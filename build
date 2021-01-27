@@ -1,4 +1,4 @@
 #Builds clib1.o
 cc -c -Wall -Werror -fpic clib1.c
 #Builds libclib1.so
-cc -shared -o libclib1.so clib1.o
+cc -shared -o libclib1.so clib1.o -L. -lcpdf
