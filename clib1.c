@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "cpdflibwrapper.h"
+
+int call_ocaml_startup(void)
+{
+   char *argv[] = {"program_name", NULL};
+   cpdf_startup(argv);
+   printf("VERSION: %s\n", cpdf_version());
+   return 0;
+}
 
 int simple_function(void) {
     static int counter = 0;
@@ -27,5 +36,3 @@ void free_C_string(char* ptr) {
            ptr, (long int)ptr, ptr);
     free(ptr);
 }
-
-
