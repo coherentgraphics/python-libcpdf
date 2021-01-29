@@ -1,23 +1,18 @@
-from ctypes import *
+import pycpdf
 
-libc = CDLL("/home/john/python-libcpdf/libclib1.so")
-
-libc.pycpdf_version.restype = POINTER(c_char)
-libc.pycpdf_lastErrorString.restype = POINTER(c_char)
-
+pycpdf.loadDLL("/home/john/python-libcpdf/libpycpdf.so")
 #CHAPTER 0. Preliminaries
-libc.pycpdf_startup()
-print('Library version is ' + string_at(libc.pycpdf_version()).decode())
-libc.pycpdf_setFast()
-libc.pycpdf_setSlow()
-print('LastError is ' + str(libc.pycpdf_lastError()))
-print('LastErrorString is ' + string_at(libc.pycpdf_lastErrorString()).decode())
-libc.pycpdf_clearError()
-libc.pycpdf_onExit()
+pycpdf.startup()
+print('Library version is ' + pycpdf.version())
+pycpdf.setFast()
+pycpdf.setSlow()
+print('LastError is ' + str(pycpdf.lastError()))
+print('LastErrorString is ' + pycpdf.lastErrorString())
+pycpdf.clearError()
+pycpdf.onExit()
 
 #CHAPTER 1. Basics
-pdf = libc.pycpdf_fromFile(b'cpdfmanual.pdf', b'')
+pdf = pycpdf.fromFile('cpdfmanual.pdf', '')
 print('pdf = ' + str(pdf))
 
-libc.pycpdf_toFile(pdf, b'out.pdf', False, False)
-
+pycpdf.toFile(pdf, 'out.pdf', False, False)
