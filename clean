@@ -1,1 +1,2 @@
 rm -f clib1.o libclib1.so
+rm -f out.pdf
