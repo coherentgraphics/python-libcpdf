@@ -1,6 +1,6 @@
 import pycpdf
 
-pycpdf.loadDLL("/home/john/python-libcpdf/libpycpdf.so")
+pycpdf.loadDLL("/Users/john/repos/python-libcpdf/libpycpdf.so")
 #CHAPTER 0. Preliminaries
 pycpdf.startup()
 print('Library version is ' + pycpdf.version())
@@ -10,7 +10,7 @@ print('LastError is ' + str(pycpdf.lastError()))
 print('LastErrorString is ' + pycpdf.lastErrorString())
 pycpdf.clearError()
 pycpdf.onExit()
-
+"""
 #CHAPTER 1. Basics
 pdf = pycpdf.fromFile('cpdfmanual.pdf', '')
 pdf2 = pycpdf.fromFileLazy('cpdfmanual.pdf', '')
@@ -249,3 +249,4 @@ pycpdf.OCGRename(pdf, 'one', 'two')
 pycpdf.OCGOrderAll(pdf)
 name = pycpdf.stampAsXObject(pdf, pdf2, True)
 pycpdf.setDemo(True)
+"""
