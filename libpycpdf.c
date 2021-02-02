@@ -87,6 +87,41 @@ void pycpdf_deletePdf(int pdf)
   return cpdf_deletePdf(pdf);
 }
 
+void pycpdf_replacePdf(int pdf, int pdf2)
+{
+  return cpdf_replacePdf(pdf, pdf2);
+}
+
+double pycpdf_ptOfCm(double i)
+{
+  return cpdf_ptOfCm(i);
+}
+
+double pycpdf_ptOfMm(double i)
+{
+  return cpdf_ptOfMm(i);
+}
+
+double pycpdf_ptOfIn(double i)
+{
+  return cpdf_ptOfIn(i);
+}
+
+double pycpdf_cmOfPt(double i)
+{
+  return cpdf_cmOfPt(i);
+}
+
+double pycpdf_mmOfPt(double i)
+{
+  return cpdf_mmOfPt(i);
+}
+
+double pycpdf_inOfPt(double i)
+{
+  return cpdf_inOfPt(i);
+}
+
 void pycpdf_toFile(int pdf, char *filename, int linearize, int make_id)
 {
   cpdf_toFile(pdf, filename, linearize, make_id);

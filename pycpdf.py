@@ -8,6 +8,18 @@ def loadDLL(f):
   libc.pycpdf_version.restype = POINTER(c_char)
   libc.pycpdf_lastErrorString.restype = POINTER(c_char)
   libc.pycpdf_blankDocument.argtypes = [c_double, c_double, c_int]
+  libc.pycpdf_ptOfCm.argtypes = [c_double]
+  libc.pycpdf_ptOfCm.restype = c_double
+  libc.pycpdf_ptOfMm.argtypes = [c_double]
+  libc.pycpdf_ptOfMm.restype = c_double
+  libc.pycpdf_ptOfIn.argtypes = [c_double]
+  libc.pycpdf_ptOfIn.restype = c_double
+  libc.pycpdf_cmOfPt.argtypes = [c_double]
+  libc.pycpdf_cmOfPt.restype = c_double
+  libc.pycpdf_mmOfPt.argtypes = [c_double]
+  libc.pycpdf_mmOfPt.restype = c_double
+  libc.pycpdf_inOfPt.argtypes = [c_double]
+  libc.pycpdf_inOfPt.restype = c_double
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -72,6 +84,27 @@ def blankDocumentPaper(papersize, pages):
 
 def deletePdf(pdf):
   libc.pycpdf_deletePdf(pdf)
+
+def replacePdf(pdf, pdf2):
+  libc.pycpdf_replacePdf(pdf, pdf2)
+
+def ptOfCm(i):
+  return libc.pycpdf_ptOfCm(i)
+
+def ptOfMm(i):
+  return libc.pycpdf_ptOfMm(i)
+
+def ptOfIn(i):
+  return libc.pycpdf_ptOfIn(i)
+
+def cmOfPt(i):
+  return libc.pycpdf_cmOfPt(i)
+
+def mmOfPt(i):
+  return libc.pycpdf_mmOfPt(i)
+
+def inOfPt(i):
+  return libc.pycpdf_inOfPt(i)
 
 def toFile(pdf, filename, linearize, make_id):
   libc.pycpdf_toFile(pdf, str.encode(filename), False, False)
