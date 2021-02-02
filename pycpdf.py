@@ -70,6 +70,9 @@ uslegallandscape = 15
 def blankDocumentPaper(papersize, pages):
   return libc.pycpdf_blankDocumentPaper(papersize, pages)
 
+def deletePdf(pdf):
+  libc.pycpdf_deletePdf(pdf)
+
 def toFile(pdf, filename, linearize, make_id):
   libc.pycpdf_toFile(pdf, str.encode(filename), False, False)
 

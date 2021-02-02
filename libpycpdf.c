@@ -82,6 +82,11 @@ int pycpdf_blankDocumentPaper(int papersize, int pages)
   return cpdf_blankDocumentPaper(papersize, pages);
 }
 
+void pycpdf_deletePdf(int pdf)
+{
+  return cpdf_deletePdf(pdf);
+}
+
 void pycpdf_toFile(int pdf, char *filename, int linearize, int make_id)
 {
   cpdf_toFile(pdf, filename, linearize, make_id);

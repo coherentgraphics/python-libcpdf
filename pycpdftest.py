@@ -22,13 +22,10 @@ pdf5 = pycpdf.blankDocument(200.5, 100.0, 50)
 pycpdf.toFile(pdf5, 'testoutputs/blank.pdf', False, False)
 pdf6 = pycpdf.blankDocumentPaper(pycpdf.a3landscape, 50)
 pycpdf.toFile(pdf6, 'testoutputs/blank2.pdf', False, False)
-"""
 pycpdf.deletePdf(pdf)
-pycpdf.replacePdf(pdf2, pdf3)
-n = startEnumeratePDFs()
-for x in range(n):
-  print(pycpdf.enumeratePDFsKey(x), pycpdf.enumeratePDFsInfo(x))
-endEnumeratePDFs()
+
+"""pycpdf.replacePdf(pdf2, pdf3)
+pdfs = pycpdf.enumeratePDFs()
 print(pycpdf.ptOfCm(1.0))
 print(pycpdf.ptOfMm(1.0))
 print(pycpdf.ptOfIn(1.0))
