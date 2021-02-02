@@ -21,6 +21,7 @@ def loadDLL(f):
   libc.pycpdf_inOfPt.argtypes = [c_double]
   libc.pycpdf_inOfPt.restype = c_double
   libc.pycpdf_enumeratePDFsInfo.restype = POINTER(c_char)
+  libc.pycpdf_stringOfPagespec.restype = POINTER(c_char)
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -117,7 +118,14 @@ def enumeratePDFs():
   libc.pycpdf_endEnumeratePDFs()
   return pdfs
 
+def parsePagespec(pdf, pagespec):
+  return libc.pycpdf_parsePagespec(pdf, str.encode(pagespec))
+
+def validatePagespec(pagespec):
+  return libc.pycpdf_validatePagespec(str.encode(pagespec))
+
+def stringOfPagespec(pdf, r):
+  return string_at(libc.pycpdf_stringOfPagespec(pdf, r)).decode()
+
 def toFile(pdf, filename, linearize, make_id):
   libc.pycpdf_toFile(pdf, str.encode(filename), False, False)
-
-

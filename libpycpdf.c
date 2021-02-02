@@ -122,11 +122,7 @@ double pycpdf_inOfPt(double i)
   return cpdf_inOfPt(i);
 }
 
-void pycpdf_toFile(int pdf, char *filename, int linearize, int make_id)
-{
-  cpdf_toFile(pdf, filename, linearize, make_id);
-  return;
-}
+
 
 void pycpdf_startEnumeratePDFs(void)
 {
@@ -150,3 +146,23 @@ void pycpdf_endEnumeratePDFs(void)
   return;
 }
 
+int pycpdf_parsePagespec(int pdf, char *pagespec)
+{
+  return cpdf_parsePagespec(pdf, pagespec);
+}
+
+int pycpdf_validatePagespec(char *pagespec)
+{
+  return cpdf_validatePagespec(pagespec);
+}
+
+char *pycpdf_stringOfPagespec(int pdf, int range)
+{
+  return cpdf_stringOfPagespec(pdf, range);
+}
+
+void pycpdf_toFile(int pdf, char *filename, int linearize, int make_id)
+{
+  cpdf_toFile(pdf, filename, linearize, make_id);
+  return;
+}
