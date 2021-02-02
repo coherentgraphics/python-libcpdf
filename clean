@@ -1,2 +1,2 @@
 rm -f libpycpdf.o libpycpdf.so
-rm -rf out.pdf enc.pdf enc2.pdf __pycache__
+rm -rf testoutputs/*.pdf __pycache__
