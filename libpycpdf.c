@@ -127,3 +127,26 @@ void pycpdf_toFile(int pdf, char *filename, int linearize, int make_id)
   cpdf_toFile(pdf, filename, linearize, make_id);
   return;
 }
+
+void pycpdf_startEnumeratePDFs(void)
+{
+  cpdf_startEnumeratePDFs();
+  return;
+}
+
+int pycpdf_enumeratePDFsKey(int n)
+{
+  return cpdf_enumeratePDFsKey(n);
+}
+
+char *pycpdf_enumeratePDFsInfo(int n)
+{
+  return cpdf_enumeratePDFsInfo(n);
+}
+
+void pycpdf_endEnumeratePDFs(void)
+{
+  cpdf_endEnumeratePDFs();
+  return;
+}
+

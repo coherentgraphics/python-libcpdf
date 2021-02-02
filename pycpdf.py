@@ -20,6 +20,7 @@ def loadDLL(f):
   libc.pycpdf_mmOfPt.restype = c_double
   libc.pycpdf_inOfPt.argtypes = [c_double]
   libc.pycpdf_inOfPt.restype = c_double
+  libc.pycpdf_enumeratePDFsInfo.restype = POINTER(c_char)
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -105,6 +106,16 @@ def mmOfPt(i):
 
 def inOfPt(i):
   return libc.pycpdf_inOfPt(i)
+
+def enumeratePDFs():
+  pdfs = []
+  n = libc.pycpdf_startEnumeratePDFs()
+  for x in range(n):
+    key = libc.pycpdf_enumeratePDFsKey(x)
+    info = string_at(libc.pycpdf_enumeratePDFsInfo(x)).decode()
+    pdfs.append((key, info))
+  libc.pycpdf_endEnumeratePDFs()
+  return pdfs
 
 def toFile(pdf, filename, linearize, make_id):
   libc.pycpdf_toFile(pdf, str.encode(filename), False, False)
