@@ -199,7 +199,7 @@ int cpdf_difference (int, int);
 /* cpdf_removeDuplicates(range) deduplicates a range, making a new one. */
 int cpdf_removeDuplicates (int);
 
-/* cpdf_rangeLenght gives the number of pages in a range. */
+/* cpdf_rangeLength gives the number of pages in a range. */
 int cpdf_rangeLength (int);
 
 /* cpdf_rangeGet(range, n) gets the page number at position n in a range, where

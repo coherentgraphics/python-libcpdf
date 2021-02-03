@@ -127,5 +127,50 @@ def validatePagespec(pagespec):
 def stringOfPagespec(pdf, r):
   return string_at(libc.pycpdf_stringOfPagespec(pdf, r)).decode()
 
+def blankRange():
+  return libc.pycpdf_blankRange()
+
+def deleteRange(r):
+  return libc.pycpdf_deleteRange(r)
+
+def pageRange(f, t):
+  return libc.pycpdf_pageRange(f, t)
+
+def all(r):
+  return libc.pycpdf_all(r)
+
+def even(r):
+  return libc.pycpdf_even(r)
+
+def odd(r):
+  return libc.pycpdf_odd(r)
+
+def rangeUnion(a, b):
+  return libc.pycpdf_rangeUnion(a, b)
+
+def difference(a, b):
+  return libc.pycpdf_difference(a, b)
+
+def removeDuplicates(r):
+  return libc.pycpdf_removeDuplicates(r)
+
+def rangeLength(r):
+  return libc.pycpdf_rangeLength(r)
+
+def rangeGet(r, n):
+  return libc.pycpdf_rangeGet(r, n)
+
+def rangeAdd(r, p):
+  return libc.pycpdf_rangeAdd(r, p)
+
+def isInRange(r, p):
+  return libc.pycpdf_isInRange(r, p)
+
+def pages(pdf):
+  return libc.pycpdf_pages(pdf)
+
+def pagesFast(userpw, filename):
+  return libc.pycpdf_pagesFast(str.encode(userpw), str.encode(filename))
+
 def toFile(pdf, filename, linearize, make_id):
   libc.pycpdf_toFile(pdf, str.encode(filename), False, False)

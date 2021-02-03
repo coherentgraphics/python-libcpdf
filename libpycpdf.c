@@ -122,8 +122,6 @@ double pycpdf_inOfPt(double i)
   return cpdf_inOfPt(i);
 }
 
-
-
 void pycpdf_startEnumeratePDFs(void)
 {
   cpdf_startEnumeratePDFs();
@@ -159,6 +157,81 @@ int pycpdf_validatePagespec(char *pagespec)
 char *pycpdf_stringOfPagespec(int pdf, int range)
 {
   return cpdf_stringOfPagespec(pdf, range);
+}
+
+int pycpdf_blankRange(void)
+{
+  return cpdf_blankRange();
+}
+
+void pycpdf_deleteRange(int r)
+{
+  return cpdf_deleteRange(r);
+}
+
+int pycpdf_pageRange(int f, int t)
+{
+  return cpdf_range(f, t);
+}
+
+int pycpdf_all(int r)
+{
+  return cpdf_all(r);
+}
+
+int pycpdf_even(int r)
+{
+  return cpdf_even(r);
+}
+
+int pycpdf_odd(int r)
+{
+  return cpdf_odd(r);
+}
+
+int pycpdf_rangeUnion(int a, int b)
+{
+  return cpdf_rangeUnion(a, b);
+}
+
+int pycpdf_difference(int a, int b)
+{
+  return cpdf_difference(a, b);
+}
+
+int pycpdf_removeDuplicates(int r)
+{
+  return cpdf_removeDuplicates(r);
+}
+
+int pycpdf_rangeLength(int r)
+{
+  return cpdf_rangeLength(r);
+}
+
+int pycpdf_rangeGet(int r, int n)
+{
+  return cpdf_rangeGet(r, n);
+}
+
+int pycpdf_rangeAdd(int r, int p)
+{
+  return cpdf_rangeAdd(r, p);
+}
+
+int pycpdf_isInRange(int r, int p)
+{
+  return cpdf_isInRange(r, p);
+}
+
+int pycpdf_pages(int pdf)
+{
+  return cpdf_pages(pdf);
+}
+
+int pycpdf_pagesFast(char *filename, char *userpw)
+{
+  return cpdf_pagesFast(filename, userpw);
 }
 
 void pycpdf_toFile(int pdf, char *filename, int linearize, int make_id)
