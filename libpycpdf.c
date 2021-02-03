@@ -239,3 +239,9 @@ void pycpdf_toFile(int pdf, char *filename, int linearize, int make_id)
   cpdf_toFile(pdf, filename, linearize, make_id);
   return;
 }
+
+void pycpdf_toFileExt(int pdf, char *filename, int linearize, int make_id, int preserve_objstm, int generate_objstm, int compress_objstm)
+{
+  cpdf_toFileExt(pdf, filename, linearize, make_id, preserve_objstm, generate_objstm, compress_objstm);
+}
+
