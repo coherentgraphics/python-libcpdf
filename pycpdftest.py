@@ -54,8 +54,8 @@ pages = pycpdf.pages(pdf5)
 pagesf = pycpdf.pagesFast('', 'testinputs/cpdfmanual.pdf')
 pycpdf.toFile(pdf4, 'testoutputs/toFile.pdf', False, False)
 pycpdf.toFileExt(pdf4, 'testoutputs/toFileExt.pdf', False, False, False, False, False)
-"""
 tomembytes = pycpdf.toMemory(pdf5, False, False)
+"""
 isenc = pycpdf.isEncrypted(pdf)
 decrypted = pycpdf.decryptPdf(pdf, 'foo')
 owner = pycpdf.decryptPdfOwner(pdf, 'foo')

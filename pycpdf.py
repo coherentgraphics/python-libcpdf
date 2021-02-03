@@ -178,3 +178,10 @@ def toFile(pdf, filename, linearize, make_id):
 def toFileExt(pdf, filename, linearize, make_id, preserve_objstm, generate_objstm, compress_objstm):
   libc.pycpdf_toFileExt(pdf, str.encode(filename), linearize, make_id, preserve_objstm, generate_objstm, compress_objstm)
 
+def toMemory(pdf, linearize, make_id):
+  length = c_int32()
+  data = libc.pycpdf_toMemory(pdf, linearize, make_id, byref(length))
+  print(f'toMemory returned {length} bytes')
+  outdata = ...
+  libc.pycpdf_toMemoryFree();
+  return outdata

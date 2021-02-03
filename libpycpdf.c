@@ -245,3 +245,18 @@ void pycpdf_toFileExt(int pdf, char *filename, int linearize, int make_id, int p
   cpdf_toFileExt(pdf, filename, linearize, make_id, preserve_objstm, generate_objstm, compress_objstm);
 }
 
+//We want to return a piece of memory which will be copied into a python string, and the C string deallocated.
+void *toMemoryData;
+
+void *pycpdf_toMemory(pdf, linearize, make_id, length)
+{
+  toMemoryData = cpdf_toMemory(pdf, linearize, make_id, &length);
+  return toMemoryData;
+}
+
+void pycpdf_toMemoryFree(void)
+{
+  free(toMemoryData);
+  return;
+}
+
