@@ -22,6 +22,7 @@ def loadDLL(f):
   libc.pycpdf_inOfPt.restype = c_double
   libc.pycpdf_enumeratePDFsInfo.restype = POINTER(c_char)
   libc.pycpdf_stringOfPagespec.restype = POINTER(c_char)
+  libc.pycpdf_toMemory.restype = POINTER(c_uint8)
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -181,7 +182,6 @@ def toFileExt(pdf, filename, linearize, make_id, preserve_objstm, generate_objst
 def toMemory(pdf, linearize, make_id):
   length = c_int32()
   data = libc.pycpdf_toMemory(pdf, linearize, make_id, byref(length))
-  print(f'toMemory returned {length} bytes')
-  outdata = ...
-  libc.pycpdf_toMemoryFree();
-  return outdata
+  s = string_at(data)
+  libc.pycpdf_toMemoryFree()
+  return s
