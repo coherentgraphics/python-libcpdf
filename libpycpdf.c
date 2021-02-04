@@ -260,3 +260,43 @@ void pycpdf_toMemoryFree(void)
   return;
 }
 
+int pycpdf_isEncrypted(int pdf)
+{
+  return cpdf_isEncrypted(pdf);
+}
+
+void pycpdf_toFileEncrypted(int pdf, int method, int *permissions, int permlength, char *ownerpw, char *userpw, int linearize, int makeid, char *filename)
+{
+  cpdf_toFileEncrypted(pdf, method, permissions, permlength, ownerpw, userpw, linearize, makeid, filename);
+  return;
+}
+
+void pycpdf_toFileEncryptedExt(int pdf, int method, int *permissions, int permlength, char* ownerpw, char *userpw,
+                               int linearize, int makeid, int preserve_objstm, int generate_objstm, int compress_objstm, char* filename)
+{
+  cpdf_toFileEncryptedExt(pdf, method, permissions, permlength, ownerpw, userpw, linearize, makeid, preserve_objstm, generate_objstm, compress_objstm, filename);
+  return;
+}
+
+void pycpdf_decryptPdf(int pdf, char *userpw)
+{
+  cpdf_decryptPdf(pdf, userpw);
+  return;
+}
+
+void pycpdf_decryptPdfOwner(int pdf, char *ownerpw)
+{
+  cpdf_decryptPdfOwner(pdf, ownerpw);
+  return;
+}
+
+int pycpdf_hasPermission(int pdf, int perm)
+{
+  return cpdf_hasPermission(pdf, perm);
+}
+
+int pycpdf_encryptionKind(int pdf)
+{
+  return cpdf_encryptionKind(pdf);
+}
+

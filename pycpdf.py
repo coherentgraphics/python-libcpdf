@@ -185,3 +185,49 @@ def toMemory(pdf, linearize, make_id):
   s = string_at(data)
   libc.pycpdf_toMemoryFree()
   return s
+
+def isEncrypted(pdf):
+  libc.pycpdf_isEncrypted(pdf)
+
+noEdit = 0
+noPrint = 1
+noCopy = 2
+noAnnot = 3
+noForms = 4
+noExtract = 5
+noAssemble = 6
+noHqPrint = 7
+
+pdf40bit = 0
+pdf128bit = 1
+aes128bitfalse = 2
+aes128bittrue = 3
+aes256bitfalse = 4
+aes256bittrue = 5
+aes256bitisofalse = 6
+aes256bitisotrue = 7
+
+def toFileEncrypted(pdf, method, permissions, ownerpw, userpw, linearize, makeid, filename):
+  c_perms = (c_uint8 * len(permissions))(*permissions)
+  libc.pycpdf_toFileEncrypted(pdf, method, c_perms, len(permissions), str.encode(ownerpw),
+                            str.encode(userpw), linearize, makeid, str.encode(filename))
+
+def toFileEncryptedExt(pdf, method, permissions, ownerpw, userpw, linearize, makeid,
+                       preserve_objstm, generate_objstm, compress_objstm, filename):
+  c_perms = (c_uint8 * len(permissions))(*permissions)
+  libc.pycpdf_toFileEncryptedExt(pdf, method, c_perms, len(permissions), str.encode(ownerpw),
+                                 str.encode(userpw), linearize, makeid, preserve_objstm,
+                                 generate_objstm, compress_objstm, str.encode(filename))
+
+def decryptPdf(pdf, userpw):
+  libc.pycpdf_decryptPdf(pdf, str.encode(userpw))
+
+def decryptPdfOwner(pdf, ownerpw):
+  libc.pycpdf_decryptPdfOwner(pdf, str.encode(ownerpw))
+
+def hasPermission(pdf, perm):
+  return libc.pycpdf_hasPermission(pdf, perm)
+
+def encryptionKind(pdf):
+  return libc.pycpdf_encryptionKind(pdf)
+
