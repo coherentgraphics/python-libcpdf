@@ -337,3 +337,77 @@ void pycpdf_scaleToFitPaper(int pdf, int r, int papersize, double scale_to_fit_s
   cpdf_scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale);
 }
 
+void pycpdf_shiftContents(int pdf, int r, double dx, double dy)
+{
+  cpdf_shiftContents(pdf, r, dx, dy);
+}
+
+void pycpdf_rotate(int pdf, int r, int rotation)
+{
+  cpdf_rotate(pdf, r, rotation);
+}
+
+void pycpdf_rotateBy(int pdf, int r, int rotation)
+{
+  cpdf_rotateBy(pdf, r, rotation);
+}
+
+void pycpdf_rotateContents(int pdf, int r, double rotation)
+{
+  cpdf_rotateContents(pdf, r, rotation);
+}
+
+void pycpdf_upright(int pdf, int r)
+{
+  cpdf_upright(pdf, r);
+}
+
+void pycpdf_hFlip(int pdf, int r)
+{
+  cpdf_hFlip(pdf, r);
+}
+
+void pycpdf_vFlip(int pdf, int r)
+{
+  cpdf_vFlip(pdf, r);
+}
+
+void pycpdf_crop(int pdf, int r, double x, double y, double w, double h)
+{
+  cpdf_crop(pdf, r, x, y, w, h);
+}
+
+void pycpdf_removeCrop(int pdf, int r)
+{
+  cpdf_removeCrop(pdf, r);
+}
+
+void pycpdf_removeTrim(int pdf, int r)
+{
+  cpdf_removeTrim(pdf, r);
+}
+
+void pycpdf_removeArt(int pdf, int r)
+{
+  cpdf_removeArt(pdf, r);
+}
+
+void pycpdf_removeBleed(int pdf, int r)
+{
+  cpdf_removeBleed(pdf, r);
+}
+
+void pycpdf_trimMarks(int pdf, int r)
+{
+  cpdf_trimMarks(pdf, r);
+}
+
+void pycpdf_showBoxes(int pdf, int r)
+{
+  cpdf_showBoxes(pdf, r);
+}
+
+void pycpdf_hardBox(int pdf, int r, char *boxname)
+{
+  cpdf_hardBox(pdf, r, boxname);
+}

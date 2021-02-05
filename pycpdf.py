@@ -26,6 +26,9 @@ def loadDLL(f):
   libc.pycpdf_scalePages.argtypes = [c_int, c_int, c_double, c_double]
   libc.pycpdf_scaleToFit.argtypes = [c_int, c_int, c_double, c_double, c_double]
   libc.pycpdf_scaleToFitPaper.argtypes = [c_int, c_int, c_int, c_double]
+  libc.pycpdf_shiftContents.argtypes = [c_int, c_int, c_double, c_double]
+  libc.pycpdf_rotateContents.argtypes = [c_int, c_int, c_double]
+  libc.pycpdf_crop.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -260,3 +263,49 @@ def scaleToFit(pdf, r, sx, sy, scale_to_fit_scale):
 
 def scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale):
   libc.pycpdf_scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale)
+
+def shiftContents(pdf, r, dx, dy):
+  libc.pycpdf_shiftContents(pdf, r, dx, dy)
+
+def rotate(pdf, r, rotation):
+  libc.pycpdf_rotate(pdf, r, rotation)
+
+def rotateBy(pdf, r, rotation):
+  libc.pycpdf_rotateBy(pdf, r, rotation)
+
+def rotateContents(pdf, r, rotation):
+  libc.pycpdf_rotateContents(pdf, r, rotation)
+
+def upright(pdf, r):
+  libc.pycpdf_upright(pdf, r)
+
+def hFlip(pdf, r):
+  libc.pycpdf_hFlip(pdf, r)
+
+def vFlip(pdf, r):
+  libc.pycpdf_vFlip(pdf, r)
+
+def crop(pdf, r, x, y, w, h):
+  libc.pycpdf_crop(pdf, r, x, y, w, h)
+
+def removeCrop(pdf, r):
+  libc.pycpdf_removeCrop(pdf, r)
+
+def removeTrim(pdf, r):
+  libc.pycpdf_removeTrim(pdf, r)
+
+def removeArt(pdf, r):
+  libc.pycpdf_removeArt(pdf, r)
+
+def removeBleed(pdf, r):
+  libc.pycpdf_removeBleed(pdf, r)
+
+def trimMarks(pdf, r):
+  libc.pycpdf_trimMarks(pdf, r)
+
+def showBoxes(pdf, r):
+  libc.pycpdf_showBoxes(pdf, r)
+
+def hardBox(pdf, r, boxname):
+  libc.pycpdf_hardBox(pdf, r, str.encode(boxname))
+

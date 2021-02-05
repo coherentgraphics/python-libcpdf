@@ -84,9 +84,9 @@ r = pycpdf.all(pdf)
 pycpdf.scalePages(pdf, r, 0.5, 0.7)
 pycpdf.scaleToFit(pdf, r, 0.5, 0.7, 0.5)
 pycpdf.scaleToFitPaper(pdf, r, pycpdf.a3landscape, 0.5)
-
 """
 pycpdf.scaleContents(pdf, r, (pycpdf.top, 10, 10), 1.0)
+"""
 pycpdf.shiftContents(pdf, r, 100, -100)
 pycpdf.rotate(pdf, r, 90)
 pycpdf.rotateBy(pdf, r, 180)
@@ -101,12 +101,13 @@ pycpdf.removeArt(pdf, r)
 pycpdf.removeBleed(pdf, r)
 pycpdf.trimMarks(pdf, r)
 pycpdf.showBoxes(pdf, r)
-pycpdf.hardBox(pdf, r, "/TrimBox")
+pycpdf.hardBox(pdf, r, "/MediaBox")
 
 # CHAPTER 4. Encryption
 
 # Encryption covered under Chapter 1 in cpdflib
 
+"""
 # CHAPTER 5. Compression
 
 pycpdf.compress(pdf)
