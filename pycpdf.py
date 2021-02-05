@@ -231,3 +231,19 @@ def hasPermission(pdf, perm):
 def encryptionKind(pdf):
   return libc.pycpdf_encryptionKind(pdf)
 
+# CHAPTER 2. Merging and Splitting
+def mergeSimple(pdfs):
+  c_pdfs = (c_int * len(pdfs))(*pdfs)
+  return libc.pycpdf_mergeSimple(c_pdfs, len(pdfs))
+
+def merge(pdfs, retain_numbering, remove_duplicate_fonts):
+  c_pdfs = (c_int * len(pdfs))(*pdfs)
+  return libc.pycpdf_merge(c_pdfs, len(pdfs), retain_numbering, remove_duplicate_fonts)
+
+def mergeSame(pdfs, retain_numbering, remove_duplicate_fonts, ranges):
+  c_pdfs = (c_int * len(pdfs))(*pdfs)
+  c_ranges = (c_int * len(ranges))(*ranges)
+  return libc.pycpdf_mergeSame(c_pdfs, len(pdfs), retain_numbering, remove_duplicate_fonts, c_ranges) 
+
+def selectPages(pdf, r):
+  return libc.pycpdf_selectPages(pdf, r)

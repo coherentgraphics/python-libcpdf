@@ -65,13 +65,20 @@ owner = pycpdf.decryptPdfOwner(encpdf2, 'owner')
 hasperm = pycpdf.hasPermission(encpdf2, pycpdf.noEdit)
 encmethod = pycpdf.encryptionKind(encpdf2)
 
-"""
 # CHAPTER 2. Merging and Splitting
-pycpdf.mergeSimple([pdf, pdf2, pdf3])
-pycpdf.merge([pdf, pdf2, pdf3], True, False, [[1, 2], [3, 4], [5, 6]])
-pycpdf.mergeSame([pdf, pdf2, pdf], True, False, [[1, 2], [3, 4], [5, 6]])
-pycpdf.selectPages(pdf, pycpdf.range_even(pdf))
+pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
+pdf2 = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
+print(pdf, pdf2)
+merged = pycpdf.mergeSimple([pdf, pdf2])
+pycpdf.toFile(merged, 'testoutputs/merged.pdf', False, False)
+merged2 = pycpdf.merge([pdf, pdf2], True, False)
+pycpdf.toFile(merged2, 'testoutputs/merged2.pdf', False, False)
+same = pycpdf.mergeSame([pdf, pdf2, pdf], True, False, [pycpdf.even(pdf), pycpdf.all(pdf2), pycpdf.odd(pdf)])
+pycpdf.toFile(same, 'testoutputs/same.pdf', False, False)
+selected = pycpdf.selectPages(pdf, pycpdf.even(pdf))
+pycpdf.toFile(selected, 'testoutputs/selected.pdf', False, False)
 
+"""
 # CHAPTER 3. Pages
 r = pycpdf.range_all(pdf)
 pycpdf.scalePages(pdf, r, 0.5, 0.7)

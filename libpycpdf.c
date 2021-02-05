@@ -300,3 +300,23 @@ int pycpdf_encryptionKind(int pdf)
   return cpdf_encryptionKind(pdf);
 }
 
+int pycpdf_mergeSimple(int *pdfs, int len)
+{
+  return cpdf_mergeSimple(pdfs, len);
+}
+
+int pycpdf_merge(int *pdfs, int len, int retain_numbering, int remove_duplicate_fonts)
+{
+  return cpdf_merge(pdfs, len, retain_numbering, remove_duplicate_fonts);
+}
+
+int pycpdf_mergeSame(int *pdfs, int len, int retain_numbering, int remove_duplicate_fonts, int *ranges)
+{
+  return cpdf_mergeSame(pdfs, len, retain_numbering, remove_duplicate_fonts, ranges);
+}
+
+int pycpdf_selectPages(int pdf, int r)
+{
+  return cpdf_selectPages(pdf, r);
+}
+
