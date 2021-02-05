@@ -337,6 +337,12 @@ void pycpdf_scaleToFitPaper(int pdf, int r, int papersize, double scale_to_fit_s
   cpdf_scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale);
 }
 
+void pycpdf_scaleContents(int pdf, int r, int pos, double p1, double p2, double scale)
+{
+  struct cpdf_position p = {.cpdf_anchor = pos,.cpdf_coord1 = p1,.cpdf_coord2 = p2};
+  cpdf_scaleContents(pdf, r, p, scale);
+}
+
 void pycpdf_shiftContents(int pdf, int r, double dx, double dy)
 {
   cpdf_shiftContents(pdf, r, dx, dy);

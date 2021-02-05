@@ -26,6 +26,7 @@ def loadDLL(f):
   libc.pycpdf_scalePages.argtypes = [c_int, c_int, c_double, c_double]
   libc.pycpdf_scaleToFit.argtypes = [c_int, c_int, c_double, c_double, c_double]
   libc.pycpdf_scaleToFitPaper.argtypes = [c_int, c_int, c_int, c_double]
+  libc.pycpdf_scaleContents.argtypes = [c_int, c_int, c_int, c_double, c_double, c_double]
   libc.pycpdf_shiftContents.argtypes = [c_int, c_int, c_double, c_double]
   libc.pycpdf_rotateContents.argtypes = [c_int, c_int, c_double]
   libc.pycpdf_crop.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
@@ -263,6 +264,37 @@ def scaleToFit(pdf, r, sx, sy, scale_to_fit_scale):
 
 def scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale):
   libc.pycpdf_scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale)
+
+posCentre = 0
+posLeft = 1
+posRight = 2
+top = 3
+topLeft = 4
+topRight = 5
+left = 6
+bottomLeft = 7
+bottomRight = 8
+right = 9
+diagonal = 10
+reverseDiagonal = 11
+
+def tripleOfPosition(p):
+  if p[0] == diagonal: return (p[0], 0.0, 0.0)
+  if p[0] == reverseDiagonal: return (p[0], 0.0, 0.0)
+  if p[0] == top: return (p[0], p[1], 0.0)
+  if p[0] == topLeft: return (p[0], p[1], 0.0)
+  if p[0] == topRight: return (p[0], p[1], 0.0)
+  if p[0] == left: return (p[0], p[1], 0.0)
+  if p[0] == bottomLeft: return (p[0], p[1], 0.0)
+  if p[0] == bottomRight: return (p[0], p[1], 0.0)
+  if p[0] == right: return (p[0], p[1], 0.0)
+  if p[0] == posCentre: return (p[0], p[1], p[2])
+  if p[0] == posLeft: return (p[0], p[1], p[2])
+  if p[0] == posRight: return (p[0], p[1], p[2])
+
+def scaleContents(pdf, r, p, scale):
+  a, b, c = tripleOfPosition(p); 
+  libc.pycpdf_scaleContents(pdf, r, a, b, c, scale)
 
 def shiftContents(pdf, r, dx, dy):
   libc.pycpdf_shiftContents(pdf, r, dx, dy)

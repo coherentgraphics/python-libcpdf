@@ -84,9 +84,7 @@ r = pycpdf.all(pdf)
 pycpdf.scalePages(pdf, r, 0.5, 0.7)
 pycpdf.scaleToFit(pdf, r, 0.5, 0.7, 0.5)
 pycpdf.scaleToFitPaper(pdf, r, pycpdf.a3landscape, 0.5)
-"""
 pycpdf.scaleContents(pdf, r, (pycpdf.top, 10, 10), 1.0)
-"""
 pycpdf.shiftContents(pdf, r, 100, -100)
 pycpdf.rotate(pdf, r, 90)
 pycpdf.rotateBy(pdf, r, 180)
