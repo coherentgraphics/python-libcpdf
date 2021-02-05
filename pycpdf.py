@@ -23,6 +23,9 @@ def loadDLL(f):
   libc.pycpdf_enumeratePDFsInfo.restype = POINTER(c_char)
   libc.pycpdf_stringOfPagespec.restype = POINTER(c_char)
   libc.pycpdf_toMemory.restype = POINTER(c_uint8)
+  libc.pycpdf_scalePages.argtypes = [c_int, c_int, c_double, c_double]
+  libc.pycpdf_scaleToFit.argtypes = [c_int, c_int, c_double, c_double, c_double]
+  libc.pycpdf_scaleToFitPaper.argtypes = [c_int, c_int, c_int, c_double]
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -247,3 +250,13 @@ def mergeSame(pdfs, retain_numbering, remove_duplicate_fonts, ranges):
 
 def selectPages(pdf, r):
   return libc.pycpdf_selectPages(pdf, r)
+
+# CHAPTER 3. Pages
+def scalePages(pdf, r, sx, sy):
+  libc.pycpdf_scalePages(pdf, r, sx, sy)
+
+def scaleToFit(pdf, r, sx, sy, scale_to_fit_scale):
+  libc.pycpdf_scaleToFit(pdf, r, sx, sy, scale_to_fit_scale)
+
+def scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale):
+  libc.pycpdf_scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale)

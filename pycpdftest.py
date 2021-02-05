@@ -78,12 +78,14 @@ pycpdf.toFile(same, 'testoutputs/same.pdf', False, False)
 selected = pycpdf.selectPages(pdf, pycpdf.even(pdf))
 pycpdf.toFile(selected, 'testoutputs/selected.pdf', False, False)
 
-"""
 # CHAPTER 3. Pages
-r = pycpdf.range_all(pdf)
+pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
+r = pycpdf.all(pdf)
 pycpdf.scalePages(pdf, r, 0.5, 0.7)
 pycpdf.scaleToFit(pdf, r, 0.5, 0.7, 0.5)
 pycpdf.scaleToFitPaper(pdf, r, pycpdf.a3landscape, 0.5)
+
+"""
 pycpdf.scaleContents(pdf, r, (pycpdf.top, 10, 10), 1.0)
 pycpdf.shiftContents(pdf, r, 100, -100)
 pycpdf.rotate(pdf, r, 90)

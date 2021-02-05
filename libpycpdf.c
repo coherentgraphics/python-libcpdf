@@ -320,3 +320,20 @@ int pycpdf_selectPages(int pdf, int r)
   return cpdf_selectPages(pdf, r);
 }
 
+/* CHAPTER 3. Pages */
+
+void pycpdf_scalePages(int pdf, int r, double sx, double sy)
+{
+  cpdf_scalePages(pdf, r, sx, sy);
+}
+
+void pycpdf_scaleToFit(int pdf, int r, double sx, double sy, double scale_to_fit_scale)
+{
+  cpdf_scaleToFit(pdf, r, sx, sy, scale_to_fit_scale);
+}
+
+void pycpdf_scaleToFitPaper(int pdf, int r, int papersize, double scale_to_fit_scale)
+{
+  cpdf_scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale);
+}
+
