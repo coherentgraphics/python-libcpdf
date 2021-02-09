@@ -575,3 +575,46 @@ void pycpdf_removeClipping(int pdf, int r)
   cpdf_removeClipping(pdf, r);
   return;
 }
+
+/* Undocumented. To come in v2.4 */
+void pycpdf_addContent(char *content, int before, int pdf, int r)
+{
+  cpdf_addContent(content, before, pdf, r);
+  return;
+}
+
+void pycpdf_outputJSON(char* filename, int parse_content, int no_stream_data, int pdf)
+{
+  cpdf_outputJSON(filename, parse_content, no_stream_data, pdf);
+  return;
+}
+
+void pycpdf_OCGCoalesce(int pdf)
+{
+  cpdf_OCGCoalesce(pdf);
+  return;
+}
+
+void pycpdf_OCGRename(int pdf, char *n_from, char *n_to)
+{
+  cpdf_OCGRename(pdf, n_from, n_to);
+  return;
+}
+
+void pycpdf_OCGOrderAll(int pdf)
+{
+  cpdf_OCGOrderAll(pdf);
+  return;
+}
+
+char *pycpdf_stampAsXObject(int pdf, int r, int stamp_pdf)
+{
+  return cpdf_stampAsXObject(pdf, r, stamp_pdf);
+}
+
+void pycpdf_setDemo(int v)
+{
+  cpdf_setDemo(v);
+  return;
+}
+

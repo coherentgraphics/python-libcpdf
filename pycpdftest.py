@@ -115,7 +115,7 @@ pycpdf.toFile(pdf, 'testoutputs/squeezed.pdf', False, False)
 
 """
 # CHAPTER 6. Bookmarks
-
+# Format: list of tuples. (level : int, page : int, text : string, openstatus : int/bool) 
 pycpdf.getBookmarks(pdf)
 pycpdf.setBookmarks(pdf)
 """
@@ -266,14 +266,13 @@ pycpdf.removeDictEntry(pdf, '/Key')
 pycpdf.removeClipping(pdf, 1)
 pycpdf.toFile(pdf, 'testoutputs/squeezed.pdf', False, False)
 
-"""
 # CHAPTER UNDOC (To come in v2.4)
 
-pycpdf.addContent('content', pdf, 1, True)
-pycpdf.outputJSON('filename.txt', pdf, 1, True)
+pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
+pycpdf.addContent('content', True, pdf, pycpdf.all(pdf))
+pycpdf.outputJSON('testoutputs/filename.txt', True, False, pdf)
 pycpdf.OCGCoalesce(pdf)
 pycpdf.OCGRename(pdf, 'one', 'two')
 pycpdf.OCGOrderAll(pdf)
-name = pycpdf.stampAsXObject(pdf, pdf2, True)
+name = pycpdf.stampAsXObject(pdf, True, pdf2)
 pycpdf.setDemo(True)
-"""

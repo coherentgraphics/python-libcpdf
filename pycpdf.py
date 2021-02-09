@@ -31,6 +31,7 @@ def loadDLL(f):
   libc.pycpdf_rotateContents.argtypes = [c_int, c_int, c_double]
   libc.pycpdf_crop.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
   libc.pycpdf_thinLines.argtypes = [c_int, c_int, c_double]
+  libc.pycpdf_stampAsXObject.restype = POINTER(c_char)
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -429,3 +430,27 @@ def removeDictEntry(pdf, key):
 
 def removeClipping(pdf, r):
   libc.pycpdf_removeClipping(pdf, r)
+
+# CHAPTER UNDOC (To come in v2.4)
+
+def addContent(content, before, pdf, r):
+  libc.pycpdf_addContent(str.encode(content), before, pdf, r)
+
+def outputJSON(filename, parse_content, no_stream_data, pdf):
+  libc.pycpdf_outputJSON(str.encode(filename), parse_content, no_stream_data, pdf)
+
+def OCGCoalesce(pdf):
+  libc.pycpdf_OCGCoalesce(pdf)
+
+def OCGRename(pdf, n_from, n_to):
+  libc.pycpdf_OCGRename(pdf, str.encode(n_from), str.encode(n_to))
+
+def OCGOrderAll(pdf):
+  libc.pycpdf_OCGOrderAll(pdf)
+
+def stampAsXObject(pdf, r, stamp_pdf):
+  string_at(libc.pycpdf_stampAsXObject(pdf, r, stamp_pdf)).decode()
+
+def setDemo(v):
+  libc.pycpdf_setDemo(v)
+
