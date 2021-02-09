@@ -105,22 +105,26 @@ pycpdf.hardBox(pdf, r, "/MediaBox")
 
 # Encryption covered under Chapter 1 in cpdflib
 
-"""
 # CHAPTER 5. Compression
 
+pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 pycpdf.compress(pdf)
-pycpdf.decompres(pdf)
+pycpdf.decompress(pdf)
 pycpdf.squeezeInMemory(pdf)
+pycpdf.toFile(pdf, 'testoutputs/squeezed.pdf', False, False)
 
+"""
 # CHAPTER 6. Bookmarks
 
 pycpdf.getBookmarks(pdf)
 pycpdf.setBookmarks(pdf)
+"""
 
 # CHAPTER 7. Presentations
 
 # Not included in the library version
 
+"""
 # CHAPTER 8. Logos, Watermarks and Stamps
 
 pycpdf.stampOn(pdf, pdf2, r)
@@ -131,20 +135,26 @@ pycpdf.addText(False, pdf, r, 'The text', 1.0, 0, 12, 0.5, 0.5, 0.5, 0.6, cpdf.J
 pycpdf.addTextSimple(pdf, r, 'The text', pycpdf.centre, pycpdf.TimesNewRoman, 12.0)
 pycpdf.removeText(pdf)
 pycpdf.textWidth(pycpdf.TimesNewRoman, 'Some text')
+"""
+
 
 # CHAPTER 9. Mulitpage facilities
+pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 pycpdf.twoUp(pdf)
-pycpdf.towUpStack(pdf)
+pycpdf.twoUpStack(pdf)
+r = pycpdf.all(pdf)
 pycpdf.padBefore(pdf, r)
 pycpdf.padAfter(pdf, r)
 pycpdf.padEvery(pdf, r)
-pycpdf.padMulitple(pdf, 10)
+pycpdf.padMultiple(pdf, 10)
 pycpdf.padMultipleBefore(pdf, 10)
+pycpdf.toFile(pdf, 'testoutputs/squeezed.pdf', False, False)
 
 # CHAPTER 10. Annotations
 
 # Not in the library version.
 
+"""
 # CHAPTER 11. Document Information and Metadata
 
 pycpdf.isLinearized('cpdfmanual.pdf')
@@ -241,8 +251,10 @@ fonts = pycpdf.getFontInfo(pdf)
 pycpdf.removeFonts(pdf)
 pycpdf.copyFont(pdf, pdf2, r, 1, "/Font")
 
+"""
 # CHAPTER 15. Miscellaneous
 
+pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 pycpdf.draft(pdf, r, True)
 pycpdf.removeAllText(pdf, r)
 pycpdf.blackText(pdf, r)
@@ -254,7 +266,9 @@ pycpdf.removeId(pdf)
 pycpdf.setVersion(pdf, 6)
 pycpdf.removeDictEntry(pdf, '/Key')
 pycpdf.removeClipping(pdf, 1)
+pycpdf.toFile(pdf, 'testoutputs/squeezed.pdf', False, False)
 
+"""
 # CHAPTER UNDOC (To come in v2.4)
 
 pycpdf.addContent(b'content', pdf, 1, True)

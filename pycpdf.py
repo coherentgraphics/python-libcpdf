@@ -30,6 +30,7 @@ def loadDLL(f):
   libc.pycpdf_shiftContents.argtypes = [c_int, c_int, c_double, c_double]
   libc.pycpdf_rotateContents.argtypes = [c_int, c_int, c_double]
   libc.pycpdf_crop.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
+  libc.pycpdf_thinLines.argtypes = [c_int, c_int, c_double]
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -341,3 +342,67 @@ def showBoxes(pdf, r):
 def hardBox(pdf, r, boxname):
   libc.pycpdf_hardBox(pdf, r, str.encode(boxname))
 
+def compress(pdf):
+  libc.pycpdf_compress(pdf)
+
+def decompress(pdf):
+  libc.pycpdf_decompress(pdf)
+
+def squeezeInMemory(pdf):
+  libc.pycpdf_squeezeInMemory(pdf)
+
+def twoUp(pdf):
+  libc.pycpdf_twoUp(pdf)
+
+def twoUpStack(pdf):
+  libc.pycpdf_twoUpStack(pdf)
+
+def padBefore(pdf, r):
+  libc.pycpdf_padBefore(pdf, r)
+
+def padAfter(pdf, r):
+  libc.pycpdf_padAfter(pdf, r)
+
+def padEvery(pdf, r):
+  libc.pycpdf_padEvery(pdf, r)
+
+def padMultiple(pdf, n):
+  libc.pycpdf_padMultiple(pdf, n)
+
+def padMultipleBefore(pdf, n):
+  libc.pycpdf_padMultipleBefore(pdf, n)
+
+# CHAPTER 15. Miscellaneous
+
+def draft(pdf, r, boxes):
+  libc.pycpdf_draft(pdf, r, boxes)
+
+def removeAllText(pdf, r):
+  libc.pycpdf_removeAllText(pdf, r)
+
+def blackText(pdf, r):
+  libc.pycpdf_blackText(pdf, r)
+
+def blackLines(pdf, r):
+  libc.pycpdf_blackLines(pdf, r)
+
+def blackFills(pdf, r):
+  libc.pycpdf_blackFills(pdf, r)
+
+def thinLines(pdf, r, linewidth):
+  libc.pycpdf_thinLines(pdf, r, linewidth)
+
+def copyId(pdf, pdf2):
+  libc.pycpdf_copyId(pdf, pdf2)
+
+def removeId(pdf):
+  libc.pycpdf_removeId(pdf)
+
+def setVersion(pdf, version):
+  libc.pycpdf_setVersion(pdf, version)
+
+def removeDictEntry(pdf, key):
+  libc.pycpdf_removeDictEntry(pdf, str.encode(key))
+
+def removeClipping(pdf, r):
+  libc.pycpdf_removeClipping(pdf, r)

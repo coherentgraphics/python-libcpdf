@@ -417,3 +417,145 @@ void pycpdf_hardBox(int pdf, int r, char *boxname)
 {
   cpdf_hardBox(pdf, r, boxname);
 }
+
+
+/* CHAPTER 4. Encryption */
+
+/* Encryption covered under Chapter 1 in cpdflib. */
+
+
+/* CHAPTER 5. Compression */
+
+void pycpdf_compress(int pdf)
+{
+  cpdf_compress(pdf);
+  return;
+}
+
+void pycpdf_decompress(int pdf)
+{
+  cpdf_decompress(pdf);
+  return;
+}
+
+void pycpdf_squeezeInMemory(int pdf)
+{
+  cpdf_squeezeInMemory(pdf);
+  return;
+}
+
+
+/* CHAPTER 7. Presentations */
+
+/* Not included in the library version */
+
+
+/* CHAPTER 9. Multipage facilities */
+void pycpdf_twoUp(int pdf)
+{
+  cpdf_twoUp(pdf);
+  return;
+}
+
+void pycpdf_twoUpStack(int pdf)
+{
+  cpdf_twoUp(pdf);
+  return;
+}
+
+void pycpdf_padBefore(int pdf, int r)
+{
+  cpdf_padBefore(pdf, r);
+  return;
+}
+
+void pycpdf_padAfter(int pdf, int r)
+{
+  cpdf_padAfter(pdf, r);
+  return;
+}
+
+void pycpdf_padEvery(int pdf, int r)
+{
+  cpdf_padEvery(pdf, r);
+  return;
+}
+
+void pycpdf_padMultiple(int pdf, int n)
+{
+  cpdf_padMultiple(pdf, n);
+  return;
+}
+
+void pycpdf_padMultipleBefore(int pdf, int n)
+{
+  cpdf_padMultiple(pdf, n);
+  return;
+}
+
+/* CHAPTER 15. Miscellaneous */
+void pycpdf_draft(int pdf, int r, int boxes)
+{
+  cpdf_draft(pdf, r, boxes);
+  return;
+}
+
+void pycpdf_removeAllText(int pdf, int r)
+{
+  cpdf_removeAllText(pdf, r);
+  return;
+}
+
+void pycpdf_blackText(int pdf, int r)
+{
+  cpdf_blackText(pdf, r);
+  return;
+}
+
+void pycpdf_blackLines(int pdf, int r)
+{
+  cpdf_blackLines(pdf, r);
+  return;
+}
+
+void pycpdf_blackFills(int pdf, int r)
+{
+  cpdf_blackFills(pdf, r);
+  return;
+}
+
+void pycpdf_thinLines(int pdf, int r, double linewidth)
+{
+  cpdf_thinLines(pdf, r, linewidth);
+  return;
+}
+
+void pycpdf_copyId(int pdf, int pdf2)
+{
+  cpdf_copyId(pdf, pdf2);
+  return;
+}
+
+void pycpdf_removeId(int pdf)
+{
+  cpdf_removeId(pdf);
+  return;
+}
+
+void pycpdf_setVersion(int pdf, int version)
+{
+  cpdf_setVersion(pdf, version);
+  return;
+}
+
+void pycpdf_removeDictEntry(int pdf, char *key)
+{
+  cpdf_removeDictEntry(pdf, key);
+  return;
+}
+
+void pycpdf_removeClipping(int pdf, int r)
+{
+  cpdf_removeClipping(pdf, r);
+  return;
+}
