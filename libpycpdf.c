@@ -493,6 +493,22 @@ void pycpdf_padMultipleBefore(int pdf, int n)
   return;
 }
 
+/* CHAPTER 11. Document Information and Metadata */
+int pycpdf_isLinearized(char *filename)
+{
+  return cpdf_isLinearized(filename);
+}
+
+int pycpdf_getVersion(int pdf)
+{
+  return cpdf_getVersion(pdf);
+}
+
+int pycpdf_getMajorVersion(int pdf)
+{
+  return cpdf_getMajorVersion(pdf);
+}
+
 /* CHAPTER 15. Miscellaneous */
 void pycpdf_draft(int pdf, int r, int boxes)
 {

@@ -342,6 +342,12 @@ def showBoxes(pdf, r):
 def hardBox(pdf, r, boxname):
   libc.pycpdf_hardBox(pdf, r, str.encode(boxname))
 
+# CHAPTER 4. Encryption
+
+# Encryption covered under Chapter 1 in cpdflib
+
+# CHAPTER 5. Compression
+
 def compress(pdf):
   libc.pycpdf_compress(pdf)
 
@@ -350,6 +356,13 @@ def decompress(pdf):
 
 def squeezeInMemory(pdf):
   libc.pycpdf_squeezeInMemory(pdf)
+
+# CHAPTER 7. Presentations
+
+# Not included in the library version
+
+
+# CHAPTER 9. Mulitpage facilities
 
 def twoUp(pdf):
   libc.pycpdf_twoUp(pdf)
@@ -371,6 +384,16 @@ def padMultiple(pdf, n):
 
 def padMultipleBefore(pdf, n):
   libc.pycpdf_padMultipleBefore(pdf, n)
+
+# CHAPTER 11. Document Information and Metadata
+def isLinearized(filename):
+  return libc.pycpdf_isLinearized(str.encode(filename))
+
+def getVersion(pdf):
+  return libc.pycpdf_getVersion(pdf)
+
+def getMajorVersion(pdf):
+  return libc.pycpdf_getMajorVersion(pdf)
 
 # CHAPTER 15. Miscellaneous
 

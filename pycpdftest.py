@@ -137,7 +137,6 @@ pycpdf.removeText(pdf)
 pycpdf.textWidth(pycpdf.TimesNewRoman, 'Some text')
 """
 
-
 # CHAPTER 9. Mulitpage facilities
 pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 pycpdf.twoUp(pdf)
@@ -154,12 +153,12 @@ pycpdf.toFile(pdf, 'testoutputs/squeezed.pdf', False, False)
 
 # Not in the library version.
 
-"""
 # CHAPTER 11. Document Information and Metadata
 
-pycpdf.isLinearized('cpdfmanual.pdf')
+linearized = pycpdf.isLinearized('testinputs/cpdfmanual.pdf')
 version = pycpdf.getVersion(pdf)
 version2 = pycpdf.getMajorVersion(pdf)
+"""
 title = pycpdf.getTitle(pdf)
 author = pycpdf.getAuthor(pdf)
 subject = pycpdf.getSubject(pdf)
@@ -206,7 +205,6 @@ pycpdf.setCropBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
 pycpdf.setTrimBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
 pycpdf.setArtBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
 pycpdf.setBleedBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
-
 pycpdf.markTrapped(pdf)
 pycpdf.markUntrapped(pdf)
 pycpdf.markTrappedXMP(pdf)
@@ -271,7 +269,7 @@ pycpdf.toFile(pdf, 'testoutputs/squeezed.pdf', False, False)
 """
 # CHAPTER UNDOC (To come in v2.4)
 
-pycpdf.addContent(b'content', pdf, 1, True)
+pycpdf.addContent('content', pdf, 1, True)
 pycpdf.outputJSON('filename.txt', pdf, 1, True)
 pycpdf.OCGCoalesce(pdf)
 pycpdf.OCGRename(pdf, 'one', 'two')
