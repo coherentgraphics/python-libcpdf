@@ -32,6 +32,22 @@ def loadDLL(f):
   libc.pycpdf_crop.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
   libc.pycpdf_thinLines.argtypes = [c_int, c_int, c_double]
   libc.pycpdf_stampAsXObject.restype = POINTER(c_char)
+  libc.pycpdf_getTitle.restype = POINTER(c_char)
+  libc.pycpdf_getAuthor.restype = POINTER(c_char)
+  libc.pycpdf_getSubject.restype = POINTER(c_char)
+  libc.pycpdf_getKeywords.restype = POINTER(c_char)
+  libc.pycpdf_getCreator.restype = POINTER(c_char)
+  libc.pycpdf_getProducer.restype = POINTER(c_char)
+  libc.pycpdf_getCreationDate.restype = POINTER(c_char)
+  libc.pycpdf_getModificationDate.restype = POINTER(c_char)
+  libc.pycpdf_getTitleXMP.restype = POINTER(c_char)
+  libc.pycpdf_getAuthorXMP.restype = POINTER(c_char)
+  libc.pycpdf_getSubjectXMP.restype = POINTER(c_char)
+  libc.pycpdf_getKeywordsXMP.restype = POINTER(c_char)
+  libc.pycpdf_getCreatorXMP.restype = POINTER(c_char)
+  libc.pycpdf_getProducerXMP.restype = POINTER(c_char)
+  libc.pycpdf_getCreationDateXMP.restype = POINTER(c_char)
+  libc.pycpdf_getModificationDateXMP.restype = POINTER(c_char)
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -386,6 +402,7 @@ def padMultiple(pdf, n):
 def padMultipleBefore(pdf, n):
   libc.pycpdf_padMultipleBefore(pdf, n)
 
+
 # CHAPTER 11. Document Information and Metadata
 def isLinearized(filename):
   return libc.pycpdf_isLinearized(str.encode(filename))
@@ -395,6 +412,119 @@ def getVersion(pdf):
 
 def getMajorVersion(pdf):
   return libc.pycpdf_getMajorVersion(pdf)
+
+def getTitle(pdf):
+  return string_at(libc.pycpdf_getTitle(pdf)).decode()
+
+def getAuthor(pdf):
+  return string_at(libc.pycpdf_getAuthor(pdf)).decode()
+
+def getSubject(pdf):
+  return string_at(libc.pycpdf_getSubject(pdf)).decode()
+
+def getKeywords(pdf):
+  return string_at(libc.pycpdf_getKeywords(pdf)).decode()
+
+def getCreator(pdf):
+  return string_at(libc.pycpdf_getCreator(pdf)).decode()
+
+def getProducer(pdf):
+  return string_at(libc.pycpdf_getProducer(pdf)).decode()
+
+def getCreationDate(pdf):
+  return string_at(libc.pycpdf_getCreationDate(pdf)).decode()
+
+def getModificationDate(pdf):
+  return string_at(libc.pycpdf_getModificationDate(pdf)).decode()
+
+def getTitleXMP(pdf):
+  return string_at(libc.pycpdf_getTitleXMP(pdf)).decode()
+
+def getAuthorXMP(pdf):
+  return string_at(libc.pycpdf_getAuthorXMP(pdf)).decode()
+
+def getSubjectXMP(pdf):
+  return string_at(libc.pycpdf_getSubjectXMP(pdf)).decode()
+
+def getKeywordsXMP(pdf):
+  return string_at(libc.pycpdf_getKeywordsXMP(pdf)).decode()
+
+def getCreatorXMP(pdf):
+  return string_at(libc.pycpdf_getCreatorXMP(pdf)).decode()
+
+def getProducerXMP(pdf):
+  return string_at(libc.pycpdf_getProducerXMP(pdf)).decode()
+
+def getCreationDateXMP(pdf):
+  return string_at(libc.pycpdf_getCreationDateXMP(pdf)).decode()
+
+def getModificationDateXMP(pdf):
+  return string_at(libc.pycpdf_getModificationDateXMP(pdf)).decode()
+
+def setTitle(pdf, s):
+  libc.pycpdf_setTitle(pdf, str.encode(s));
+  return
+
+def setAuthor(pdf, s):
+  libc.pycpdf_setAuthor(pdf, str.encode(s));
+  return
+
+def setSubject(pdf, s):
+  libc.pycpdf_setSubject(pdf, str.encode(s));
+  return
+
+def setKeywords(pdf, s):
+  libc.pycpdf_setKeywords(pdf, str.encode(s));
+  return
+
+def setCreator(pdf, s):
+  libc.pycpdf_setCreator(pdf, str.encode(s));
+  return
+
+def setProducer(pdf, s):
+  libc.pycpdf_setProducer(pdf, str.encode(s));
+  return
+
+def setCreationDate(pdf, s):
+  libc.pycpdf_setCreationDate(pdf, str.encode(s));
+  return
+
+def setModificationDate(pdf, s):
+  libc.pycpdf_setModificationDate(pdf, str.encode(s));
+  return
+
+def setTitleXMP(pdf, s):
+  libc.pycpdf_setTitleXMP(pdf, str.encode(s));
+  return
+
+def setAuthorXMP(pdf, s):
+  libc.pycpdf_setAuthorXMP(pdf, str.encode(s));
+  return
+
+def setSubjectXMP(pdf, s):
+  libc.pycpdf_setSubjectXMP(pdf, str.encode(s));
+  return
+
+def setKeywordsXMP(pdf, s):
+  libc.pycpdf_setKeywordsXMP(pdf, str.encode(s));
+  return
+
+def setCreatorXMP(pdf, s):
+  libc.pycpdf_setCreatorXMP(pdf, str.encode(s));
+  return
+
+def setProducerXMP(pdf, s):
+  libc.pycpdf_setProducerXMP(pdf, str.encode(s));
+  return
+
+def setCreationDateXMP(pdf, s):
+  libc.pycpdf_setCreationDateXMP(pdf, str.encode(s));
+  return
+
+def setModificationDateXMP(pdf, s):
+  libc.pycpdf_setModificationDateXMP(pdf, str.encode(s));
+  return
+
 
 # CHAPTER 15. Miscellaneous
 

@@ -509,6 +509,183 @@ int pycpdf_getMajorVersion(int pdf)
   return cpdf_getMajorVersion(pdf);
 }
 
+char* pycpdf_getTitle(int pdf)
+{
+  return cpdf_getTitle(pdf);
+}
+
+char* pycpdf_getAuthor(int pdf)
+{
+  return cpdf_getAuthor(pdf);
+}
+
+char* pycpdf_getSubject(int pdf)
+{
+  return cpdf_getSubject(pdf);
+}
+
+char* pycpdf_getKeywords(int pdf)
+{
+  return cpdf_getKeywords(pdf);
+}
+
+char* pycpdf_getCreator(int pdf)
+{
+  return cpdf_getCreator(pdf);
+}
+
+char* pycpdf_getProducer(int pdf)
+{
+  return cpdf_getProducer(pdf);
+}
+
+char* pycpdf_getCreationDate(int pdf)
+{
+  return cpdf_getCreationDate(pdf);
+}
+
+char* pycpdf_getModificationDate(int pdf)
+{
+  return cpdf_getModificationDate(pdf);
+}
+
+char* pycpdf_getTitleXMP(int pdf)
+{
+  return cpdf_getTitleXMP(pdf);
+}
+
+char* pycpdf_getAuthorXMP(int pdf)
+{
+  return cpdf_getAuthorXMP(pdf);
+}
+
+char* pycpdf_getSubjectXMP(int pdf)
+{
+  return cpdf_getSubjectXMP(pdf);
+}
+
+char* pycpdf_getKeywordsXMP(int pdf)
+{
+  return cpdf_getKeywordsXMP(pdf);
+}
+
+char* pycpdf_getCreatorXMP(int pdf)
+{
+  return cpdf_getCreatorXMP(pdf);
+}
+
+char* pycpdf_getProducerXMP(int pdf)
+{
+  return cpdf_getProducerXMP(pdf);
+}
+
+char* pycpdf_getCreationDateXMP(int pdf)
+{
+  return cpdf_getCreationDateXMP(pdf);
+}
+
+char* pycpdf_getModificationDateXMP(int pdf)
+{
+  return cpdf_getModificationDateXMP(pdf);
+}
+
+void pycpdf_setTitle(int pdf, char *s)
+{
+  cpdf_setTitle(pdf, s);
+  return;
+}
+
+void pycpdf_setAuthor(int pdf, char *s)
+{
+  cpdf_setAuthor(pdf, s);
+  return;
+}
+
+void pycpdf_setSubject(int pdf, char *s)
+{
+  cpdf_setSubject(pdf, s);
+  return;
+}
+
+void pycpdf_setKeywords(int pdf, char *s)
+{
+  cpdf_setKeywords(pdf, s);
+  return;
+}
+
+void pycpdf_setCreator(int pdf, char *s)
+{
+  cpdf_setCreator(pdf, s);
+  return;
+}
+
+void pycpdf_setProducer(int pdf, char *s)
+{
+  cpdf_setProducer(pdf, s);
+  return;
+}
+
+void pycpdf_setCreationDate(int pdf, char *s)
+{
+  cpdf_setCreationDate(pdf, s);
+  return;
+}
+
+void pycpdf_setModificationDate(int pdf, char *s)
+{
+  cpdf_setModificationDate(pdf, s);
+  return;
+}
+
+void pycpdf_setTitleXMP(int pdf, char *s)
+{
+  cpdf_setTitleXMP(pdf, s);
+  return;
+}
+
+void pycpdf_setAuthorXMP(int pdf, char *s)
+{
+  cpdf_setAuthorXMP(pdf, s);
+  return;
+}
+
+void pycpdf_setSubjectXMP(int pdf, char *s)
+{
+  cpdf_setSubjectXMP(pdf, s);
+  return;
+}
+
+void pycpdf_setKeywordsXMP(int pdf, char *s)
+{
+  cpdf_setKeywordsXMP(pdf, s);
+  return;
+}
+
+void pycpdf_setCreatorXMP(int pdf, char *s)
+{
+  cpdf_setCreatorXMP(pdf, s);
+  return;
+}
+
+void pycpdf_setProducerXMP(int pdf, char *s)
+{
+  cpdf_setProducerXMP(pdf, s);
+  return;
+}
+
+void pycpdf_setCreationDateXMP(int pdf, char *s)
+{
+  cpdf_setCreationDateXMP(pdf, s);
+  return;
+}
+
+void pycpdf_setModificationDateXMP(int pdf, char *s)
+{
+  cpdf_setModificationDateXMP(pdf, s);
+  return;
+}
+
+
 /* CHAPTER 15. Miscellaneous */
 void pycpdf_draft(int pdf, int r, int boxes)
 {
