@@ -685,6 +685,95 @@ void pycpdf_setModificationDateXMP(int pdf, char *s)
   return;
 }
 
+void pycpdf_setMediaBox(int pdf, int range, double minx, double maxx, double miny, double maxy)
+{
+  cpdf_setMediabox(pdf, range, minx, maxx, miny, maxy);
+  return;
+}
+
+void pycpdf_setCropBox(int pdf, int range, double minx, double maxx, double miny, double maxy)
+{
+  cpdf_setCropBox(pdf, range, minx, maxx, miny, maxy);
+  return;
+}
+
+void pycpdf_setTrimBox(int pdf, int range, double minx, double maxx, double miny, double maxy)
+{
+  cpdf_setTrimBox(pdf, range, minx, maxx, miny, maxy);
+  return;
+}
+
+void pycpdf_setArtBox(int pdf, int range, double minx, double maxx, double miny, double maxy)
+{
+  cpdf_setArtBox(pdf, range, minx, maxx, miny, maxy);
+  return;
+}
+
+void pycpdf_setBleedBox(int pdf, int range, double minx, double maxx, double miny, double maxy)
+{
+  cpdf_setBleedBox(pdf, range, minx, maxx, miny, maxy);
+  return;
+}
+
+void pycpdf_markTrapped(int pdf)
+{
+  cpdf_markTrapped(pdf);
+  return;
+}
+
+void pycpdf_markUntrapped(int pdf)
+{
+  cpdf_markUntrapped(pdf);
+  return;
+}
+
+void pycpdf_markTrappedXMP(int pdf)
+{
+  cpdf_markTrappedXMP(pdf);
+  return;
+}
+
+void pycpdf_markUntrappedXMP(int pdf)
+{
+  cpdf_markUntrappedXMP(pdf);
+  return;
+}
+
+void pycpdf_hideToolbar(int pdf, int flag)
+{
+  cpdf_hideToolbar(pdf, flag);
+  return;
+}
+
+void pycpdf_hideMenubar(int pdf, int flag)
+{
+  cpdf_hideMenubar(pdf, flag);
+  return;
+}
+
+void pycpdf_hideWindowUi(int pdf, int flag)
+{
+  cpdf_hideWindowUi(pdf, flag);
+  return;
+}
+
+void pycpdf_fitWindow(int pdf, int flag)
+{
+  cpdf_fitWindow(pdf, flag);
+  return;
+}
+
+void pycpdf_centerWindow(int pdf, int flag)
+{
+  cpdf_centerWindow(pdf, flag);
+  return;
+}
+
+void pycpdf_displayDocTitle(int pdf, int flag)
+{
+  cpdf_displayDocTitle(pdf, flag);
+  return;
+}
 
 /* CHAPTER 15. Miscellaneous */
 void pycpdf_draft(int pdf, int r, int boxes)

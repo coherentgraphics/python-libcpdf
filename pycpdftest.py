@@ -154,7 +154,6 @@ pycpdf.toFile(pdf, 'testoutputs/squeezed.pdf', False, False)
 # Not in the library version.
 
 # CHAPTER 11. Document Information and Metadata
-
 linearized = pycpdf.isLinearized('testinputs/cpdfmanual.pdf')
 version = pycpdf.getVersion(pdf)
 version2 = pycpdf.getMajorVersion(pdf)
@@ -216,6 +215,7 @@ cropBox = pycpdf.getCropBox(pdf, 1)
 trimBox = pycpdf.getTrimBox(pdf, 1)
 artBox = pycpdf.getArtBox(pdf, 1)
 bleedBox = pycpdf.getBleedBox(pdf, 1)
+"""
 pycpdf.setMediaBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
 pycpdf.setCropBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
 pycpdf.setTrimBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
@@ -225,14 +225,17 @@ pycpdf.markTrapped(pdf)
 pycpdf.markUntrapped(pdf)
 pycpdf.markTrappedXMP(pdf)
 pycpdf.markUntrappedXMP(pdf)
+"""
 pycpdf.setPageLayout(pdf, pycpdf.singlePage)
 pycpdf.setPageMode(pdf, pycpdf.useThumbs)
+"""
 pycpdf.hideToolbar(pdf, True)
 pycpdf.hideMenubar(pdf, False)
 pycpdf.hideWindowUi(pdf, True)
 pycpdf.fitWindow(pdf, True)
 pycpdf.centerWindow(pdf, True)
 pycpdf.displayDocTitle(pdf, True)
+"""
 pycpdf.openAtPage(pdf, True, 5)
 pycpdf.setMetadataFromFile(pdf, 'metadata.txt')
 pycpdf.setMetadataFromByteArray(pdf, b'data')

@@ -48,6 +48,11 @@ def loadDLL(f):
   libc.pycpdf_getProducerXMP.restype = POINTER(c_char)
   libc.pycpdf_getCreationDateXMP.restype = POINTER(c_char)
   libc.pycpdf_getModificationDateXMP.restype = POINTER(c_char)
+  libc.pycpdf_setMediaBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
+  libc.pycpdf_setCropBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
+  libc.pycpdf_setTrimBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
+  libc.pycpdf_setArtBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
+  libc.pycpdf_setBleedBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -523,6 +528,66 @@ def setCreationDateXMP(pdf, s):
 
 def setModificationDateXMP(pdf, s):
   libc.pycpdf_setModificationDateXMP(pdf, str.encode(s));
+  return
+
+def setMediaBox(pdf, r, minx, maxx, miny, maxy):
+  libc.pycpdf_setMediaBox(pdf, r, minx, maxx, miny, maxy);
+  return
+
+def setCropBox(pdf, r, minx, maxx, miny, maxy):
+  libc.pycpdf_setCropBox(pdf, r, minx, maxx, miny, maxy);
+  return
+
+def setTrimBox(pdf, r, minx, maxx, miny, maxy):
+  libc.pycpdf_setTrimBox(pdf, r, minx, maxx, miny, maxy);
+  return
+
+def setArtBox(pdf, r, minx, maxx, miny, maxy):
+  libc.pycpdf_setArtBox(pdf, r, minx, maxx, miny, maxy);
+  return
+
+def setBleedBox(pdf, r, minx, maxx, miny, maxy):
+  libc.pycpdf_setBleedBox(pdf, r, minx, maxx, miny, maxy);
+  return
+
+def markTrapped(pdf):
+  libc.pycpdf_markTrapped(pdf);
+  return
+
+def markUntrapped(pdf):
+  libc.pycpdf_markUntrapped(pdf);
+  return
+
+def markTrappedXMP(pdf):
+  libc.pycpdf_markTrappedXMP(pdf);
+  return
+
+def markUntrappedXMP(pdf):
+  libc.pycpdf_markUntrappedXMP(pdf);
+  return
+
+def hideToolbar(pdf, flag):
+  libc.pycpdf_hideToolbar(pdf, flag);
+  return
+
+def hideMenubar(pdf, flag):
+  libc.pycpdf_hideMenubar(pdf, flag);
+  return
+
+def hideWindowUi(pdf, flag):
+  libc.pycpdf_hideWindowUi(pdf, flag);
+  return
+
+def fitWindow(pdf, flag):
+  libc.pycpdf_fitWindow(pdf, flag);
+  return
+
+def centerWindow(pdf, flag):
+  libc.pycpdf_centerWindow(pdf, flag);
+  return
+
+def displayDocTitle(pdf, flag):
+  libc.pycpdf_displayDocTitle(pdf, flag);
   return
 
 
