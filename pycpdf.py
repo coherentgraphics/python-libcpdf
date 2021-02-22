@@ -590,6 +590,13 @@ def displayDocTitle(pdf, flag):
   libc.pycpdf_displayDocTitle(pdf, flag);
   return
 
+def removeMetadata(pdf):
+  libc.pycpdf_removeMetadata(pdf);
+  return
+
+def createMetadata(pdf):
+  libc.pycpdf_createMetadata(pdf);
+  return
 
 # CHAPTER 15. Miscellaneous
 

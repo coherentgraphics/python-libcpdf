@@ -775,6 +775,18 @@ void pycpdf_displayDocTitle(int pdf, int flag)
   return;
 }
 
+void pycpdf_removeMetadata(int pdf)
+{
+  cpdf_removeMetadata(pdf);
+  return;
+}
+
+void pycpdf_createMetadata(int pdf)
+{
+  cpdf_createMetadata(pdf);
+  return;
+}
+
 /* CHAPTER 15. Miscellaneous */
 void pycpdf_draft(int pdf, int r, int boxes)
 {
