@@ -467,136 +467,153 @@ def getModificationDateXMP(pdf):
   return string_at(libc.pycpdf_getModificationDateXMP(pdf)).decode()
 
 def setTitle(pdf, s):
-  libc.pycpdf_setTitle(pdf, str.encode(s));
+  libc.pycpdf_setTitle(pdf, str.encode(s))
   return
 
 def setAuthor(pdf, s):
-  libc.pycpdf_setAuthor(pdf, str.encode(s));
+  libc.pycpdf_setAuthor(pdf, str.encode(s))
   return
 
 def setSubject(pdf, s):
-  libc.pycpdf_setSubject(pdf, str.encode(s));
+  libc.pycpdf_setSubject(pdf, str.encode(s))
   return
 
 def setKeywords(pdf, s):
-  libc.pycpdf_setKeywords(pdf, str.encode(s));
+  libc.pycpdf_setKeywords(pdf, str.encode(s))
   return
 
 def setCreator(pdf, s):
-  libc.pycpdf_setCreator(pdf, str.encode(s));
+  libc.pycpdf_setCreator(pdf, str.encode(s))
   return
 
 def setProducer(pdf, s):
-  libc.pycpdf_setProducer(pdf, str.encode(s));
+  libc.pycpdf_setProducer(pdf, str.encode(s))
   return
 
 def setCreationDate(pdf, s):
-  libc.pycpdf_setCreationDate(pdf, str.encode(s));
+  libc.pycpdf_setCreationDate(pdf, str.encode(s))
   return
 
 def setModificationDate(pdf, s):
-  libc.pycpdf_setModificationDate(pdf, str.encode(s));
+  libc.pycpdf_setModificationDate(pdf, str.encode(s))
   return
 
 def setTitleXMP(pdf, s):
-  libc.pycpdf_setTitleXMP(pdf, str.encode(s));
+  libc.pycpdf_setTitleXMP(pdf, str.encode(s))
   return
 
 def setAuthorXMP(pdf, s):
-  libc.pycpdf_setAuthorXMP(pdf, str.encode(s));
+  libc.pycpdf_setAuthorXMP(pdf, str.encode(s))
   return
 
 def setSubjectXMP(pdf, s):
-  libc.pycpdf_setSubjectXMP(pdf, str.encode(s));
+  libc.pycpdf_setSubjectXMP(pdf, str.encode(s))
   return
 
 def setKeywordsXMP(pdf, s):
-  libc.pycpdf_setKeywordsXMP(pdf, str.encode(s));
+  libc.pycpdf_setKeywordsXMP(pdf, str.encode(s))
   return
 
 def setCreatorXMP(pdf, s):
-  libc.pycpdf_setCreatorXMP(pdf, str.encode(s));
+  libc.pycpdf_setCreatorXMP(pdf, str.encode(s))
   return
 
 def setProducerXMP(pdf, s):
-  libc.pycpdf_setProducerXMP(pdf, str.encode(s));
+  libc.pycpdf_setProducerXMP(pdf, str.encode(s))
   return
 
 def setCreationDateXMP(pdf, s):
-  libc.pycpdf_setCreationDateXMP(pdf, str.encode(s));
+  libc.pycpdf_setCreationDateXMP(pdf, str.encode(s))
   return
 
 def setModificationDateXMP(pdf, s):
-  libc.pycpdf_setModificationDateXMP(pdf, str.encode(s));
+  libc.pycpdf_setModificationDateXMP(pdf, str.encode(s))
   return
 
 def setMediaBox(pdf, r, minx, maxx, miny, maxy):
-  libc.pycpdf_setMediaBox(pdf, r, minx, maxx, miny, maxy);
+  libc.pycpdf_setMediaBox(pdf, r, minx, maxx, miny, maxy)
   return
 
 def setCropBox(pdf, r, minx, maxx, miny, maxy):
-  libc.pycpdf_setCropBox(pdf, r, minx, maxx, miny, maxy);
+  libc.pycpdf_setCropBox(pdf, r, minx, maxx, miny, maxy)
   return
 
 def setTrimBox(pdf, r, minx, maxx, miny, maxy):
-  libc.pycpdf_setTrimBox(pdf, r, minx, maxx, miny, maxy);
+  libc.pycpdf_setTrimBox(pdf, r, minx, maxx, miny, maxy)
   return
 
 def setArtBox(pdf, r, minx, maxx, miny, maxy):
-  libc.pycpdf_setArtBox(pdf, r, minx, maxx, miny, maxy);
+  libc.pycpdf_setArtBox(pdf, r, minx, maxx, miny, maxy)
   return
 
 def setBleedBox(pdf, r, minx, maxx, miny, maxy):
-  libc.pycpdf_setBleedBox(pdf, r, minx, maxx, miny, maxy);
+  libc.pycpdf_setBleedBox(pdf, r, minx, maxx, miny, maxy)
   return
 
 def markTrapped(pdf):
-  libc.pycpdf_markTrapped(pdf);
+  libc.pycpdf_markTrapped(pdf)
   return
 
 def markUntrapped(pdf):
-  libc.pycpdf_markUntrapped(pdf);
+  libc.pycpdf_markUntrapped(pdf)
   return
 
 def markTrappedXMP(pdf):
-  libc.pycpdf_markTrappedXMP(pdf);
+  libc.pycpdf_markTrappedXMP(pdf)
   return
 
 def markUntrappedXMP(pdf):
-  libc.pycpdf_markUntrappedXMP(pdf);
+  libc.pycpdf_markUntrappedXMP(pdf)
   return
 
 def hideToolbar(pdf, flag):
-  libc.pycpdf_hideToolbar(pdf, flag);
+  libc.pycpdf_hideToolbar(pdf, flag)
   return
 
 def hideMenubar(pdf, flag):
-  libc.pycpdf_hideMenubar(pdf, flag);
+  libc.pycpdf_hideMenubar(pdf, flag)
   return
 
 def hideWindowUi(pdf, flag):
-  libc.pycpdf_hideWindowUi(pdf, flag);
+  libc.pycpdf_hideWindowUi(pdf, flag)
   return
 
 def fitWindow(pdf, flag):
-  libc.pycpdf_fitWindow(pdf, flag);
+  libc.pycpdf_fitWindow(pdf, flag)
   return
 
 def centerWindow(pdf, flag):
-  libc.pycpdf_centerWindow(pdf, flag);
+  libc.pycpdf_centerWindow(pdf, flag)
   return
 
 def displayDocTitle(pdf, flag):
-  libc.pycpdf_displayDocTitle(pdf, flag);
+  libc.pycpdf_displayDocTitle(pdf, flag)
   return
 
 def removeMetadata(pdf):
-  libc.pycpdf_removeMetadata(pdf);
+  libc.pycpdf_removeMetadata(pdf)
   return
 
 def createMetadata(pdf):
-  libc.pycpdf_createMetadata(pdf);
+  libc.pycpdf_createMetadata(pdf)
   return
+
+# CHAPTER 12. File Attachments
+
+def attachFile(filename, pdf):
+  libc.pycpdf_attachFile(str.encode(filename), pdf)
+
+def attachFileToPage(filename, pdf, pagenumber):
+  libc.pycpdf_attachFileToPage(str.encode(filename), pdf, pagenumber)
+
+def attachFileFromMemory(data, filename, pdf):
+  libc.pycpdf_attachFileFromMemory(data, len(data), filename, pdf)
+
+def attachFileToPageFromMemory(data, filename, pdf, pagenumber):
+  libc.pycpdf_attachFileToPageFromMemory(data, len(data), filename, pdf, pagenumber)
+
+def removeAttachedFiles(pdf):
+  libc.pycpdf_removeAttachedFiles(pdf)
 
 # CHAPTER 15. Miscellaneous
 

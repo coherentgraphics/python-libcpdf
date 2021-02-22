@@ -787,6 +787,38 @@ void pycpdf_createMetadata(int pdf)
   return;
 }
 
+/* CHAPTER 12. File Attachments */
+void pycpdf_attachFile(char* filename, int pdf)
+{
+  cpdf_attachFile(filename, pdf);
+  return;
+}
+
+void pycpdf_attachFileToPage(char* filename, int pdf, int pagenumber)
+{
+  cpdf_attachFileToPage(filename, pdf, pagenumber);
+  return;
+}
+
+void pycpdf_attachFileFromMemory(void* data, int len, char* filename, int pdf)
+{
+  cpdf_attachFileFromMemory(data, len, filename, pdf);
+  return;
+}
+
+void pycpdf_attachFileToPageFromMemory(void* data, int len, char* filename, int pdf, int pagenumber)
+{
+  cpdf_attachFileToPageFromMemory(data, len, filename, pdf, pagenumber);
+  return;
+}
+
+void pycpdf_removeAttachedFiles(int pdf)
+{
+  cpdf_removeAttachedFiles(pdf);
+  return;
+}
+
+
 /* CHAPTER 15. Miscellaneous */
 void pycpdf_draft(int pdf, int r, int boxes)
 {

@@ -253,11 +253,14 @@ labels = pycpdf.getPageLabels(pdf)
 
 # CHAPTER 12. File Attachments
 
-pycpdf.attachFile('attach.txt', pdf)
-pycpdf.attachFileToPage('attach.txt', pdf, 1)
-pycpdf.attachFileFromMemory(b'data', 'filename.txt', pdf)
-pycpdf.attachFileToPageFromMemory(b'data', 'filename.txt', pdf, 1)
+"""
+pycpdf.attachFile('testinputs/attach.txt', pdf)
+pycpdf.attachFileToPage('testinputs/attach.txt', pdf, 1)
+pycpdf.attachFileFromMemory('data', 'filename.txt', pdf)
+pycpdf.attachFileToPageFromMemory('data', 'filename.txt', pdf, 1)
 pycpdf.removeAttachedFiles(pdf)
+
+"""
 attachments = pycpdf.getAttachments(pdf)
 
 # CHAPTER 13. Images
