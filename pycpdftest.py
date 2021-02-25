@@ -113,12 +113,13 @@ pycpdf.decompress(pdf)
 pycpdf.squeezeInMemory(pdf)
 pycpdf.toFile(pdf, 'testoutputs/squeezed.pdf', False, False)
 
-"""
 # CHAPTER 6. Bookmarks
+
 # Format: list of tuples. (level : int, page : int, text : string, openstatus : int/bool) 
-pycpdf.getBookmarks(pdf)
-pycpdf.setBookmarks(pdf)
-"""
+existing_marks = pycpdf.getBookmarks(pdf)
+print(existing_marks)
+marks = [(0, 1, "new bookmark", True), (1, 3, "second, indented one", False)]
+pycpdf.setBookmarks(pdf, marks)
 
 # CHAPTER 7. Presentations
 

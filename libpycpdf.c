@@ -445,6 +445,81 @@ void pycpdf_squeezeInMemory(int pdf)
 }
 
 
+/* CHAPTER 6. Bookmarks */
+
+void pycpdf_startGetBookmarkInfo(int pdf)
+{
+  cpdf_startGetBookmarkInfo(pdf);
+  return;
+}
+
+int pycpdf_numberBookmarks()
+{
+  return cpdf_numberBookmarks();
+}
+
+int pycpdf_getBookmarkLevel(int n)
+{
+  return cpdf_getBookmarkLevel(n);
+}
+
+int pycpdf_getBookmarkPage(int pdf, int page)
+{
+  return cpdf_getBookmarkPage(pdf, page);
+}
+
+char *pycpdf_getBookmarkText(int n)
+{
+  return cpdf_getBookmarkText(n);
+}
+
+int pycpdf_getBookmarkOpenStatus(int n)
+{
+  return cpdf_getBookmarkOpenStatus(n);
+}
+
+void pycpdf_endGetBookmarkInfo()
+{
+  cpdf_endGetBookmarkInfo();
+  return;
+}
+
+void pycpdf_startSetBookmarkInfo(int n)
+{
+  cpdf_startSetBookmarkInfo(n);
+  return;
+}
+
+void pycpdf_setBookmarkLevel(int n, int level)
+{
+  cpdf_setBookmarkLevel(n, level);
+  return;
+}
+
+void pycpdf_setBookmarkPage(int pdf, int n, int targetpage)
+{
+  cpdf_setBookmarkPage(pdf, n, targetpage);
+  return;
+}
+
+void pycpdf_setBookmarkOpenStatus(int n, int status)
+{
+  cpdf_setBookmarkOpenStatus(n, status);
+  return;
+}
+
+void pycpdf_setBookmarkText(int n, char *text)
+{
+  cpdf_setBookmarkText(n, text);
+  return;
+}
+
+void pycpdf_endSetBookmarkInfo(int pdf)
+{
+  cpdf_endSetBookmarkInfo(pdf);
+  return;
+}
+
 /* CHAPTER 7. Presentations */
 
 /* Not included in the library version */

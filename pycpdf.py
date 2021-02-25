@@ -53,6 +53,7 @@ def loadDLL(f):
   libc.pycpdf_setTrimBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
   libc.pycpdf_setArtBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
   libc.pycpdf_setBleedBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
+  libc.pycpdf_getBookmarkText.restype = POINTER(c_char)
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -378,6 +379,35 @@ def decompress(pdf):
 
 def squeezeInMemory(pdf):
   libc.pycpdf_squeezeInMemory(pdf)
+
+
+# CHAPTER 6. Bookmarks
+
+# Format: list of tuples. (level : int, page : int, text : string, openstatus : int/bool) 
+
+def getBookmarks(pdf):
+  l = []
+  libc.pycpdf_startGetBookmarkInfo(pdf);
+  n = libc.pycpdf_numberBookmarks();
+  for x in range(n):
+      level = libc.pycpdf_getBookmarkLevel(x)
+      page = libc.pycpdf_getBookmarkPage(pdf, x)
+      text = string_at(libc.pycpdf_getBookmarkText(x)).decode()
+      openStatus = libc.pycpdf_getBookmarkOpenStatus(x)
+      l.append((level, page, text, openStatus))
+  libc.pycpdf_endGetBookmarkInfo(pdf);
+  return l
+
+def setBookmarks(pdf, marks):
+  libc.pycpdf_startSetBookmarkInfo(len(marks))
+  for n, m in enumerate(marks):
+      level, page, text, openStatus = m
+      print(level, page, text, openStatus)
+      libc.pycpdf_setBookmarkLevel(n, level)
+      libc.pycpdf_setBookmarkPage(n, page)
+      libc.pycpdf_setBookmarkOpenStatus(n, openStatus)
+      libc.pycpdf_setBookmarkText(n, text)
+  libc.pycpdf_endSetBookmarkInfo(pdf)
 
 # CHAPTER 7. Presentations
 
