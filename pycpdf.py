@@ -566,6 +566,27 @@ def markUntrappedXMP(pdf):
   libc.pycpdf_markUntrappedXMP(pdf)
   return
 
+singlePage = 0
+oneColumn = 1
+twoColumnLeft = 2
+twoColumnRight = 3
+twoPageLeft = 4
+twoPageRight = 5
+
+def setPageLayout(pdf, layout):
+  libc.pycpdf_setPageLayout(pdf, layout)
+  return
+
+useNone = 0
+useOutlines = 1
+useThumbs = 2
+useOC = 3
+useAttachments = 4
+
+def setPageMode(pdf, mode):
+  libc.pycpdf_setPageMode(pdf, mode)
+  return
+
 def hideToolbar(pdf, flag):
   libc.pycpdf_hideToolbar(pdf, flag)
   return
@@ -590,12 +611,28 @@ def displayDocTitle(pdf, flag):
   libc.pycpdf_displayDocTitle(pdf, flag)
   return
 
+def openAtPage(pdf, flag, pagenumber):
+  libc.pycpdf_openAtPage(pdf, flag, pagenumber)
+  return
+
+def setMetadataFromFile(pdf, filename):
+  libc.pycpdf_setMetadataFromFile(pdf, str.encode(filename))
+  return
+
+def setMetadataFromByteArray(pdf, data):
+  libc.pycpdf_setMetadataFromByteArray(pdf, data, len(data))
+  return
+
 def removeMetadata(pdf):
   libc.pycpdf_removeMetadata(pdf)
   return
 
 def createMetadata(pdf):
   libc.pycpdf_createMetadata(pdf)
+  return
+
+def setMetadataDate(pdf, date):
+  libc.pycpdf_setMetadataDate(pdf, str.encode(date))
   return
 
 # CHAPTER 12. File Attachments

@@ -225,26 +225,26 @@ pycpdf.markTrapped(pdf)
 pycpdf.markUntrapped(pdf)
 pycpdf.markTrappedXMP(pdf)
 pycpdf.markUntrappedXMP(pdf)
-"""
 pycpdf.setPageLayout(pdf, pycpdf.singlePage)
 pycpdf.setPageMode(pdf, pycpdf.useThumbs)
-"""
 pycpdf.hideToolbar(pdf, True)
 pycpdf.hideMenubar(pdf, False)
 pycpdf.hideWindowUi(pdf, True)
 pycpdf.fitWindow(pdf, True)
 pycpdf.centerWindow(pdf, True)
 pycpdf.displayDocTitle(pdf, True)
-"""
 pycpdf.openAtPage(pdf, True, 5)
-pycpdf.setMetadataFromFile(pdf, 'metadata.txt')
-pycpdf.setMetadataFromByteArray(pdf, b'data')
+pycpdf.setMetadataFromFile(pdf, 'testinputs/metadata.txt')
+pycpdf.setMetadataFromByteArray(pdf, 'data')
+
+"""
 metadata = pycpdf.getMetadata(pdf)
 """
 pycpdf.removeMetadata(pdf)
 pycpdf.createMetadata(pdf)
+pycpdf.setMetadataDate(pdf, 'now')
+
 """
-pycpdf.setMetadataDate(pdf, 'DATE')
 labels = []
 pycpdf.addPageLabels(pdf, labels)
 pycpdf.removePageLabels(pdf)

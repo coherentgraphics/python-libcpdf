@@ -739,6 +739,18 @@ void pycpdf_markUntrappedXMP(int pdf)
   return;
 }
 
+void pycpdf_setPageLayout(int pdf, int layout)
+{
+  cpdf_setPageLayout(pdf, layout);
+  return;
+}
+
+void pycpdf_setPageMode(int pdf, int mode)
+{
+  cpdf_setPageMode(pdf, mode);
+  return;
+}
+
 void pycpdf_hideToolbar(int pdf, int flag)
 {
   cpdf_hideToolbar(pdf, flag);
@@ -775,6 +787,24 @@ void pycpdf_displayDocTitle(int pdf, int flag)
   return;
 }
 
+void pycpdf_openAtPage(int pdf, int flag, int pagenumber)
+{
+  cpdf_openAtPage(pdf, flag, pagenumber);
+  return;
+}
+
+void pycpdf_setMetadataFromFile(int pdf, char *filename)
+{
+  cpdf_setMetadataFromFile(pdf, filename);
+  return;
+}
+
+void pycpdf_setMetadataFromByteArray(int pdf, void* data, int len)
+{
+  cpdf_setMetadataFromByteArray(pdf, data, len);
+  return;
+}
+
 void pycpdf_removeMetadata(int pdf)
 {
   cpdf_removeMetadata(pdf);
@@ -784,6 +814,12 @@ void pycpdf_removeMetadata(int pdf)
 void pycpdf_createMetadata(int pdf)
 {
   cpdf_createMetadata(pdf);
+  return;
+}
+
+void pycpdf_setMetadataDate(int pdf, char *date)
+{
+  cpdf_setMetadataDate(pdf, date);
   return;
 }
 
