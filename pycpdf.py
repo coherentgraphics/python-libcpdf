@@ -610,6 +610,46 @@ def getPageRotation(pdf, pagenumber):
 def hasBox(pdf, pagenumber, boxname):
   return libc.pycpdf_hasBox(pdf, pagenumber, str.encode(boxname))
 
+def getMediaBox(pdf, pagenumber):
+  minx = c_double(0.0)
+  maxx = c_double(0.0)
+  miny = c_double(0.0)
+  maxy = c_double(0.0)
+  libc.pycpdf_getMediaBox(pdf, pagenumber, byref(minx), byref(maxx), byref(miny), byref(maxy))
+  return (minx.value, maxx.value, miny.value, maxy.value)
+
+def getCropBox(pdf, pagenumber):
+  minx = c_double(0.0)
+  maxx = c_double(0.0)
+  miny = c_double(0.0)
+  maxy = c_double(0.0)
+  libc.pycpdf_getCropBox(pdf, pagenumber, byref(minx), byref(maxx), byref(miny), byref(maxy))
+  return (minx.value, maxx.value, miny.value, maxy.value)
+
+def getTrimBox(pdf, pagenumber):
+  minx = c_double(0.0)
+  maxx = c_double(0.0)
+  miny = c_double(0.0)
+  maxy = c_double(0.0)
+  libc.pycpdf_getTrimBox(pdf, pagenumber, byref(minx), byref(maxx), byref(miny), byref(maxy))
+  return (minx.value, maxx.value, miny.value, maxy.value)
+
+def getArtBox(pdf, pagenumber):
+  minx = c_double(0.0)
+  maxx = c_double(0.0)
+  miny = c_double(0.0)
+  maxy = c_double(0.0)
+  libc.pycpdf_getArtBox(pdf, pagenumber, byref(minx), byref(maxx), byref(miny), byref(maxy))
+  return (minx.value, maxx.value, miny.value, maxy.value)
+
+def getBleedBox(pdf, pagenumber):
+  minx = c_double(0.0)
+  maxx = c_double(0.0)
+  miny = c_double(0.0)
+  maxy = c_double(0.0)
+  libc.pycpdf_getBleedBox(pdf, pagenumber, byref(minx), byref(maxx), byref(miny), byref(maxy))
+  return (minx.value, maxx.value, miny.value, maxy.value)
+
 def setMediaBox(pdf, r, minx, maxx, miny, maxy):
   libc.pycpdf_setMediaBox(pdf, r, minx, maxx, miny, maxy)
   return

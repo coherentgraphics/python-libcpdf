@@ -814,6 +814,36 @@ int pycpdf_hasBox(int pdf, int pagenumber, char *box)
   return cpdf_hasBox(pdf, pagenumber, box);
 }
 
+void pycpdf_getMediaBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy)
+{
+  cpdf_getMediaBox(pdf, pagenumber, minx, maxx, miny, maxy);
+  return;
+}
+
+void pycpdf_getCropBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy)
+{
+  cpdf_getCropBox(pdf, pagenumber, minx, maxx, miny, maxy);
+  return;
+}
+
+void pycpdf_getTrimBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy)
+{
+  cpdf_getTrimBox(pdf, pagenumber, minx, maxx, miny, maxy);
+  return;
+}
+
+void pycpdf_getArtBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy)
+{
+  cpdf_getArtBox(pdf, pagenumber, minx, maxx, miny, maxy);
+  return;
+}
+
+void pycpdf_getBleedBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy)
+{
+  cpdf_getBleedBox(pdf, pagenumber, minx, maxx, miny, maxy);
+  return;
+}
+
 void pycpdf_setMediaBox(int pdf, int range, double minx, double maxx, double miny, double maxy)
 {
   cpdf_setMediabox(pdf, range, minx, maxx, miny, maxy);

@@ -212,13 +212,16 @@ dateString = pycpdf.dateStringOfComponents(1, 2, 3, 4, 5, 6, 7, 8, 9)
 """
 rot = pycpdf.getPageRotation(pdf, 1)
 hasBox = pycpdf.hasBox(pdf, 1, '/TrimBox')
-"""
 mediaBox = pycpdf.getMediaBox(pdf, 1)
+print(mediaBox)
 cropBox = pycpdf.getCropBox(pdf, 1)
+print(cropBox)
 trimBox = pycpdf.getTrimBox(pdf, 1)
+print(trimBox)
 artBox = pycpdf.getArtBox(pdf, 1)
+print(artBox)
 bleedBox = pycpdf.getBleedBox(pdf, 1)
-"""
+print(bleedBox)
 pycpdf.setMediaBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
 pycpdf.setCropBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
 pycpdf.setTrimBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
