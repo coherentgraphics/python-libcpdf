@@ -54,6 +54,8 @@ def loadDLL(f):
   libc.pycpdf_setArtBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
   libc.pycpdf_setBleedBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
   libc.pycpdf_getBookmarkText.restype = POINTER(c_char)
+  libc.pycpdf_addText.argtypes = [c_int, c_int, c_int, POINTER(c_char), c_int, c_double, c_int, c_int, c_double, c_double, c_double, c_double, c_int, c_int, c_int, c_double, c_int, c_int, c_int, POINTER(c_char), c_double, c_int]
+  #libc.pycpdf_addTextSimple.argtypes = [c_int, c_int, POINTER(c_char), c_int, c_int, c_double]
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -413,6 +415,48 @@ def setBookmarks(pdf, marks):
 
 # Not included in the library version
 
+# CHAPTER 8. Logos, Watermarks and Stamps
+
+def stampOn(pdf, pdf2, r):
+  libc.pycpdf_stampOn(pdf, pdf2, r)
+
+def stampUnder(pdf, pdf2, r):
+  libc.pycpdf_stampUnder(pdf, pdf2, r)
+
+def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos, relative_to_cropbox):
+  libc.pycpdf_stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos, relative_to_cropbox)
+
+def combinePages(pdf, pdf2):
+  libc.pycpdf_combinePages(pdf, pdf)
+
+leftJustify = 0
+centreJustify = 1
+rightJustify = 2
+
+def addText(metrics, pdf, r, text, pos, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, filename, line_width, embed_fonts):
+  libc.pycpdf_addText(metrics, pdf, r, str.encode(text), pos, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, str.encode(filename), line_width, embed_fonts)
+
+def addTextSimple(pdf, r, text, position, font, size):
+  libc.pycpdf_addTextSimple(pdf, r, str.encode(text), position, font, size)
+
+def removeText(pdf, r):
+  libc.pycpdf_removeText(pdf, r)
+
+timesRoman = 0
+timesBold = 1
+timesItalic = 2
+timesBoldItalic = 3
+helvetica = 4
+helveticaBold = 5
+helveticaOblique = 6
+helveticaBoldOblique = 7
+courier = 8
+courierBold = 9
+courierOblique = 10
+courierBoldOblique = 11
+
+def textWidth(font, string):
+  libc.pycpdf_textWidth(font, str.encode(string))
 
 # CHAPTER 9. Mulitpage facilities
 
@@ -559,6 +603,12 @@ def setCreationDateXMP(pdf, s):
 def setModificationDateXMP(pdf, s):
   libc.pycpdf_setModificationDateXMP(pdf, str.encode(s))
   return
+
+def getPageRotation(pdf, pagenumber):
+  return libc.pycpdf_getPageRotation(pdf, pagenumber)
+
+def hasBox(pdf, pagenumber, boxname):
+  return libc.pycpdf_hasBox(pdf, pagenumber, str.encode(boxname))
 
 def setMediaBox(pdf, r, minx, maxx, miny, maxy):
   libc.pycpdf_setMediaBox(pdf, r, minx, maxx, miny, maxy)

@@ -125,20 +125,20 @@ pycpdf.setBookmarks(pdf, marks)
 
 # Not included in the library version
 
-"""
 # CHAPTER 8. Logos, Watermarks and Stamps
 
 pycpdf.stampOn(pdf, pdf2, r)
 pycpdf.stampUnder(pdf, pdf2, r)
 pycpdf.stampExtended(pdf, pdf2, r, True, True, pycpdf.topLeft, False)
 pycpdf.combinePages(pdf, pdf2)
-pycpdf.addText(False, pdf, r, 'The text', 1.0, 0, 12, 0.5, 0.5, 0.5, 0.6, cpdf.JustifyCentre, True, False, 'foo.pdf', 2.0, False)
-pycpdf.addTextSimple(pdf, r, 'The text', pycpdf.centre, pycpdf.TimesNewRoman, 12.0)
-pycpdf.removeText(pdf)
-pycpdf.textWidth(pycpdf.TimesNewRoman, 'Some text')
 """
+pycpdf.addText(False, pdf, r, 'The text', pycpdf.topLeft, 1.0, 0, pycpdf.timesRoman, 12, 0.5, 0.5, 0.5, False, False, False, 1.0, pycpdf.centreJustify, True, False, 'foo.pdf', 2.0, False)
+pycpdf.addTextSimple(pdf, r, 'The text', pycpdf.centre, pycpdf.timesRoman, 12.0)
+"""
+pycpdf.removeText(pdf, r)
+pycpdf.textWidth(pycpdf.timesRoman, 'Some text')
 
-# CHAPTER 9. Mulitpage facilities
+# CHAPTER 9. Multipage facilities
 pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 pycpdf.twoUp(pdf)
 pycpdf.twoUpStack(pdf)
@@ -209,8 +209,10 @@ pycpdf.setModificationDateXMP(pdf, 'now')
 """
 components = pycpdf.getDateComponents('DATE')
 dateString = pycpdf.dateStringOfComponents(1, 2, 3, 4, 5, 6, 7, 8, 9)
-rot = pycpdf.getPageRotation(pdf, r)
+"""
+rot = pycpdf.getPageRotation(pdf, 1)
 hasBox = pycpdf.hasBox(pdf, 1, '/TrimBox')
+"""
 mediaBox = pycpdf.getMediaBox(pdf, 1)
 cropBox = pycpdf.getCropBox(pdf, 1)
 trimBox = pycpdf.getTrimBox(pdf, 1)

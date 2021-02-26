@@ -524,6 +524,50 @@ void pycpdf_endSetBookmarkInfo(int pdf)
 
 /* Not included in the library version */
 
+/* CHAPTER 8. Logos, Watermarks and Stamps */
+
+void pycpdf_stampOn(int pdf, int pdf2, int r)
+{
+  cpdf_stampOn(pdf, pdf2, r);
+  return;
+}
+
+void pycpdf_stampUnder(int pdf, int pdf2, int r)
+{
+  cpdf_stampUnder(pdf, pdf2, r);
+  return;
+}
+
+void pycpdf_stampExtended(int pdf, int pdf2, int r, int isover, int scale_stamp_to_fit, struct cpdf_position pos, int relative_to_cropbox)
+{
+  cpdf_stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos, relative_to_cropbox);
+  return;
+}
+
+void pycpdf_combinePages(int pdf, int pdf2)
+{
+  cpdf_combinePages(pdf, pdf2);
+  return;
+}
+
+void pycpdf_addText(int metrics, int pdf, int r, char *text, struct cpdf_position pos, double line_spacing, int bates, int font, double size, double red, double green, double blue, int underneath, int relative_to_cropbox, int outline, double opacity, int justification, int midline, int topline, char* filename, double line_width, int embed_fonts)
+{
+  cpdf_addText(metrics, pdf, r, text, pos, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, filename, line_width, embed_fonts);
+  return;
+
+}
+
+void pycpdf_removeText(int pdf, int r)
+{
+  cpdf_removeText(pdf, r);
+  return;
+}
+
+int pycpdf_textWidth(int font, char *string)
+{
+  return cpdf_textWidth(font, string);
+}
+
 
 /* CHAPTER 9. Multipage facilities */
 void pycpdf_twoUp(int pdf)
@@ -758,6 +802,16 @@ void pycpdf_setModificationDateXMP(int pdf, char *s)
 {
   cpdf_setModificationDateXMP(pdf, s);
   return;
+}
+
+int pycpdf_getPageRotation(int pdf, int pagenumber)
+{
+  return cpdf_getPageRotation(pdf, pagenumber);
+}
+
+int pycpdf_hasBox(int pdf, int pagenumber, char *box)
+{
+  return cpdf_hasBox(pdf, pagenumber, box);
 }
 
 void pycpdf_setMediaBox(int pdf, int range, double minx, double maxx, double miny, double maxy)
