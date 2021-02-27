@@ -242,10 +242,7 @@ pycpdf.displayDocTitle(pdf, True)
 pycpdf.openAtPage(pdf, True, 5)
 pycpdf.setMetadataFromFile(pdf, 'testinputs/metadata.txt')
 pycpdf.setMetadataFromByteArray(pdf, 'data')
-
-"""
 metadata = pycpdf.getMetadata(pdf)
-"""
 pycpdf.removeMetadata(pdf)
 pycpdf.createMetadata(pdf)
 pycpdf.setMetadataDate(pdf, 'now')
@@ -256,25 +253,24 @@ pycpdf.addPageLabels(pdf, labels)
 pycpdf.removePageLabels(pdf)
 labelString = pycpdf.getPageLabelStringForPage(pdf, 1)
 labels = pycpdf.getPageLabels(pdf)
+"""
 
 # CHAPTER 12. File Attachments
 
-"""
 pycpdf.attachFile('testinputs/attach.txt', pdf)
 pycpdf.attachFileToPage('testinputs/attach.txt', pdf, 1)
 pycpdf.attachFileFromMemory('data', 'filename.txt', pdf)
 pycpdf.attachFileToPageFromMemory('data', 'filename.txt', pdf, 1)
 pycpdf.removeAttachedFiles(pdf)
-
-"""
 attachments = pycpdf.getAttachments(pdf)
 
 # CHAPTER 13. Images
 
 images = pycpdf.getImageResolution(pdf, 300)
+print(images)
 
 # CHAPTER 14. Fonts
-
+"""
 fonts = pycpdf.getFontInfo(pdf)
 pycpdf.removeFonts(pdf)
 pycpdf.copyFont(pdf, pdf2, r, 1, "/Font")

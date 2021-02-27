@@ -56,6 +56,9 @@ def loadDLL(f):
   libc.pycpdf_getBookmarkText.restype = POINTER(c_char)
   libc.pycpdf_addText.argtypes = [c_int, c_int, c_int, POINTER(c_char), c_int, c_double, c_int, c_int, c_double, c_double, c_double, c_double, c_int, c_int, c_int, c_double, c_int, c_int, c_int, POINTER(c_char), c_double, c_int]
   #libc.pycpdf_addTextSimple.argtypes = [c_int, c_int, POINTER(c_char), c_int, c_int, c_double]
+  libc.pycpdf_getMetadata.restype = POINTER(c_uint8)
+  libc.pycpdf_getAttachmentData.restype = POINTER(c_uint8)
+  libc.pycpdf_startGetImageResolution.argtypes = [c_int, c_double]
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -743,6 +746,13 @@ def setMetadataFromByteArray(pdf, data):
   libc.pycpdf_setMetadataFromByteArray(pdf, data, len(data))
   return
 
+def getMetadata(pdf):
+  length = c_int32()
+  data = libc.pycpdf_getMetadata(pdf, byref(length))
+  s = string_at(data)
+  libc.pycpdf_getMetadataFree()
+  return s
+
 def removeMetadata(pdf):
   libc.pycpdf_removeMetadata(pdf)
   return
@@ -771,6 +781,36 @@ def attachFileToPageFromMemory(data, filename, pdf, pagenumber):
 
 def removeAttachedFiles(pdf):
   libc.pycpdf_removeAttachedFiles(pdf)
+
+def getAttachments(pdf):
+  libc.pycpdf_startGetAttachments(pdf)
+  n = libc.pycpdf_numberGetAttachments()
+  l = []
+  for i in range(n):
+    name = string_at(libc.pycpdf_getAttachmentName(n)).decode()
+    page = libc.pycpdf_getAttachmentPage(n)
+    length = c_int32()
+    data = libc.pycpdf_getAttachmentData(n, byref(length))
+    s = string_at(data)
+    libc.pycpdf_getAttachmentDataFree()
+    l.append((name, page, data))
+  libc.pycpdf_endGetAttachments()
+
+
+# CHAPTER 13. Images
+def getImageResolution(pdf, min_required_resolution):
+  n = libc.pycpdf_startGetImageResolution(pdf, min_required_resolution)
+  l = []
+  for x in range(n):
+    pagenumber = libc.pycpdf_getImageResolutionPageNumber(x)
+    imagename = string_at(libc.pycpdf_getImageResolutionImageName(x)).decode()
+    xp = libc.pycpdf_getImageResolutionXPixels(x)
+    yp = libc.pycpdf_getImageResolutionYPixels(x)
+    xr = libc.pycpdf_getImageResolutionXRes(x)
+    yr = libc.pycpdf_getImageResolutionYRes(x)
+    l.append((pagenumber, imagename, xp, yp, xr, yr))
+  libc.pycpdf_endGetImageResolution()
+  return l
 
 # CHAPTER 15. Miscellaneous
 

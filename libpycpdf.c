@@ -964,6 +964,20 @@ void pycpdf_setMetadataFromByteArray(int pdf, void* data, int len)
   return;
 }
 
+void *getMetadataData;
+
+void *pycpdf_getMetadata(int pdf, int *length)
+{
+  toMemoryData = cpdf_getMetadata(pdf, length);
+  return toMemoryData;
+}
+
+void pycpdf_getMetadataFree(void)
+{
+  free(getMetadataData);
+  return;
+}
+
 void pycpdf_removeMetadata(int pdf)
 {
   cpdf_removeMetadata(pdf);
@@ -1013,6 +1027,86 @@ void pycpdf_removeAttachedFiles(int pdf)
   return;
 }
 
+void pycpdf_startGetAttachments(int pdf)
+{
+  cpdf_startGetAttachments(pdf);
+  return;
+}
+
+int pycpdf_numberGetAttachments()
+{
+  return cpdf_numberGetAttachments();
+}
+
+char *pycpdf_getAttachmentName(int n)
+{
+  return cpdf_getAttachmentName(n);
+}
+
+int pycpdf_getAttachmentPage(int n)
+{
+  return cpdf_getAttachmentPage(n);
+}
+
+void *getAttachmentData;
+
+void *pycpdf_getAttachmentData(int n, int *length)
+{
+  return cpdf_getAttachmentData(n, length);
+}
+
+void pycpdf_getAttachmentFree(void)
+{
+  free(getAttachmentData);
+  return;
+}
+
+void pycpdf_endGetAttachments()
+{
+  cpdf_endGetAttachments();
+  return;
+}
+
+/* CHAPTER 13. Images. */
+int pycpdf_startGetImageResolution(int pdf, double min_required_resolution)
+{
+  return cpdf_startGetImageResolution(pdf, min_required_resolution);
+}
+
+int pycpdf_getImageResolutionPageNumber(int n)
+{
+  return cpdf_getImageResolutionPageNumber(n);
+}
+
+char *pycpdf_getImageResolutionImageName(int n)
+{
+  return cpdf_getImageResolutionImageName(n);
+}
+
+int pycpdf_getImageResolutionXPixels(int n)
+{
+  return cpdf_getImageResolutionXPixels(n);
+}
+
+int pycpdf_getImageResolutionYPixels(int n)
+{
+  return cpdf_getImageResolutionYPixels(n);
+}
+
+double pycpdf_getImageResolutionXRes(int n)
+{
+  return cpdf_getImageResolutionXRes(n);
+}
+
+double pycpdf_getImageResolutionYRes(int n)
+{
+  return cpdf_getImageResolutionYRes(n);
+}
+
+void pycpdf_endGetImageResolution(void)
+{
+  return cpdf_endGetImageResolution();
+}
 
 /* CHAPTER 15. Miscellaneous */
 void pycpdf_draft(int pdf, int r, int boxes)
