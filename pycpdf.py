@@ -812,8 +812,28 @@ def getImageResolution(pdf, min_required_resolution):
   libc.pycpdf_endGetImageResolution()
   return l
 
-# CHAPTER 15. Miscellaneous
+# CHAPTER 14. Fonts
+def getFontInfo(pdf):
+  libc.pycpdf_startGetFontInfo(pdf)
+  n = libc.pycpdf_numberFonts()
+  print("fonts:", n)
+  l = []
+  for x in range(n):
+      pagenumber = libc.pycpdf_getFontPage(x)
+      fontname = string_at(libc.pycpdf_getFontName(x)).decode()
+      #fonttype = string_at(libc.pycpdf_getFontType(x)).decode()
+      #fontencoding = string_at(libc.pycpdf_getFontEncoding(x)).decode()
+      l.append((pagenumber))
+  libc.pycpdf_endGetFontInfo(pdf)
+  return l
 
+def removeFonts(pdf):
+  libc.pycpdf_removeFonts(pdf)
+
+def copyFont(pdf, pdf2, r, pagenumber, fontname):
+  libc.pycpdf_copyFont(pdf, pdf2, r, pagenumber, str.encode(fontname))
+
+# CHAPTER 15. Miscellaneous
 def draft(pdf, r, boxes):
   libc.pycpdf_draft(pdf, r, boxes)
 

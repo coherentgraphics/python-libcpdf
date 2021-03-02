@@ -1,6 +1,7 @@
 import pycpdf
 
 pycpdf.loadDLL("/Users/john/repos/python-libcpdf/libpycpdf.so")
+
 #CHAPTER 0. Preliminaries
 pycpdf.startup()
 print('Library version is ' + pycpdf.version())
@@ -106,7 +107,6 @@ pycpdf.hardBox(pdf, r, "/MediaBox")
 # Encryption covered under Chapter 1 in cpdflib
 
 # CHAPTER 5. Compression
-
 pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 pycpdf.compress(pdf)
 pycpdf.decompress(pdf)
@@ -126,7 +126,6 @@ pycpdf.setBookmarks(pdf, marks)
 # Not included in the library version
 
 # CHAPTER 8. Logos, Watermarks and Stamps
-
 pycpdf.stampOn(pdf, pdf2, r)
 pycpdf.stampUnder(pdf, pdf2, r)
 pycpdf.stampExtended(pdf, pdf2, r, True, True, pycpdf.topLeft, False)
@@ -256,7 +255,6 @@ labels = pycpdf.getPageLabels(pdf)
 """
 
 # CHAPTER 12. File Attachments
-
 pycpdf.attachFile('testinputs/attach.txt', pdf)
 pycpdf.attachFileToPage('testinputs/attach.txt', pdf, 1)
 pycpdf.attachFileFromMemory('data', 'filename.txt', pdf)
@@ -265,19 +263,16 @@ pycpdf.removeAttachedFiles(pdf)
 attachments = pycpdf.getAttachments(pdf)
 
 # CHAPTER 13. Images
-
 images = pycpdf.getImageResolution(pdf, 300)
 print(images)
 
 # CHAPTER 14. Fonts
-"""
 fonts = pycpdf.getFontInfo(pdf)
+print(fonts)
 pycpdf.removeFonts(pdf)
 pycpdf.copyFont(pdf, pdf2, r, 1, "/Font")
 
-"""
 # CHAPTER 15. Miscellaneous
-
 pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 pycpdf.draft(pdf, r, True)
 pycpdf.removeAllText(pdf, r)
@@ -293,7 +288,6 @@ pycpdf.removeClipping(pdf, 1)
 pycpdf.toFile(pdf, 'testoutputs/squeezed.pdf', False, False)
 
 # CHAPTER UNDOC (To come in v2.4)
-
 pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 pycpdf.addContent('content', True, pdf, pycpdf.all(pdf))
 pycpdf.outputJSON('testoutputs/filename.txt', True, False, pdf)

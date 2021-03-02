@@ -1108,6 +1108,56 @@ void pycpdf_endGetImageResolution(void)
   return cpdf_endGetImageResolution();
 }
 
+/* CHAPTER 14. Fonts */
+void pycpdf_removeFonts(int pdf)
+{
+    cpdf_removeFonts(pdf);
+    return;
+}
+
+void pycpdf_copyFont(int pdf, int pdf2, int range, int pagenumber, char *fontname)
+{
+    cpdf_copyFont(pdf, pdf2, range, pagenumber, fontname);
+    return;
+}
+
+void pycpdf_startGetFontInfo(int pdf)
+{
+    cpdf_startGetFontInfo(pdf);
+    return;
+}
+
+int pycpdf_numberFonts(void)
+{
+    return cpdf_numberFonts();
+}
+
+int pycpdf_getFontPage(int n)
+{
+    return cpdf_getFontPage(n);
+}
+
+char *pycpdf_getFontName(int n)
+{
+    return cpdf_getFontName(n);
+}
+
+char *pycpdf_getFontType(int n)
+{
+    return cpdf_getFontType(n);
+}
+
+char *pycpdf_getFontEncoding(int n)
+{
+    return cpdf_getFontEncoding(n);
+}
+
+void pycpdf_endGetFontInfo(void)
+{
+    cpdf_endGetFontInfo();
+    return;
+}
+
 /* CHAPTER 15. Miscellaneous */
 void pycpdf_draft(int pdf, int r, int boxes)
 {
