@@ -245,14 +245,11 @@ metadata = pycpdf.getMetadata(pdf)
 pycpdf.removeMetadata(pdf)
 pycpdf.createMetadata(pdf)
 pycpdf.setMetadataDate(pdf, 'now')
-
-"""
-labels = []
-pycpdf.addPageLabels(pdf, labels)
+labels = pycpdf.getPageLabels(pdf)
+print(labels)
+pycpdf.addPageLabels(pdf, (pycpdf.decimalArabic, "PRE-", 1, pycpdf.all(pdf)), False)
 pycpdf.removePageLabels(pdf)
 labelString = pycpdf.getPageLabelStringForPage(pdf, 1)
-labels = pycpdf.getPageLabels(pdf)
-"""
 
 # CHAPTER 12. File Attachments
 pycpdf.attachFile('testinputs/attach.txt', pdf)

@@ -59,6 +59,11 @@ def loadDLL(f):
   libc.pycpdf_getMetadata.restype = POINTER(c_uint8)
   libc.pycpdf_getAttachmentData.restype = POINTER(c_uint8)
   libc.pycpdf_startGetImageResolution.argtypes = [c_int, c_double]
+  libc.pycpdf_getFontName.restype = POINTER(c_char)
+  libc.pycpdf_getFontType.restype = POINTER(c_char)
+  libc.pycpdf_getFontEncoding.restype = POINTER(c_char)
+  libc.pycpdf_getPageLabelStringForPage.restype = POINTER(c_char)
+  libc.pycpdf_getPageLabelPrefix.restype = POINTER(c_char)
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -765,6 +770,36 @@ def setMetadataDate(pdf, date):
   libc.pycpdf_setMetadataDate(pdf, str.encode(date))
   return
 
+decimalArabic = 0
+uppercaseRoman = 1
+lowercaseRoman = 2
+uppercaseLetters = 3
+lowercaseLetters = 4
+
+def getPageLabels(pdf):
+  n = libc.pycpdf_startGetPageLabels(pdf)
+  l = []
+  for x in range(n):
+    style = libc.pycpdf_getPageLabelStyle(x)
+    prefix = string_at(libc.pycpdf_getPageLabelPrefix(x)).decode()
+    offset = libc.pycpdf_getPageLabelOffset(x)
+    plrange = libc.pycpdf_getPageLabelRange(x)
+    l.append((style, prefix, offset, plrange))
+  libc.pycpdf_endGetPageLabels()
+  return l
+
+def addPageLabels(pdf, label, progress):
+  style, prefix, offset, plrange = label
+  libc.pycpdf_addPageLabels(pdf, style, str.encode(prefix), offset, plrange, progress)
+  return
+
+def removePageLabels(pdf):
+  libc.pycpdf_removePageLabels(pdf)
+  return
+
+def getPageLabelStringForPage(pdf, pagenumber):
+  return string_at(libc.pycpdf_getPageLabelStringForPage(pdf, pagenumber)).decode()
+
 # CHAPTER 12. File Attachments
 
 def attachFile(filename, pdf):
@@ -821,9 +856,9 @@ def getFontInfo(pdf):
   for x in range(n):
       pagenumber = libc.pycpdf_getFontPage(x)
       fontname = string_at(libc.pycpdf_getFontName(x)).decode()
-      #fonttype = string_at(libc.pycpdf_getFontType(x)).decode()
-      #fontencoding = string_at(libc.pycpdf_getFontEncoding(x)).decode()
-      l.append((pagenumber))
+      fonttype = string_at(libc.pycpdf_getFontType(x)).decode()
+      fontencoding = string_at(libc.pycpdf_getFontEncoding(x)).decode()
+      l.append((pagenumber, fontname, fonttype, fontencoding))
   libc.pycpdf_endGetFontInfo(pdf)
   return l
 

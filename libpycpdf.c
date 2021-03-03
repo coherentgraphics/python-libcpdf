@@ -996,6 +996,54 @@ void pycpdf_setMetadataDate(int pdf, char *date)
   return;
 }
 
+int pycpdf_startGetPageLabels(int pdf)
+{
+  return cpdf_startGetPageLabels(pdf);
+}
+
+int pycpdf_getPageLabelStyle(int n)
+{
+  return cpdf_getPageLabelStyle(n);
+}
+
+char *pycpdf_getPageLabelPrefix(int n)
+{
+  return cpdf_getPageLabelPrefix(n);
+}
+
+int pycpdf_getPageLabelOffset(int n)
+{
+  return cpdf_getPageLabelOffset(n);
+}
+
+int pycpdf_getPageLabelRange(int n)
+{
+  return cpdf_getPageLabelRange(n);
+}
+
+void pycpdf_endGetPageLabels(void)
+{
+  cpdf_endGetPageLabels();
+  return;
+}
+
+void pycpdf_addPageLabels(int pdf, int style, char *prefix, int offset, int range, int progress)
+{
+  cpdf_addPageLabels(pdf, style, prefix, offset, range, progress);
+  return;
+}
+
+void pycpdf_removePageLabels(int pdf)
+{
+  cpdf_removePageLabels(pdf);
+  return;
+}
+
+char *pycpdf_getPageLabelStringForPage(int pdf, int pagenumber)
+{
+  return cpdf_getPageLabelStringForPage(pdf, pagenumber);
+}
+
 /* CHAPTER 12. File Attachments */
 void pycpdf_attachFile(char* filename, int pdf)
 {
