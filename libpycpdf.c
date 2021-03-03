@@ -550,11 +550,19 @@ void pycpdf_combinePages(int pdf, int pdf2)
   return;
 }
 
-void pycpdf_addText(int metrics, int pdf, int r, char *text, struct cpdf_position pos, double line_spacing, int bates, int font, double size, double red, double green, double blue, int underneath, int relative_to_cropbox, int outline, double opacity, int justification, int midline, int topline, char* filename, double line_width, int embed_fonts)
+void pycpdf_addText(int metrics, int pdf, int r, char *text, int pos, double p1, double p2, double line_spacing, int bates, int font, double size, double red, double green, double blue, int underneath, int relative_to_cropbox, int outline, double opacity, int justification, int midline, int topline, char* filename, double line_width, int embed_fonts)
 {
-  cpdf_addText(metrics, pdf, r, text, pos, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, filename, line_width, embed_fonts);
+  struct cpdf_position position = {.cpdf_anchor = pos,.cpdf_coord1 = p1,.cpdf_coord2 = p2};
+  cpdf_addText(metrics, pdf, r, text, position, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, filename, line_width, embed_fonts);
   return;
 
+}
+
+void pycpdf_addTextSimple(int pdf, int r, char *text, int pos, double p1, double p2, int font, double size)
+{
+  struct cpdf_position position = {.cpdf_anchor = pos,.cpdf_coord1 = p1,.cpdf_coord2 = p2};
+  cpdf_addTextSimple(pdf, r, text, position, font, size);
+  return;
 }
 
 void pycpdf_removeText(int pdf, int r)

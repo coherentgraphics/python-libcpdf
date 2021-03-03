@@ -54,8 +54,8 @@ def loadDLL(f):
   libc.pycpdf_setArtBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
   libc.pycpdf_setBleedBox.argtypes = [c_int, c_int, c_double, c_double, c_double, c_double]
   libc.pycpdf_getBookmarkText.restype = POINTER(c_char)
-  libc.pycpdf_addText.argtypes = [c_int, c_int, c_int, POINTER(c_char), c_int, c_double, c_int, c_int, c_double, c_double, c_double, c_double, c_int, c_int, c_int, c_double, c_int, c_int, c_int, POINTER(c_char), c_double, c_int]
-  #libc.pycpdf_addTextSimple.argtypes = [c_int, c_int, POINTER(c_char), c_int, c_int, c_double]
+  libc.pycpdf_addText.argtypes = [c_int, c_int, c_int, POINTER(c_char), c_int, c_double, c_double, c_double, c_int, c_int, c_double, c_double, c_double, c_double, c_int, c_int, c_int, c_double, c_int, c_int, c_int, POINTER(c_char), c_double, c_int]
+  libc.pycpdf_addTextSimple.argtypes = [c_int, c_int, POINTER(c_char), c_int, c_double, c_double, c_int, c_double]
   libc.pycpdf_getMetadata.restype = POINTER(c_uint8)
   libc.pycpdf_getAttachmentData.restype = POINTER(c_uint8)
   libc.pycpdf_startGetImageResolution.argtypes = [c_int, c_double]
@@ -442,11 +442,13 @@ leftJustify = 0
 centreJustify = 1
 rightJustify = 2
 
-def addText(metrics, pdf, r, text, pos, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, filename, line_width, embed_fonts):
-  libc.pycpdf_addText(metrics, pdf, r, str.encode(text), pos, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, str.encode(filename), line_width, embed_fonts)
+def addText(metrics, pdf, r, text, p, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, filename, line_width, embed_fonts):
+  a, b, c = tripleOfPosition(p); 
+  libc.pycpdf_addText(metrics, pdf, r, str.encode(text), a, b, c, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, str.encode(filename), line_width, embed_fonts)
 
-def addTextSimple(pdf, r, text, position, font, size):
-  libc.pycpdf_addTextSimple(pdf, r, str.encode(text), position, font, size)
+def addTextSimple(pdf, r, text, p, font, size):
+  a, b, c = tripleOfPosition(p); 
+  libc.pycpdf_addTextSimple(pdf, r, str.encode(text), a, b, c, font, size)
 
 def removeText(pdf, r):
   libc.pycpdf_removeText(pdf, r)

@@ -130,10 +130,8 @@ pycpdf.stampOn(pdf, pdf2, r)
 pycpdf.stampUnder(pdf, pdf2, r)
 pycpdf.stampExtended(pdf, pdf2, r, True, True, pycpdf.topLeft, False)
 pycpdf.combinePages(pdf, pdf2)
-"""
-pycpdf.addText(False, pdf, r, 'The text', pycpdf.topLeft, 1.0, 0, pycpdf.timesRoman, 12, 0.5, 0.5, 0.5, False, False, False, 1.0, pycpdf.centreJustify, True, False, 'foo.pdf', 2.0, False)
-pycpdf.addTextSimple(pdf, r, 'The text', pycpdf.centre, pycpdf.timesRoman, 12.0)
-"""
+pycpdf.addText(False, pdf, r, 'The text', (pycpdf.topLeft, 1.0, 0.0), 1.0, 10, pycpdf.timesRoman, 12, 0.5, 0.5, 0.5, False, False, False, 1.0, pycpdf.centreJustify, True, False, 'foo.pdf', 2.0, False)
+pycpdf.addTextSimple(pdf, r, 'The text', (pycpdf.posCentre, 100.0, 200.0), pycpdf.timesRoman, 12.0)
 pycpdf.removeText(pdf, r)
 pycpdf.textWidth(pycpdf.timesRoman, 'Some text')
 
