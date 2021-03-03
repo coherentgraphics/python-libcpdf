@@ -804,6 +804,17 @@ void pycpdf_setModificationDateXMP(int pdf, char *s)
   return;
 }
 
+void pycpdf_getDateComponents(char *str, int *year, int *month, int *day, int *hour, int *minute, int *second, int *hour_offset, int *minute_offset)
+{
+  cpdf_getDateComponents(str, year, month, day, hour, minute, second, hour_offset, minute_offset);
+  return;
+}
+
+char *pycpdf_dateStringOfComponents(int year, int month, int day, int hour, int minute, int second, int hour_offset, int minute_offset)
+{
+  return cpdf_dateStringOfComponents(year, month, day, hour, minute, second, hour_offset, minute_offset);
+}
+
 int pycpdf_getPageRotation(int pdf, int pagenumber)
 {
   return cpdf_getPageRotation(pdf, pagenumber);

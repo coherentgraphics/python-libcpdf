@@ -205,10 +205,8 @@ pycpdf.setCreatorXMP(pdf, 'creator')
 pycpdf.setProducerXMP(pdf, 'producer')
 pycpdf.setCreationDateXMP(pdf, 'now')
 pycpdf.setModificationDateXMP(pdf, 'now')
-"""
-components = pycpdf.getDateComponents('DATE')
-dateString = pycpdf.dateStringOfComponents(1, 2, 3, 4, 5, 6, 7, 8, 9)
-"""
+components = pycpdf.getDateComponents('now')
+dateString = pycpdf.dateStringOfComponents(components)
 rot = pycpdf.getPageRotation(pdf, 1)
 hasBox = pycpdf.hasBox(pdf, 1, '/TrimBox')
 mediaBox = pycpdf.getMediaBox(pdf, 1)

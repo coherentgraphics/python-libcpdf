@@ -64,6 +64,7 @@ def loadDLL(f):
   libc.pycpdf_getFontEncoding.restype = POINTER(c_char)
   libc.pycpdf_getPageLabelStringForPage.restype = POINTER(c_char)
   libc.pycpdf_getPageLabelPrefix.restype = POINTER(c_char)
+  libc.pycpdf_dateStringOfComponents.restype = POINTER(c_char)
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -611,6 +612,22 @@ def setCreationDateXMP(pdf, s):
 def setModificationDateXMP(pdf, s):
   libc.pycpdf_setModificationDateXMP(pdf, str.encode(s))
   return
+
+def getDateComponents(string):
+  year = c_int(0)
+  month = c_int(0)
+  day = c_int(0)
+  hour = c_int(0)
+  minute = c_int(0)
+  second = c_int(0)
+  hour_offset = c_int(0)
+  minute_offset = c_int(0)
+  libc.pycpdf_getDateComponents(string, byref(year), byref(month), byref(day), byref(hour), byref(minute), byref(second), byref(hour_offset), byref(minute_offset))
+  return (year, month, day, hour, minute, second, hour_offset, minute_offset)
+
+def dateStringOfComponents(components):
+  year, month, day, hour, minute, second, hour_offset, minute_offset = components
+  return string_at(libc.pycpdf_dateStringOfComponents(year, month, day, hour, minute, second, hour_offset, minute_offset)).decode()
 
 def getPageRotation(pdf, pagenumber):
   return libc.pycpdf_getPageRotation(pdf, pagenumber)
