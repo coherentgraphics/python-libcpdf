@@ -161,52 +161,74 @@ def enumeratePDFs():
   libc.pycpdf_endEnumeratePDFs()
   return pdfs
 
+#Convert between lists and ranges - these are internal functions, not for external use.
+def list_of_range(r):
+  l = []
+  for x in range(libc.pycpdf_rangeLength(r)):
+    l.append(libc.pycpdf_rangeGet(r, x))
+  return l
+
+def range_of_list(l):
+  r = libc.pycpdf_blankRange()
+  for x in l:
+    r = libc.pycpdf_rangeAdd(r, x)
+  return r
+
 def parsePagespec(pdf, pagespec):
-  return libc.pycpdf_parsePagespec(pdf, str.encode(pagespec))
+  return list_of_range(libc.pycpdf_parsePagespec(pdf, str.encode(pagespec)))
 
 def validatePagespec(pagespec):
   return libc.pycpdf_validatePagespec(str.encode(pagespec))
 
 def stringOfPagespec(pdf, r):
+  r = range_of_list(r)
   return string_at(libc.pycpdf_stringOfPagespec(pdf, r)).decode()
 
 def blankRange():
   return libc.pycpdf_blankRange()
 
+#Now internal
+"""
 def deleteRange(r):
   return libc.pycpdf_deleteRange(r)
+"""
 
 def pageRange(f, t):
-  return libc.pycpdf_pageRange(f, t)
+  return list_of_range(libc.pycpdf_pageRange(f, t))
 
-def all(r):
-  return libc.pycpdf_all(r)
+def all(pdf):
+  return list_of_range(libc.pycpdf_all(pdf))
 
 def even(r):
-  return libc.pycpdf_even(r)
+  r = range_of_list(r)
+  return list_of_range(libc.pycpdf_even(r))
 
 def odd(r):
-  return libc.pycpdf_odd(r)
+  r = range_of_list(r)
+  return list_of_range(libc.pycpdf_odd(r))
 
 def rangeUnion(a, b):
-  return libc.pycpdf_rangeUnion(a, b)
+  return list_of_range(libc.pycpdf_rangeUnion(range_of_list(a), range_of_list(b)))
 
 def difference(a, b):
-  return libc.pycpdf_difference(a, b)
+  return list_of_range(libc.pycpdf_difference(range_of_list(a), range_of_list(b)))
 
 def removeDuplicates(r):
-  return libc.pycpdf_removeDuplicates(r)
+  return list_of_range(libc.pycpdf_removeDuplicates(range_of_list(r)))
 
 def rangeLength(r):
-  return libc.pycpdf_rangeLength(r)
+  return libc.pycpdf_rangeLength(range_of_list(r))
 
 def rangeGet(r, n):
+  r = range_of_list(r)
   return libc.pycpdf_rangeGet(r, n)
 
 def rangeAdd(r, p):
-  return libc.pycpdf_rangeAdd(r, p)
+  r = range_of_list(r)
+  return list_of_range(libc.pycpdf_rangeAdd(r, p))
 
 def isInRange(r, p):
+  r = range_of_list(r)
   return libc.pycpdf_isInRange(r, p)
 
 def pages(pdf):
@@ -217,7 +239,7 @@ def pagesFast(userpw, filename):
 
 def toFile(pdf, filename, linearize, make_id):
   libc.pycpdf_toFile(pdf, str.encode(filename), False, False)
-
+"""
 def toFileExt(pdf, filename, linearize, make_id, preserve_objstm, generate_objstm, compress_objstm):
   libc.pycpdf_toFileExt(pdf, str.encode(filename), linearize, make_id, preserve_objstm, generate_objstm, compress_objstm)
 
@@ -943,4 +965,4 @@ def stampAsXObject(pdf, r, stamp_pdf):
 
 def setDemo(v):
   libc.pycpdf_setDemo(v)
-
+"""
