@@ -187,12 +187,6 @@ def stringOfPagespec(pdf, r):
 def blankRange():
   return libc.pycpdf_blankRange()
 
-#Now internal
-"""
-def deleteRange(r):
-  return libc.pycpdf_deleteRange(r)
-"""
-
 def pageRange(f, t):
   return list_of_range(libc.pycpdf_pageRange(f, t))
 
@@ -239,7 +233,7 @@ def pagesFast(userpw, filename):
 
 def toFile(pdf, filename, linearize, make_id):
   libc.pycpdf_toFile(pdf, str.encode(filename), False, False)
-"""
+
 def toFileExt(pdf, filename, linearize, make_id, preserve_objstm, generate_objstm, compress_objstm):
   libc.pycpdf_toFileExt(pdf, str.encode(filename), linearize, make_id, preserve_objstm, generate_objstm, compress_objstm)
 
@@ -305,21 +299,26 @@ def merge(pdfs, retain_numbering, remove_duplicate_fonts):
   return libc.pycpdf_merge(c_pdfs, len(pdfs), retain_numbering, remove_duplicate_fonts)
 
 def mergeSame(pdfs, retain_numbering, remove_duplicate_fonts, ranges):
+  ranges = list(map(range_of_list, ranges))
   c_pdfs = (c_int * len(pdfs))(*pdfs)
   c_ranges = (c_int * len(ranges))(*ranges)
   return libc.pycpdf_mergeSame(c_pdfs, len(pdfs), retain_numbering, remove_duplicate_fonts, c_ranges) 
 
 def selectPages(pdf, r):
+  r = range_of_list(r)
   return libc.pycpdf_selectPages(pdf, r)
 
 # CHAPTER 3. Pages
 def scalePages(pdf, r, sx, sy):
+  r = range_of_list(r)
   libc.pycpdf_scalePages(pdf, r, sx, sy)
 
 def scaleToFit(pdf, r, sx, sy, scale_to_fit_scale):
+  r = range_of_list(r)
   libc.pycpdf_scaleToFit(pdf, r, sx, sy, scale_to_fit_scale)
 
 def scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale):
+  r = range_of_list(r)
   libc.pycpdf_scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale)
 
 posCentre = 0
@@ -350,52 +349,68 @@ def tripleOfPosition(p):
   if p[0] == posRight: return (p[0], p[1], p[2])
 
 def scaleContents(pdf, r, p, scale):
+  r = range_of_list(r)
   a, b, c = tripleOfPosition(p); 
   libc.pycpdf_scaleContents(pdf, r, a, b, c, scale)
 
 def shiftContents(pdf, r, dx, dy):
+  r = range_of_list(r)
   libc.pycpdf_shiftContents(pdf, r, dx, dy)
 
 def rotate(pdf, r, rotation):
+  r = range_of_list(r)
   libc.pycpdf_rotate(pdf, r, rotation)
 
 def rotateBy(pdf, r, rotation):
+  r = range_of_list(r)
   libc.pycpdf_rotateBy(pdf, r, rotation)
 
 def rotateContents(pdf, r, rotation):
+  r = range_of_list(r)
   libc.pycpdf_rotateContents(pdf, r, rotation)
 
 def upright(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_upright(pdf, r)
 
 def hFlip(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_hFlip(pdf, r)
 
 def vFlip(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_vFlip(pdf, r)
 
 def crop(pdf, r, x, y, w, h):
+  r = range_of_list(r)
   libc.pycpdf_crop(pdf, r, x, y, w, h)
 
 def removeCrop(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_removeCrop(pdf, r)
 
 def removeTrim(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_removeTrim(pdf, r)
 
 def removeArt(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_removeArt(pdf, r)
 
 def removeBleed(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_removeBleed(pdf, r)
 
 def trimMarks(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_trimMarks(pdf, r)
 
 def showBoxes(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_showBoxes(pdf, r)
 
 def hardBox(pdf, r, boxname):
+  r = range_of_list(r)
   libc.pycpdf_hardBox(pdf, r, str.encode(boxname))
 
 # CHAPTER 4. Encryption
@@ -412,7 +427,6 @@ def decompress(pdf):
 
 def squeezeInMemory(pdf):
   libc.pycpdf_squeezeInMemory(pdf)
-
 
 # CHAPTER 6. Bookmarks
 
@@ -449,12 +463,15 @@ def setBookmarks(pdf, marks):
 # CHAPTER 8. Logos, Watermarks and Stamps
 
 def stampOn(pdf, pdf2, r):
+  r = range_of_list(r)
   libc.pycpdf_stampOn(pdf, pdf2, r)
 
 def stampUnder(pdf, pdf2, r):
+  r = range_of_list(r)
   libc.pycpdf_stampUnder(pdf, pdf2, r)
 
 def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos, relative_to_cropbox):
+  r = range_of_list(r)
   libc.pycpdf_stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos, relative_to_cropbox)
 
 def combinePages(pdf, pdf2):
@@ -466,13 +483,16 @@ rightJustify = 2
 
 def addText(metrics, pdf, r, text, p, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, filename, line_width, embed_fonts):
   a, b, c = tripleOfPosition(p); 
+  r = range_of_list(r)
   libc.pycpdf_addText(metrics, pdf, r, str.encode(text), a, b, c, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, str.encode(filename), line_width, embed_fonts)
 
 def addTextSimple(pdf, r, text, p, font, size):
   a, b, c = tripleOfPosition(p); 
+  r = range_of_list(r)
   libc.pycpdf_addTextSimple(pdf, r, str.encode(text), a, b, c, font, size)
 
 def removeText(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_removeText(pdf, r)
 
 timesRoman = 0
@@ -491,8 +511,8 @@ courierBoldOblique = 11
 def textWidth(font, string):
   libc.pycpdf_textWidth(font, str.encode(string))
 
-# CHAPTER 9. Mulitpage facilities
 
+# CHAPTER 9. Mulitpage facilities
 def twoUp(pdf):
   libc.pycpdf_twoUp(pdf)
 
@@ -500,13 +520,15 @@ def twoUpStack(pdf):
   libc.pycpdf_twoUpStack(pdf)
 
 def padBefore(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_padBefore(pdf, r)
 
 def padAfter(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_padAfter(pdf, r)
 
-def padEvery(pdf, r):
-  libc.pycpdf_padEvery(pdf, r)
+def padEvery(pdf, n):
+  libc.pycpdf_padEvery(pdf, n)
 
 def padMultiple(pdf, n):
   libc.pycpdf_padMultiple(pdf, n)
@@ -514,6 +536,9 @@ def padMultiple(pdf, n):
 def padMultipleBefore(pdf, n):
   libc.pycpdf_padMultipleBefore(pdf, n)
 
+# CHAPTER 10. Annotations
+
+# Not in the library version.
 
 # CHAPTER 11. Document Information and Metadata
 def isLinearized(filename):
@@ -825,13 +850,13 @@ def getPageLabels(pdf):
     prefix = string_at(libc.pycpdf_getPageLabelPrefix(x)).decode()
     offset = libc.pycpdf_getPageLabelOffset(x)
     plrange = libc.pycpdf_getPageLabelRange(x)
-    l.append((style, prefix, offset, plrange))
+    l.append((style, prefix, offset, list_of_range(plrange)))
   libc.pycpdf_endGetPageLabels()
   return l
 
 def addPageLabels(pdf, label, progress):
   style, prefix, offset, plrange = label
-  libc.pycpdf_addPageLabels(pdf, style, str.encode(prefix), offset, plrange, progress)
+  libc.pycpdf_addPageLabels(pdf, style, str.encode(prefix), offset, range_of_list(plrange), progress)
   return
 
 def removePageLabels(pdf):
@@ -872,7 +897,6 @@ def getAttachments(pdf):
     l.append((name, page, data))
   libc.pycpdf_endGetAttachments()
 
-
 # CHAPTER 13. Images
 def getImageResolution(pdf, min_required_resolution):
   n = libc.pycpdf_startGetImageResolution(pdf, min_required_resolution)
@@ -907,25 +931,32 @@ def removeFonts(pdf):
   libc.pycpdf_removeFonts(pdf)
 
 def copyFont(pdf, pdf2, r, pagenumber, fontname):
+  r = range_of_list(r)
   libc.pycpdf_copyFont(pdf, pdf2, r, pagenumber, str.encode(fontname))
 
 # CHAPTER 15. Miscellaneous
 def draft(pdf, r, boxes):
+  r = range_of_list(r)
   libc.pycpdf_draft(pdf, r, boxes)
 
 def removeAllText(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_removeAllText(pdf, r)
 
 def blackText(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_blackText(pdf, r)
 
 def blackLines(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_blackLines(pdf, r)
 
 def blackFills(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_blackFills(pdf, r)
 
 def thinLines(pdf, r, linewidth):
+  r = range_of_list(r)
   libc.pycpdf_thinLines(pdf, r, linewidth)
 
 def copyId(pdf, pdf2):
@@ -941,11 +972,13 @@ def removeDictEntry(pdf, key):
   libc.pycpdf_removeDictEntry(pdf, str.encode(key))
 
 def removeClipping(pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_removeClipping(pdf, r)
 
 # CHAPTER UNDOC (To come in v2.4)
 
 def addContent(content, before, pdf, r):
+  r = range_of_list(r)
   libc.pycpdf_addContent(str.encode(content), before, pdf, r)
 
 def outputJSON(filename, parse_content, no_stream_data, pdf):
@@ -961,8 +994,8 @@ def OCGOrderAll(pdf):
   libc.pycpdf_OCGOrderAll(pdf)
 
 def stampAsXObject(pdf, r, stamp_pdf):
+  r = range_of_list(r)
   string_at(libc.pycpdf_stampAsXObject(pdf, r, stamp_pdf)).decode()
 
 def setDemo(v):
   libc.pycpdf_setDemo(v)
-"""
