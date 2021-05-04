@@ -5,9 +5,9 @@
 
 /* CHAPTER 0. Preliminaries */
 
-int pycpdf_startup(void)
+int pycpdf_startup(char** argv)
 {
-   char *argv[] = {"program_name", NULL};
+   //char *argv[] = {"program_name", NULL};
    cpdf_startup(argv);
    return 0;
 }

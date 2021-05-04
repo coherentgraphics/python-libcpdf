@@ -1,4 +1,5 @@
 from ctypes import *
+import sys
 
 libc = None
 
@@ -89,7 +90,15 @@ def loadDLL(f):
 
 #CHAPTER 0. Preliminaries
 def startup():
-  libc.pycpdf_startup()
+  LP_c_char = POINTER(c_char)
+  LP_LP_c_char = POINTER(LP_c_char)  
+  argc = len(sys.argv)
+  argv = (LP_c_char * (argc + 1))()
+  for i, arg in enumerate(sys.argv):
+      enc_arg = arg.encode('utf-8')
+      argv[i] = create_string_buffer(enc_arg)
+  libc.pycpdf_startup.argtypes = [LP_LP_c_char]
+  libc.pycpdf_startup(argv)
 
 def version():
   return string_at(libc.pycpdf_version()).decode()
