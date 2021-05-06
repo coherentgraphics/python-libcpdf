@@ -1,6 +1,12 @@
 import pycpdf
+import sys
 
-pycpdf.loadDLL("/Users/john/repos/python-libcpdf/libpycpdf.so")
+if sys.platform.startswith('darwin'):
+  pycpdf.loadDLL("/Users/john/repos/python-libcpdf/libpycpdf.so")
+elif sys.platform.startswith('linux'):
+  pycpdf.loadDLL("libpycpdf.so")
+elif sys.platform.startswith('win32') or sys.platform.startswith('cygwin'):
+  pycpdf.loadDLL("libypcpdf.so")
 
 def prerr():
   print(f'({pycpdf.lastError()} | {pycpdf.lastErrorString()})')
