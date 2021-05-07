@@ -1,12 +1,14 @@
 import pycpdf
 import sys
+import os
 
 if sys.platform.startswith('darwin'):
   pycpdf.loadDLL("/Users/john/repos/python-libcpdf/libpycpdf.so")
 elif sys.platform.startswith('linux'):
   pycpdf.loadDLL("libpycpdf.so")
 elif sys.platform.startswith('win32') or sys.platform.startswith('cygwin'):
-  pycpdf.loadDLL("libypcpdf.so")
+    os.add_dll_directory("C:\\\\OCaml64/home/JohnWhitington/python-libcpdf/")
+    pycpdf.loadDLL("libpycpdf.dll")
 
 def prerr():
   print(f'({pycpdf.lastError()} | {pycpdf.lastErrorString()})')
