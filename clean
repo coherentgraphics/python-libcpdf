@@ -1,2 +1,3 @@
-rm -f libpycpdf.o libpycpdf.so
+rm -f libcpdf.so libcpdf.dll
+rm -f libpycpdf.o libpycpdf.so libpycpdf.dll
 rm -rf testoutputs/*.pdf testoutputs/*.txt __pycache__
