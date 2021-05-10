@@ -98,8 +98,11 @@ def lastError():
 def lastErrorString():
   return string_at(libc.pycpdf_lastErrorString()).decode()
 
-def error():
-  raise CPDFError(lastErrorString())
+def checkerror():
+  if lastError() != 0:
+    s = lastErrorString()
+    clearError()
+    raise CPDFError(s)
 
 #CHAPTER 0. Preliminaries
 def startup():
@@ -112,21 +115,28 @@ def startup():
       argv[i] = create_string_buffer(enc_arg)
   libc.pycpdf_startup.argtypes = [LP_LP_c_char]
   libc.pycpdf_startup(argv)
+  checkerror()
 
 def version():
-  return string_at(libc.pycpdf_version()).decode()
+  v = string_at(libc.pycpdf_version()).decode()
+  checkerror()
+  return v
 
 def setFast():
   libc.pycpdf_setFast()
+  checkerror()
 
 def setSlow():
   libc.pycpdf_setSlow()
+  checkerror()
 
 def clearError():
   libc.pycpdf_clearError()
+  checkerror()
 
 def onExit():
   libc.pycpdf_onExit()
+  checkerror()
 
 #CHAPTER 1. Basics
 def fromFile(filename, userpw):
@@ -706,10 +716,8 @@ def getDateComponents(string):
   hour_offset = c_int(0)
   minute_offset = c_int(0)
   libc.pycpdf_getDateComponents(string, byref(year), byref(month), byref(day), byref(hour), byref(minute), byref(second), byref(hour_offset), byref(minute_offset))
-  if lastError() == 0:
-    return (year, month, day, hour, minute, second, hour_offset, minute_offset)
-  else:
-    error()
+  checkerror()
+  return (year, month, day, hour, minute, second, hour_offset, minute_offset)
 
 def dateStringOfComponents(components):
   year, month, day, hour, minute, second, hour_offset, minute_offset = components
