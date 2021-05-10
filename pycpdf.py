@@ -140,19 +140,29 @@ def onExit():
 
 #CHAPTER 1. Basics
 def fromFile(filename, userpw):
-  return Pdf(libc.pycpdf_fromFile(str.encode(filename), str.encode(userpw)))
+  pdf = Pdf(libc.pycpdf_fromFile(str.encode(filename), str.encode(userpw)))
+  checkerror()
+  return pdf
 
 def fromFileLazy(filename, userpw):
-  return Pdf(libc.pycpdf_fromFileLazy(str.encode(filename), str.encode(userpw)))
+  pdf = Pdf(libc.pycpdf_fromFileLazy(str.encode(filename), str.encode(userpw)))
+  checkerror()
+  return pdf
 
 def fromMemory(data, userpw):
-  return Pdf(libc.pycpdf_fromMemory(data, len(data), str.encode(userpw)))
+  pdf = Pdf(libc.pycpdf_fromMemory(data, len(data), str.encode(userpw)))
+  checkerror()
+  return pdf
 
 def fromMemoryLazy(data, userpw):
-  return Pdf(libc.pycpdf_fromMemoryLazy(data, len(data), str.encode(userpw)))
+  pdf = Pdf(libc.pycpdf_fromMemoryLazy(data, len(data), str.encode(userpw)))
+  checkerror()
+  return pdf
 
 def blankDocument(w, h, pages):
-  return Pdf(libc.pycpdf_blankDocument(w, h, pages))
+  pdf = Pdf(libc.pycpdf_blankDocument(w, h, pages))
+  checkerror()
+  return pdf
 
 a0portrait = 0
 a1portrait = 1
