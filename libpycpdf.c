@@ -36,16 +36,16 @@ int pycpdf_lastError(void)
 
 char *pycpdf_lastErrorString(void)
 {
-  printf("cpdf_lastErrorString is %s\n", cpdf_lastErrorString);
+  //printf("cpdf_lastErrorString is %s\n", cpdf_lastErrorString);
   return cpdf_lastErrorString;
 }
 
 void pycpdf_clearError(void)
 {
   cpdf_clearError();
-  cpdf_lastError = 0; //why?
-  cpdf_lastErrorString = ""; //why?
-  printf("after clearerror, cpdf_lastErrorString is %s\n", cpdf_lastErrorString);
+  cpdf_lastError = 0;
+  cpdf_lastErrorString = "";
+  //printf("after clearerror, cpdf_lastErrorString is %s\n", cpdf_lastErrorString);
   return;
 }
 

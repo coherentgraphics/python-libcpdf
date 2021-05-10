@@ -6,10 +6,8 @@ libc = None
 class Pdf:
   pdf = -1
   def __init__(self, pdfnum):
-    print('Making Pdf')
     self.pdf = pdfnum
   def __del__(self):
-    print(f'Destructor called. Deleting Pdf {self.pdf}')
     libc.pycpdf_deletePdf(self.pdf)
 
 def loadDLL(f):
@@ -88,6 +86,21 @@ def loadDLL(f):
   libc.pycpdf_getPageLabelPrefix.restype = POINTER(c_char)
   libc.pycpdf_dateStringOfComponents.restype = POINTER(c_char)
 
+#Error handling
+class CPDFError(Exception):
+  def __init__(self, message):
+    self.message = message
+    super().__init__(self.message)
+
+def lastError():
+  return libc.pycpdf_lastError()
+
+def lastErrorString():
+  return string_at(libc.pycpdf_lastErrorString()).decode()
+
+def error():
+  raise CPDFError(lastErrorString())
+
 #CHAPTER 0. Preliminaries
 def startup():
   LP_c_char = POINTER(c_char)
@@ -108,12 +121,6 @@ def setFast():
 
 def setSlow():
   libc.pycpdf_setSlow()
-
-def lastError():
-  return libc.pycpdf_lastError()
-
-def lastErrorString():
-  return string_at(libc.pycpdf_lastErrorString()).decode()
 
 def clearError():
   libc.pycpdf_clearError()
@@ -699,7 +706,10 @@ def getDateComponents(string):
   hour_offset = c_int(0)
   minute_offset = c_int(0)
   libc.pycpdf_getDateComponents(string, byref(year), byref(month), byref(day), byref(hour), byref(minute), byref(second), byref(hour_offset), byref(minute_offset))
-  return (year, month, day, hour, minute, second, hour_offset, minute_offset)
+  if lastError() == 0:
+    return (year, month, day, hour, minute, second, hour_offset, minute_offset)
+  else:
+    error()
 
 def dateStringOfComponents(components):
   year, month, day, hour, minute, second, hour_offset, minute_offset = components
