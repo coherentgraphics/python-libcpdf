@@ -182,25 +182,39 @@ uslegalportrait = 14
 uslegallandscape = 15
 
 def blankDocumentPaper(papersize, pages):
-  return Pdf(libc.pycpdf_blankDocumentPaper(papersize, pages))
+  r = Pdf(libc.pycpdf_blankDocumentPaper(papersize, pages))
+  checkerror()
+  return r
 
 def ptOfCm(i):
-  return libc.pycpdf_ptOfCm(i)
+  r = libc.pycpdf_ptOfCm(i)
+  checkerror()
+  return r
 
 def ptOfMm(i):
-  return libc.pycpdf_ptOfMm(i)
+  r = libc.pycpdf_ptOfMm(i)
+  checkerror()
+  return r
 
 def ptOfIn(i):
-  return libc.pycpdf_ptOfIn(i)
+  r = libc.pycpdf_ptOfIn(i)
+  checkerror()
+  return r
 
 def cmOfPt(i):
-  return libc.pycpdf_cmOfPt(i)
+  r = libc.pycpdf_cmOfPt(i)
+  checkerror()
+  return r
 
 def mmOfPt(i):
-  return libc.pycpdf_mmOfPt(i)
+  r = libc.pycpdf_mmOfPt(i)
+  checkerror()
+  return r
 
 def inOfPt(i):
-  return libc.pycpdf_inOfPt(i)
+  r = libc.pycpdf_inOfPt(i)
+  checkerror()
+  return r
 
 def enumeratePDFs():
   pdfs = []
@@ -210,6 +224,7 @@ def enumeratePDFs():
     info = string_at(libc.pycpdf_enumeratePDFsInfo(x)).decode()
     pdfs.append((key, info))
   libc.pycpdf_endEnumeratePDFs()
+  checkerror()
   return pdfs
 
 #Convert between lists and ranges - these are internal functions, not for external use.
@@ -217,60 +232,90 @@ def list_of_range(r):
   l = []
   for x in range(libc.pycpdf_rangeLength(r)):
     l.append(libc.pycpdf_rangeGet(r, x))
+  checkerror()
   return l
 
 def range_of_list(l):
   r = libc.pycpdf_blankRange()
   for x in l:
     r = libc.pycpdf_rangeAdd(r, x)
+  checkerror()
   return r
 
 def parsePagespec(pdf, pagespec):
-  return list_of_range(libc.pycpdf_parsePagespec(pdf.pdf, str.encode(pagespec)))
+  r = list_of_range(libc.pycpdf_parsePagespec(pdf.pdf, str.encode(pagespec)))
+  checkerror()
+  return r
 
 def validatePagespec(pagespec):
-  return libc.pycpdf_validatePagespec(str.encode(pagespec))
+  r = libc.pycpdf_validatePagespec(str.encode(pagespec))
+  checkerror()
+  return r
 
 def stringOfPagespec(pdf, r):
-  r = range_of_list(r)
-  return string_at(libc.pycpdf_stringOfPagespec(pdf.pdf, r)).decode()
+  rn = range_of_list(r)
+  r = string_at(libc.pycpdf_stringOfPagespec(pdf.pdf, rn)).decode()
+  checkerror()
+  return r
 
 def blankRange():
-  return libc.pycpdf_blankRange()
+  r = libc.pycpdf_blankRange()
+  checkerror()
+  return r
 
 def pageRange(f, t):
-  return list_of_range(libc.pycpdf_pageRange(f, t))
+  r = list_of_range(libc.pycpdf_pageRange(f, t))
+  checkerror()
+  return r
 
 def all(pdf):
-  return list_of_range(libc.pycpdf_all(pdf.pdf))
+  r = list_of_range(libc.pycpdf_all(pdf.pdf))
+  checkerror()
+  return r
 
 def even(r):
-  r = range_of_list(r)
-  return list_of_range(libc.pycpdf_even(r))
+  rn = range_of_list(r)
+  r = list_of_range(libc.pycpdf_even(rn))
+  checkerror()
+  return r
 
 def odd(r):
-  r = range_of_list(r)
-  return list_of_range(libc.pycpdf_odd(r))
+  rn = range_of_list(r)
+  r = list_of_range(libc.pycpdf_odd(rn))
+  checkerror()
+  return r
 
 def rangeUnion(a, b):
-  return list_of_range(libc.pycpdf_rangeUnion(range_of_list(a), range_of_list(b)))
+  r = list_of_range(libc.pycpdf_rangeUnion(range_of_list(a), range_of_list(b)))
+  checkerror()
+  return r
 
 def difference(a, b):
-  return list_of_range(libc.pycpdf_difference(range_of_list(a), range_of_list(b)))
+  r = list_of_range(libc.pycpdf_difference(range_of_list(a), range_of_list(b)))
+  checkerror()
+  return r
 
 def removeDuplicates(r):
-  return list_of_range(libc.pycpdf_removeDuplicates(range_of_list(r)))
+  r = list_of_range(libc.pycpdf_removeDuplicates(range_of_list(r)))
+  checkerror()
+  return r
 
 def rangeLength(r):
-  return libc.pycpdf_rangeLength(range_of_list(r))
+  r = libc.pycpdf_rangeLength(range_of_list(r))
+  checkerror()
+  return r
 
 def rangeGet(r, n):
-  r = range_of_list(r)
-  return libc.pycpdf_rangeGet(r, n)
+  rn = range_of_list(r)
+  r2 = libc.pycpdf_rangeGet(rn, n)
+  checkerror()
+  return r2
 
 def rangeAdd(r, p):
-  r = range_of_list(r)
-  return list_of_range(libc.pycpdf_rangeAdd(r, p))
+  rn = range_of_list(r)
+  r2 = list_of_range(libc.pycpdf_rangeAdd(rn, p))
+  checkerror()
+  return r2
 
 def isInRange(r, p):
   r = range_of_list(r)
@@ -284,19 +329,24 @@ def pagesFast(userpw, filename):
 
 def toFile(pdf, filename, linearize, make_id):
   libc.pycpdf_toFile(pdf.pdf, str.encode(filename), False, False)
+  checkerror()
 
 def toFileExt(pdf, filename, linearize, make_id, preserve_objstm, generate_objstm, compress_objstm):
   libc.pycpdf_toFileExt(pdf.pdf, str.encode(filename), linearize, make_id, preserve_objstm, generate_objstm, compress_objstm)
+  checkerror()
 
 def toMemory(pdf, linearize, make_id):
   length = c_int32()
   data = libc.pycpdf_toMemory(pdf.pdf, linearize, make_id, byref(length))
   s = string_at(data)
   libc.pycpdf_toMemoryFree()
+  checkerror()
   return s
 
 def isEncrypted(pdf):
-  libc.pycpdf_isEncrypted(pdf.pdf)
+  r = libc.pycpdf_isEncrypted(pdf.pdf)
+  checkerror()
+  return r
 
 noEdit = 0
 noPrint = 1
@@ -320,6 +370,7 @@ def toFileEncrypted(pdf, method, permissions, ownerpw, userpw, linearize, makeid
   c_perms = (c_uint8 * len(permissions))(*permissions)
   libc.pycpdf_toFileEncrypted(pdf.pdf, method, c_perms, len(permissions), str.encode(ownerpw),
                             str.encode(userpw), linearize, makeid, str.encode(filename))
+  checkerror()
 
 def toFileEncryptedExt(pdf, method, permissions, ownerpw, userpw, linearize, makeid,
                        preserve_objstm, generate_objstm, compress_objstm, filename):
@@ -327,18 +378,25 @@ def toFileEncryptedExt(pdf, method, permissions, ownerpw, userpw, linearize, mak
   libc.pycpdf_toFileEncryptedExt(pdf.pdf, method, c_perms, len(permissions), str.encode(ownerpw),
                                  str.encode(userpw), linearize, makeid, preserve_objstm,
                                  generate_objstm, compress_objstm, str.encode(filename))
+  checkerror()
 
 def decryptPdf(pdf, userpw):
   libc.pycpdf_decryptPdf(pdf.pdf, str.encode(userpw))
+  checkerror()
 
 def decryptPdfOwner(pdf, ownerpw):
   libc.pycpdf_decryptPdfOwner(pdf.pdf, str.encode(ownerpw))
+  checkerror()
 
 def hasPermission(pdf, perm):
-  return libc.pycpdf_hasPermission(pdf.pdf, perm)
+  r = libc.pycpdf_hasPermission(pdf.pdf, perm)
+  checkerror()
+  return r
 
 def encryptionKind(pdf):
-  return libc.pycpdf_encryptionKind(pdf.pdf)
+  r = libc.pycpdf_encryptionKind(pdf.pdf)
+  checkerror()
+  return r
 
 # CHAPTER 2. Merging and Splitting
 def mergeSimple(pdfs):
