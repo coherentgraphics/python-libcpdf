@@ -402,23 +402,31 @@ def encryptionKind(pdf):
 def mergeSimple(pdfs):
   raw_pdfs = list(map(lambda p: p.pdf, pdfs))
   c_pdfs = (c_int * len(pdfs))(*raw_pdfs)
-  return Pdf(libc.pycpdf_mergeSimple(c_pdfs, len(pdfs)))
+  r = Pdf(libc.pycpdf_mergeSimple(c_pdfs, len(pdfs)))
+  checkerror()
+  return r
 
 def merge(pdfs, retain_numbering, remove_duplicate_fonts):
   raw_pdfs = map(lambda p: p.pdf, pdfs)
   c_pdfs = (c_int * len(pdfs))(*raw_pdfs)
-  return Pdf(libc.pycpdf_merge(c_pdfs, len(pdfs), retain_numbering, remove_duplicate_fonts))
+  r = Pdf(libc.pycpdf_merge(c_pdfs, len(pdfs), retain_numbering, remove_duplicate_fonts))
+  checkerror()
+  return r
 
 def mergeSame(pdfs, retain_numbering, remove_duplicate_fonts, ranges):
   ranges = list(map(range_of_list, ranges))
   raw_pdfs = map(lambda p: p.pdf, pdfs)
   c_pdfs = (c_int * len(pdfs))(*raw_pdfs)
   c_ranges = (c_int * len(ranges))(*ranges)
-  return Pdf(libc.pycpdf_mergeSame(c_pdfs, len(pdfs), retain_numbering, remove_duplicate_fonts, c_ranges))
+  r = Pdf(libc.pycpdf_mergeSame(c_pdfs, len(pdfs), retain_numbering, remove_duplicate_fonts, c_ranges))
+  checkerror()
+  return r
 
 def selectPages(pdf, r):
-  r = range_of_list(r)
-  return Pdf(libc.pycpdf_selectPages(pdf.pdf, r))
+  rn = range_of_list(r)
+  r = Pdf(libc.pycpdf_selectPages(pdf.pdf, rn))
+  checkerror()
+  return r
 
 # CHAPTER 3. Pages
 def scalePages(pdf, r, sx, sy):
