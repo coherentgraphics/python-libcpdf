@@ -18,7 +18,7 @@ def prerr():
 def fatal_prerr():
   prerr()
   print('Fatal error; exiting')
-  #sys.exit(1);
+  #sys.exit(1); PUT BACK IN
 
 #CHAPTER 0. Preliminaries
 print('***** CHAPTER 0. Preliminaries')

@@ -318,14 +318,20 @@ def rangeAdd(r, p):
   return r2
 
 def isInRange(r, p):
-  r = range_of_list(r)
-  return libc.pycpdf_isInRange(r, p)
+  rn = range_of_list(r)
+  r2 = libc.pycpdf_isInRange(rn, p)
+  checkerror()
+  return r2
 
 def pages(pdf):
-  return libc.pycpdf_pages(pdf.pdf)
+  r = libc.pycpdf_pages(pdf.pdf)
+  checkerror()
+  return r
 
 def pagesFast(userpw, filename):
-  return libc.pycpdf_pagesFast(str.encode(userpw), str.encode(filename))
+  r = libc.pycpdf_pagesFast(str.encode(userpw), str.encode(filename))
+  checkerror()
+  return r
 
 def toFile(pdf, filename, linearize, make_id):
   libc.pycpdf_toFile(pdf.pdf, str.encode(filename), False, False)
@@ -432,14 +438,17 @@ def selectPages(pdf, r):
 def scalePages(pdf, r, sx, sy):
   r = range_of_list(r)
   libc.pycpdf_scalePages(pdf.pdf, r, sx, sy)
+  checkerror()
 
 def scaleToFit(pdf, r, sx, sy, scale_to_fit_scale):
   r = range_of_list(r)
   libc.pycpdf_scaleToFit(pdf.pdf, r, sx, sy, scale_to_fit_scale)
+  checkerror()
 
 def scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale):
   r = range_of_list(r)
   libc.pycpdf_scaleToFitPaper(pdf.pdf, r, papersize, scale_to_fit_scale)
+  checkerror()
 
 posCentre = 0
 posLeft = 1
@@ -472,66 +481,82 @@ def scaleContents(pdf, r, p, scale):
   r = range_of_list(r)
   a, b, c = tripleOfPosition(p); 
   libc.pycpdf_scaleContents(pdf.pdf, r, a, b, c, scale)
+  checkerror()
 
 def shiftContents(pdf, r, dx, dy):
   r = range_of_list(r)
   libc.pycpdf_shiftContents(pdf.pdf, r, dx, dy)
+  checkerror()
 
 def rotate(pdf, r, rotation):
   r = range_of_list(r)
   libc.pycpdf_rotate(pdf.pdf, r, rotation)
+  checkerror()
 
 def rotateBy(pdf, r, rotation):
   r = range_of_list(r)
   libc.pycpdf_rotateBy(pdf.pdf, r, rotation)
+  checkerror()
 
 def rotateContents(pdf, r, rotation):
   r = range_of_list(r)
   libc.pycpdf_rotateContents(pdf.pdf, r, rotation)
+  checkerror()
 
 def upright(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_upright(pdf.pdf, r)
+  checkerror()
 
 def hFlip(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_hFlip(pdf.pdf, r)
+  checkerror()
 
 def vFlip(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_vFlip(pdf.pdf, r)
+  checkerror()
 
 def crop(pdf, r, x, y, w, h):
   r = range_of_list(r)
   libc.pycpdf_crop(pdf.pdf, r, x, y, w, h)
+  checkerror()
 
 def removeCrop(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_removeCrop(pdf.pdf, r)
+  checkerror()
 
 def removeTrim(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_removeTrim(pdf.pdf, r)
+  checkerror()
 
 def removeArt(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_removeArt(pdf.pdf, r)
+  checkerror()
 
 def removeBleed(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_removeBleed(pdf.pdf, r)
+  checkerror()
 
 def trimMarks(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_trimMarks(pdf.pdf, r)
+  checkerror()
 
 def showBoxes(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_showBoxes(pdf.pdf, r)
+  checkerror()
 
 def hardBox(pdf, r, boxname):
   r = range_of_list(r)
   libc.pycpdf_hardBox(pdf.pdf, r, str.encode(boxname))
+  checkerror()
 
 # CHAPTER 4. Encryption
 
@@ -541,12 +566,15 @@ def hardBox(pdf, r, boxname):
 
 def compress(pdf):
   libc.pycpdf_compress(pdf.pdf)
+  checkerror()
 
 def decompress(pdf):
   libc.pycpdf_decompress(pdf.pdf)
+  checkerror()
 
 def squeezeInMemory(pdf):
   libc.pycpdf_squeezeInMemory(pdf.pdf)
+  checkerror()
 
 # CHAPTER 6. Bookmarks
 
@@ -563,6 +591,7 @@ def getBookmarks(pdf):
       openStatus = libc.pycpdf_getBookmarkOpenStatus(x)
       l.append((level, page, text, openStatus))
   libc.pycpdf_endGetBookmarkInfo(pdf.pdf);
+  checkerror()
   return l
 
 def setBookmarks(pdf, marks):
@@ -575,6 +604,7 @@ def setBookmarks(pdf, marks):
       libc.pycpdf_setBookmarkOpenStatus(n, openStatus)
       libc.pycpdf_setBookmarkText(n, text)
   libc.pycpdf_endSetBookmarkInfo(pdf.pdf)
+  checkerror()
 
 # CHAPTER 7. Presentations
 
@@ -585,17 +615,21 @@ def setBookmarks(pdf, marks):
 def stampOn(pdf, pdf2, r):
   r = range_of_list(r)
   libc.pycpdf_stampOn(pdf.pdf, pdf2.pdf, r)
+  checkerror()
 
 def stampUnder(pdf, pdf2, r):
   r = range_of_list(r)
   libc.pycpdf_stampUnder(pdf.pdf, pdf2.pdf, r)
+  checkerror()
 
 def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos, relative_to_cropbox):
   r = range_of_list(r)
   libc.pycpdf_stampExtended(pdf.pdf, pdf2.pdf, r, isover, scale_stamp_to_fit, pos, relative_to_cropbox)
+  checkerror()
 
 def combinePages(pdf, pdf2):
   libc.pycpdf_combinePages(pdf.pdf, pdf2.pdf)
+  checkerror()
 
 leftJustify = 0
 centreJustify = 1
@@ -605,15 +639,18 @@ def addText(metrics, pdf, r, text, p, line_spacing, bates, font, size, red, gree
   a, b, c = tripleOfPosition(p); 
   r = range_of_list(r)
   libc.pycpdf_addText(metrics, pdf.pdf, r, str.encode(text), a, b, c, line_spacing, bates, font, size, red, green, blue, underneath, relative_to_cropbox, outline, opacity, justification, midline, topline, str.encode(filename), line_width, embed_fonts)
+  checkerror()
 
 def addTextSimple(pdf, r, text, p, font, size):
   a, b, c = tripleOfPosition(p); 
   r = range_of_list(r)
   libc.pycpdf_addTextSimple(pdf.pdf, r, str.encode(text), a, b, c, font, size)
+  checkerror()
 
 def removeText(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_removeText(pdf.pdf, r)
+  checkerror()
 
 timesRoman = 0
 timesBold = 1
@@ -629,32 +666,41 @@ courierOblique = 10
 courierBoldOblique = 11
 
 def textWidth(font, string):
-  libc.pycpdf_textWidth(font, str.encode(string))
+  r = libc.pycpdf_textWidth(font, str.encode(string))
+  checkerror()
+  return r
 
 
 # CHAPTER 9. Mulitpage facilities
 def twoUp(pdf):
   libc.pycpdf_twoUp(pdf.pdf)
+  checkerror()
 
 def twoUpStack(pdf):
   libc.pycpdf_twoUpStack(pdf.pdf)
+  checkerror()
 
 def padBefore(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_padBefore(pdf.pdf, r)
+  checkerror()
 
 def padAfter(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_padAfter(pdf.pdf, r)
+  checkerror()
 
 def padEvery(pdf, n):
   libc.pycpdf_padEvery(pdf.pdf, n)
+  checkerror()
 
 def padMultiple(pdf, n):
   libc.pycpdf_padMultiple(pdf.pdf, n)
+  checkerror()
 
 def padMultipleBefore(pdf, n):
   libc.pycpdf_padMultipleBefore(pdf.pdf, n)
+  checkerror()
 
 # CHAPTER 10. Annotations
 
@@ -662,124 +708,178 @@ def padMultipleBefore(pdf, n):
 
 # CHAPTER 11. Document Information and Metadata
 def isLinearized(filename):
-  return libc.pycpdf_isLinearized(str.encode(filename))
+  r = libc.pycpdf_isLinearized(str.encode(filename))
+  checkerror()
+  return r
 
 def getVersion(pdf):
-  return libc.pycpdf_getVersion(pdf.pdf)
+  r = libc.pycpdf_getVersion(pdf.pdf)
+  checkerror()
+  return r
 
 def getMajorVersion(pdf):
-  return libc.pycpdf_getMajorVersion(pdf.pdf)
+  r = libc.pycpdf_getMajorVersion(pdf.pdf)
+  checkerror()
+  return r
 
 def getTitle(pdf):
-  return string_at(libc.pycpdf_getTitle(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getTitle(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getAuthor(pdf):
-  return string_at(libc.pycpdf_getAuthor(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getAuthor(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getSubject(pdf):
-  return string_at(libc.pycpdf_getSubject(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getSubject(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getKeywords(pdf):
-  return string_at(libc.pycpdf_getKeywords(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getKeywords(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getCreator(pdf):
-  return string_at(libc.pycpdf_getCreator(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getCreator(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getProducer(pdf):
-  return string_at(libc.pycpdf_getProducer(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getProducer(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getCreationDate(pdf):
-  return string_at(libc.pycpdf_getCreationDate(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getCreationDate(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getModificationDate(pdf):
-  return string_at(libc.pycpdf_getModificationDate(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getModificationDate(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getTitleXMP(pdf):
-  return string_at(libc.pycpdf_getTitleXMP(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getTitleXMP(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getAuthorXMP(pdf):
-  return string_at(libc.pycpdf_getAuthorXMP(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getAuthorXMP(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getSubjectXMP(pdf):
-  return string_at(libc.pycpdf_getSubjectXMP(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getSubjectXMP(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getKeywordsXMP(pdf):
-  return string_at(libc.pycpdf_getKeywordsXMP(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getKeywordsXMP(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getCreatorXMP(pdf):
-  return string_at(libc.pycpdf_getCreatorXMP(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getCreatorXMP(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getProducerXMP(pdf):
-  return string_at(libc.pycpdf_getProducerXMP(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getProducerXMP(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getCreationDateXMP(pdf):
-  return string_at(libc.pycpdf_getCreationDateXMP(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getCreationDateXMP(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def getModificationDateXMP(pdf):
-  return string_at(libc.pycpdf_getModificationDateXMP(pdf.pdf)).decode()
+  r = string_at(libc.pycpdf_getModificationDateXMP(pdf.pdf)).decode()
+  checkerror()
+  return r
 
 def setTitle(pdf, s):
   libc.pycpdf_setTitle(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setAuthor(pdf, s):
   libc.pycpdf_setAuthor(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setSubject(pdf, s):
   libc.pycpdf_setSubject(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setKeywords(pdf, s):
   libc.pycpdf_setKeywords(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setCreator(pdf, s):
   libc.pycpdf_setCreator(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setProducer(pdf, s):
   libc.pycpdf_setProducer(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setCreationDate(pdf, s):
   libc.pycpdf_setCreationDate(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setModificationDate(pdf, s):
   libc.pycpdf_setModificationDate(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setTitleXMP(pdf, s):
   libc.pycpdf_setTitleXMP(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setAuthorXMP(pdf, s):
   libc.pycpdf_setAuthorXMP(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setSubjectXMP(pdf, s):
   libc.pycpdf_setSubjectXMP(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setKeywordsXMP(pdf, s):
   libc.pycpdf_setKeywordsXMP(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setCreatorXMP(pdf, s):
   libc.pycpdf_setCreatorXMP(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setProducerXMP(pdf, s):
   libc.pycpdf_setProducerXMP(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setCreationDateXMP(pdf, s):
   libc.pycpdf_setCreationDateXMP(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def setModificationDateXMP(pdf, s):
   libc.pycpdf_setModificationDateXMP(pdf.pdf, str.encode(s))
+  checkerror()
   return
 
 def getDateComponents(string):
@@ -797,13 +897,19 @@ def getDateComponents(string):
 
 def dateStringOfComponents(components):
   year, month, day, hour, minute, second, hour_offset, minute_offset = components
-  return string_at(libc.pycpdf_dateStringOfComponents(year, month, day, hour, minute, second, hour_offset, minute_offset)).decode()
+  r = string_at(libc.pycpdf_dateStringOfComponents(year, month, day, hour, minute, second, hour_offset, minute_offset)).decode()
+  checkerror()
+  return r
 
 def getPageRotation(pdf, pagenumber):
-  return libc.pycpdf_getPageRotation(pdf.pdf, pagenumber)
+  r = libc.pycpdf_getPageRotation(pdf.pdf, pagenumber)
+  checkerror()
+  return r
 
 def hasBox(pdf, pagenumber, boxname):
-  return libc.pycpdf_hasBox(pdf.pdf, pagenumber, str.encode(boxname))
+  r = libc.pycpdf_hasBox(pdf.pdf, pagenumber, str.encode(boxname))
+  checkerror()
+  return r
 
 def getMediaBox(pdf, pagenumber):
   minx = c_double(0.0)
@@ -811,6 +917,7 @@ def getMediaBox(pdf, pagenumber):
   miny = c_double(0.0)
   maxy = c_double(0.0)
   libc.pycpdf_getMediaBox(pdf.pdf, pagenumber, byref(minx), byref(maxx), byref(miny), byref(maxy))
+  checkerror()
   return (minx.value, maxx.value, miny.value, maxy.value)
 
 def getCropBox(pdf, pagenumber):
@@ -819,6 +926,7 @@ def getCropBox(pdf, pagenumber):
   miny = c_double(0.0)
   maxy = c_double(0.0)
   libc.pycpdf_getCropBox(pdf.pdf, pagenumber, byref(minx), byref(maxx), byref(miny), byref(maxy))
+  checkerror()
   return (minx.value, maxx.value, miny.value, maxy.value)
 
 def getTrimBox(pdf, pagenumber):
@@ -827,6 +935,7 @@ def getTrimBox(pdf, pagenumber):
   miny = c_double(0.0)
   maxy = c_double(0.0)
   libc.pycpdf_getTrimBox(pdf.pdf, pagenumber, byref(minx), byref(maxx), byref(miny), byref(maxy))
+  checkerror()
   return (minx.value, maxx.value, miny.value, maxy.value)
 
 def getArtBox(pdf, pagenumber):
@@ -835,6 +944,7 @@ def getArtBox(pdf, pagenumber):
   miny = c_double(0.0)
   maxy = c_double(0.0)
   libc.pycpdf_getArtBox(pdf.pdf, pagenumber, byref(minx), byref(maxx), byref(miny), byref(maxy))
+  checkerror()
   return (minx.value, maxx.value, miny.value, maxy.value)
 
 def getBleedBox(pdf, pagenumber):
@@ -843,42 +953,52 @@ def getBleedBox(pdf, pagenumber):
   miny = c_double(0.0)
   maxy = c_double(0.0)
   libc.pycpdf_getBleedBox(pdf.pdf, pagenumber, byref(minx), byref(maxx), byref(miny), byref(maxy))
+  checkerror()
   return (minx.value, maxx.value, miny.value, maxy.value)
 
 def setMediaBox(pdf, r, minx, maxx, miny, maxy):
   libc.pycpdf_setMediaBox(pdf.pdf, r, minx, maxx, miny, maxy)
+  checkerror()
   return
 
 def setCropBox(pdf, r, minx, maxx, miny, maxy):
   libc.pycpdf_setCropBox(pdf.pdf, r, minx, maxx, miny, maxy)
+  checkerror()
   return
 
 def setTrimBox(pdf, r, minx, maxx, miny, maxy):
   libc.pycpdf_setTrimBox(pdf.pdf, r, minx, maxx, miny, maxy)
+  checkerror()
   return
 
 def setArtBox(pdf, r, minx, maxx, miny, maxy):
   libc.pycpdf_setArtBox(pdf.pdf, r, minx, maxx, miny, maxy)
+  checkerror()
   return
 
 def setBleedBox(pdf, r, minx, maxx, miny, maxy):
   libc.pycpdf_setBleedBox(pdf.pdf, r, minx, maxx, miny, maxy)
+  checkerror()
   return
 
 def markTrapped(pdf):
   libc.pycpdf_markTrapped(pdf.pdf)
+  checkerror()
   return
 
 def markUntrapped(pdf):
   libc.pycpdf_markUntrapped(pdf.pdf)
+  checkerror()
   return
 
 def markTrappedXMP(pdf):
   libc.pycpdf_markTrappedXMP(pdf.pdf)
+  checkerror()
   return
 
 def markUntrappedXMP(pdf):
   libc.pycpdf_markUntrappedXMP(pdf.pdf)
+  checkerror()
   return
 
 singlePage = 0
@@ -890,6 +1010,7 @@ twoPageRight = 5
 
 def setPageLayout(pdf, layout):
   libc.pycpdf_setPageLayout(pdf.pdf, layout)
+  checkerror()
   return
 
 useNone = 0
@@ -900,42 +1021,52 @@ useAttachments = 4
 
 def setPageMode(pdf, mode):
   libc.pycpdf_setPageMode(pdf.pdf, mode)
+  checkerror()
   return
 
 def hideToolbar(pdf, flag):
   libc.pycpdf_hideToolbar(pdf.pdf, flag)
+  checkerror()
   return
 
 def hideMenubar(pdf, flag):
   libc.pycpdf_hideMenubar(pdf.pdf, flag)
+  checkerror()
   return
 
 def hideWindowUi(pdf, flag):
   libc.pycpdf_hideWindowUi(pdf.pdf, flag)
+  checkerror()
   return
 
 def fitWindow(pdf, flag):
   libc.pycpdf_fitWindow(pdf.pdf, flag)
+  checkerror()
   return
 
 def centerWindow(pdf, flag):
   libc.pycpdf_centerWindow(pdf.pdf, flag)
+  checkerror()
   return
 
 def displayDocTitle(pdf, flag):
   libc.pycpdf_displayDocTitle(pdf.pdf, flag)
+  checkerror()
   return
 
 def openAtPage(pdf, flag, pagenumber):
   libc.pycpdf_openAtPage(pdf.pdf, flag, pagenumber)
+  checkerror()
   return
 
 def setMetadataFromFile(pdf, filename):
   libc.pycpdf_setMetadataFromFile(pdf.pdf, str.encode(filename))
+  checkerror()
   return
 
 def setMetadataFromByteArray(pdf, data):
   libc.pycpdf_setMetadataFromByteArray(pdf.pdf, data, len(data))
+  checkerror()
   return
 
 def getMetadata(pdf):
@@ -943,18 +1074,22 @@ def getMetadata(pdf):
   data = libc.pycpdf_getMetadata(pdf.pdf, byref(length))
   s = string_at(data)
   libc.pycpdf_getMetadataFree()
+  checkerror()
   return s
 
 def removeMetadata(pdf):
   libc.pycpdf_removeMetadata(pdf.pdf)
+  checkerror()
   return
 
 def createMetadata(pdf):
   libc.pycpdf_createMetadata(pdf.pdf)
+  checkerror()
   return
 
 def setMetadataDate(pdf, date):
   libc.pycpdf_setMetadataDate(pdf.pdf, str.encode(date))
+  checkerror()
   return
 
 decimalArabic = 0
@@ -973,36 +1108,46 @@ def getPageLabels(pdf):
     plrange = libc.pycpdf_getPageLabelRange(x)
     l.append((style, prefix, offset, list_of_range(plrange)))
   libc.pycpdf_endGetPageLabels()
+  checkerror()
   return l
 
 def addPageLabels(pdf, label, progress):
   style, prefix, offset, plrange = label
   libc.pycpdf_addPageLabels(pdf.pdf, style, str.encode(prefix), offset, range_of_list(plrange), progress)
+  checkerror()
   return
 
 def removePageLabels(pdf):
   libc.pycpdf_removePageLabels(pdf.pdf)
+  checkerror()
   return
 
 def getPageLabelStringForPage(pdf, pagenumber):
-  return string_at(libc.pycpdf_getPageLabelStringForPage(pdf.pdf, pagenumber)).decode()
+  r = string_at(libc.pycpdf_getPageLabelStringForPage(pdf.pdf, pagenumber)).decode()
+  checkerror()
+  return r
 
 # CHAPTER 12. File Attachments
 
 def attachFile(filename, pdf):
   libc.pycpdf_attachFile(str.encode(filename), pdf.pdf)
+  checkerror()
 
 def attachFileToPage(filename, pdf, pagenumber):
   libc.pycpdf_attachFileToPage(str.encode(filename), pdf.pdf, pagenumber)
+  checkerror()
 
 def attachFileFromMemory(data, filename, pdf):
   libc.pycpdf_attachFileFromMemory(data, len(data), filename, pdf.pdf)
+  checkerror()
 
 def attachFileToPageFromMemory(data, filename, pdf, pagenumber):
   libc.pycpdf_attachFileToPageFromMemory(data, len(data), filename, pdf.pdf, pagenumber)
+  checkerror()
 
 def removeAttachedFiles(pdf):
   libc.pycpdf_removeAttachedFiles(pdf.pdf)
+  checkerror()
 
 def getAttachments(pdf):
   libc.pycpdf_startGetAttachments(pdf.pdf)
@@ -1017,6 +1162,8 @@ def getAttachments(pdf):
     libc.pycpdf_getAttachmentDataFree()
     l.append((name, page, data))
   libc.pycpdf_endGetAttachments()
+  checkerror()
+  return l
 
 # CHAPTER 13. Images
 def getImageResolution(pdf, min_required_resolution):
@@ -1031,6 +1178,7 @@ def getImageResolution(pdf, min_required_resolution):
     yr = libc.pycpdf_getImageResolutionYRes(x)
     l.append((pagenumber, imagename, xp, yp, xr, yr))
   libc.pycpdf_endGetImageResolution()
+  checkerror()
   return l
 
 # CHAPTER 14. Fonts
@@ -1046,77 +1194,99 @@ def getFontInfo(pdf):
       fontencoding = string_at(libc.pycpdf_getFontEncoding(x)).decode()
       l.append((pagenumber, fontname, fonttype, fontencoding))
   libc.pycpdf_endGetFontInfo(pdf.pdf)
+  checkerror()
   return l
 
 def removeFonts(pdf):
   libc.pycpdf_removeFonts(pdf.pdf)
+  checkerror()
 
 def copyFont(pdf, pdf2, r, pagenumber, fontname):
   r = range_of_list(r)
   libc.pycpdf_copyFont(pdf.pdf, pdf2.pdf, r, pagenumber, str.encode(fontname))
+  checkerror()
 
 # CHAPTER 15. Miscellaneous
 def draft(pdf, r, boxes):
   r = range_of_list(r)
   libc.pycpdf_draft(pdf.pdf, r, boxes)
+  checkerror()
 
 def removeAllText(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_removeAllText(pdf.pdf, r)
+  checkerror()
 
 def blackText(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_blackText(pdf.pdf, r)
+  checkerror()
 
 def blackLines(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_blackLines(pdf.pdf, r)
+  checkerror()
 
 def blackFills(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_blackFills(pdf.pdf, r)
+  checkerror()
 
 def thinLines(pdf, r, linewidth):
   r = range_of_list(r)
   libc.pycpdf_thinLines(pdf.pdf, r, linewidth)
+  checkerror()
 
 def copyId(pdf, pdf2):
   libc.pycpdf_copyId(pdf.pdf, pdf2.pdf)
+  checkerror()
 
 def removeId(pdf):
   libc.pycpdf_removeId(pdf.pdf)
+  checkerror()
 
 def setVersion(pdf, version):
   libc.pycpdf_setVersion(pdf.pdf, version)
+  checkerror()
 
 def removeDictEntry(pdf, key):
   libc.pycpdf_removeDictEntry(pdf.pdf, str.encode(key))
+  checkerror()
 
 def removeClipping(pdf, r):
   r = range_of_list(r)
   libc.pycpdf_removeClipping(pdf.pdf, r)
+  checkerror()
 
 # CHAPTER UNDOC (To come in v2.4)
 
 def addContent(content, before, pdf, r):
   r = range_of_list(r)
   libc.pycpdf_addContent(str.encode(content), before, pdf.pdf, r)
+  checkerror()
 
 def outputJSON(filename, parse_content, no_stream_data, pdf):
   libc.pycpdf_outputJSON(str.encode(filename), parse_content, no_stream_data, pdf.pdf)
+  checkerror()
 
 def OCGCoalesce(pdf):
   libc.pycpdf_OCGCoalesce(pdf.pdf)
+  checkerror()
 
 def OCGRename(pdf, n_from, n_to):
   libc.pycpdf_OCGRename(pdf.pdf, str.encode(n_from), str.encode(n_to))
+  checkerror()
 
 def OCGOrderAll(pdf):
   libc.pycpdf_OCGOrderAll(pdf.pdf)
+  checkerror()
 
 def stampAsXObject(pdf, r, stamp_pdf):
   r = range_of_list(r)
-  string_at(libc.pycpdf_stampAsXObject(pdf.pdf, r, stamp_pdf.pdf)).decode()
+  r2 = string_at(libc.pycpdf_stampAsXObject(pdf.pdf, r, stamp_pdf.pdf)).decode()
+  checkerror()
+  return r2
 
 def setDemo(v):
   libc.pycpdf_setDemo(v)
+  checkerror()
