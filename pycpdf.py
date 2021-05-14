@@ -1,3 +1,8 @@
+"""This is the introduction summary line
+
+and here is the elaboration text.
+"""
+
 from ctypes import *
 import sys
 
@@ -5,6 +10,7 @@ libc = None
 
 
 class Pdf:
+    """The type of PDF documents."""
     pdf = -1
 
     def __init__(self, pdfnum):
@@ -15,6 +21,7 @@ class Pdf:
 
 
 def loadDLL(f):
+    """Load the libpycpdf DLL from a given file, and set up pycpdflib."""
     global libc
     libc = CDLL(f)
     libc.pycpdf_version.restype = POINTER(c_char)
@@ -91,10 +98,10 @@ def loadDLL(f):
     libc.pycpdf_getPageLabelPrefix.restype = POINTER(c_char)
     libc.pycpdf_dateStringOfComponents.restype = POINTER(c_char)
 
-# Error handling
-
 
 class CPDFError(Exception):
+    """Any pycpdflib function may raise an exception CPDFError, carrying a string describing what went wrong"""
+
     def __init__(self, message):
         self.message = message
         super().__init__(self.message)
