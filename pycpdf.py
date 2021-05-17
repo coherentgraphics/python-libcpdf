@@ -108,14 +108,17 @@ class CPDFError(Exception):
 
 
 def lastError():
+    """Return the last error. Not usually used directly, since cdpflib functions raise exceptions"""
     return libc.pycpdf_lastError()
 
 
 def lastErrorString():
+    """Return the last error string. Not usually used directly, since cpdflib functions raise exceptions"""
     return string_at(libc.pycpdf_lastErrorString()).decode()
 
 
 def checkerror():
+    """Raise an exception if the last function call resulted in an error. Not used directly, since cpdflib functions will raise the exception directly."""
     if lastError() != 0:
         s = lastErrorString()
         clearError()
@@ -125,6 +128,7 @@ def checkerror():
 
 
 def startup():
+    """To be called after loadDLL, before any other function. Sets up cpdflib."""
     LP_c_char = POINTER(c_char)
     LP_LP_c_char = POINTER(LP_c_char)
     argc = len(sys.argv)
@@ -138,27 +142,38 @@ def startup():
 
 
 def version():
+    """Returns the version number of the cpdflib library"""
     v = string_at(libc.pycpdf_version()).decode()
     checkerror()
     return v
 
 
 def setFast():
+    """ Some operations have a fast mode. The default is 'slow' mode, which works
+    even on old-fashioned files. For more details, see section 1.13 of the CPDF
+    manual. These functions set the mode globally. """
     libc.pycpdf_setFast()
     checkerror()
 
 
 def setSlow():
+    """ Some operations have a fast mode. The default is 'slow' mode, which works
+    even on old-fashioned files. For more details, see section 1.13 of the CPDF
+    manual. These functions set the mode globally. """
     libc.pycpdf_setSlow()
     checkerror()
 
 
 def clearError():
+    """ cpdf_clearError clears the current error state. """
     libc.pycpdf_clearError()
     checkerror()
 
 
 def onExit():
+    """ cpdf_onExit is a debug function which prints some information about
+    resource usage. This can be used to detect if PDFs or ranges are being
+    deallocated properly."""
     libc.pycpdf_onExit()
     checkerror()
 
@@ -166,12 +181,20 @@ def onExit():
 
 
 def fromFile(filename, userpw):
+    """ cpdf_fromFile(filename, userpw) loads a PDF file from a given file. Supply a
+    user password (possibly blank) in case the file is encypted. It won't be
+    decrypted, but sometimes the password is needed just to load the file."""
     pdf = Pdf(libc.pycpdf_fromFile(str.encode(filename), str.encode(userpw)))
     checkerror()
     return pdf
 
 
 def fromFileLazy(filename, userpw):
+    """ cpdf_fromFileLazy(pdf, userpw) loads a PDF from a file, doing only minimal
+    parsing. The objects will be read and parsed when they are actually needed.
+    Use this when the whole file won't be required. Also supply a user password
+    (possibly blank) in case the file is encypted. It won't be decrypted, but
+    sometimes the password is needed just to load the file."""
     pdf = Pdf(libc.pycpdf_fromFileLazy(
         str.encode(filename), str.encode(userpw)))
     checkerror()
@@ -179,18 +202,26 @@ def fromFileLazy(filename, userpw):
 
 
 def fromMemory(data, userpw):
+    """cpdf_fromMemory(data, length, userpw) loads a file from memory, given a
+    pointer and a length, and the user password."""
     pdf = Pdf(libc.pycpdf_fromMemory(data, len(data), str.encode(userpw)))
     checkerror()
     return pdf
 
 
 def fromMemoryLazy(data, userpw):
+    """ cpdf_fromMemory(data, length, userpw) loads a file from memory, given a
+    pointer and a length, and the user password, but lazily like
+    cpdf_fromFileLazy."""
     pdf = Pdf(libc.pycpdf_fromMemoryLazy(data, len(data), str.encode(userpw)))
     checkerror()
     return pdf
 
 
 def blankDocument(w, h, pages):
+    """ cpdf_blankDocument(width, height, num_pages) creates a blank document with
+    pages of the given width (in points), height (in points), and number of
+    pages."""
     pdf = Pdf(libc.pycpdf_blankDocument(w, h, pages))
     checkerror()
     return pdf
@@ -215,48 +246,58 @@ uslegallandscape = 15
 
 
 def blankDocumentPaper(papersize, pages):
+    """cpdf_blankDocument(width, height, num_pages) creates a blank document with
+    pages of the given width (in points), height (in points), and number of
+    pages. """
     r = Pdf(libc.pycpdf_blankDocumentPaper(papersize, pages))
     checkerror()
     return r
 
 
 def ptOfCm(i):
+    """Convert a figure in centimetres to points (72 points to 1 inch)"""
     r = libc.pycpdf_ptOfCm(i)
     checkerror()
     return r
 
 
 def ptOfMm(i):
+    """Convert a figure in millimetres to points (72 points to 1 inch)"""
     r = libc.pycpdf_ptOfMm(i)
     checkerror()
     return r
 
 
 def ptOfIn(i):
+    """Convert a figure in inches to points (72 points to 1 inch)"""
     r = libc.pycpdf_ptOfIn(i)
     checkerror()
     return r
 
 
 def cmOfPt(i):
+    """Convert a figure in points to centimetres (72 points to 1 inch)"""
     r = libc.pycpdf_cmOfPt(i)
     checkerror()
     return r
 
 
 def mmOfPt(i):
+    """Convert a figure in points to millimetres (72 points to 1 inch)"""
     r = libc.pycpdf_mmOfPt(i)
     checkerror()
     return r
 
 
 def inOfPt(i):
+    """Convert a figure in points to inches (72 points to 1 inch)"""
     r = libc.pycpdf_inOfPt(i)
     checkerror()
     return r
 
 
 def enumeratePDFs():
+    """FIXME What does this do?"""
     pdfs = []
     n = libc.pycpdf_startEnumeratePDFs()
     for x in range(n):
@@ -267,10 +308,9 @@ def enumeratePDFs():
     checkerror()
     return pdfs
 
-# Convert between lists and ranges - these are internal functions, not for external use.
-
 
 def list_of_range(r):
+    """Internal."""
     l = []
     for x in range(libc.pycpdf_rangeLength(r)):
         l.append(libc.pycpdf_rangeGet(r, x))
@@ -279,6 +319,7 @@ def list_of_range(r):
 
 
 def range_of_list(l):
+    """Internal."""
     r = libc.pycpdf_blankRange()
     for x in l:
         r = libc.pycpdf_rangeAdd(r, x)
@@ -287,18 +328,26 @@ def range_of_list(l):
 
 
 def parsePagespec(pdf, pagespec):
+    """cpdf_parsePagespec(pdf, range) parses a page specification with reference to
+    a given PDF (the PDF is supplied so that page ranges which reference pages
+    which do not exist are rejected)."""
     r = list_of_range(libc.pycpdf_parsePagespec(pdf.pdf, str.encode(pagespec)))
     checkerror()
     return r
 
 
 def validatePagespec(pagespec):
+    """cpdf_validatePagespec(range) validates a page specification so far as is
+    possible in the absence of the actual document."""
     r = libc.pycpdf_validatePagespec(str.encode(pagespec))
     checkerror()
     return r
 
 
 def stringOfPagespec(pdf, r):
+    """cpdf_stringOfPagespec(pdf, range) builds a page specification from a page
+    range. For example, the range containing 1,2,3,6,7,8 in a document of 8
+    pages might yield "1-3,6-end" """
     rn = range_of_list(r)
     r = string_at(libc.pycpdf_stringOfPagespec(pdf.pdf, rn)).decode()
     checkerror()
@@ -306,24 +355,30 @@ def stringOfPagespec(pdf, r):
 
 
 def blankRange():
+    """cpdf_blankRange() creates a range with no pages in."""
     r = libc.pycpdf_blankRange()
     checkerror()
     return r
 
 
 def pageRange(f, t):
+    """ cpdf_range(from, to) build a range from one page to another inclusive. For example,
+    cpdf_range(3,7) gives the range 3,4,5,6,7 """
     r = list_of_range(libc.pycpdf_pageRange(f, t))
     checkerror()
     return r
 
 
 def all(pdf):
+    """cpdf_all(pdf) is the range containing all the pages in a given document."""
     r = list_of_range(libc.pycpdf_all(pdf.pdf))
     checkerror()
     return r
 
 
 def even(r):
+    """cpdf_even(range) makes a range which contains just the even pages of another
+    range"""
     rn = range_of_list(r)
     r = list_of_range(libc.pycpdf_even(rn))
     checkerror()
@@ -331,6 +386,8 @@ def even(r):
 
 
 def odd(r):
+    """cpdf_odd(range) makes a range which contains just the odd pages of another
+    range"""
     rn = range_of_list(r)
     r = list_of_range(libc.pycpdf_odd(rn))
     checkerror()
@@ -338,6 +395,8 @@ def odd(r):
 
 
 def rangeUnion(a, b):
+    """cpdf_rangeUnion(a, b) makes the union of two ranges giving a range containing the
+    pages in range a and range b."""
     r = list_of_range(libc.pycpdf_rangeUnion(
         range_of_list(a), range_of_list(b)))
     checkerror()
@@ -345,6 +404,8 @@ def rangeUnion(a, b):
 
 
 def difference(a, b):
+    """cpdf_difference(a, b) makes the difference of two ranges, giving a range
+    containing all the pages in a except for those which are also in b."""
     r = list_of_range(libc.pycpdf_difference(
         range_of_list(a), range_of_list(b)))
     checkerror()
@@ -352,18 +413,22 @@ def difference(a, b):
 
 
 def removeDuplicates(r):
+    """cpdf_removeDuplicates(range) deduplicates a range, making a new one."""
     r = list_of_range(libc.pycpdf_removeDuplicates(range_of_list(r)))
     checkerror()
     return r
 
 
 def rangeLength(r):
+    """cpdf_rangeLength gives the number of pages in a range."""
     r = libc.pycpdf_rangeLength(range_of_list(r))
     checkerror()
     return r
 
 
 def rangeGet(r, n):
+    """cpdf_rangeGet(range, n) gets the page number at position n in a range, where
+    n runs from 0 to rangeLength - 1."""
     rn = range_of_list(r)
     r2 = libc.pycpdf_rangeGet(rn, n)
     checkerror()
@@ -371,6 +436,8 @@ def rangeGet(r, n):
 
 
 def rangeAdd(r, p):
+    """cpdf_rangeAdd(range, page) adds the page to a range, if it is not already
+    there."""
     rn = range_of_list(r)
     r2 = list_of_range(libc.pycpdf_rangeAdd(rn, p))
     checkerror()
@@ -378,6 +445,8 @@ def rangeAdd(r, p):
 
 
 def isInRange(r, p):
+    """cpdf_isInRange(range, page) returns true if the page is in the range, false
+    otherwise."""
     rn = range_of_list(r)
     r2 = libc.pycpdf_isInRange(rn, p)
     checkerror()
@@ -385,29 +454,47 @@ def isInRange(r, p):
 
 
 def pages(pdf):
+    """cpdf_pages(pdf) returns the number of pages in a PDF."""
     r = libc.pycpdf_pages(pdf.pdf)
     checkerror()
     return r
 
 
 def pagesFast(userpw, filename):
+    """cpdf_pagesFast(password, filename) returns the number of pages in a given
+    PDF, with given user encryption password. It tries to do this as fast as
+    possible, without loading the whole file."""
     r = libc.pycpdf_pagesFast(str.encode(userpw), str.encode(filename))
     checkerror()
     return r
 
 
 def toFile(pdf, filename, linearize, make_id):
+    """cpdf_toFile (pdf, filename, linearize, make_id) writes the file to a given
+    filename. If linearize is true, it will be linearized. If make_id is true,
+    it will be given a new ID."""
     libc.pycpdf_toFile(pdf.pdf, str.encode(filename), False, False)
     checkerror()
 
 
 def toFileExt(pdf, filename, linearize, make_id, preserve_objstm, generate_objstm, compress_objstm):
+    """cpdf_toFile (pdf, filename, linearize, make_id, preserve_objstm,
+    generate_objstm, compress_objstm) writes the file to a given filename. If
+    make_id is true, it will be given a new ID.  If preserve_objstm is true,
+    existing object streams will be preserved. If generate_objstm is true,
+    object streams will be generated even if not originally present. If
+    compress_objstm is true, object streams will be compressed (what we usually
+    want). WARNING: the pdf argument will be invalid after this call, and should
+    be discarded."""
     libc.pycpdf_toFileExt(pdf.pdf, str.encode(
         filename), linearize, make_id, preserve_objstm, generate_objstm, compress_objstm)
     checkerror()
 
 
 def toMemory(pdf, linearize, make_id):
+    """Given a buffer of the correct size, cpdf_toFileMemory (pdf, linearize,
+    make_id, &length) writes it and returns the buffer. The buffer length is
+    filled in &length."""
     length = c_int32()
     data = libc.pycpdf_toMemory(pdf.pdf, linearize, make_id, byref(length))
     s = string_at(data)
@@ -417,6 +504,7 @@ def toMemory(pdf, linearize, make_id):
 
 
 def isEncrypted(pdf):
+    """cpdf_isEncrypted(pdf) returns true if a documented is encrypted, false otherwise."""
     r = libc.pycpdf_isEncrypted(pdf.pdf)
     checkerror()
     return r
@@ -442,6 +530,9 @@ aes256bitisotrue = 7
 
 
 def toFileEncrypted(pdf, method, permissions, ownerpw, userpw, linearize, makeid, filename):
+    """cpdf_toFileEncrypted(pdf, encryption_method, permissions, permission_length,
+    owner_password, user password, linearize, makeid, filename) writes a file as
+    encrypted."""
     c_perms = (c_uint8 * len(permissions))(*permissions)
     libc.pycpdf_toFileEncrypted(pdf.pdf, method, c_perms, len(permissions), str.encode(ownerpw),
                                 str.encode(userpw), linearize, makeid, str.encode(filename))
