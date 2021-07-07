@@ -496,12 +496,16 @@ void pycpdf_startSetBookmarkInfo(int n)
 
 void pycpdf_setBookmarkLevel(int n, int level)
 {
+  printf("In libpycpdf.c, n = %i, level = %i\n", n, level);
+  fflush(stdout);
   cpdf_setBookmarkLevel(n, level);
   return;
 }
 
 void pycpdf_setBookmarkPage(int pdf, int n, int targetpage)
 {
+  printf("In libpycpdf.c, pdf = %i, n = %i, targetpage = %i\n", pdf, n, targetpage);
+  fflush(stdout);
   cpdf_setBookmarkPage(pdf, n, targetpage);
   return;
 }

@@ -18,7 +18,7 @@ def prerr():
 def fatal_prerr():
   prerr()
   print('Fatal error; exiting')
-  #sys.exit(1); PUT BACK IN
+  sys.exit(1)
 
 #CHAPTER 0. Preliminaries
 print('***** CHAPTER 0. Preliminaries')
@@ -295,6 +295,8 @@ pycpdf.toFile(pdf, 'testoutputs/squeezed.pdf', False, False)
 
 # Format: list of tuples. (level : int, page : int, text : string, openstatus : int/bool) 
 print('---cpdf_getBookmarks')
+try: pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
+except: fatal_prerr()
 try: existing_marks = pycpdf.getBookmarks(pdf)
 except: fatal_prerr()
 print(existing_marks)
@@ -302,6 +304,7 @@ marks = [(0, 1, "new bookmark", True), (1, 3, "second, indented one", False)]
 print('---cpdf_setBookmarks')
 try: pycpdf.setBookmarks(pdf, marks)
 except: prerr()
+pycpdf.toFile(pdf, 'testoutputs/newmarks.pdf', False, False)
 
 # CHAPTER 7. Presentations
 
@@ -489,7 +492,7 @@ try: pycpdf.setModificationDateXMP(pdf, 'now')
 except: prerr()
 try:
   print('---cpdf_getDateComponents')
-  components = pycpdf.getDateComponents('now')
+  components = pycpdf.getDateComponents('D:20061108125017Z')
   print('---cpdf_dateStringOfComponents')
   dateString = pycpdf.dateStringOfComponents(components)
 except:
