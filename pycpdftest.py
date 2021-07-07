@@ -493,6 +493,7 @@ except: prerr()
 try:
   print('---cpdf_getDateComponents')
   components = pycpdf.getDateComponents('D:20061108125017Z')
+  print(components)
   print('---cpdf_dateStringOfComponents')
   dateString = pycpdf.dateStringOfComponents(components)
 except:

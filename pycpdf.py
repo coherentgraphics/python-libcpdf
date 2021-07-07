@@ -1367,10 +1367,10 @@ def getDateComponents(string):
     second = c_int(0)
     hour_offset = c_int(0)
     minute_offset = c_int(0)
-    libc.pycpdf_getDateComponents(string, byref(year), byref(month), byref(day), byref(
+    libc.pycpdf_getDateComponents(str.encode(string), byref(year), byref(month), byref(day), byref(
         hour), byref(minute), byref(second), byref(hour_offset), byref(minute_offset))
     checkerror()
-    return (year, month, day, hour, minute, second, hour_offset, minute_offset)
+    return (year.value, month.value, day.value, hour.value, minute.value, second.value, hour_offset.value, minute_offset.value)
 
 
 def dateStringOfComponents(components):
