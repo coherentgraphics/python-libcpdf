@@ -1673,15 +1673,15 @@ lowercaseLetters = 4
 
 
 def getPageLabels(pdf):
-    """Get page labels as a list of tuples (style, prefix, offset, plrange)"""
+    """Get page labels as a list of tuples (style, prefix, offset, startvalue)"""
     n = libc.pycpdf_startGetPageLabels(pdf.pdf)
     l = []
     for x in range(n):
         style = libc.pycpdf_getPageLabelStyle(x)
         prefix = string_at(libc.pycpdf_getPageLabelPrefix(x)).decode()
         offset = libc.pycpdf_getPageLabelOffset(x)
-        plrange = libc.pycpdf_getPageLabelRange(x)
-        l.append((style, prefix, offset, list_of_range(plrange)))
+        startvalue = libc.pycpdf_getPageLabelRange(x)
+        l.append((style, prefix, offset, startvalue))
     libc.pycpdf_endGetPageLabels()
     checkerror()
     return l
