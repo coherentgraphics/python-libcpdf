@@ -1673,7 +1673,21 @@ lowercaseLetters = 4
 
 
 def getPageLabels(pdf):
-    """Get page labels as a list of tuples (style, prefix, offset, startvalue)"""
+    """Get page labels as a list of tuples (style, prefix, offset, startvalue)
+
+    For example, a document might have five pages of introduction with roman
+    numerals, followed by the rest of the pages in decimal arabic, numbered from
+    one:
+
+    labelstyle = LowercaseRoman
+    labelprefix = ""
+    startpage = 1
+    startvalue = 1
+
+    labelstyle = DecimalArabic
+    labelprefix = ""
+    startpage = 6
+    startvalue = 1 """
     n = libc.pycpdf_startGetPageLabels(pdf.pdf)
     l = []
     for x in range(n):
@@ -1932,7 +1946,8 @@ def OCGRename(pdf, n_from, n_to):
     libc.pycpdf_OCGRename(pdf.pdf, str.encode(n_from), str.encode(n_to))
     checkerror()
 
-#Add ocg list
+# Add ocg list
+
 
 def OCGOrderAll(pdf):
     libc.pycpdf_OCGOrderAll(pdf.pdf)
