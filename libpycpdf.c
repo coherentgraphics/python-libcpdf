@@ -542,9 +542,10 @@ void pycpdf_stampUnder(int pdf, int pdf2, int r)
   return;
 }
 
-void pycpdf_stampExtended(int pdf, int pdf2, int r, int isover, int scale_stamp_to_fit, struct cpdf_position pos, int relative_to_cropbox)
+void pycpdf_stampExtended(int pdf, int pdf2, int r, int isover, int scale_stamp_to_fit, int pos, int relative_to_cropbox)
 {
-  cpdf_stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos, relative_to_cropbox);
+  struct cpdf_position position = {.cpdf_anchor = pos,.cpdf_coord1 = 0.0,.cpdf_coord2 = 0.0};
+  cpdf_stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, position, relative_to_cropbox);
   return;
 }
 
