@@ -1,6 +1,7 @@
 import pycpdf
 import sys
 import os
+#import traceback
 
 if sys.platform.startswith('darwin'):
   pycpdf.loadDLL("/Users/john/repos/python-libcpdf/libpycpdf.so")
@@ -300,7 +301,7 @@ except: fatal_prerr()
 try: existing_marks = pycpdf.getBookmarks(pdf)
 except: fatal_prerr()
 print(existing_marks)
-marks = [(0, 1, "new bookmark", True), (1, 3, "second, indented one", False)]
+marks = [(0, 20, "New bookmark!", True)]
 print('---cpdf_setBookmarks')
 try: pycpdf.setBookmarks(pdf, marks)
 except: prerr()

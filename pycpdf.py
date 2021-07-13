@@ -872,20 +872,13 @@ def getBookmarks(pdf):
 def setBookmarks(pdf, marks):
     """Set the bookmarks for a PDF as a list of tuples.
     (level : int, page : int, text : string, openstatus : bool)"""
-    print(f'There are {len(marks)} marks')
     libc.pycpdf_startSetBookmarkInfo(len(marks))
     for n, m in enumerate(marks):
-        print(f'n = {n}')
         level, page, text, openStatus = m
-        print(level, page, text, openStatus)
         libc.pycpdf_setBookmarkLevel(n, level)
-        print('level done')
-        libc.pycpdf_setBookmarkPage(pdf, n, page)
-        print('page done')
+        libc.pycpdf_setBookmarkPage(pdf.pdf, n, page)
         libc.pycpdf_setBookmarkOpenStatus(n, openStatus)
-        print('openstatus done')
         libc.pycpdf_setBookmarkText(n, text)
-        print('text done')
     libc.pycpdf_endSetBookmarkInfo(pdf.pdf)
     checkerror()
 
