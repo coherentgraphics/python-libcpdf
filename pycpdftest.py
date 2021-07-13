@@ -3,6 +3,7 @@ import sys
 import os
 #import traceback
 
+#DLL loading depends on your own platform. These are the author's settings.
 if sys.platform.startswith('darwin'):
   pycpdf.loadDLL("/Users/john/repos/python-libcpdf/libpycpdf.so")
 elif sys.platform.startswith('linux'):
