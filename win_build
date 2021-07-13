@@ -3,4 +3,4 @@ cc -c -Wall -Werror -fpic libpycpdf.c
 #pull in libcpdf.dll
 cp ../cpdflib-source/libcpdf.dll .
 #Builds libclib1.so
-cc -shared -o libpycpdf.so libpycpdf.o -L. -lcpdf
+cc -shared -o libpycpdf.dll libpycpdf.o -L. -lcpdf
