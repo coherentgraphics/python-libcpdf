@@ -1310,6 +1310,23 @@ void pycpdf_outputJSON(char* filename, int parse_content, int no_stream_data, in
   return;
 }
 
+int pycpdf_startGetOCGList(int pdf)
+{
+    return cpdf_startGetOCGList(pdf);
+}
+
+char *pycpdf_OCGListEntry(int i)
+{
+    return cpdf_OCGListEntry(i);
+}
+
+void pycpdf_endGetOCGList()
+{
+    cpdf_endGetOCGList();
+    return;
+}
+
+
 void pycpdf_OCGCoalesce(int pdf)
 {
   cpdf_OCGCoalesce(pdf);
@@ -1327,6 +1344,8 @@ void pycpdf_OCGOrderAll(int pdf)
   cpdf_OCGOrderAll(pdf);
   return;
 }
+
+
 
 char *pycpdf_stampAsXObject(int pdf, int r, int stamp_pdf)
 {

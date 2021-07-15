@@ -1,7 +1,7 @@
 import pycpdf
 import sys
 import os
-#import traceback
+import traceback
 
 #DLL loading depends on your own platform. These are the author's settings.
 if sys.platform.startswith('darwin'):
@@ -15,6 +15,7 @@ elif sys.platform.startswith('win32') or sys.platform.startswith('cygwin'):
 def prerr():
   print("*** EXCEPTION RAISED")
   print(f'({pycpdf.lastError()} | {pycpdf.lastErrorString()})')
+  print(traceback.format_exc())
   pycpdf.clearError()
 
 def fatal_prerr():
@@ -190,6 +191,7 @@ try: encmethod = pycpdf.encryptionKind(encpdf2)
 except: fatal_prerr()
 
 # CHAPTER 2. Merging and Splitting
+print('***** CHAPTER 2. Merging and Splitting')
 try: pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 except: fatal_prerr()
 try: pdf2 = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
@@ -217,6 +219,7 @@ try: pycpdf.toFile(selected, 'testoutputs/02selected.pdf', False, False)
 except: prerr()
 
 # CHAPTER 3. Pages
+print('***** CHAPTER 3. Pages')
 try: pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 except: fatal_prerr()
 try: r = pycpdf.all(pdf)
@@ -322,6 +325,7 @@ except: prerr()
 # Encryption covered under Chapter 1 in cpdflib
 
 # CHAPTER 5. Compression
+print('***** CHAPTER 5. Compression')
 try: pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 except: fatal_prerr()
 print('---cpdf_compress')
@@ -343,6 +347,7 @@ except: prerr()
 # CHAPTER 6. Bookmarks
 
 # Format: list of tuples. (level : int, page : int, text : string, openstatus : int/bool) 
+print('***** CHAPTER 6. Bookmarks')
 print('---cpdf_getBookmarks')
 try: pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 except: fatal_prerr()
@@ -361,6 +366,7 @@ except: prerr()
 # Not included in the library version
 
 # CHAPTER 8. Logos, Watermarks and Stamps
+print('***** CHAPTER 8. Logos, Watermarks and Stamps')
 print('---cpdf_stampOn')
 try: pycpdf.stampOn(pdf, pdf2, r)
 except: prerr()
@@ -395,6 +401,7 @@ try: name = pycpdf.stampAsXObject(pdf, pycpdf.all(pdf), pdf2)
 except: fatal_prerr()
 
 # CHAPTER 9. Multipage facilities
+print('***** CHAPTER 9. Multipage facilities')
 pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 print('---cpdf_twoUp')
 try: pycpdf.twoUp(pdf)
@@ -439,6 +446,7 @@ except: prerr()
 # Not in the library version.
 
 # CHAPTER 11. Document Information and Metadata
+print('***** CHAPTER 11. Document Information and Metadata')
 print('---cpdf_isLinearized')
 try: linearized = pycpdf.isLinearized('testinputs/cpdfmanual.pdf')
 except: fatal_prerr()
@@ -681,6 +689,7 @@ try: labelString = pycpdf.getPageLabelStringForPage(pdf, 1)
 except: fatal_prerr()
 
 # CHAPTER 12. File Attachments
+print('***** CHAPTER 12. File Attachments')
 print('---cpdf_attachFile')
 try: pycpdf.attachFile('testinputs/attach.txt', pdf)
 except: prerr()
@@ -693,6 +702,8 @@ except: prerr()
 print('---cpdf_attachFileToPageFromMemory')
 try: pycpdf.attachFileToPageFromMemory('data', 'filename.txt', pdf, 1)
 except: prerr()
+try: pycpdf.toFile('testoutputs/12with_attachments.pdf', False, False)
+except: prerr()
 print('---cpdf_removeAttachedFiles')
 try: pycpdf.removeAttachedFiles(pdf)
 except: prerr()
@@ -701,12 +712,14 @@ try: attachments = pycpdf.getAttachments(pdf)
 except: fatal_prerr()
 
 # CHAPTER 13. Images
+print('***** CHAPTER 13. Images')
 print('---cpdf_getImageResolution')
 try: images = pycpdf.getImageResolution(pdf, 300)
 except: fatal_prerr()
 print(images)
 
 # CHAPTER 14. Fonts
+print('***** CHAPTER 14. Fonts')
 print('---cpdf_getFontInfo')
 try: fonts = pycpdf.getFontInfo(pdf)
 except: fatal_prerr()
@@ -721,6 +734,7 @@ try: pycpdf.copyFont(pdf, pdf2, r, 1, "/Font")
 except: prerr()
 
 # CHAPTER 15. PDF and JSON
+print('***** CHAPTER 15. PDF and JSON')
 try: pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 except: fatal_prerr()
 print('---cpdf_outputJSON')
@@ -732,6 +746,14 @@ try: pycpdf.outputjson('testoutputs/15jsonparsed.json', true, false, pdf)
 except: prerr()
 
 # CHAPTER 16. Optional Content Groups
+print('***** CHAPTER 16. Optional Content Groups')
+try: pdf = pycpdf.fromFile('testinputs/has_ocgs.pdf', '')
+except: fatal_prerr()
+print('---cpdf_getOCGList')
+try:
+    ocgs = pycpdf.getOCGList(pdf)
+    print(ocgs)
+except: prerr()
 print('---cpdf_OCGCoalesce')
 try: pycpdf.OCGCoalesce(pdf)
 except: prerr()
@@ -743,45 +765,72 @@ try: pycpdf.OCGOrderAll(pdf)
 except: prerr()
 
 # CHAPTER 17. Miscellaneous
+print('***** CHAPTER 17. Miscellaneous')
 try: pdf = pycpdf.fromFile('testinputs/cpdfmanual.pdf', '')
 except: fatal_prerr()
 print('---cpdf_draft')
 try: pycpdf.draft(pdf, r, True)
 except: prerr()
+try: pycpdf.toFile(pdf, 'testoutputs/17draft.pdf', False, False)
+except: prerr()
 print('---cpdf_removeAllText')
 try: pycpdf.removeAllText(pdf, r)
+except: prerr()
+try: pycpdf.toFile(pdf, 'testoutputs/17removealltext.pdf', False, False)
 except: prerr()
 print('---cpdf_blackText')
 try: pycpdf.blackText(pdf, r)
 except: prerr()
+try: pycpdf.toFile(pdf, 'testoutputs/17blacktext.pdf', False, False)
+except: prerr()
 print('---cpdf_blackLines')
 try: pycpdf.blackLines(pdf, r)
+except: prerr()
+try: pycpdf.toFile(pdf, 'testoutputs/17blacklines.pdf', False, False)
 except: prerr()
 print('---cpdf_blackFills')
 try: pycpdf.blackFills(pdf, r)
 except: prerr()
+try: pycpdf.toFile(pdf, 'testoutputs/17blackfills.pdf', False, False)
+except: prerr()
 print('---cpdf_thinLines')
 try: pycpdf.thinLines(pdf, r, 2.0)
+except: prerr()
+try: pycpdf.toFile(pdf, 'testoutputs/17thinlines.pdf', False, False)
 except: prerr()
 print('---cpdf_copyId')
 try: pycpdf.copyId(pdf, pdf2)
 except: prerr()
+try: pycpdf.toFile(pdf, 'testoutputs/17copyid.pdf', False, False)
+except: prerr()
 print('---cpdf_removeId')
 try: pycpdf.removeId(pdf)
+except: prerr()
+try: pycpdf.toFile(pdf, 'testoutputs/17removeid.pdf', False, False)
 except: prerr()
 print('---cpdf_setVersion')
 try: pycpdf.setVersion(pdf, 6)
 except: prerr()
+try: pycpdf.toFile(pdf, 'testoutputs/17setversion.pdf', False, False)
+except: prerr()
+print('---cpdf_setFullVersion')
+try: pycpdf.setFullVersion(pdf, 2, 0)
+except: prerr()
+try: pycpdf.toFile(pdf, 'testoutputs/17setfullversion.pdf', False, False)
+except: prerr()
 print('---cpdf_removeDictEntry')
 try: pycpdf.removeDictEntry(pdf, '/Key')
+except: prerr()
+try: pycpdf.toFile(pdf, 'testoutputs/17removedictentry.pdf', False, False)
 except: prerr()
 print('---cpdf_removeClipping')
 try: pycpdf.removeClipping(pdf, pycpdf.all(pdf))
 except: prerr()
-try: pycpdf.toFile(pdf, 'testoutputs/15squeezed.pdf', False, False)
+try: pycpdf.toFile(pdf, 'testoutputs/17removeclipping.pdf', False, False)
 except: prerr()
 
 # CHAPTER X. Undocumented or Internal
+print('***** CHAPTER X. Undocumented or Internal')
 print('---cpdf_setDemo')
 try: pycpdf.setDemo(True)
 except: prerr()

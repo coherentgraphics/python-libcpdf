@@ -97,6 +97,7 @@ def loadDLL(f):
     libc.pycpdf_getPageLabelStringForPage.restype = POINTER(c_char)
     libc.pycpdf_getPageLabelPrefix.restype = POINTER(c_char)
     libc.pycpdf_dateStringOfComponents.restype = POINTER(c_char)
+    libc.pycpdf_OCGListEntry.restype = POINTER(c_char)
 
 
 class CPDFError(Exception):
@@ -1939,7 +1940,15 @@ def OCGRename(pdf, n_from, n_to):
     libc.pycpdf_OCGRename(pdf.pdf, str.encode(n_from), str.encode(n_to))
     checkerror()
 
-# Add ocg list
+
+def getOCGList(pdf):
+    l = []
+    n = libc.pycpdf_startGetOCGList(pdf.pdf)
+    for x in range(n):
+        l.append(string_at(libc.pycpdf_OCGListEntry(x)).decode())
+    libc.pycpdf_endGetOCGList()
+    checkerror()
+    return l
 
 
 def OCGOrderAll(pdf):
