@@ -1901,6 +1901,11 @@ def setVersion(pdf, version):
     libc.pycpdf_setVersion(pdf.pdf, version)
     checkerror()
 
+def setFullVersion(pdf, major, minor):
+    """cpdf_setFullVersion(pdf, version) sets the major and minor version number of a document."""
+    libc.pycpdf_setFullVersion(pdf.pdf, major, minor)
+    checkerror()
+
 
 def removeDictEntry(pdf, key):
     """cpdf_removeDictEntry(pdf, key) removes any dictionary entry with the given

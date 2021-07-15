@@ -1285,6 +1285,12 @@ void pycpdf_setVersion(int pdf, int version)
   return;
 }
 
+void pycpdf_setFullVersion(int pdf, int major, int minor)
+{
+  cpdf_setFullVersion(pdf, major, minor);
+  return;
+}
+
 void pycpdf_removeDictEntry(int pdf, char *key)
 {
   cpdf_removeDictEntry(pdf, key);
