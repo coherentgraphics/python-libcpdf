@@ -591,7 +591,7 @@ void pycpdf_twoUp(int pdf)
 
 void pycpdf_twoUpStack(int pdf)
 {
-  cpdf_twoUp(pdf);
+  cpdf_twoUpStack(pdf);
   return;
 }
 
@@ -621,7 +621,7 @@ void pycpdf_padMultiple(int pdf, int n)
 
 void pycpdf_padMultipleBefore(int pdf, int n)
 {
-  cpdf_padMultiple(pdf, n);
+  cpdf_padMultipleBefore(pdf, n);
   return;
 }
 
