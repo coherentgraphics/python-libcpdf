@@ -502,6 +502,8 @@ except: prerr()
 
 # CHAPTER 11. Document Information and Metadata
 print('***** CHAPTER 11. Document Information and Metadata')
+try: pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+except: fatal_prerr()
 print('---cpdf_isLinearized')
 try: linearized = pycpdf.isLinearized('testinputs/cpdfmanual.pdf')
 except: fatal_prerr()
