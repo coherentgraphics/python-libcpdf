@@ -98,6 +98,7 @@ def loadDLL(f):
     libc.pycpdf_getPageLabelPrefix.restype = POINTER(c_char)
     libc.pycpdf_dateStringOfComponents.restype = POINTER(c_char)
     libc.pycpdf_OCGListEntry.restype = POINTER(c_char)
+    libc.pycpdf_stampExtended.argtypes = [c_int, c_int, c_int, c_int, c_int, c_int, c_double, c_double, c_int]
 
 
 class CPDFError(Exception):
@@ -916,16 +917,18 @@ def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos, relative_to_cro
      - pos gives the position to put the stamp
      - relative_to_cropbox: if true, pos is relative to cropbox not mediabox"""
     r = range_of_list(r)
+    a, b, c = tripleOfPosition(pos)
     libc.pycpdf_stampExtended(
-        pdf.pdf, pdf2.pdf, r, isover, scale_stamp_to_fit, pos, relative_to_cropbox)
+        pdf.pdf, pdf2.pdf, r, isover, scale_stamp_to_fit, a, b, c, relative_to_cropbox)
     checkerror()
 
 
 def combinePages(pdf, pdf2):
     """cpdf_combinePages(under, over) combines the PDFs page-by-page, putting
     each page of 'over' over each page of 'under'"""
-    libc.pycpdf_combinePages(pdf.pdf, pdf2.pdf)
+    output = libc.pycpdf_combinePages(pdf.pdf, pdf2.pdf)
     checkerror()
+    return Pdf(output)
 
 
 leftJustify = 0
@@ -1900,6 +1903,7 @@ def setVersion(pdf, version):
     """cpdf_setVersion(pdf, version) sets the minor version number of a document."""
     libc.pycpdf_setVersion(pdf.pdf, version)
     checkerror()
+
 
 def setFullVersion(pdf, major, minor):
     """cpdf_setFullVersion(pdf, version) sets the major and minor version number of a document."""
