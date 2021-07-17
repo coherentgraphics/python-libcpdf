@@ -237,18 +237,18 @@ except:
     fatal_prerr()
 print('---cpdf_pagesFast')
 try:
-    pagesf = pycpdf.pagesFast('', 'testinputs/cpdfmanual.pdf')
+    pagesf = pycpdf.pagesFast('', 'cpdflibmanual.pdf')
 except:
     fatal_prerr()
 print('---cpdf_toFile')
 try:
-    pycpdf.toFile(pdf4, 'testoutputs/01tofile.pdf', False, False)
+    pycpdf.toFile(pdf, 'testoutputs/01tofile.pdf', False, False)
 except:
     prerr()
 print('---cpdf_toFileExt')
 try:
-    pycpdf.toFileExt(pdf4, 'testoutputs/01tofileext.pdf',
-                     False, False, False, False, False)
+    pycpdf.toFileExt(pdf, 'testoutputs/01tofileext.pdf',
+                     False, True, True, True, True)
 except:
     prerr()
 print('---cpdf_toMemory')
@@ -317,7 +317,6 @@ try:
 except:
     fatal_prerr()
 print('---cpdf_mergeSimple')
-print(pdf, pdf2)
 try:
     merged = pycpdf.mergeSimple([pdf, pdf, pdf])
 except:
@@ -328,7 +327,7 @@ except:
     prerr()
 print('---cpdf_merge')
 try:
-    merged2 = pycpdf.merge([pdf, pdf2], True, False)
+    merged2 = pycpdf.merge([pdf, pdf, pdf], False, False)
 except:
     fatal_prerr()
 try:
@@ -337,8 +336,8 @@ except:
     prerr()
 print('---cpdf_mergeSame')
 try:
-    same = pycpdf.mergeSame([pdf, pdf2, pdf], True, False, [pycpdf.even(
-        pycpdf.all(pdf)), pycpdf.all(pdf2), pycpdf.odd(pycpdf.all(pdf))])
+    same = pycpdf.mergeSame([pdf, pdf, pdf], False, False, [
+        pycpdf.all(pdf), pycpdf.all(pdf2), pycpdf.all(pdf)])
 except:
     fatal_prerr()
 try:
@@ -347,7 +346,7 @@ except:
     prerr()
 print('---cpdf_selectPages')
 try:
-    selected = pycpdf.selectPages(pdf, pycpdf.even(pycpdf.all(pdf)))
+    selected = pycpdf.selectPages(pdf, [1, 2, 3])
 except:
     fatal_prerr()
 try:
