@@ -98,7 +98,8 @@ def loadDLL(f):
     libc.pycpdf_getPageLabelPrefix.restype = POINTER(c_char)
     libc.pycpdf_dateStringOfComponents.restype = POINTER(c_char)
     libc.pycpdf_OCGListEntry.restype = POINTER(c_char)
-    libc.pycpdf_stampExtended.argtypes = [c_int, c_int, c_int, c_int, c_int, c_int, c_double, c_double, c_int]
+    libc.pycpdf_stampExtended.argtypes = [
+        c_int, c_int, c_int, c_int, c_int, c_int, c_double, c_double, c_int]
 
 
 class CPDFError(Exception):

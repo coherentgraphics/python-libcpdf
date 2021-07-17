@@ -736,7 +736,8 @@ except:
     prerr()
 print('---cpdf_stampExtended')
 try:
-    pycpdf.stampExtended(stamp, stampee, pycpdf.all(stamp), True, True, (pycpdf.topLeft, 20, 20), True)
+    pycpdf.stampExtended(stamp, stampee, pycpdf.all(
+        stamp), True, True, (pycpdf.topLeft, 20, 20), True)
 except:
     prerr()
 try:
@@ -780,7 +781,8 @@ except:
     fatal_prerr()
 print('---cpdf_addContent')
 try:
-    pycpdf.addContent(f'q 1 0 0 1 100 100 cm {name} Do Q q 1 0 0 1 300 300 cm {name} Do Q q 1 0 0 1 500 500 cm {name} Do Q' , True, undoc, pycpdf.all(undoc))
+    pycpdf.addContent(
+        f'q 1 0 0 1 100 100 cm {name} Do Q q 1 0 0 1 300 300 cm {name} Do Q q 1 0 0 1 500 500 cm {name} Do Q', True, undoc, pycpdf.all(undoc))
 except:
     prerr()
 try:
