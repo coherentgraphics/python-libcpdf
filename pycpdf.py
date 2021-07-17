@@ -1470,7 +1470,8 @@ def getBleedBox(pdf, pagenumber):
 def setMediaBox(pdf, r, minx, maxx, miny, maxy):
     """These functions set a box given the document, page range, min x, max x, min y,
     max y in points."""
-    libc.pycpdf_setMediaBox(pdf.pdf, r, minx, maxx, miny, maxy)
+    print(f'setMediabox r = {type(r)}')
+    libc.pycpdf_setMediaBox(pdf.pdf, range_of_list(r), minx, maxx, miny, maxy)
     checkerror()
     return
 
@@ -1478,7 +1479,7 @@ def setMediaBox(pdf, r, minx, maxx, miny, maxy):
 def setCropBox(pdf, r, minx, maxx, miny, maxy):
     """These functions set a box given the document, page range, min x, max x, min y,
     max y in points."""
-    libc.pycpdf_setCropBox(pdf.pdf, r, minx, maxx, miny, maxy)
+    libc.pycpdf_setCropBox(pdf.pdf, range_of_list(r), minx, maxx, miny, maxy)
     checkerror()
     return
 
@@ -1486,7 +1487,7 @@ def setCropBox(pdf, r, minx, maxx, miny, maxy):
 def setTrimBox(pdf, r, minx, maxx, miny, maxy):
     """These functions set a box given the document, page range, min x, max x, min y,
     max y in points."""
-    libc.pycpdf_setTrimBox(pdf.pdf, r, minx, maxx, miny, maxy)
+    libc.pycpdf_setTrimBox(pdf.pdf, range_of_list(r), minx, maxx, miny, maxy)
     checkerror()
     return
 
@@ -1494,7 +1495,7 @@ def setTrimBox(pdf, r, minx, maxx, miny, maxy):
 def setArtBox(pdf, r, minx, maxx, miny, maxy):
     """These functions set a box given the document, page range, min x, max x, min y,
     max y in points."""
-    libc.pycpdf_setArtBox(pdf.pdf, r, minx, maxx, miny, maxy)
+    libc.pycpdf_setArtBox(pdf.pdf, range_of_list(r), minx, maxx, miny, maxy)
     checkerror()
     return
 
@@ -1502,7 +1503,7 @@ def setArtBox(pdf, r, minx, maxx, miny, maxy):
 def setBleedBox(pdf, r, minx, maxx, miny, maxy):
     """These functions set a box given the document, page range, min x, max x, min y,
     max y in points."""
-    libc.pycpdf_setBleedBox(pdf.pdf, r, minx, maxx, miny, maxy)
+    libc.pycpdf_setBleedBox(pdf.pdf, range_of_list(r), minx, maxx, miny, maxy)
     checkerror()
     return
 

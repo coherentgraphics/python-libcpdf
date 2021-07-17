@@ -1120,27 +1120,27 @@ except:
 print(bleedBox)
 print('---cpdf_setMediaBox')
 try:
-    pycpdf.setMediaBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
+    pycpdf.setMediaBox(pdf, pycpdf.all(pdf), 100.0, 500.0, 150.0, 550.0)
 except:
     fatal_prerr()
 print('---cpdf_setCropBox')
 try:
-    pycpdf.setCropBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
+    pycpdf.setCropBox(pdf, pycpdf.all(pdf), 100.0, 500.0, 150.0, 550.0)
 except:
     fatal_prerr()
 print('---cpdf_setTrimBox')
 try:
-    pycpdf.setTrimBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
+    pycpdf.setTrimBox(pdf, pycpdf.all(pdf), 100.0, 500.0, 150.0, 550.0)
 except:
     prerr()
 print('---cpdf_setArtBox')
 try:
-    pycpdf.setArtBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
+    pycpdf.setArtBox(pdf, pycpdf.all(pdf), 100.0, 500.0, 150.0, 550.0)
 except:
     prerr()
 print('---cpdf_setBleedBox')
 try:
-    pycpdf.setBleedBox(pdf, 1, 1.0, 1.0, 200.0, 200.0)
+    pycpdf.setBleedBox(pdf, pycpdf.all(pdf), 100.0, 500.0, 150.0, 550.0)
 except:
     prerr()
 try:
@@ -1177,12 +1177,12 @@ except:
     prerr()
 print('---cpdf_setPageLayout')
 try:
-    pycpdf.setPageLayout(pdf, pycpdf.singlePage)
+    pycpdf.setPageLayout(pdf, pycpdf.twoColumnLeft)
 except:
     prerr()
 print('---cpdf_setPageMode')
 try:
-    pycpdf.setPageMode(pdf, pycpdf.useThumbs)
+    pycpdf.setPageMode(pdf, pycpdf.useOutlines)
 except:
     prerr()
 print('---cpdf_hideToolbar')
@@ -1192,7 +1192,7 @@ except:
     prerr()
 print('---cpdf_hideMenubar')
 try:
-    pycpdf.hideMenubar(pdf, False)
+    pycpdf.hideMenubar(pdf, True)
 except:
     prerr()
 print('---cpdf_hideWindowUi')
@@ -1217,7 +1217,7 @@ except:
     prerr()
 print('---cpdf_openAtPage')
 try:
-    pycpdf.openAtPage(pdf, True, 5)
+    pycpdf.openAtPage(pdf, True, 4)
 except:
     prerr()
 try:
@@ -1226,7 +1226,7 @@ except:
     prerr()
 print('---cpdf_setMetadataFromFile')
 try:
-    pycpdf.setMetadataFromFile(pdf, 'testinputs/metadata.txt')
+    pycpdf.setMetadataFromFile(pdf, 'cpdflibmanual.pdf')
 except:
     prerr()
 try:
@@ -1235,7 +1235,7 @@ except:
     prerr()
 print('---cpdf_setMetadataFromByteArray')
 try:
-    pycpdf.setMetadataFromByteArray(pdf, 'data')
+    pycpdf.setMetadataFromByteArray(pdf, 'BYTEARRAY')
 except:
     prerr()
 try:
