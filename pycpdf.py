@@ -881,7 +881,7 @@ def setBookmarks(pdf, marks):
         libc.pycpdf_setBookmarkLevel(n, level)
         libc.pycpdf_setBookmarkPage(pdf.pdf, n, page)
         libc.pycpdf_setBookmarkOpenStatus(n, openStatus)
-        libc.pycpdf_setBookmarkText(n, text)
+        libc.pycpdf_setBookmarkText(n, str.encode(text))
     libc.pycpdf_endSetBookmarkInfo(pdf.pdf)
     checkerror()
 
@@ -1625,7 +1625,7 @@ def setMetadataFromFile(pdf, filename):
 def setMetadataFromByteArray(pdf, data):
     """cpdf_setMetadataFromByteArray(pdf, data, length) set the XMP metadata from
     an array of bytes."""
-    libc.pycpdf_setMetadataFromByteArray(pdf.pdf, data, len(data))
+    libc.pycpdf_setMetadataFromByteArray(pdf.pdf, str.encode(data), len(data))
     checkerror()
     return
 
@@ -1749,7 +1749,7 @@ def attachFileToPage(filename, pdf, pagenumber):
 def attachFileFromMemory(data, filename, pdf):
     """cpdf_attachFileFromMemory(memory, length, filename, pdf) attaches from
     memory, just like cpdf_attachFile."""
-    libc.pycpdf_attachFileFromMemory(data, len(data), filename, pdf.pdf)
+    libc.pycpdf_attachFileFromMemory(data, len(data), str.encode(filename), pdf.pdf)
     checkerror()
 
 
@@ -1757,7 +1757,7 @@ def attachFileToPageFromMemory(data, filename, pdf, pagenumber):
     """cpdf_attachFileToPageFromMemory(memory, length, filename, pdf, pagenumber)
     attaches from memory, just like cpdf_attachFileToPage."""
     libc.pycpdf_attachFileToPageFromMemory(
-        data, len(data), filename, pdf.pdf, pagenumber)
+        data, len(data), str.encode(filename), pdf.pdf, pagenumber)
     checkerror()
 
 
