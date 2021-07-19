@@ -500,10 +500,11 @@ def toMemory(pdf, linearize, make_id):
     filled in &length."""
     length = c_int32()
     data = libc.pycpdf_toMemory(pdf.pdf, linearize, make_id, byref(length))
-    s = string_at(data)
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
     libc.pycpdf_toMemoryFree()
     checkerror()
-    return s
+    return out_data.raw
 
 
 def isEncrypted(pdf):
@@ -1634,10 +1635,11 @@ def getMetadata(pdf):
     """cpdf_getMetadata(pdf, &length) returns the XMP metadata and fills in length."""
     length = c_int32()
     data = libc.pycpdf_getMetadata(pdf.pdf, byref(length))
-    s = string_at(data)
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
     libc.pycpdf_getMetadataFree()
     checkerror()
-    return s
+    return out_data.raw
 
 
 def removeMetadata(pdf):
@@ -1749,7 +1751,8 @@ def attachFileToPage(filename, pdf, pagenumber):
 def attachFileFromMemory(data, filename, pdf):
     """cpdf_attachFileFromMemory(memory, length, filename, pdf) attaches from
     memory, just like cpdf_attachFile."""
-    libc.pycpdf_attachFileFromMemory(data, len(data), str.encode(filename), pdf.pdf)
+    libc.pycpdf_attachFileFromMemory(
+        data, len(data), str.encode(filename), pdf.pdf)
     checkerror()
 
 
@@ -1778,9 +1781,10 @@ def getAttachments(pdf):
         page = libc.pycpdf_getAttachmentPage(n)
         length = c_int32()
         data = libc.pycpdf_getAttachmentData(n, byref(length))
-        s = string_at(data)
+        out_data = create_string_buffer(length.value)
+        memmove(out_data, data, length.value)
         libc.pycpdf_getAttachmentDataFree()
-        l.append((name, page, data))
+        l.append((name, page, out_data.raw))
     libc.pycpdf_endGetAttachments()
     checkerror()
     return l
