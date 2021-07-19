@@ -53,10 +53,10 @@ try:
     pycpdf.clearError()
 except:
     prerr()
-#print('---cpdf_onExit()')
-#try:
+# print('---cpdf_onExit()')
+# try:
 #    pycpdf.onExit()
-#except:
+# except:
 #    prerr()
 
 # CHAPTER 1. Basics
@@ -665,7 +665,8 @@ except:
 print(f'There are {len(existing_marks)} bookmarks')
 for m in existing_marks:
     a, b, c, d = m
-    print(f'Bookmark at level {a} points to page {b} and has text "{c}" and open {d}')
+    print(
+        f'Bookmark at level {a} points to page {b} and has text "{c}" and open {d}')
 marks = [(0, 20, "New bookmark!", True)]
 print('---cpdf_setBookmarks()')
 try:
@@ -1350,19 +1351,19 @@ except:
 # CHAPTER 13. Images
 print('***** CHAPTER 13. Images')
 try:
-    pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+    pdf = pycpdf.fromFile('testinputs/image.pdf', '')
 except:
     fatal_prerr()
 print('---cpdf_getImageResolution()')
 try:
-    images = pycpdf.getImageResolution(pdf, 300)
+    images = pycpdf.getImageResolution(pdf, 500000.)
 except:
     fatal_prerr()
 print(images)
 
 # CHAPTER 14. Fonts
 print('***** CHAPTER 14. Fonts')
-print('---cpdf_getFontInfo()')
+print('---cpdf: Get Fonts')
 try:
     pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
 except:
@@ -1415,12 +1416,13 @@ try:
     pdf = pycpdf.fromFile('testinputs/has_ocgs.pdf', '')
 except:
     fatal_prerr()
-print('---cpdf_getOCGList()')
+print('---cpdf: Get OCG List')
 try:
     ocgs = pycpdf.getOCGList(pdf)
-    print(ocgs)
 except:
     prerr()
+for x in ocgs:
+    print(x)
 print('---cpdf_OCGCoalesce()')
 try:
     pycpdf.OCGCoalesce(pdf)

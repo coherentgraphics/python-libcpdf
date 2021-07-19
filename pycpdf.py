@@ -1817,7 +1817,6 @@ def getFontInfo(pdf):
     showing each font used on each page."""
     libc.pycpdf_startGetFontInfo(pdf.pdf)
     n = libc.pycpdf_numberFonts()
-    print("fonts:", n)
     l = []
     for x in range(n):
         pagenumber = libc.pycpdf_getFontPage(x)
