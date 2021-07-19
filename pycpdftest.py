@@ -53,11 +53,11 @@ try:
     pycpdf.clearError()
 except:
     prerr()
-print('---cpdf_onExit()')
-try:
-    pycpdf.onExit()
-except:
-    prerr()
+#print('---cpdf_onExit()')
+#try:
+#    pycpdf.onExit()
+#except:
+#    prerr()
 
 # CHAPTER 1. Basics
 print('***** CHAPTER 1. Basics')
@@ -164,13 +164,11 @@ try:
     allpdf4 = pycpdf.all(pdf4)
 except:
     fatal_prerr()
-print(allpdf4)
 print('---cpdf_stringOfPagespec()')
 try:
     pagespecstr = pycpdf.stringOfPagespec(pdf4, allpdf4)
 except:
     fatal_prerr()
-print(pagespecstr)
 print('---cpdf_blankRange()')
 try:
     blankrange = pycpdf.blankRange()
@@ -186,7 +184,6 @@ try:
     rall = pycpdf.all(pdf4)
 except:
     fatal_prerr()
-print("all", rall)
 print('---cpdf_even()')
 try:
     even = pycpdf.even(rall)
@@ -665,7 +662,10 @@ try:
     existing_marks = pycpdf.getBookmarks(pdf)
 except:
     fatal_prerr()
-print(existing_marks)
+print(f'There are {len(existing_marks)} bookmarks')
+for m in existing_marks:
+    a, b, c, d = m
+    print(f'Bookmark at level {a} points to page {b} and has text "{c}" and open {d}')
 marks = [(0, 20, "New bookmark!", True)]
 print('---cpdf_setBookmarks()')
 try:
@@ -1371,7 +1371,9 @@ try:
     fonts = pycpdf.getFontInfo(pdf)
 except:
     fatal_prerr()
-print(fonts)
+for f in fonts:
+    a, b, c, d = f
+    print(f'Page {a}, font {b} has type {c} and encoding {d}')
 print('---cpdf_removeFonts()')
 try:
     pycpdf.removeFonts(pdf)
