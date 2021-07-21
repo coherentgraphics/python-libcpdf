@@ -90,7 +90,9 @@ def loadDLL(f):
          c_double, c_int, c_double]
     libc.pycpdf_getMetadata.restype = POINTER(c_uint8)
     libc.pycpdf_getAttachmentData.restype = POINTER(c_uint8)
+    libc.pycpdf_getAttachmentName.restype = POINTER(c_uint8)
     libc.pycpdf_startGetImageResolution.argtypes = [c_int, c_double]
+    libc.pycpdf_getImageResolutionImageName.restype = POINTER(c_char)
     libc.pycpdf_getFontName.restype = POINTER(c_char)
     libc.pycpdf_getFontType.restype = POINTER(c_char)
     libc.pycpdf_getFontEncoding.restype = POINTER(c_char)
@@ -100,6 +102,8 @@ def loadDLL(f):
     libc.pycpdf_OCGListEntry.restype = POINTER(c_char)
     libc.pycpdf_stampExtended.argtypes = [
         c_int, c_int, c_int, c_int, c_int, c_int, c_double, c_double, c_int]
+    libc.pycpdf_getImageResolutionXRes.restype = c_double
+    libc.pycpdf_getImageResolutionYRes.restype = c_double
 
 
 class CPDFError(Exception):
@@ -1777,13 +1781,13 @@ def getAttachments(pdf):
     n = libc.pycpdf_numberGetAttachments()
     l = []
     for i in range(n):
-        name = string_at(libc.pycpdf_getAttachmentName(n)).decode()
-        page = libc.pycpdf_getAttachmentPage(n)
+        name = string_at(libc.pycpdf_getAttachmentName(i)).decode()
+        page = libc.pycpdf_getAttachmentPage(i)
         length = c_int32()
-        data = libc.pycpdf_getAttachmentData(n, byref(length))
+        data = libc.pycpdf_getAttachmentData(i, byref(length))
         out_data = create_string_buffer(length.value)
         memmove(out_data, data, length.value)
-        libc.pycpdf_getAttachmentDataFree()
+        libc.pycpdf_getAttachmentFree()
         l.append((name, page, out_data.raw))
     libc.pycpdf_endGetAttachments()
     checkerror()

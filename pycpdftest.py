@@ -98,7 +98,6 @@ try:
     pdf5 = pycpdf.blankDocument(100.0, 200.0, 20)
 except:
     fatal_prerr()
-print('---cpdf_toFile()')
 try:
     pycpdf.toFile(pdf5, 'testoutputs/01blank.pdf', False, False)
 except:
@@ -112,41 +111,41 @@ try:
     pycpdf.toFile(pdf6, 'testoutputs/01blanka4.pdf', False, False)
 except:
     prerr()
-print('---cpdf_enumeratePDFs()')
+print('---cpdf: enumerate PDFs')
 try:
     pdfs = pycpdf.enumeratePDFs()
 except:
     fatal_prerr()
-for k, i in pdfs:
-    print(k, i)
+# for k, i in pdfs:
+#    print(k, i)
+print('---cpdf_ptOfIn()')
+try:
+    print(f'One inch is {pycpdf.ptOfIn(1.0):.6f} points')
+except:
+    prerr()
 print('---cpdf_ptOfCm()')
 try:
-    print(pycpdf.ptOfCm(1.0))
+    print(f'One centimetre is {pycpdf.ptOfCm(1.0):.6f} points')
 except:
     prerr()
 print('---cpdf_ptOfMm()')
 try:
-    print(pycpdf.ptOfMm(1.0))
+    print(f'One millimetre is {pycpdf.ptOfMm(1.0):.6f} points')
 except:
     prerr()
-print('---cpdf_ptOfIn()')
+print('---cpdf_inOfPt()')
 try:
-    print(pycpdf.ptOfIn(1.0))
+    print(f'One point is {pycpdf.inOfPt(1.0):.6f} inches')
 except:
     prerr()
 print('---cpdf_cmOfPt()')
 try:
-    print(pycpdf.cmOfPt(1.0))
+    print(f'One point is {pycpdf.cmOfPt(1.0):.6f} centimetres')
 except:
     prerr()
-print('---cpdf_ptOfCm()')
+print('---cpdf_mmOfPt()')
 try:
-    print(pycpdf.mmOfPt(1.0))
-except:
-    prerr()
-print('---cpdf_ptOfCm()')
-try:
-    print(pycpdf.inOfPt(1.0))
+    print(f'One point is {pycpdf.mmOfPt(1.0):.6f} millimetres')
 except:
     prerr()
 print('---cpdf_parsePagespec()')
@@ -1276,18 +1275,21 @@ try:
     pycpdf.toFile(pdf, 'testoutputs/11metadata4.pdf', False, False)
 except:
     prerr()
-print('---cpdf_getPageLabels()')
+print('---cpdf_addPageLabels()')
+try:
+    pycpdf.addPageLabels(
+        pdf, (pycpdf.uppercaseRoman, "PREFIX-", 1, pycpdf.all(pdf)), False)
+except:
+    prerr()
+print('---cpdf: get page labels')
 try:
     labels = pycpdf.getPageLabels(pdf)
 except:
     fatal_prerr()
-print(labels)
-print('---cpdf_addPageLabels()')
-try:
-    pycpdf.addPageLabels(
-        pdf, (pycpdf.decimalArabic, "PREFIX-", 1, pycpdf.all(pdf)), False)
-except:
-    prerr()
+print(f'There are {len(labels)} labels')
+for l in labels:
+    a, b, c, d = l
+    print(f'Page label: {a}, {b}, {c}, {d}')
 print('---cpdf_removePageLabels()')
 try:
     pycpdf.removePageLabels(pdf)
@@ -1333,6 +1335,17 @@ try:
     pycpdf.toFile(pdf, 'testoutputs/12with_attachments.pdf', False, False)
 except:
     prerr()
+print('---cpdf: get attachments')
+try:
+    attachments = pycpdf.getAttachments(pdf)
+except:
+    fatal_prerr()
+print(f'There are {len(attachments)} attachments to get')
+for i, a in enumerate(attachments):
+    name, page, data = a
+    print(f'Attachment {i} is named {name}')
+    print(f'It is on page {page}')
+    print(f'Contains {len(data)} bytes of data')
 print('---cpdf_removeAttachedFiles()')
 try:
     pycpdf.removeAttachedFiles(pdf)
@@ -1342,11 +1355,7 @@ try:
     pycpdf.toFile(pdf, 'testoutputs/12removed_attachments.pdf', False, False)
 except:
     prerr()
-print('---cpdf_getAttachments()')
-try:
-    attachments = pycpdf.getAttachments(pdf)
-except:
-    fatal_prerr()
+
 
 # CHAPTER 13. Images
 print('***** CHAPTER 13. Images')
@@ -1354,12 +1363,14 @@ try:
     pdf = pycpdf.fromFile('testinputs/image.pdf', '')
 except:
     fatal_prerr()
-print('---cpdf_getImageResolution()')
+print('---cpdf: get image resolution')
 try:
     images = pycpdf.getImageResolution(pdf, 500000.)
 except:
     fatal_prerr()
-print(images)
+for i in images:
+    a, b, c, d, e, f = i
+    print(f'IMAGE: {a}, {b}, {c}, {d}, {e:.6f}, {f:.6f}')
 
 # CHAPTER 14. Fonts
 print('***** CHAPTER 14. Fonts')
