@@ -230,14 +230,20 @@ except:
     fatal_prerr()
 print('---cpdf_pages()')
 try:
-    pages = pycpdf.pages(pdf5)
+    pdfpages = pycpdf.fromFile('cpdflibmanual.pdf', '')
+except:
+    prerr()
+try:
+    pages = pycpdf.pages(pdfpages)
 except:
     fatal_prerr()
+print(f'Pages = {pages}')
 print('---cpdf_pagesFast()')
 try:
     pagesf = pycpdf.pagesFast('', 'cpdflibmanual.pdf')
 except:
     fatal_prerr()
+print(f'Pages = {pagesf}')
 print('---cpdf_toFile()')
 try:
     pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
@@ -283,13 +289,27 @@ try:
     encpdf = pycpdf.fromFile('testoutputs/01encrypted.pdf', 'user')
 except:
     fatal_prerr()
+
+try:
+    encpdf2 = pycpdf.fromFile('testoutputs/01encrypted.pdf', 'user')
+except:
+    fatal_prerr()
+print('---cpdf_hasPermission()')
+try:
+    hasperm = pycpdf.hasPermission(encpdf2, pycpdf.noEdit)
+    hasperm2 = pycpdf.hasPermission(encpdf2, pycpdf.noCopy)
+except:
+    fatal_prerr()
+print(f'Haspermission {hasperm}, {hasperm2}')
+print('---cpdf_encryptionKind()')
+try:
+    encmethod = pycpdf.encryptionKind(encpdf2)
+except:
+    fatal_prerr()
+print(f'encryption kind is {encmethod}')
 print('---cpdf_decryptPdf()')
 try:
     decrypted = pycpdf.decryptPdf(encpdf, 'user')
-except:
-    fatal_prerr()
-try:
-    encpdf2 = pycpdf.fromFile('testoutputs/01encrypted.pdf', 'user')
 except:
     fatal_prerr()
 print('---cpdf_decryptPdfOwner()')
@@ -297,16 +317,7 @@ try:
     owner = pycpdf.decryptPdfOwner(encpdf2, 'owner')
 except:
     fatal_prerr()
-print('---cpdf_hasPermission()')
-try:
-    hasperm = pycpdf.hasPermission(encpdf2, pycpdf.noEdit)
-except:
-    fatal_prerr()
-print('---cpdf_encryptionKind()')
-try:
-    encmethod = pycpdf.encryptionKind(encpdf2)
-except:
-    fatal_prerr()
+
 
 # CHAPTER 2. Merging and Splitting
 print('***** CHAPTER 2. Merging and Splitting')
@@ -652,7 +663,7 @@ except:
 
 # Format: list of tuples. (level : int, page : int, text : string, openstatus : int/bool)
 print('***** CHAPTER 6. Bookmarks')
-print('---cpdf_getBookmarks()')
+print('---cpdf: get bookmarks')
 try:
     pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
 except:
@@ -667,7 +678,7 @@ for m in existing_marks:
     print(
         f'Bookmark at level {a} points to page {b} and has text "{c}" and open {d}')
 marks = [(0, 20, "New bookmark!", True)]
-print('---cpdf_setBookmarks()')
+print('---cpdf: set bookmarks')
 try:
     pycpdf.setBookmarks(pdf, marks)
 except:
@@ -885,23 +896,26 @@ try:
     linearized = pycpdf.isLinearized('testinputs/cpdfmanual.pdf')
 except:
     fatal_prerr()
+print(f'is_linearized:{int(linearized)}')
 print('---cpdf_getVersion()')
 try:
     version = pycpdf.getVersion(pdf)
 except:
     fatal_prerr()
+print(f'minor version:{version}')
 print('---cpdf_getMajorVersion()')
 try:
     version2 = pycpdf.getMajorVersion(pdf)
 except:
     fatal_prerr()
+print(f'major version:{version2}')
 print('---cpdf_getTitle()')
 try:
     title = pycpdf.getTitle(pdf)
 except:
     fatal_prerr()
 print(f'title: {title}')
-print('---cpdf_getTitle')
+print('---cpdf_getAuthor()')
 try:
     author = pycpdf.getAuthor(pdf)
 except:
@@ -936,13 +950,13 @@ try:
     creationDate = pycpdf.getCreationDate(pdf)
 except:
     fatal_prerr()
-print(f'creationDate: {creationDate}')
+print(f'creationdate: {creationDate}')
 print('---cpdf_getModificationDate()')
 try:
     modificationDate = pycpdf.getModificationDate(pdf)
 except:
     fatal_prerr()
-print(f'modificationDate: {modificationDate}')
+print(f'modificationdate: {modificationDate}')
 print('---cpdf_getTitleXMP()')
 try:
     titleXMP = pycpdf.getTitleXMP(pdf)
@@ -984,13 +998,13 @@ try:
     creationDateXMP = pycpdf.getCreationDateXMP(pdf)
 except:
     fatal_prerr()
-print(f'creationDateXMP: {creationDateXMP}')
-print('---cpdf_getModificationDate()')
+print(f'creationdateXMP: {creationDateXMP}')
+print('---cpdf_getModificationDateXMP()')
 try:
     modificationDateXMP = pycpdf.getModificationDateXMP(pdf)
 except:
     prerr()
-print(f'modificationDateXMP: {modificationDateXMP}')
+print(f'modificationdateXMP: {modificationDateXMP}')
 print('---cpdf_setTitle()')
 try:
     pycpdf.setTitle(pdf, 'title')
@@ -1078,9 +1092,11 @@ except:
 try:
     print('---cpdf_getDateComponents()')
     components = pycpdf.getDateComponents('D:20061108125017Z')
-    print(components)
+    a, b, c, d, e, f, g, h = components
+    print(f'D:20061108125017Z = {a}, {b}, {c}, {d}, {e}, {f}, {g}, {h}')
     print('---cpdf_dateStringOfComponents()')
     dateString = pycpdf.dateStringOfComponents(components)
+    print(dateString)
 except:
     fatal_prerr()
 print('---cpdf_getPageRotation()')
@@ -1088,41 +1104,48 @@ try:
     rot = pycpdf.getPageRotation(pdf, 1)
 except:
     fatal_prerr()
+print(f'/Rotate on page 1 = {rot}')
 print('---cpdf_hasBox()')
 try:
     hasBox = pycpdf.hasBox(pdf, 1, '/TrimBox')
 except:
     fatal_prerr()
+print(f'hasbox: {int(hasBox)}')
 print('---cpdf_getMediaBox()')
 try:
     mediaBox = pycpdf.getMediaBox(pdf, 1)
 except:
     fatal_prerr()
-print(mediaBox)
+a, b, c, d = mediaBox
+print(f'Media: {a:.6f} {b:.6f} {c:.6f} {d:.6f}')
 print('---cpdf_getCropBox()')
 try:
     cropBox = pycpdf.getCropBox(pdf, 1)
 except:
     fatal_prerr()
-print(cropBox)
-print('---cpdf_getTrimBox()')
-try:
-    trimBox = pycpdf.getTrimBox(pdf, 1)
-except:
-    fatal_prerr()
-print(trimBox)
-print('---cpdf_getArtBox()')
-try:
-    artBox = pycpdf.getArtBox(pdf, 1)
-except:
-    fatal_prerr()
-print(artBox)
+a, b, c, d = cropBox
+print(f'Crop: {a:.6f} {b:.6f} {c:.6f} {d:.6f}')
 print('---cpdf_getBleedBox()')
 try:
     bleedBox = pycpdf.getBleedBox(pdf, 1)
 except:
     fatal_prerr()
-print(bleedBox)
+a, b, c, d = bleedBox
+print(f'Bleed: {a:.6f} {b:.6f} {c:.6f} {d:.6f}')
+print('---cpdf_getArtBox()')
+try:
+    artBox = pycpdf.getArtBox(pdf, 1)
+except:
+    fatal_prerr()
+a, b, c, d = artBox
+print(f'Art: {a:.6f} {b:.6f} {c:.6f} {d:.6f}')
+print('---cpdf_getTrimBox()')
+try:
+    trimBox = pycpdf.getTrimBox(pdf, 1)
+except:
+    fatal_prerr()
+a, b, c, d = trimBox
+print(f'Trim: {a:.6f} {b:.6f} {c:.6f} {d:.6f}')
 print('---cpdf_setMediaBox()')
 try:
     pycpdf.setMediaBox(pdf, pycpdf.all(pdf), 100.0, 500.0, 150.0, 550.0)
@@ -1300,6 +1323,7 @@ try:
     labelString = pycpdf.getPageLabelStringForPage(pdf, 1)
 except:
     fatal_prerr()
+print(f'Label string is {labelString}')
 try:
     pycpdf.toFile(pdf, 'testoutputs/11pagelabels.pdf', False, False)
 except:

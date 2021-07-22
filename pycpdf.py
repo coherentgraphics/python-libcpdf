@@ -1475,7 +1475,6 @@ def getBleedBox(pdf, pagenumber):
 def setMediaBox(pdf, r, minx, maxx, miny, maxy):
     """These functions set a box given the document, page range, min x, max x, min y,
     max y in points."""
-    print(f'setMediabox r = {type(r)}')
     libc.pycpdf_setMediaBox(pdf.pdf, range_of_list(r), minx, maxx, miny, maxy)
     checkerror()
     return
