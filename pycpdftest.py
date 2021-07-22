@@ -71,6 +71,7 @@ try:
     pdf2 = pycpdf.fromFileLazy('cpdflibmanual.pdf', '')
 except:
     fatal_prerr()
+print('---cpdf_toMemory()')
 try:
     data = pycpdf.toMemory(pdf, False, False)
 except:
@@ -148,32 +149,9 @@ try:
     print(f'One point is {pycpdf.mmOfPt(1.0):.6f} millimetres')
 except:
     prerr()
-print('---cpdf_parsePagespec()')
-try:
-    r = pycpdf.parsePagespec(pdf4, "1-3,end")
-except:
-    fatal_prerr()
-print('---cpdf_valiadatePagespec()')
-try:
-    valid = pycpdf.validatePagespec("1-4,5,6")
-except:
-    fatal_prerr()
-print('---cpdf_all()')
-try:
-    allpdf4 = pycpdf.all(pdf4)
-except:
-    fatal_prerr()
-print('---cpdf_stringOfPagespec()')
-try:
-    pagespecstr = pycpdf.stringOfPagespec(pdf4, allpdf4)
-except:
-    fatal_prerr()
-print('---cpdf_blankRange()')
-try:
-    blankrange = pycpdf.blankRange()
-except:
-    fatal_prerr()
-print('---cpdf_pageRange()')
+
+
+print('---cpdf_range()')
 try:
     fromto = pycpdf.pageRange(3, 7)
 except:
@@ -228,6 +206,32 @@ try:
     inrange = pycpdf.isInRange(odd, 1)
 except:
     fatal_prerr()
+print('---cpdf_parsePagespec()')
+try:
+    r = pycpdf.parsePagespec(pdf4, "1-3,end")
+except:
+    fatal_prerr()
+print('---cpdf_validatePagespec()')
+try:
+    valid = pycpdf.validatePagespec("1-4,5,6")
+except:
+    fatal_prerr()
+print(f'Validating pagespec gives {int(valid)}')
+try:
+    allpdf4 = pycpdf.all(pdf4)
+except:
+    fatal_prerr()
+print('---cpdf_stringOfPagespec()')
+try:
+    pagespecstr = pycpdf.stringOfPagespec(pdf4, [1,2,3,4,5])
+except:
+    fatal_prerr()
+print(f'String of pagespec is {pagespecstr}')
+print('---cpdf_blankRange()')
+try:
+    blankrange = pycpdf.blankRange()
+except:
+    fatal_prerr()
 print('---cpdf_pages()')
 try:
     pdfpages = pycpdf.fromFile('cpdflibmanual.pdf', '')
@@ -259,16 +263,18 @@ try:
                      False, True, True, True, True)
 except:
     prerr()
-print('---cpdf_toMemory()')
-try:
-    tomembytes = pycpdf.toMemory(pdf5, False, False)
-except:
-    prerr()
 print('---cpdf_isEncrypted()')
 try:
     isenc = pycpdf.isEncrypted(pdf5)
 except:
     fatal_prerr()
+print(f'isencrypted:{int(isenc)}')
+print('---cpdf_isLinearized()')
+try:
+    linearized = pycpdf.isLinearized('testinputs/cpdfmanual.pdf')
+except:
+    fatal_prerr()
+print(f'islinearized:{int(linearized)}')
 print('---cpdf_toFileEncrypted()')
 try:
     pdf5 = pycpdf.fromFile('cpdflibmanual.pdf', '')
@@ -557,6 +563,34 @@ try:
     pycpdf.toFile(pagespdf12, 'testoutputs/03crop.pdf', False, False)
 except:
     prerr()
+print('---cpdf_trimMarks()')
+try:
+    pycpdf.trimMarks(pagespdf17, r)
+except:
+    prerr()
+try:
+    pycpdf.toFile(pagespdf17, 'testoutputs/03trim_marks.pdf', False, False)
+except:
+    prerr()
+print('---cpdf_showBoxes()')
+try:
+    pycpdf.showBoxes(pagespdf18, r)
+except:
+    prerr()
+try:
+    pycpdf.toFile(pagespdf18, 'testoutputs/03show_boxes.pdf', False, False)
+except:
+    prerr()
+print('---cpdf_hardBox()')
+try:
+    pycpdf.hardBox(pagespdf19, r, "/MediaBox")
+except:
+    prerr()
+try:
+    pycpdf.toFile(pagespdf19, 'testoutputs/03hard_box.pdf', False, False)
+except:
+    prerr()
+
 print('---cpdf_removeCrop()')
 try:
     pycpdf.removeCrop(pagespdf13, r)
@@ -591,33 +625,6 @@ except:
     prerr()
 try:
     pycpdf.toFile(pagespdf16, 'testoutputs/03remove_bleed.pdf', False, False)
-except:
-    prerr()
-print('---cpdf_trimMarks()')
-try:
-    pycpdf.trimMarks(pagespdf17, r)
-except:
-    prerr()
-try:
-    pycpdf.toFile(pagespdf17, 'testoutputs/03trim_marks.pdf', False, False)
-except:
-    prerr()
-print('---cpdf_showBoxes()')
-try:
-    pycpdf.showBoxes(pagespdf18, r)
-except:
-    prerr()
-try:
-    pycpdf.toFile(pagespdf18, 'testoutputs/03show_boxes.pdf', False, False)
-except:
-    prerr()
-print('---cpdf_hardBox()')
-try:
-    pycpdf.hardBox(pagespdf19, r, "/MediaBox")
-except:
-    prerr()
-try:
-    pycpdf.toFile(pagespdf19, 'testoutputs/03hard_box.pdf', False, False)
 except:
     prerr()
 
@@ -891,12 +898,7 @@ try:
     pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
 except:
     fatal_prerr()
-print('---cpdf_isLinearized()')
-try:
-    linearized = pycpdf.isLinearized('testinputs/cpdfmanual.pdf')
-except:
-    fatal_prerr()
-print(f'is_linearized:{int(linearized)}')
+
 print('---cpdf_getVersion()')
 try:
     version = pycpdf.getVersion(pdf)
