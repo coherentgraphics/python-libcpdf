@@ -2,6 +2,7 @@ import pycpdf
 import sys
 import os
 import traceback
+import gc
 
 # DLL loading depends on your own platform. These are the author's settings.
 if sys.platform.startswith('darwin'):
@@ -223,7 +224,7 @@ except:
     fatal_prerr()
 print('---cpdf_stringOfPagespec()')
 try:
-    pagespecstr = pycpdf.stringOfPagespec(pdf4, [1,2,3,4,5])
+    pagespecstr = pycpdf.stringOfPagespec(pdf4, [1, 2, 3, 4, 5])
 except:
     fatal_prerr()
 print(f'String of pagespec is {pagespecstr}')
@@ -1645,5 +1646,15 @@ print('***** CHAPTER X. Undocumented or Internal')
 print('---cpdf_setDemo()')
 try:
     pycpdf.setDemo(True)
+except:
+    prerr()
+print('---cpdf_onExit()')
+try:
+    pycpdf.onExit()
+except:
+    prerr()
+gc.collect()
+try:
+    pycpdf.onExit()
 except:
     prerr()

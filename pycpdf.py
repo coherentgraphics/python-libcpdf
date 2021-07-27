@@ -334,11 +334,20 @@ def range_of_list(l):
     return r
 
 
+def deleteRange(r):
+    """Internal."""
+    r = libc.pycpdf_deleteRange(r)
+    checkerror()
+    return r
+
+
 def parsePagespec(pdf, pagespec):
     """cpdf_parsePagespec(pdf, range) parses a page specification with reference to
     a given PDF (the PDF is supplied so that page ranges which reference pages
     which do not exist are rejected)."""
-    r = list_of_range(libc.pycpdf_parsePagespec(pdf.pdf, str.encode(pagespec)))
+    rn = libc.pycpdf_parsePagespec(pdf.pdf, str.encode(pagespec))
+    r = list_of_range(rn)
+    deleteRange(rn)
     checkerror()
     return r
 
@@ -357,6 +366,7 @@ def stringOfPagespec(pdf, r):
     pages might yield "1-3,6-end" """
     rn = range_of_list(r)
     r = string_at(libc.pycpdf_stringOfPagespec(pdf.pdf, rn)).decode()
+    deleteRange(rn)
     checkerror()
     return r
 
@@ -371,14 +381,18 @@ def blankRange():
 def pageRange(f, t):
     """ cpdf_range(from, to) build a range from one page to another inclusive. For example,
     cpdf_range(3,7) gives the range 3,4,5,6,7 """
-    r = list_of_range(libc.pycpdf_pageRange(f, t))
+    rn = libc.pycpdf_pageRange(f, t)
+    r = list_of_range(rn)
+    deleteRange(rn)
     checkerror()
     return r
 
 
 def all(pdf):
     """cpdf_all(pdf) is the range containing all the pages in a given document."""
-    r = list_of_range(libc.pycpdf_all(pdf.pdf))
+    rn = libc.pycpdf_all(pdf.pdf)
+    r = list_of_range(rn)
+    deleteRange(rn)
     checkerror()
     return r
 
@@ -387,50 +401,72 @@ def even(r):
     """cpdf_even(range) makes a range which contains just the even pages of another
     range"""
     rn = range_of_list(r)
-    r = list_of_range(libc.pycpdf_even(rn))
+    reven = libc.pycpdf_even(rn)
+    rout = list_of_range(reven)
+    deleteRange(rn)
+    deleteRange(reven)
     checkerror()
-    return r
+    return rout
 
 
 def odd(r):
     """cpdf_odd(range) makes a range which contains just the odd pages of another
     range"""
     rn = range_of_list(r)
-    r = list_of_range(libc.pycpdf_odd(rn))
+    rodd = libc.pycpdf_odd(rn)
+    rout = list_of_range(rodd)
+    deleteRange(rn)
+    deleteRange(rodd)
     checkerror()
-    return r
+    return rout
 
 
 def rangeUnion(a, b):
     """cpdf_rangeUnion(a, b) makes the union of two ranges giving a range containing the
     pages in range a and range b."""
-    r = list_of_range(libc.pycpdf_rangeUnion(
-        range_of_list(a), range_of_list(b)))
+    ra = range_of_list(a)
+    rb = range_of_list(b)
+    runion = libc.pycpdf_rangeUnion(ra, rb)
+    rout = list_of_range(runion)
+    deleteRange(ra)
+    deleteRange(rb)
+    deleteRange(runion)
     checkerror()
-    return r
+    return rout
 
 
 def difference(a, b):
     """cpdf_difference(a, b) makes the difference of two ranges, giving a range
     containing all the pages in a except for those which are also in b."""
-    r = list_of_range(libc.pycpdf_difference(
-        range_of_list(a), range_of_list(b)))
+    ra = range_of_list(a)
+    rb = range_of_list(b)
+    rdiff = libc.pycpdf_difference(ra, rb)
+    rout = list_of_range(rdiff)
+    deleteRange(ra)
+    deleteRange(rb)
+    deleteRange(rdiff)
     checkerror()
-    return r
+    return rout
 
 
 def removeDuplicates(r):
     """cpdf_removeDuplicates(range) deduplicates a range, making a new one."""
-    r = list_of_range(libc.pycpdf_removeDuplicates(range_of_list(r)))
+    rn = range_of_list(r)
+    rdup = libc.pycpdf_removeDuplicates(rn)
+    rout = list_of_range(rdup)
+    deleteRange(rn)
+    deleteRange(rdup)
     checkerror()
-    return r
+    return rout
 
 
 def rangeLength(r):
     """cpdf_rangeLength gives the number of pages in a range."""
-    r = libc.pycpdf_rangeLength(range_of_list(r))
+    rn = range_of_list(r)
+    l = libc.pycpdf_rangeLength(rn)
+    deleteRange(rn)
     checkerror()
-    return r
+    return l
 
 
 def rangeGet(r, n):
@@ -438,6 +474,7 @@ def rangeGet(r, n):
     n runs from 0 to rangeLength - 1."""
     rn = range_of_list(r)
     r2 = libc.pycpdf_rangeGet(rn, n)
+    deleteRange(rn)
     checkerror()
     return r2
 
@@ -446,9 +483,12 @@ def rangeAdd(r, p):
     """cpdf_rangeAdd(range, page) adds the page to a range, if it is not already
     there."""
     rn = range_of_list(r)
-    r2 = list_of_range(libc.pycpdf_rangeAdd(rn, p))
+    radd = libc.pycpdf_rangeAdd(rn, p)
+    rout = list_of_range(radd)
+    deleteRange(rn)
+    deleteRange(radd)
     checkerror()
-    return r2
+    return rout
 
 
 def isInRange(r, p):
@@ -456,6 +496,7 @@ def isInRange(r, p):
     otherwise."""
     rn = range_of_list(r)
     r2 = libc.pycpdf_isInRange(rn, p)
+    deleteRange(rn)
     checkerror()
     return r2
 
@@ -628,6 +669,8 @@ def mergeSame(pdfs, retain_numbering, remove_duplicate_fonts, ranges):
     c_ranges = (c_int * len(ranges))(*ranges)
     r = Pdf(libc.pycpdf_mergeSame(c_pdfs, len(pdfs),
             retain_numbering, remove_duplicate_fonts, c_ranges))
+    for x in ranges:
+        deleteRange(x)
     checkerror()
     return r
 
@@ -637,6 +680,7 @@ def selectPages(pdf, r):
     in the page range."""
     rn = range_of_list(r)
     r = Pdf(libc.pycpdf_selectPages(pdf.pdf, rn))
+    deleteRange(rn)
     checkerror()
     return r
 
@@ -649,6 +693,7 @@ def scalePages(pdf, r, sx, sy):
     altered as appropriate)"""
     r = range_of_list(r)
     libc.pycpdf_scalePages(pdf.pdf, r, sx, sy)
+    deleteRange(r)
     checkerror()
 
 
@@ -658,6 +703,7 @@ def scaleToFit(pdf, r, sx, sy, scale_to_fit_scale):
     Other boxed (crop etc. are altered as appropriate)"""
     r = range_of_list(r)
     libc.pycpdf_scaleToFit(pdf.pdf, r, sx, sy, scale_to_fit_scale)
+    deleteRange(r)
     checkerror()
 
 
@@ -666,6 +712,7 @@ def scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale):
     to fit the given page size, possibly multiplied by scale (typically 1.0)"""
     r = range_of_list(r)
     libc.pycpdf_scaleToFitPaper(pdf.pdf, r, papersize, scale_to_fit_scale)
+    deleteRange(r)
     checkerror()
 
 
@@ -717,6 +764,7 @@ def scaleContents(pdf, r, p, scale):
     r = range_of_list(r)
     a, b, c = tripleOfPosition(p)
     libc.pycpdf_scaleContents(pdf.pdf, r, a, b, c, scale)
+    deleteRange(r)
     checkerror()
 
 
@@ -725,6 +773,7 @@ def shiftContents(pdf, r, dx, dy):
     the range."""
     r = range_of_list(r)
     libc.pycpdf_shiftContents(pdf.pdf, r, dx, dy)
+    deleteRange(r)
     checkerror()
 
 
@@ -733,6 +782,7 @@ def rotate(pdf, r, rotation):
     absolute value. Appropriate rotations are 0, 90, 180, 270."""
     r = range_of_list(r)
     libc.pycpdf_rotate(pdf.pdf, r, rotation)
+    deleteRange(r)
     checkerror()
 
 
@@ -741,6 +791,7 @@ def rotateBy(pdf, r, rotation):
     given number of degrees. Appropriate values are 90, 180, 270."""
     r = range_of_list(r)
     libc.pycpdf_rotateBy(pdf.pdf, r, rotation)
+    deleteRange(r)
     checkerror()
 
 
@@ -749,6 +800,7 @@ def rotateContents(pdf, r, rotation):
     of the page by the given number of degrees, in a clockwise direction."""
     r = range_of_list(r)
     libc.pycpdf_rotateContents(pdf.pdf, r, rotation)
+    deleteRange(r)
     checkerror()
 
 
@@ -758,6 +810,7 @@ def upright(pdf, r):
     visual change."""
     r = range_of_list(r)
     libc.pycpdf_upright(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -765,6 +818,7 @@ def hFlip(pdf, r):
     """cpdf_hFlip(pdf, range) flips horizontally the pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_hFlip(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -772,6 +826,7 @@ def vFlip(pdf, r):
     """cpdf_vFlip(pdf, range) flips vertically the pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_vFlip(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -780,6 +835,7 @@ def crop(pdf, r, x, y, w, h):
     crop box. The dimensions are in points."""
     r = range_of_list(r)
     libc.pycpdf_crop(pdf.pdf, r, x, y, w, h)
+    deleteRange(r)
     checkerror()
 
 
@@ -787,6 +843,7 @@ def removeCrop(pdf, r):
     """cpdf_removeCrop(pdf, range) removes any crop box from pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_removeCrop(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -794,6 +851,7 @@ def removeTrim(pdf, r):
     """cpdf_removeTrim(pdf, range) removes any crop box from pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_removeTrim(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -801,6 +859,7 @@ def removeArt(pdf, r):
     """cpdf_removeArt(pdf, range) removes any crop box from pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_removeArt(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -808,6 +867,7 @@ def removeBleed(pdf, r):
     """cpdf_removeBleed(pdf, range) removes any crop box from pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_removeBleed(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -815,6 +875,7 @@ def trimMarks(pdf, r):
     """cpdf_trimMarks(pdf, range) adds trim marks to the given pages, if the trimbox exists."""
     r = range_of_list(r)
     libc.pycpdf_trimMarks(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -822,6 +883,7 @@ def showBoxes(pdf, r):
     """cpdf_showBoxes(pdf, range) shows the boxes on the given pages, for debug."""
     r = range_of_list(r)
     libc.pycpdf_showBoxes(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -829,6 +891,7 @@ def hardBox(pdf, r, boxname):
     """cpdf_hardBox make a given box a 'hard box' i.e clips it explicitly."""
     r = range_of_list(r)
     libc.pycpdf_hardBox(pdf.pdf, r, str.encode(boxname))
+    deleteRange(r)
     checkerror()
 
 # CHAPTER 4. Encryption
@@ -903,6 +966,7 @@ def stampOn(pdf, pdf2, r):
     origin at the origin of the target document."""
     r = range_of_list(r)
     libc.pycpdf_stampOn(pdf.pdf, pdf2.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -912,6 +976,7 @@ def stampUnder(pdf, pdf2, r):
     at the origin of the target document."""
     r = range_of_list(r)
     libc.pycpdf_stampUnder(pdf.pdf, pdf2.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -926,6 +991,7 @@ def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos, relative_to_cro
     a, b, c = tripleOfPosition(pos)
     libc.pycpdf_stampExtended(
         pdf.pdf, pdf2.pdf, r, isover, scale_stamp_to_fit, a, b, c, relative_to_cropbox)
+    deleteRange(r)
     checkerror()
 
 
@@ -1005,6 +1071,7 @@ def addText(metrics, pdf, r, text, p, line_spacing, bates, font, size, red,
                         underneath, relative_to_cropbox, outline, opacity,
                         justification, midline, topline, str.encode(filename),
                         line_width, embed_fonts)
+    deleteRange(r)
     checkerror()
 
 
@@ -1019,6 +1086,7 @@ def addTextSimple(pdf, r, text, p, font, size):
     r = range_of_list(r)
     libc.pycpdf_addTextSimple(
         pdf.pdf, r, str.encode(text), a, b, c, font, size)
+    deleteRange(r)
     checkerror()
 
 
@@ -1027,6 +1095,7 @@ def removeText(pdf, r):
     given pages."""
     r = range_of_list(r)
     libc.pycpdf_removeText(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -1073,6 +1142,7 @@ def padBefore(pdf, r):
     """cpdf_padBefore(pdf, range) adds a blank page before each page in the given range"""
     r = range_of_list(r)
     libc.pycpdf_padBefore(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -1080,6 +1150,7 @@ def padAfter(pdf, r):
     """cpdf_padAfter(pdf, range) adds a blank page after each page in the given range"""
     r = range_of_list(r)
     libc.pycpdf_padAfter(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -1475,7 +1546,9 @@ def getBleedBox(pdf, pagenumber):
 def setMediaBox(pdf, r, minx, maxx, miny, maxy):
     """These functions set a box given the document, page range, min x, max x, min y,
     max y in points."""
-    libc.pycpdf_setMediaBox(pdf.pdf, range_of_list(r), minx, maxx, miny, maxy)
+    rn = range_of_list(r)
+    libc.pycpdf_setMediaBox(pdf.pdf, rn, minx, maxx, miny, maxy)
+    deleteRange(rn)
     checkerror()
     return
 
@@ -1483,7 +1556,9 @@ def setMediaBox(pdf, r, minx, maxx, miny, maxy):
 def setCropBox(pdf, r, minx, maxx, miny, maxy):
     """These functions set a box given the document, page range, min x, max x, min y,
     max y in points."""
-    libc.pycpdf_setCropBox(pdf.pdf, range_of_list(r), minx, maxx, miny, maxy)
+    rn = range_of_list(r)
+    libc.pycpdf_setCropBox(pdf.pdf, rn, minx, maxx, miny, maxy)
+    deleteRange(rn)
     checkerror()
     return
 
@@ -1491,7 +1566,9 @@ def setCropBox(pdf, r, minx, maxx, miny, maxy):
 def setTrimBox(pdf, r, minx, maxx, miny, maxy):
     """These functions set a box given the document, page range, min x, max x, min y,
     max y in points."""
-    libc.pycpdf_setTrimBox(pdf.pdf, range_of_list(r), minx, maxx, miny, maxy)
+    rn = range_of_list(r)
+    libc.pycpdf_setTrimBox(pdf.pdf, rn, minx, maxx, miny, maxy)
+    deleteRange(rn)
     checkerror()
     return
 
@@ -1499,7 +1576,9 @@ def setTrimBox(pdf, r, minx, maxx, miny, maxy):
 def setArtBox(pdf, r, minx, maxx, miny, maxy):
     """These functions set a box given the document, page range, min x, max x, min y,
     max y in points."""
-    libc.pycpdf_setArtBox(pdf.pdf, range_of_list(r), minx, maxx, miny, maxy)
+    rn = range_of_list(r)
+    libc.pycpdf_setArtBox(pdf.pdf, rn, minx, maxx, miny, maxy)
+    deleteRange(rn)
     checkerror()
     return
 
@@ -1507,7 +1586,9 @@ def setArtBox(pdf, r, minx, maxx, miny, maxy):
 def setBleedBox(pdf, r, minx, maxx, miny, maxy):
     """These functions set a box given the document, page range, min x, max x, min y,
     max y in points."""
-    libc.pycpdf_setBleedBox(pdf.pdf, range_of_list(r), minx, maxx, miny, maxy)
+    rn = range_of_list(r)
+    libc.pycpdf_setBleedBox(pdf.pdf, rn, minx, maxx, miny, maxy)
+    deleteRange(rn)
     checkerror()
     return
 
@@ -1713,8 +1794,10 @@ def addPageLabels(pdf, label, progress):
     The prefix is prefix text for each label. The range is the page range the
     labels apply to. Offset can be used to shift the numbering up or down."""
     style, prefix, offset, plrange = label
+    rn = range_of_list(plrange)
     libc.pycpdf_addPageLabels(pdf.pdf, style, str.encode(
-        prefix), offset, range_of_list(plrange), progress)
+        prefix), offset, rn, progress)
+    deleteRange(rn)
     checkerror()
     return
 
@@ -1845,6 +1928,7 @@ def copyFont(pdf, pdf2, r, pagenumber, fontname):
     r = range_of_list(r)
     libc.pycpdf_copyFont(pdf.pdf, pdf2.pdf, r,
                          pagenumber, str.encode(fontname))
+    deleteRange(r)
     checkerror()
 
 # CHAPTER 15. Miscellaneous
@@ -1855,6 +1939,7 @@ def draft(pdf, r, boxes):
     them with crossed boxes if 'boxes' is true"""
     r = range_of_list(r)
     libc.pycpdf_draft(pdf.pdf, r, boxes)
+    deleteRange(r)
     checkerror()
 
 
@@ -1863,6 +1948,7 @@ def removeAllText(pdf, r):
     given document."""
     r = range_of_list(r)
     libc.pycpdf_removeAllText(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -1870,6 +1956,7 @@ def blackText(pdf, r):
     """cpdf_blackText(pdf, range) blackens all text on the given pages."""
     r = range_of_list(r)
     libc.pycpdf_blackText(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -1877,6 +1964,7 @@ def blackLines(pdf, r):
     """cpdf_blackLines(pdf, range) blackens all lines on the given pages."""
     r = range_of_list(r)
     libc.pycpdf_blackLines(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -1884,6 +1972,7 @@ def blackFills(pdf, r):
     """cpdf_blackFills(pdf, range) blackens all fills on the given pages."""
     r = range_of_list(r)
     libc.pycpdf_blackFills(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -1892,6 +1981,7 @@ def thinLines(pdf, r, linewidth):
     min_thickness to min_thickness. Thickness given in points."""
     r = range_of_list(r)
     libc.pycpdf_thinLines(pdf.pdf, r, linewidth)
+    deleteRange(r)
     checkerror()
 
 
@@ -1931,6 +2021,7 @@ def removeClipping(pdf, r):
     range"""
     r = range_of_list(r)
     libc.pycpdf_removeClipping(pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 # CHAPTER UNDOC (To come in v2.4)
@@ -1939,6 +2030,7 @@ def removeClipping(pdf, r):
 def addContent(content, before, pdf, r):
     r = range_of_list(r)
     libc.pycpdf_addContent(str.encode(content), before, pdf.pdf, r)
+    deleteRange(r)
     checkerror()
 
 
@@ -1977,6 +2069,7 @@ def stampAsXObject(pdf, r, stamp_pdf):
     r = range_of_list(r)
     r2 = string_at(libc.pycpdf_stampAsXObject(
         pdf.pdf, r, stamp_pdf.pdf)).decode()
+    deleteRange(r)
     checkerror()
     return r2
 
