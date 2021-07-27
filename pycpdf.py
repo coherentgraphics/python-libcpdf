@@ -316,31 +316,6 @@ def enumeratePDFs():
     return pdfs
 
 
-def list_of_range(r):
-    """Internal."""
-    l = []
-    for x in range(libc.pycpdf_rangeLength(r)):
-        l.append(libc.pycpdf_rangeGet(r, x))
-    checkerror()
-    return l
-
-
-def range_of_list(l):
-    """Internal."""
-    r = libc.pycpdf_blankRange()
-    for x in l:
-        r = libc.pycpdf_rangeAdd(r, x)
-    checkerror()
-    return r
-
-
-def deleteRange(r):
-    """Internal."""
-    r = libc.pycpdf_deleteRange(r)
-    checkerror()
-    return r
-
-
 def parsePagespec(pdf, pagespec):
     """cpdf_parsePagespec(pdf, range) parses a page specification with reference to
     a given PDF (the PDF is supplied so that page ranges which reference pages
@@ -1119,6 +1094,22 @@ def textWidth(font, string):
     r = libc.pycpdf_textWidth(font, str.encode(string))
     checkerror()
     return r
+
+
+def addContent(content, before, pdf, r):
+    r = range_of_list(r)
+    libc.pycpdf_addContent(str.encode(content), before, pdf.pdf, r)
+    deleteRange(r)
+    checkerror()
+
+
+def stampAsXObject(pdf, r, stamp_pdf):
+    r = range_of_list(r)
+    r2 = string_at(libc.pycpdf_stampAsXObject(
+        pdf.pdf, r, stamp_pdf.pdf)).decode()
+    deleteRange(r)
+    checkerror()
+    return r2
 
 
 # CHAPTER 9. Mulitpage facilities
@@ -1931,7 +1922,43 @@ def copyFont(pdf, pdf2, r, pagenumber, fontname):
     deleteRange(r)
     checkerror()
 
-# CHAPTER 15. Miscellaneous
+# CHAPTER 15. PDF and JSON
+
+
+def outputJSON(filename, parse_content, no_stream_data, pdf):
+    libc.pycpdf_outputJSON(str.encode(filename),
+                           parse_content, no_stream_data, pdf.pdf)
+    checkerror()
+
+# CHAPTER 16. Optional Content Groups
+
+
+def OCGCoalesce(pdf):
+    libc.pycpdf_OCGCoalesce(pdf.pdf)
+    checkerror()
+
+
+def OCGRename(pdf, n_from, n_to):
+    libc.pycpdf_OCGRename(pdf.pdf, str.encode(n_from), str.encode(n_to))
+    checkerror()
+
+
+def getOCGList(pdf):
+    l = []
+    n = libc.pycpdf_startGetOCGList(pdf.pdf)
+    for x in range(n):
+        l.append(string_at(libc.pycpdf_OCGListEntry(x)).decode())
+    libc.pycpdf_endGetOCGList()
+    checkerror()
+    return l
+
+
+def OCGOrderAll(pdf):
+    libc.pycpdf_OCGOrderAll(pdf.pdf)
+    checkerror()
+
+
+# CHAPTER 17. Miscellaneous
 
 
 def draft(pdf, r, boxes):
@@ -2024,56 +2051,34 @@ def removeClipping(pdf, r):
     deleteRange(r)
     checkerror()
 
-# CHAPTER UNDOC (To come in v2.4)
-
-
-def addContent(content, before, pdf, r):
-    r = range_of_list(r)
-    libc.pycpdf_addContent(str.encode(content), before, pdf.pdf, r)
-    deleteRange(r)
-    checkerror()
-
-
-def outputJSON(filename, parse_content, no_stream_data, pdf):
-    libc.pycpdf_outputJSON(str.encode(filename),
-                           parse_content, no_stream_data, pdf.pdf)
-    checkerror()
-
-
-def OCGCoalesce(pdf):
-    libc.pycpdf_OCGCoalesce(pdf.pdf)
-    checkerror()
-
-
-def OCGRename(pdf, n_from, n_to):
-    libc.pycpdf_OCGRename(pdf.pdf, str.encode(n_from), str.encode(n_to))
-    checkerror()
-
-
-def getOCGList(pdf):
-    l = []
-    n = libc.pycpdf_startGetOCGList(pdf.pdf)
-    for x in range(n):
-        l.append(string_at(libc.pycpdf_OCGListEntry(x)).decode())
-    libc.pycpdf_endGetOCGList()
-    checkerror()
-    return l
-
-
-def OCGOrderAll(pdf):
-    libc.pycpdf_OCGOrderAll(pdf.pdf)
-    checkerror()
-
-
-def stampAsXObject(pdf, r, stamp_pdf):
-    r = range_of_list(r)
-    r2 = string_at(libc.pycpdf_stampAsXObject(
-        pdf.pdf, r, stamp_pdf.pdf)).decode()
-    deleteRange(r)
-    checkerror()
-    return r2
+# CHAPTER X. Undocumented or Internal
 
 
 def setDemo(v):
     libc.pycpdf_setDemo(v)
     checkerror()
+
+
+def list_of_range(r):
+    """Internal."""
+    l = []
+    for x in range(libc.pycpdf_rangeLength(r)):
+        l.append(libc.pycpdf_rangeGet(r, x))
+    checkerror()
+    return l
+
+
+def range_of_list(l):
+    """Internal."""
+    r = libc.pycpdf_blankRange()
+    for x in l:
+        r = libc.pycpdf_rangeAdd(r, x)
+    checkerror()
+    return r
+
+
+def deleteRange(r):
+    """Internal."""
+    r = libc.pycpdf_deleteRange(r)
+    checkerror()
+    return r
