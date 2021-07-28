@@ -54,11 +54,6 @@ try:
     pycpdf.clearError()
 except:
     prerr()
-# print('---cpdf_onExit()')
-# try:
-#    pycpdf.onExit()
-# except:
-#    prerr()
 
 # CHAPTER 1. Basics
 print('***** CHAPTER 1. Basics')
@@ -118,8 +113,6 @@ try:
     pdfs = pycpdf.enumeratePDFs()
 except:
     fatal_prerr()
-# for k, i in pdfs:
-#    print(k, i)
 print('---cpdf_ptOfIn()')
 try:
     print(f'One inch is {pycpdf.ptOfIn(1.0):.6f} points')
@@ -150,13 +143,18 @@ try:
     print(f'One point is {pycpdf.mmOfPt(1.0):.6f} millimetres')
 except:
     prerr()
-
-
 print('---cpdf_range()')
+
+try:
+    pycpdf.onExit()
+except:
+    prerr()
+
 try:
     fromto = pycpdf.pageRange(3, 7)
 except:
     fatal_prerr()
+
 print('---cpdf_all()')
 try:
     rall = pycpdf.all(pdf4)
@@ -325,6 +323,10 @@ try:
 except:
     fatal_prerr()
 
+try:
+    pycpdf.onExit()
+except:
+    prerr()
 
 # CHAPTER 2. Merging and Splitting
 print('***** CHAPTER 2. Merging and Splitting')

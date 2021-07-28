@@ -350,7 +350,9 @@ def blankRange():
     """cpdf_blankRange() creates a range with no pages in."""
     r = libc.pycpdf_blankRange()
     checkerror()
-    return r
+    l = list_of_range(r)
+    deleteRange(r)
+    return l
 
 
 def pageRange(f, t):
@@ -2072,7 +2074,9 @@ def range_of_list(l):
     """Internal."""
     r = libc.pycpdf_blankRange()
     for x in l:
-        r = libc.pycpdf_rangeAdd(r, x)
+        rn = libc.pycpdf_rangeAdd(r, x)
+        deleteRange(r)
+        r = rn
     checkerror()
     return r
 
