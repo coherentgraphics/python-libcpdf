@@ -115,7 +115,7 @@ class CPDFError(Exception):
 
 
 def lastError():
-    """Return the last error. Not usually used directly, since cdpflib functions raise exceptions"""
+    """Return the last error. Not usually used directly, since cpdflib functions raise exceptions"""
     return libc.pycpdf_lastError()
 
 
