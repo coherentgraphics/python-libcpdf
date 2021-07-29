@@ -3,3 +3,4 @@ rm -f libpycpdf.o libpycpdf.so libpycpdf.dll
 rm -rf testoutputs/*.pdf testoutputs/*.json testoutputs/*.txt __pycache__
 rm -f foo foo2
 rm -f pycpdf.html pycpdf.pyc
+rm -f examples/*.pdf
