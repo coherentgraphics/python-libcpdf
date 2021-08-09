@@ -95,9 +95,10 @@ def loadDLL(f):
         [c_int, c_int, c_double, c_double, c_double, c_double]
     libc.pycpdf_getBookmarkText.restype = POINTER(c_char)
     libc.pycpdf_addText.argtypes =\
-        [c_int, c_int, c_int, POINTER(c_char), c_int, c_double, c_double, c_double,
-         c_int, c_int, c_double, c_double, c_double, c_double, c_int, c_int, c_int,
-         c_double, c_int, c_int, c_int, POINTER(c_char), c_double, c_int]
+        [c_int, c_int, c_int, POINTER(c_char), c_int, c_double, c_double,
+         c_double, c_int, c_int, c_double, c_double, c_double, c_double, c_int,
+         c_int, c_int, c_double, c_int, c_int, c_int, POINTER(c_char),
+         c_double, c_int]
     libc.pycpdf_addTextSimple.argtypes =\
         [c_int, c_int, POINTER(c_char), c_int, c_double,
          c_double, c_int, c_double]
@@ -377,8 +378,8 @@ def blankRange():
 
 
 def pageRange(f, t):
-    """ pageRange(from, to) build a range from one page to another inclusive. For example,
-    pageRange(3,7) gives the range 3,4,5,6,7 """
+    """ pageRange(from, to) build a range from one page to another inclusive.
+    For example, pageRange(3,7) gives the range 3,4,5,6,7 """
     rn = libc.pycpdf_pageRange(f, t)
     r = list_of_range(rn)
     deleteRange(rn)
@@ -420,8 +421,8 @@ def odd(r):
 
 
 def rangeUnion(a, b):
-    """rangeUnion(a, b) makes the union of two ranges giving a range containing the
-    pages in range a and range b."""
+    """rangeUnion(a, b) makes the union of two ranges giving a range containing
+    the pages in range a and range b."""
     ra = range_of_list(a)
     rb = range_of_list(b)
     runion = libc.pycpdf_rangeUnion(ra, rb)
@@ -523,16 +524,18 @@ def toFile(pdf, filename, linearize, make_id):
     checkerror()
 
 
-def toFileExt(pdf, filename, linearize, make_id, preserve_objstm, generate_objstm, compress_objstm):
+def toFileExt(pdf, filename, linearize, make_id, preserve_objstm,
+              generate_objstm, compress_objstm):
     """toFileExt (pdf, filename, linearize, make_id, preserve_objstm,
     generate_objstm, compress_objstm) writes the file to a given filename. If
     make_id is true, it will be given a new ID.  If preserve_objstm is true,
     existing object streams will be preserved. If generate_objstm is true,
     object streams will be generated even if not originally present. If
     compress_objstm is true, object streams will be compressed (what we usually
-    want). WARNING: the pdf argument will be invalid after this call and should not be used again."""
-    libc.pycpdf_toFileExt(pdf.pdf, str.encode(
-        filename), linearize, make_id, preserve_objstm, generate_objstm, compress_objstm)
+    want). WARNING: the pdf argument will be invalid after this call and should
+    not be used again."""
+    libc.pycpdf_toFileExt(pdf.pdf, str.encode(filename), linearize, make_id,
+                          preserve_objstm, generate_objstm, compress_objstm)
     checkerror()
 
 
@@ -549,7 +552,8 @@ def toMemory(pdf, linearize, make_id):
 
 
 def isEncrypted(pdf):
-    """isEncrypted(pdf) returns True if a documented is encrypted, False otherwise."""
+    """isEncrypted(pdf) returns True if a documented is encrypted, False
+    otherwise."""
     r = libc.pycpdf_isEncrypted(pdf.pdf)
     checkerror()
     return r
@@ -574,27 +578,31 @@ aes256bitisofalse = 6
 aes256bitisotrue = 7
 
 
-def toFileEncrypted(pdf, method, permissions, ownerpw, userpw, linearize, makeid, filename):
+def toFileEncrypted(pdf, method, permissions, ownerpw, userpw, linearize,
+                    makeid, filename):
     """toFileEncrypted(pdf, encryption_method, permissions, permission_length,
-    owner_password, user password, linearize, makeid, filename) writes a file as
-    encrypted."""
+    owner_password, user password, linearize, makeid, filename) writes a file
+    as encrypted."""
     c_perms = (c_uint8 * len(permissions))(*permissions)
-    libc.pycpdf_toFileEncrypted(pdf.pdf, method, c_perms, len(permissions), str.encode(ownerpw),
-                                str.encode(userpw), linearize, makeid, str.encode(filename))
+    libc.pycpdf_toFileEncrypted(pdf.pdf, method, c_perms, len(permissions),
+                                str.encode(ownerpw), str.encode(userpw),
+                                linearize, makeid, str.encode(filename))
     checkerror()
 
 
-def toFileEncryptedExt(pdf, method, permissions, ownerpw, userpw, linearize, makeid,
-                       preserve_objstm, generate_objstm, compress_objstm, filename):
+def toFileEncryptedExt(pdf, method, permissions, ownerpw, userpw, linearize,
+                       makeid, preserve_objstm, generate_objstm,
+                       compress_objstm, filename):
     """toFileEncryptedExt(pdf, encryption_method, permissions,
     permission_length, owner_password, user_password, linearize, makeid,
     preserve_objstm, generate_objstm, compress_objstm, filename) WARNING: the
     pdf argument will be invalid after this call, and should be discarded."""
     c_perms = (c_uint8 * len(permissions))(*permissions)
-    libc.pycpdf_toFileEncryptedExt(pdf.pdf, method, c_perms, len(permissions), str.encode(ownerpw),
-                                   str.encode(
-                                       userpw), linearize, makeid, preserve_objstm,
-                                   generate_objstm, compress_objstm, str.encode(filename))
+    libc.pycpdf_toFileEncryptedExt(pdf.pdf, method, c_perms, len(permissions),
+                                   str.encode(ownerpw), str.encode(userpw),
+                                   linearize, makeid, preserve_objstm,
+                                   generate_objstm, compress_objstm,
+                                   str.encode(filename))
     checkerror()
 
 
@@ -642,9 +650,10 @@ def mergeSimple(pdfs):
 
 def merge(pdfs, retain_numbering, remove_duplicate_fonts):
     """merge(pdfs, retain_numbering, remove_duplicate_fonts) merges
-    the list of PDFs. If retain_numbering is true page labels are not rewritten. If
-    remove_duplicate_fonts is true, duplicate fonts are merged. This is useful
-    when the source documents for merging originate from the same source."""
+    the list of PDFs. If retain_numbering is true page labels are not
+    rewritten. If remove_duplicate_fonts is true, duplicate fonts are merged.
+    This is useful when the source documents for merging originate from the
+    same source."""
     raw_pdfs = map(lambda p: p.pdf, pdfs)
     c_pdfs = (c_int * len(pdfs))(*raw_pdfs)
     r = Pdf(libc.pycpdf_merge(c_pdfs, len(pdfs),
@@ -868,7 +877,8 @@ def removeBleed(pdf, r):
 
 
 def trimMarks(pdf, r):
-    """trimMarks(pdf, range) adds trim marks to the given pages, if the trimbox exists."""
+    """trimMarks(pdf, range) adds trim marks to the given pages, if the trimbox
+    exists."""
     r = range_of_list(r)
     libc.pycpdf_trimMarks(pdf.pdf, r)
     deleteRange(r)
@@ -976,7 +986,8 @@ def stampUnder(pdf, pdf2, r):
     checkerror()
 
 
-def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos, relative_to_cropbox):
+def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos,
+                  relative_to_cropbox):
     """stampExtended(pdf, pdf2, range, isover, scale_stamp_to_fit, pos,
     relative_to_cropbox) is a stamping function with extra features.
      - isover true, pdf goes over pdf2, isover false, pdf goes under pdf2
@@ -985,8 +996,8 @@ def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos, relative_to_cro
      - relative_to_cropbox: if true, pos is relative to cropbox not mediabox"""
     r = range_of_list(r)
     a, b, c = tripleOfPosition(pos)
-    libc.pycpdf_stampExtended(
-        pdf.pdf, pdf2.pdf, r, isover, scale_stamp_to_fit, a, b, c, relative_to_cropbox)
+    libc.pycpdf_stampExtended(pdf.pdf, pdf2.pdf, r, isover, scale_stamp_to_fit,
+                              a, b, c, relative_to_cropbox)
     deleteRange(r)
     checkerror()
 
@@ -1023,12 +1034,15 @@ def addText(metrics, pdf, r, text, p, line_spacing, bates, font, size, red,
          * green: Green component of colour, 0.0 - 1.0
          * blue: Blue component of colour, 0.0 - 1.0
          * underneath: If true, text is added underneath rather than on top
-         * relative_to_cropbox: If true, position is relative to crop box not media box
+         * relative_to_cropbox: If true, position is relative to crop box not
+           media box
          * outline: If true, text is outline rather than filled
          * opacity: Opacity, 1.0 = opaque, 0.0 = wholly transparent
          * justification: Justification
-         * midline: If true, position is relative to midline of text, not baseline
-         * topline: If true, position is relative to topline of text, not baseline
+         * midline: If true, position is relative to midline of text, not
+           baseline
+         * topline: If true, position is relative to topline of text, not
+           baseline
          * filename: filename that this document was read from (optional)
          * line_width: line width
          * embed_fonts: embed fonts
@@ -1151,7 +1165,8 @@ def twoUpStack(pdf):
 
 
 def padBefore(pdf, r):
-    """padBefore(pdf, range) adds a blank page before each page in the given range"""
+    """padBefore(pdf, range) adds a blank page before each page in the given
+    range"""
     r = range_of_list(r)
     libc.pycpdf_padBefore(pdf.pdf, r)
     deleteRange(r)
@@ -1159,7 +1174,8 @@ def padBefore(pdf, r):
 
 
 def padAfter(pdf, r):
-    """padAfter(pdf, range) adds a blank page after each page in the given range"""
+    """padAfter(pdf, range) adds a blank page after each page in the given
+    range"""
     r = range_of_list(r)
     libc.pycpdf_padAfter(pdf.pdf, r)
     deleteRange(r)
@@ -1320,7 +1336,8 @@ def getCreationDateXMP(pdf):
 
 
 def getModificationDateXMP(pdf):
-    """getModificationDateXMP(pdf) returns the XMP modification date of a document."""
+    """getModificationDateXMP(pdf) returns the XMP modification date of a
+    document."""
     r = string_at(libc.pycpdf_getModificationDateXMP(pdf.pdf)).decode()
     checkerror()
     return r
@@ -1432,19 +1449,21 @@ def setCreationDateXMP(pdf, s):
 
 
 def setModificationDateXMP(pdf, s):
-    """setModificationDateXMP(pdf) set the XMP modification date of a document."""
+    """setModificationDateXMP(pdf) set the XMP modification date of a
+    document."""
     libc.pycpdf_setModificationDateXMP(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def getDateComponents(string):
-    """Dates: Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds (0-59),
-     hour_offset is the offset from UT in hours (-23 to 23); minute_offset is the
-     offset from UT in minutes (-59 to 59).
+    """Dates: Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds
+    (0-59), hour_offset is the offset from UT in hours (-23 to 23);
+    minute_offset is the offset from UT in minutes (-59 to 59).
 
     getDateComponents(datestring, year, month, day, hour, minute, second,
-    hour_offset, minute_offset) returns the components from a PDF date string."""
+    hour_offset, minute_offset) returns the components from a PDF date
+    string."""
     year = c_int(0)
     month = c_int(0)
     day = c_int(0)
@@ -1453,23 +1472,28 @@ def getDateComponents(string):
     second = c_int(0)
     hour_offset = c_int(0)
     minute_offset = c_int(0)
-    libc.pycpdf_getDateComponents(str.encode(string), byref(year), byref(month), byref(day), byref(
-        hour), byref(minute), byref(second), byref(hour_offset), byref(minute_offset))
+    libc.pycpdf_getDateComponents(str.encode(string), byref(year),
+                                  byref(month), byref(day), byref(hour),
+                                  byref(minute), byref(second),
+                                  byref(hour_offset), byref(minute_offset))
     checkerror()
-    return (year.value, month.value, day.value, hour.value, minute.value, second.value, hour_offset.value, minute_offset.value)
+    return (year.value, month.value, day.value, hour.value, minute.value,
+            second.value, hour_offset.value, minute_offset.value)
 
 
-def dateStringOfComponents(components):
-    """Dates: Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds (0-59),
-     hour_offset is the offset from UT in hours (-23 to 23); minute_offset is the
-     offset from UT in minutes (-59 to 59).
+def dateStringOfComponents(cs):
+    """Dates: Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds
+    (0-59), hour_offset is the offset from UT in hours (-23 to 23);
+    minute_offset is the offset from UT in minutes (-59 to 59).
 
     dateStringOfComponents(year, month, day, hour, minute, second,
     hour_offset, minute_offset) builds a PDF date string from individual
     components."""
-    year, month, day, hour, minute, second, hour_offset, minute_offset = components
-    r = string_at(libc.pycpdf_dateStringOfComponents(
-        year, month, day, hour, minute, second, hour_offset, minute_offset)).decode()
+    year, month, day, hour, minute, second, hour_offset, minute_offset = cs
+    r = string_at(libc.pycpdf_dateStringOfComponents(year, month, day, hour,
+                                                     minute, second,
+                                                     hour_offset,
+                                                     minute_offset)).decode()
     checkerror()
     return r
 
@@ -1491,8 +1515,9 @@ def hasBox(pdf, pagenumber, boxname):
 
 
 def getMediaBox(pdf, pagenumber):
-    """These functions get a box given the document, page range, min x, max x, min y, max y in
-    points. Only suceeds if such a box exists, as checked by hasBox"""
+    """These functions get a box given the document, page range, min x, max x,
+    min y, max y in points. Only suceeds if such a box exists, as checked by
+    hasBox"""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1504,8 +1529,9 @@ def getMediaBox(pdf, pagenumber):
 
 
 def getCropBox(pdf, pagenumber):
-    """These functions get a box given the document, page range, min x, max x, min y, max y in
-    points. Only suceeds if such a box exists, as checked by hasBox"""
+    """These functions get a box given the document, page range, min x, max x,
+    min y, max y in points. Only suceeds if such a box exists, as checked by
+    hasBox"""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1517,8 +1543,9 @@ def getCropBox(pdf, pagenumber):
 
 
 def getTrimBox(pdf, pagenumber):
-    """These functions get a box given the document, page range, min x, max x, min y, max y in
-    points. Only suceeds if such a box exists, as checked by hasBox"""
+    """These functions get a box given the document, page range, min x, max x,
+    min y, max y in points. Only suceeds if such a box exists, as checked by
+    hasBox"""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1530,8 +1557,9 @@ def getTrimBox(pdf, pagenumber):
 
 
 def getArtBox(pdf, pagenumber):
-    """These functions get a box given the document, page range, min x, max x, min y, max y in
-    points. Only suceeds if such a box exists, as checked by hasBox"""
+    """These functions get a box given the document, page range, min x, max x,
+    min y, max y in points. Only suceeds if such a box exists, as checked by
+    hasBox"""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1543,8 +1571,9 @@ def getArtBox(pdf, pagenumber):
 
 
 def getBleedBox(pdf, pagenumber):
-    """These functions get a box given the document, page range, min x, max x, min y, max y in
-    points. Only suceeds if such a box exists, as checked by hasBox"""
+    """These functions get a box given the document, page range, min x, max x,
+    min y, max y in points. Only suceeds if such a box exists, as checked by
+    hasBox"""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1556,8 +1585,8 @@ def getBleedBox(pdf, pagenumber):
 
 
 def setMediaBox(pdf, r, minx, maxx, miny, maxy):
-    """These functions set a box given the document, page range, min x, max x, min y,
-    max y in points."""
+    """These functions set a box given the document, page range, min x, max x,
+    min y, max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setMediaBox(pdf.pdf, rn, minx, maxx, miny, maxy)
     deleteRange(rn)
@@ -1566,8 +1595,8 @@ def setMediaBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def setCropBox(pdf, r, minx, maxx, miny, maxy):
-    """These functions set a box given the document, page range, min x, max x, min y,
-    max y in points."""
+    """These functions set a box given the document, page range, min x, max x,
+    min y, max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setCropBox(pdf.pdf, rn, minx, maxx, miny, maxy)
     deleteRange(rn)
@@ -1576,8 +1605,8 @@ def setCropBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def setTrimBox(pdf, r, minx, maxx, miny, maxy):
-    """These functions set a box given the document, page range, min x, max x, min y,
-    max y in points."""
+    """These functions set a box given the document, page range, min x, max x,
+    min y, max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setTrimBox(pdf.pdf, rn, minx, maxx, miny, maxy)
     deleteRange(rn)
@@ -1586,8 +1615,8 @@ def setTrimBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def setArtBox(pdf, r, minx, maxx, miny, maxy):
-    """These functions set a box given the document, page range, min x, max x, min y,
-    max y in points."""
+    """These functions set a box given the document, page range, min x, max x,
+    min y, max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setArtBox(pdf.pdf, rn, minx, maxx, miny, maxy)
     deleteRange(rn)
@@ -1596,8 +1625,8 @@ def setArtBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def setBleedBox(pdf, r, minx, maxx, miny, maxy):
-    """These functions set a box given the document, page range, min x, max x, min y,
-    max y in points."""
+    """These functions set a box given the document, page range, min x, max x,
+    min y, max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setBleedBox(pdf.pdf, rn, minx, maxx, miny, maxy)
     deleteRange(rn)
@@ -1728,7 +1757,8 @@ def setMetadataFromByteArray(pdf, data):
 
 
 def getMetadata(pdf):
-    """getMetadata(pdf, &length) returns the XMP metadata and fills in length."""
+    """getMetadata(pdf, &length) returns the XMP metadata and fills in
+    length."""
     length = c_int32()
     data = libc.pycpdf_getMetadata(pdf.pdf, byref(length))
     out_data = create_string_buffer(length.value)
@@ -1773,8 +1803,8 @@ def getPageLabels(pdf):
     """Get page labels as a list of tuples (style, prefix, offset, startvalue)
 
     For example, a document might have five pages of introduction with roman
-    numerals, followed by the rest of the pages in decimal arabic, numbered from
-    one:
+    numerals, followed by the rest of the pages in decimal arabic, numbered
+    from one:
 
     labelstyle = LowercaseRoman
     labelprefix = ""
@@ -1891,7 +1921,8 @@ def getAttachments(pdf):
 
 
 def getImageResolution(pdf, min_required_resolution):
-    """Return a list of all uses of images in the PDF which do not meet the minimum required resolution in dpi"""
+    """Return a list of all uses of images in the PDF which do not meet the
+    minimum required resolution in dpi"""
     n = libc.pycpdf_startGetImageResolution(pdf.pdf, min_required_resolution)
     l = []
     for x in range(n):
@@ -1935,8 +1966,8 @@ def removeFonts(pdf):
 
 def copyFont(pdf, pdf2, r, pagenumber, fontname):
     """copyFont(from, to, range, pagenumber, fontname) copies the given font
-    from the given page in the 'from' PDF to every page in the 'to' PDF. The new
-    font is stored under it's font name."""
+    from the given page in the 'from' PDF to every page in the 'to' PDF. The
+    new font is stored under it's font name."""
     r = range_of_list(r)
     libc.pycpdf_copyFont(pdf.pdf, pdf2.pdf, r,
                          pagenumber, str.encode(fontname))
@@ -2052,7 +2083,8 @@ def setVersion(pdf, version):
 
 
 def setFullVersion(pdf, major, minor):
-    """setFullVersion(pdf, version) sets the major and minor version number of a document."""
+    """setFullVersion(pdf, version) sets the major and minor version number of
+    a document."""
     libc.pycpdf_setFullVersion(pdf.pdf, major, minor)
     checkerror()
 
