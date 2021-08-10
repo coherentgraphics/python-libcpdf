@@ -108,10 +108,6 @@ def chapter1():
     except:
         prerr()
     print('---cpdf: enumerate PDFs')
-    try:
-        pdfs = pycpdf.enumeratePDFs()
-    except:
-        fatal_prerr()
     print('---cpdf_ptOfIn()')
     try:
         print(f'One inch is {pycpdf.ptOfIn(1.0):.6f} points')

@@ -48,7 +48,6 @@ def loadDLL(f):
     libc.pycpdf_mmOfPt.restype = c_double
     libc.pycpdf_inOfPt.argtypes = [c_double]
     libc.pycpdf_inOfPt.restype = c_double
-    libc.pycpdf_enumeratePDFsInfo.restype = POINTER(c_char)
     libc.pycpdf_stringOfPagespec.restype = POINTER(c_char)
     libc.pycpdf_toMemory.restype = POINTER(c_uint8)
     libc.pycpdf_scalePages.argtypes = [c_int, c_int, c_double, c_double]
@@ -313,19 +312,6 @@ def inOfPt(i):
     r = libc.pycpdf_inOfPt(i)
     checkerror()
     return r
-
-
-def enumeratePDFs():
-    """FIXME What does this do?"""
-    pdfs = []
-    n = libc.pycpdf_startEnumeratePDFs()
-    for x in range(n):
-        key = libc.pycpdf_enumeratePDFsKey(x)
-        info = string_at(libc.pycpdf_enumeratePDFsInfo(x)).decode()
-        pdfs.append((key, info))
-    libc.pycpdf_endEnumeratePDFs()
-    checkerror()
-    return pdfs
 
 
 def parsePagespec(pdf, pagespec):
