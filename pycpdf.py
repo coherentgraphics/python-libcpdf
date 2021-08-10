@@ -7,6 +7,10 @@ first. On MacOS, you may need to give the full path, and you may need to
 install libcpdf.so in a standard location /usr/local/lib/, or use the
 install_name_tool command to tell libpycpdf.so where to find libcpdf.so.
 
+FIXME: EXCEPTIONS
+
+
+
 A 'range' is a list of integers specifying page numbers.
 
 Text arguments and results are in UTF8.
@@ -245,6 +249,7 @@ def blankDocument(w, h, pages):
     return pdf
 
 
+"""Paper sizes."""
 a0portrait = 0
 a1portrait = 1
 a2portrait = 2
@@ -315,7 +320,7 @@ def inOfPt(i):
 
 
 def parsePagespec(pdf, pagespec):
-    """parsePagespec(pdf, range) parses a page specification with reference to
+    """parsePagespec(pdf, pagespec) parses a page specification with reference to
     a given PDF (the PDF is supplied so that page ranges which reference pages
     which do not exist are rejected)."""
 
@@ -518,7 +523,7 @@ def toFileExt(pdf, filename, linearize, make_id, preserve_objstm,
 
 def toMemory(pdf, linearize, make_id):
     """Given a buffer of the correct size, toMemory (pdf, linearize,
-    make_id) writes it and returns the buffer of type FIXME."""
+    make_id) writes it and returns the buffer as a byte array of type bytes."""
     length = c_int32()
     data = libc.pycpdf_toMemory(pdf.pdf, linearize, make_id, byref(length))
     out_data = create_string_buffer(length.value)
@@ -535,7 +540,7 @@ def isEncrypted(pdf):
     checkerror()
     return r
 
-
+"""Permissions."""
 noEdit = 0
 noPrint = 1
 noCopy = 2
@@ -545,6 +550,7 @@ noExtract = 5
 noAssemble = 6
 noHqPrint = 7
 
+"""Encryption Methods."""
 pdf40bit = 0
 pdf128bit = 1
 aes128bitfalse = 2
@@ -698,9 +704,11 @@ def scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale):
     checkerror()
 
 
+"""Positions with two numbers in a tuple e.g (posLeft, 10.0, 20.0):"""
 posCentre = 0
 posLeft = 1
 posRight = 2
+"""Positions with one number in a tuple e.g (top, 5.0):"""
 top = 3
 topLeft = 4
 topRight = 5
@@ -708,15 +716,16 @@ left = 6
 bottomLeft = 7
 bottomRight = 8
 right = 9
+"""Positions with no numbers e.g diagonal:"""
 diagonal = 10
 reverseDiagonal = 11
 
 
 def tripleOfPosition(p):
-    if p[0] == diagonal:
-        return (p[0], 0.0, 0.0)
-    if p[0] == reverseDiagonal:
-        return (p[0], 0.0, 0.0)
+    if p == diagonal:
+        return (p, 0.0, 0.0)
+    if p == reverseDiagonal:
+        return (p, 0.0, 0.0)
     if p[0] == top:
         return (p[0], p[1], 0.0)
     if p[0] == topLeft:
@@ -739,12 +748,12 @@ def tripleOfPosition(p):
         return (p[0], p[1], p[2])
 
 
-def scaleContents(pdf, r, p, scale):
+def scaleContents(pdf, r, pos, scale):
     """scaleContents(pdf, range, position, scale) scales the contents of the
     pages in the range about the point given by the position, by the
-    scale given. FIXME positions"""
+    scale given."""
     r = range_of_list(r)
-    a, b, c = tripleOfPosition(p)
+    a, b, c = tripleOfPosition(pos)
     libc.pycpdf_scaleContents(pdf.pdf, r, a, b, c, scale)
     deleteRange(r)
     checkerror()
@@ -986,7 +995,22 @@ def combinePages(pdf, pdf2):
     checkerror()
     return Pdf(output)
 
+"""Fonts."""
+timesRoman = 0
+timesBold = 1
+timesItalic = 2
+timesBoldItalic = 3
+helvetica = 4
+helveticaBold = 5
+helveticaOblique = 6
+helveticaBoldOblique = 7
+courier = 8
+courierBold = 9
+courierOblique = 10
+courierBoldOblique = 11
 
+
+"""Jusitifications."""
 leftJustify = 0
 centreJustify = 1
 rightJustify = 2
@@ -1084,20 +1108,6 @@ def removeText(pdf, r):
     libc.pycpdf_removeText(pdf.pdf, r)
     deleteRange(r)
     checkerror()
-
-
-timesRoman = 0
-timesBold = 1
-timesItalic = 2
-timesBoldItalic = 3
-helvetica = 4
-helveticaBold = 5
-helveticaOblique = 6
-helveticaBoldOblique = 7
-courier = 8
-courierBold = 9
-courierOblique = 10
-courierBoldOblique = 11
 
 
 def textWidth(font, string):
@@ -1644,7 +1654,7 @@ def markUntrappedXMP(pdf):
     checkerror()
     return
 
-
+"""Page layouts."""
 singlePage = 0
 oneColumn = 1
 twoColumnLeft = 2
@@ -1659,7 +1669,7 @@ def setPageLayout(pdf, layout):
     checkerror()
     return
 
-
+"""Page modes."""
 useNone = 0
 useOutlines = 1
 useThumbs = 2
@@ -1740,8 +1750,8 @@ def setMetadataFromByteArray(pdf, data):
 
 
 def getMetadata(pdf):
-    """getMetadata(pdf, &length) returns the XMP metadata and fills in
-    length."""
+    """getMetadata(pdf, &length) returns the XMP metadata as a byte array of
+    type bytes"""
     length = c_int32()
     data = libc.pycpdf_getMetadata(pdf.pdf, byref(length))
     out_data = create_string_buffer(length.value)
@@ -1774,7 +1784,7 @@ def setMetadataDate(pdf, date):
     checkerror()
     return
 
-
+"""Label styles."""
 decimalArabic = 0
 uppercaseRoman = 1
 lowercaseRoman = 2
@@ -1883,7 +1893,7 @@ def removeAttachedFiles(pdf):
 
 def getAttachments(pdf):
     """List information about attachements. Returns a list of tuples
-    (name, page number, data)"""
+    (name, page number, byte array of data)"""
     libc.pycpdf_startGetAttachments(pdf.pdf)
     n = libc.pycpdf_numberGetAttachments()
     l = []
