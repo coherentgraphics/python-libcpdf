@@ -1,15 +1,11 @@
 """Pycpdf: a python interface to cpdf.
 
-Before using the library, you must do two things:
-
-1. Load the libpycpdf and libcpdf DLLs. This is achieved with the
-pycpdf.loadDLL function, given the filename or full path of the libpycpdf DLL.
-On Windows, you may have to call os.add_dll_directory first. On MacOS, you may
-need to give the full path, and you may need to install libcpdf.so in a
-standard location /usr/local/lib/, or use the install_name_tool command to tell
-libpycpdf.so where to find libcpdf.so.
-
-2. Call pycpdf.startup() to initialise the library.
+Before using the library, you must load the libpycpdf and libcpdf DLLs. This is
+achieved with the pycpdf.loadDLL function, given the filename or full path of
+the libpycpdf DLL.  On Windows, you may have to call os.add_dll_directory
+first. On MacOS, you may need to give the full path, and you may need to
+install libcpdf.so in a standard location /usr/local/lib/, or use the
+install_name_tool command to tell libpycpdf.so where to find libcpdf.so.
 
 A 'range' is a list of integers specifying page numbers.
 
@@ -118,6 +114,16 @@ def loadDLL(f):
         c_int, c_int, c_int, c_int, c_int, c_int, c_double, c_double, c_int]
     libc.pycpdf_getImageResolutionXRes.restype = c_double
     libc.pycpdf_getImageResolutionYRes.restype = c_double
+    LP_c_char = POINTER(c_char)
+    LP_LP_c_char = POINTER(LP_c_char)
+    argc = len(sys.argv)
+    argv = (LP_c_char * (argc + 1))()
+    for i, arg in enumerate(sys.argv):
+        enc_arg = arg.encode('utf-8')
+        argv[i] = create_string_buffer(enc_arg)
+    libc.pycpdf_startup.argtypes = [LP_LP_c_char]
+    libc.pycpdf_startup(argv)
+    checkerror()
 
 
 class CPDFError(Exception):
@@ -131,13 +137,13 @@ class CPDFError(Exception):
 
 def lastError():
     """Return the last error. Not usually used directly, since pycpdflib
-    functions raise exceptions"""
+    functions raise exceptions."""
     return libc.pycpdf_lastError()
 
 
 def lastErrorString():
     """Return the last error string. Not usually used directly, since pycpdflib
-    functions raise exceptions"""
+    functions raise exceptions."""
     return string_at(libc.pycpdf_lastErrorString()).decode()
 
 
@@ -153,23 +159,8 @@ def checkerror():
 # CHAPTER 0. Preliminaries
 
 
-def startup():
-    """To be called after loadDLL, before any other function. Sets up
-    pycpdflib."""
-    LP_c_char = POINTER(c_char)
-    LP_LP_c_char = POINTER(LP_c_char)
-    argc = len(sys.argv)
-    argv = (LP_c_char * (argc + 1))()
-    for i, arg in enumerate(sys.argv):
-        enc_arg = arg.encode('utf-8')
-        argv[i] = create_string_buffer(enc_arg)
-    libc.pycpdf_startup.argtypes = [LP_LP_c_char]
-    libc.pycpdf_startup(argv)
-    checkerror()
-
-
 def version():
-    """Returns the version number of the pycpdflib library"""
+    """Returns the version number of the pycpdflib library."""
     v = string_at(libc.pycpdf_version()).decode()
     checkerror()
     return v
@@ -491,7 +482,7 @@ def rangeAdd(r, p):
 
 
 def isInRange(r, p):
-    """isInRange(range, page) returns true if the page is in the range, false
+    """isInRange(range, page) returns True if the page is in the range, False
     otherwise."""
     rn = range_of_list(r)
     r2 = libc.pycpdf_isInRange(rn, p)
@@ -518,7 +509,7 @@ def pagesFast(userpw, filename):
 
 def toFile(pdf, filename, linearize, make_id):
     """toFile (pdf, filename, linearize, make_id) writes the file to a given
-    filename. If linearize is true, it will be linearized. If make_id is true,
+    filename. If linearize is True, it will be linearized. If make_id is True,
     it will be given a new ID."""
     libc.pycpdf_toFile(pdf.pdf, str.encode(filename), False, False)
     checkerror()
@@ -528,10 +519,10 @@ def toFileExt(pdf, filename, linearize, make_id, preserve_objstm,
               generate_objstm, compress_objstm):
     """toFileExt (pdf, filename, linearize, make_id, preserve_objstm,
     generate_objstm, compress_objstm) writes the file to a given filename. If
-    make_id is true, it will be given a new ID.  If preserve_objstm is true,
-    existing object streams will be preserved. If generate_objstm is true,
+    make_id is True, it will be given a new ID.  If preserve_objstm is True,
+    existing object streams will be preserved. If generate_objstm is True,
     object streams will be generated even if not originally present. If
-    compress_objstm is true, object streams will be compressed (what we usually
+    compress_objstm is True, object streams will be compressed (what we usually
     want). WARNING: the pdf argument will be invalid after this call and should
     not be used again."""
     libc.pycpdf_toFileExt(pdf.pdf, str.encode(filename), linearize, make_id,
@@ -621,7 +612,7 @@ def decryptPdfOwner(pdf, ownerpw):
 
 
 def hasPermission(pdf, perm):
-    """hasPermission(pdf, permission) returns true if the given permission
+    """hasPermission(pdf, permission) returns True if the given permission
     (restriction) is present."""
     r = libc.pycpdf_hasPermission(pdf.pdf, perm)
     checkerror()
@@ -650,8 +641,8 @@ def mergeSimple(pdfs):
 
 def merge(pdfs, retain_numbering, remove_duplicate_fonts):
     """merge(pdfs, retain_numbering, remove_duplicate_fonts) merges
-    the list of PDFs. If retain_numbering is true page labels are not
-    rewritten. If remove_duplicate_fonts is true, duplicate fonts are merged.
+    the list of PDFs. If retain_numbering is True page labels are not
+    rewritten. If remove_duplicate_fonts is True, duplicate fonts are merged.
     This is useful when the source documents for merging originate from the
     same source."""
     raw_pdfs = map(lambda p: p.pdf, pdfs)
@@ -990,10 +981,10 @@ def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos,
                   relative_to_cropbox):
     """stampExtended(pdf, pdf2, range, isover, scale_stamp_to_fit, pos,
     relative_to_cropbox) is a stamping function with extra features.
-     - isover true, pdf goes over pdf2, isover false, pdf goes under pdf2
+     - isover True, pdf goes over pdf2, isover False, pdf goes under pdf2
      - scale_stamp_to_fit scales the stamp to fit the page
      - pos gives the position to put the stamp
-     - relative_to_cropbox: if true, pos is relative to cropbox not mediabox"""
+     - relative_to_cropbox: if True, pos is relative to cropbox not mediabox"""
     r = range_of_list(r)
     a, b, c = tripleOfPosition(pos)
     libc.pycpdf_stampExtended(pdf.pdf, pdf2.pdf, r, isover, scale_stamp_to_fit,
@@ -1021,7 +1012,7 @@ def addText(metrics, pdf, r, text, p, line_spacing, bates, font, size, red,
             embed_fonts):
     """Adding text. Adds text to a PDF, if the characters exist in the font.
 
-         * metrics: If true, don't actually add text but collect metrics.
+         * metrics: If True, don't actually add text but collect metrics.
          * pdf:	Document
          * r: Page Range
          * text: The text to add
@@ -1033,15 +1024,15 @@ def addText(metrics, pdf, r, text, p, line_spacing, bates, font, size, red,
          * red: Red component of colour, 0.0 - 1.0
          * green: Green component of colour, 0.0 - 1.0
          * blue: Blue component of colour, 0.0 - 1.0
-         * underneath: If true, text is added underneath rather than on top
-         * relative_to_cropbox: If true, position is relative to crop box not
+         * underneath: If True, text is added underneath rather than on top
+         * relative_to_cropbox: If True, position is relative to crop box not
            media box
-         * outline: If true, text is outline rather than filled
+         * outline: If True, text is outline rather than filled
          * opacity: Opacity, 1.0 = opaque, 0.0 = wholly transparent
          * justification: Justification
-         * midline: If true, position is relative to midline of text, not
+         * midline: If True, position is relative to midline of text, not
            baseline
-         * topline: If true, position is relative to topline of text, not
+         * topline: If True, position is relative to topline of text, not
            baseline
          * filename: filename that this document was read from (optional)
          * line_width: line width
@@ -1132,6 +1123,9 @@ def textWidth(font, string):
 
 
 def addContent(content, before, pdf, r):
+    """addContent(content, before, range, pdf) adds page content before (if
+    True) or after (if False) the existing content to pages in the given range
+    in the given PDF."""
     r = range_of_list(r)
     libc.pycpdf_addContent(str.encode(content), before, pdf.pdf, r)
     deleteRange(r)
@@ -1139,6 +1133,9 @@ def addContent(content, before, pdf, r):
 
 
 def stampAsXObject(pdf, r, stamp_pdf):
+    """stampAsXObject(pdf, range, stamp_pdf) stamps stamp_pdf onto the pages
+    in the given range in pdf as a shared Form XObject. The name of the
+    newly-created XObject is returned."""
     r = range_of_list(r)
     r2 = string_at(libc.pycpdf_stampAsXObject(
         pdf.pdf, r, stamp_pdf.pdf)).decode()
@@ -1507,7 +1504,7 @@ def getPageRotation(pdf, pagenumber):
 
 
 def hasBox(pdf, pagenumber, boxname):
-    """hasBox(pdf, pagenumber, boxname) returns true, if that page has the
+    """hasBox(pdf, pagenumber, boxname) returns True, if that page has the
     given box. E.g "/CropBox" """
     r = libc.pycpdf_hasBox(pdf.pdf, pagenumber, str.encode(boxname))
     checkerror()
@@ -1978,6 +1975,10 @@ def copyFont(pdf, pdf2, r, pagenumber, fontname):
 
 
 def outputJSON(filename, parse_content, no_stream_data, pdf):
+    """outputJSON(filename, parse_content, no_stream_data, pdf) outputs a PDF
+    in JSON format to the given filename. If parse_content is True, page
+    content is parsed. If no_stream_data is True, all stream data is suppressed
+    entirely."""
     libc.pycpdf_outputJSON(str.encode(filename),
                            parse_content, no_stream_data, pdf.pdf)
     checkerror()
@@ -1985,17 +1986,8 @@ def outputJSON(filename, parse_content, no_stream_data, pdf):
 # CHAPTER 16. Optional Content Groups
 
 
-def OCGCoalesce(pdf):
-    libc.pycpdf_OCGCoalesce(pdf.pdf)
-    checkerror()
-
-
-def OCGRename(pdf, n_from, n_to):
-    libc.pycpdf_OCGRename(pdf.pdf, str.encode(n_from), str.encode(n_to))
-    checkerror()
-
-
 def getOCGList(pdf):
+    """Return a list of Optional Content Groups in the given pdf."""
     l = []
     n = libc.pycpdf_startGetOCGList(pdf.pdf)
     for x in range(n):
@@ -2005,8 +1997,24 @@ def getOCGList(pdf):
     return l
 
 
+def OCGRename(pdf, n_from, n_to):
+    """OCGRename(pdf, n_from, n_to) will rename an optional content group."""
+    libc.pycpdf_OCGRename(pdf.pdf, str.encode(n_from), str.encode(n_to))
+    checkerror()
+
+
 def OCGOrderAll(pdf):
+    """Ensure that every optional content group appears in the OCG order list."""
     libc.pycpdf_OCGOrderAll(pdf.pdf)
+    checkerror()
+
+
+def OCGCoalesce(pdf):
+    """Coalesce optional content groups. For example, if we merge or stamp two
+    files both with an OCG called "Layer 1", we will have two different
+    optional content groups. This function will merge the two into a single
+    optional content group."""
+    libc.pycpdf_OCGCoalesce(pdf.pdf)
     checkerror()
 
 

@@ -31,10 +31,6 @@ def fatal_prerr():
 def chapter0():
     print('***** CHAPTER 0. Preliminaries')
     print('---cpdf_startup()')
-    try:
-        pycpdf.startup()
-    except:
-        prerr()
     print('---cpdf_version()')
     try:
         print('version = ' + pycpdf.version())
