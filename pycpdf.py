@@ -20,6 +20,7 @@ import sys
 
 libc = None
 
+# CHAPTER 0. Preliminaries
 
 class Pdf:
     """The type of PDF documents."""
@@ -30,7 +31,6 @@ class Pdf:
 
     def __del__(self):
         libc.pycpdf_deletePdf(self.pdf)
-
 
 def loadDLL(f):
     """Load the libpycpdf DLL from a given file, and set up pycpdflib."""
@@ -158,7 +158,7 @@ def checkerror():
         clearError()
         raise CPDFError(s)
 
-# CHAPTER 0. Preliminaries
+
 
 
 def version():
@@ -887,7 +887,7 @@ def hardBox(pdf, r, boxname):
 
 # CHAPTER 4. Encryption
 
-# Encryption covered under Chapter 1 in cpdflib
+# Encryption covered under Chapter 1 in pycpdflib
 
 # CHAPTER 5. Compression
 
@@ -1914,7 +1914,8 @@ def getAttachments(pdf):
 
 def getImageResolution(pdf, min_required_resolution):
     """Return a list of all uses of images in the PDF which do not meet the
-    minimum required resolution in dpi"""
+    minimum required resolution in dpi as tuples of:
+    (pagenumber, name, x pixels, y pixels, x resolution, y resolution)"""
     n = libc.pycpdf_startGetImageResolution(pdf.pdf, min_required_resolution)
     l = []
     for x in range(n):
