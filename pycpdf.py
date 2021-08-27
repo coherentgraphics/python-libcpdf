@@ -130,7 +130,7 @@ def loadDLL(f):
 
 class CPDFError(Exception):
     """Any function may raise an exception CPDFError, carrying a string
-    describing what went wrong"""
+    describing what went wrong."""
 
     def __init__(self, message):
         self.message = message
