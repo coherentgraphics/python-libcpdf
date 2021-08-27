@@ -22,6 +22,7 @@ libc = None
 
 # CHAPTER 0. Preliminaries
 
+
 class Pdf:
     """The type of PDF documents."""
     pdf = -1
@@ -31,6 +32,7 @@ class Pdf:
 
     def __del__(self):
         libc.pycpdf_deletePdf(self.pdf)
+
 
 def loadDLL(f):
     """Load the libpycpdf DLL from a given file, and set up pycpdflib."""
@@ -157,8 +159,6 @@ def checkerror():
         s = lastErrorString()
         clearError()
         raise CPDFError(s)
-
-
 
 
 def version():
@@ -538,6 +538,7 @@ def isEncrypted(pdf):
     r = libc.pycpdf_isEncrypted(pdf.pdf)
     checkerror()
     return r
+
 
 """Permissions."""
 noEdit = 0
@@ -975,6 +976,7 @@ def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos,
                   relative_to_cropbox):
     """stampExtended(pdf, pdf2, range, isover, scale_stamp_to_fit, pos,
     relative_to_cropbox) is a stamping function with extra features.
+
      - isover True, pdf goes over pdf2, isover False, pdf goes under pdf2
      - scale_stamp_to_fit scales the stamp to fit the page
      - pos gives the position to put the stamp
@@ -993,6 +995,7 @@ def combinePages(pdf, pdf2):
     output = libc.pycpdf_combinePages(pdf.pdf, pdf2.pdf)
     checkerror()
     return Pdf(output)
+
 
 """Fonts."""
 timesRoman = 0
@@ -1653,6 +1656,7 @@ def markUntrappedXMP(pdf):
     checkerror()
     return
 
+
 """Page layouts."""
 singlePage = 0
 oneColumn = 1
@@ -1667,6 +1671,7 @@ def setPageLayout(pdf, layout):
     libc.pycpdf_setPageLayout(pdf.pdf, layout)
     checkerror()
     return
+
 
 """Page modes."""
 useNone = 0
@@ -1782,6 +1787,7 @@ def setMetadataDate(pdf, date):
     libc.pycpdf_setMetadataDate(pdf.pdf, str.encode(date))
     checkerror()
     return
+
 
 """Label styles."""
 decimalArabic = 0
