@@ -1488,7 +1488,7 @@ def hasBox(pdf, pagenumber, boxname):
 
 
 def getMediaBox(pdf, pagenumber):
-    """These functions get a box given the document, page range, min x, max x,
+    """Get a mediabox box given the document, page range, min x, max x,
     min y, max y in points. Only suceeds if such a box exists, as checked by
     hasBox"""
     minx = c_double(0.0)
@@ -1502,7 +1502,7 @@ def getMediaBox(pdf, pagenumber):
 
 
 def getCropBox(pdf, pagenumber):
-    """These functions get a box given the document, page range, min x, max x,
+    """Get a crop box given the document, page range, min x, max x,
     min y, max y in points. Only suceeds if such a box exists, as checked by
     hasBox"""
     minx = c_double(0.0)
@@ -1516,7 +1516,7 @@ def getCropBox(pdf, pagenumber):
 
 
 def getTrimBox(pdf, pagenumber):
-    """These functions get a box given the document, page range, min x, max x,
+    """Get a trim box given the document, page range, min x, max x,
     min y, max y in points. Only suceeds if such a box exists, as checked by
     hasBox"""
     minx = c_double(0.0)
@@ -1530,7 +1530,7 @@ def getTrimBox(pdf, pagenumber):
 
 
 def getArtBox(pdf, pagenumber):
-    """These functions get a box given the document, page range, min x, max x,
+    """Get an art box given the document, page range, min x, max x,
     min y, max y in points. Only suceeds if such a box exists, as checked by
     hasBox"""
     minx = c_double(0.0)
@@ -1544,7 +1544,7 @@ def getArtBox(pdf, pagenumber):
 
 
 def getBleedBox(pdf, pagenumber):
-    """These functions get a box given the document, page range, min x, max x,
+    """Get a bleed box given the document, page range, min x, max x,
     min y, max y in points. Only suceeds if such a box exists, as checked by
     hasBox"""
     minx = c_double(0.0)
@@ -1558,7 +1558,7 @@ def getBleedBox(pdf, pagenumber):
 
 
 def setMediaBox(pdf, r, minx, maxx, miny, maxy):
-    """These functions set a box given the document, page range, min x, max x,
+    """Set the media box given the document, page range, min x, max x,
     min y, max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setMediaBox(pdf.pdf, rn, minx, maxx, miny, maxy)
@@ -1568,7 +1568,7 @@ def setMediaBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def setCropBox(pdf, r, minx, maxx, miny, maxy):
-    """These functions set a box given the document, page range, min x, max x,
+    """Set the crop box given the document, page range, min x, max x,
     min y, max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setCropBox(pdf.pdf, rn, minx, maxx, miny, maxy)
@@ -1578,7 +1578,7 @@ def setCropBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def setTrimBox(pdf, r, minx, maxx, miny, maxy):
-    """These functions set a box given the document, page range, min x, max x,
+    """Set the trim box given the document, page range, min x, max x,
     min y, max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setTrimBox(pdf.pdf, rn, minx, maxx, miny, maxy)
@@ -1588,7 +1588,7 @@ def setTrimBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def setArtBox(pdf, r, minx, maxx, miny, maxy):
-    """These functions set a box given the document, page range, min x, max x,
+    """Set the art box given the document, page range, min x, max x,
     min y, max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setArtBox(pdf.pdf, rn, minx, maxx, miny, maxy)
@@ -1598,7 +1598,7 @@ def setArtBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def setBleedBox(pdf, r, minx, maxx, miny, maxy):
-    """These functions set a box given the document, page range, min x, max x,
+    """Set the bleed box given the document, page range, min x, max x,
     min y, max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setBleedBox(pdf.pdf, rn, minx, maxx, miny, maxy)
@@ -1608,28 +1608,28 @@ def setBleedBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def markTrapped(pdf):
-    """markTrapped(pdf) marks a document as trapped."""
+    """Mark a document as trapped."""
     libc.pycpdf_markTrapped(pdf.pdf)
     checkerror()
     return
 
 
 def markUntrapped(pdf):
-    """markUntrapped(pdf) marks a document as untrapped."""
+    """Mark a document as untrapped."""
     libc.pycpdf_markUntrapped(pdf.pdf)
     checkerror()
     return
 
 
 def markTrappedXMP(pdf):
-    """markTrappedXMP(pdf) marks a document as trapped in XMP metadata."""
+    """Mark a document as trapped in XMP metadata."""
     libc.pycpdf_markTrappedXMP(pdf.pdf)
     checkerror()
     return
 
 
 def markUntrappedXMP(pdf):
-    """markUntrappedXMP(pdf) marks a document as untrapped in XMP metadata."""
+    """Mark a document as untrapped in XMP metadata."""
     libc.pycpdf_markUntrappedXMP(pdf.pdf)
     checkerror()
     return
@@ -1645,7 +1645,7 @@ twoPageRight = 5
 
 
 def setPageLayout(pdf, layout):
-    """setPageLayout(pdf, layout) sets the page layout for a document."""
+    """Set the page layout for a document."""
     libc.pycpdf_setPageLayout(pdf.pdf, layout)
     checkerror()
     return
@@ -1660,80 +1660,77 @@ useAttachments = 4
 
 
 def setPageMode(pdf, mode):
-    """setPageMode(pdf, mode) sets the page mode for a document."""
+    """Set the page mode for a document."""
     libc.pycpdf_setPageMode(pdf.pdf, mode)
     checkerror()
     return
 
 
 def hideToolbar(pdf, flag):
-    """hideToolbar(pdf, flag) sets the hide toolbar flag"""
+    """Sets the hide toolbar flag."""
     libc.pycpdf_hideToolbar(pdf.pdf, flag)
     checkerror()
     return
 
 
 def hideMenubar(pdf, flag):
-    """hideMenubar(pdf, flag) sets the hide menu bar flag"""
+    """Set the hide menu bar flag."""
     libc.pycpdf_hideMenubar(pdf.pdf, flag)
     checkerror()
     return
 
 
 def hideWindowUi(pdf, flag):
-    """hideWindowUi(pdf, flag) sets the hide window UI flag"""
+    """Set the hide window UI flag."""
     libc.pycpdf_hideWindowUi(pdf.pdf, flag)
     checkerror()
     return
 
 
 def fitWindow(pdf, flag):
-    """fitWindow(pdf, flag) sets the fit window flag"""
+    """Set the fit window flag."""
     libc.pycpdf_fitWindow(pdf.pdf, flag)
     checkerror()
     return
 
 
 def centerWindow(pdf, flag):
-    """centerWindow(pdf, flag) sets the center window flag"""
+    """Set the center window flag."""
     libc.pycpdf_centerWindow(pdf.pdf, flag)
     checkerror()
     return
 
 
 def displayDocTitle(pdf, flag):
-    """displayDocTitle(pdf, flag) sets the display doc title flag"""
+    """Set the display document title flag."""
     libc.pycpdf_displayDocTitle(pdf.pdf, flag)
     checkerror()
     return
 
 
-def openAtPage(pdf, flag, pagenumber):
-    """openAtPage(pdf, fit, pagenumber)"""
-    libc.pycpdf_openAtPage(pdf.pdf, flag, pagenumber)
+def openAtPage(pdf, fitflag, pagenumber):
+    """Set the PDF to open, possibly with zoom-to-fit, at the given page number. """
+    libc.pycpdf_openAtPage(pdf.pdf, fitflag, pagenumber)
     checkerror()
     return
 
 
 def setMetadataFromFile(pdf, filename):
-    """setMetadataFromFile(pdf, filename) set the XMP metadata of a document,
-    given a file name."""
+    """Set the XMP metadata of a document, given a file name."""
     libc.pycpdf_setMetadataFromFile(pdf.pdf, str.encode(filename))
     checkerror()
     return
 
 
 def setMetadataFromByteArray(pdf, data):
-    """setMetadataFromByteArray(pdf, data, length) set the XMP metadata from
-    an array of bytes."""
+    """Set the XMP metadata from an array of bytes."""
     libc.pycpdf_setMetadataFromByteArray(pdf.pdf, str.encode(data), len(data))
     checkerror()
     return
 
 
 def getMetadata(pdf):
-    """getMetadata(pdf, &length) returns the XMP metadata as a byte array of
-    type bytes"""
+    """Return the XMP metadata as a byte array of type bytes"""
     length = c_int32()
     data = libc.pycpdf_getMetadata(pdf.pdf, byref(length))
     out_data = create_string_buffer(length.value)
@@ -1744,14 +1741,14 @@ def getMetadata(pdf):
 
 
 def removeMetadata(pdf):
-    """removeMetadata(pdf) removes the XMP metadata from a document"""
+    """Remove the XMP metadata from a document"""
     libc.pycpdf_removeMetadata(pdf.pdf)
     checkerror()
     return
 
 
 def createMetadata(pdf):
-    """createMetadata(pdf) builds fresh metadata as best it can from existing
+    """Builds fresh XMP metadata as good as possible from existing
     metadata in the document."""
     libc.pycpdf_createMetadata(pdf.pdf)
     checkerror()
@@ -1759,9 +1756,8 @@ def createMetadata(pdf):
 
 
 def setMetadataDate(pdf, date):
-    """setMetadataDate(pdf, date) sets the metadata date for a PDF. The date
-    is given in PDF date format -- cpdf will convert it to XMP format. The date
-    'now' means now."""
+    """Set the metadata date for a PDF. The date is given in PDF date format --
+    cpdf will convert it to XMP format. The date 'now' means now."""
     libc.pycpdf_setMetadataDate(pdf.pdf, str.encode(date))
     checkerror()
     return
@@ -1780,17 +1776,19 @@ def getPageLabels(pdf):
 
     For example, a document might have five pages of introduction with roman
     numerals, followed by the rest of the pages in decimal arabic, numbered
-    from one:
+    from one. First label:
 
-    labelstyle = LowercaseRoman
-    labelprefix = ""
-    startpage = 1
-    startvalue = 1
+    * labelstyle = LowercaseRoman
+    * labelprefix = ""
+    * startpage = 1
+    * startvalue = 1
 
-    labelstyle = DecimalArabic
-    labelprefix = ""
-    startpage = 6
-    startvalue = 1 """
+    Second label:
+
+    * labelstyle = DecimalArabic
+    * labelprefix = ""
+    * startpage = 6
+    * startvalue = 1 """
     n = libc.pycpdf_startGetPageLabels(pdf.pdf)
     l = []
     for x in range(n):
@@ -1805,9 +1803,7 @@ def getPageLabels(pdf):
 
 
 def addPageLabels(pdf, label, progress):
-    """Add page labels.
-
-    addPageLabels(pdf, style, prefix, offset, range, progress)
+    """Add one group of page labels from a tuple (style, prefix, offset, range).
 
     The prefix is prefix text for each label. The range is the page range the
     labels apply to. Offset can be used to shift the numbering up or down."""
@@ -1821,15 +1817,14 @@ def addPageLabels(pdf, label, progress):
 
 
 def removePageLabels(pdf):
-    """removePageLabels(pdf) removes the page labels from the document."""
+    """Removes all page labels from the document."""
     libc.pycpdf_removePageLabels(pdf.pdf)
     checkerror()
     return
 
 
 def getPageLabelStringForPage(pdf, pagenumber):
-    """getPageLabelStringForPage(pdf, page number) calculates the full label
-    string for a given page, and returns it"""
+    """Calculate the full label string for a given page, and return it."""
     r = string_at(libc.pycpdf_getPageLabelStringForPage(
         pdf.pdf, pagenumber)).decode()
     checkerror()
@@ -1839,44 +1834,41 @@ def getPageLabelStringForPage(pdf, pagenumber):
 
 
 def attachFile(filename, pdf):
-    """attachFile(filename, pdf) attaches a file to the pdf. It is attached at
-    document level."""
+    """Attach a file to the pdf. It is attached at document level."""
     libc.pycpdf_attachFile(str.encode(filename), pdf.pdf)
     checkerror()
 
 
 def attachFileToPage(filename, pdf, pagenumber):
-    """attachFileToPage(filename, pdf, pagenumber) attaches a file, given its
-    file name, pdf, and the page number to which it should be attached."""
+    """Attach a file, given its file name, pdf, and the page number to which
+    it should be attached."""
     libc.pycpdf_attachFileToPage(str.encode(filename), pdf.pdf, pagenumber)
     checkerror()
 
 
 def attachFileFromMemory(data, filename, pdf):
-    """attachFileFromMemory(memory, length, filename, pdf) attaches from
-    memory, just like attachFile."""
+    """Attach a file from a byte array. It is attached at document level."""
     libc.pycpdf_attachFileFromMemory(
         data, len(data), str.encode(filename), pdf.pdf)
     checkerror()
 
 
 def attachFileToPageFromMemory(data, filename, pdf, pagenumber):
-    """attachFileToPageFromMemory(memory, length, filename, pdf, pagenumber)
-    attaches from memory, just like attachFileToPage."""
+    """Attach a file to a given pag from a byte array. It is attached at document level."""
     libc.pycpdf_attachFileToPageFromMemory(
         data, len(data), str.encode(filename), pdf.pdf, pagenumber)
     checkerror()
 
 
 def removeAttachedFiles(pdf):
-    """Remove all page- and document-level attachments from a document"""
+    """Remove all page- and document-level attachments from a document."""
     libc.pycpdf_removeAttachedFiles(pdf.pdf)
     checkerror()
 
 
 def getAttachments(pdf):
     """List information about attachements. Returns a list of tuples
-    (name, page number, byte array of data)"""
+    (name, page number, byte array of data). Page 0 = document-level attachment."""
     libc.pycpdf_startGetAttachments(pdf.pdf)
     n = libc.pycpdf_numberGetAttachments()
     l = []
@@ -1899,7 +1891,7 @@ def getAttachments(pdf):
 def getImageResolution(pdf, min_required_resolution):
     """Return a list of all uses of images in the PDF which do not meet the
     minimum required resolution in dpi as tuples of:
-    (pagenumber, name, x pixels, y pixels, x resolution, y resolution)"""
+    (pagenumber, name, x pixels, y pixels, x resolution, y resolution)."""
     n = libc.pycpdf_startGetImageResolution(pdf.pdf, min_required_resolution)
     l = []
     for x in range(n):
@@ -1936,15 +1928,14 @@ def getFontInfo(pdf):
 
 
 def removeFonts(pdf):
-    """removeFonts(pdf) removes all font data from a file."""
+    """Remove all font data from a file."""
     libc.pycpdf_removeFonts(pdf.pdf)
     checkerror()
 
 
 def copyFont(pdf, pdf2, r, pagenumber, fontname):
-    """copyFont(from, to, range, pagenumber, fontname) copies the given font
-    from the given page in the 'from' PDF to every page in the 'to' PDF. The
-    new font is stored under it's font name."""
+    """Copy the given font from the given page in the pdf PDF to every page in
+    the pdf2 PDF. The new font is stored under its font name."""
     r = range_of_list(r)
     libc.pycpdf_copyFont(pdf.pdf, pdf2.pdf, r,
                          pagenumber, str.encode(fontname))
@@ -1955,10 +1946,9 @@ def copyFont(pdf, pdf2, r, pagenumber, fontname):
 
 
 def outputJSON(filename, parse_content, no_stream_data, pdf):
-    """outputJSON(filename, parse_content, no_stream_data, pdf) outputs a PDF
-    in JSON format to the given filename. If parse_content is True, page
-    content is parsed. If no_stream_data is True, all stream data is suppressed
-    entirely."""
+    """Output a PDF in JSON format to the given filename. If parse_content is
+    True, page content is parsed. If no_stream_data is True, all stream data is
+    suppressed entirely."""
     libc.pycpdf_outputJSON(str.encode(filename),
                            parse_content, no_stream_data, pdf.pdf)
     checkerror()
@@ -1967,7 +1957,7 @@ def outputJSON(filename, parse_content, no_stream_data, pdf):
 
 
 def getOCGList(pdf):
-    """Return a list of Optional Content Groups in the given pdf."""
+    """Return a list of Optional Content Groups in the given pdf as strings."""
     l = []
     n = libc.pycpdf_startGetOCGList(pdf.pdf)
     for x in range(n):
@@ -1978,7 +1968,7 @@ def getOCGList(pdf):
 
 
 def OCGRename(pdf, n_from, n_to):
-    """OCGRename(pdf, n_from, n_to) will rename an optional content group."""
+    """Rename an optional content group."""
     libc.pycpdf_OCGRename(pdf.pdf, str.encode(n_from), str.encode(n_to))
     checkerror()
 
@@ -2002,8 +1992,8 @@ def OCGCoalesce(pdf):
 
 
 def draft(pdf, r, boxes):
-    """draft(pdf, range, boxes) removes images on the given pages, replacing
-    them with crossed boxes if 'boxes' is true"""
+    """Remove images on the given pages, replacing
+    them with crossed boxes if 'boxes' is True."""
     r = range_of_list(r)
     libc.pycpdf_draft(pdf.pdf, r, boxes)
     deleteRange(r)
@@ -2011,8 +2001,7 @@ def draft(pdf, r, boxes):
 
 
 def removeAllText(pdf, r):
-    """removeAllText(pdf, range) removes all text from the given pages in a
-    given document."""
+    """Remove all text from the given pages in a document."""
     r = range_of_list(r)
     libc.pycpdf_removeAllText(pdf.pdf, r)
     deleteRange(r)
@@ -2020,7 +2009,7 @@ def removeAllText(pdf, r):
 
 
 def blackText(pdf, r):
-    """blackText(pdf, range) blackens all text on the given pages."""
+    """Blacken all text on the given pages."""
     r = range_of_list(r)
     libc.pycpdf_blackText(pdf.pdf, r)
     deleteRange(r)
@@ -2028,7 +2017,7 @@ def blackText(pdf, r):
 
 
 def blackLines(pdf, r):
-    """blackLines(pdf, range) blackens all lines on the given pages."""
+    """Blacken all lines on the given pages."""
     r = range_of_list(r)
     libc.pycpdf_blackLines(pdf.pdf, r)
     deleteRange(r)
@@ -2036,7 +2025,7 @@ def blackLines(pdf, r):
 
 
 def blackFills(pdf, r):
-    """blackFills(pdf, range) blackens all fills on the given pages."""
+    """Blacken all fills on the given pages."""
     r = range_of_list(r)
     libc.pycpdf_blackFills(pdf.pdf, r)
     deleteRange(r)
@@ -2044,8 +2033,8 @@ def blackFills(pdf, r):
 
 
 def thinLines(pdf, r, linewidth):
-    """thinLines(pdf, range, min_thickness) thickens every line less than
-    min_thickness to min_thickness. Thickness given in points."""
+    """Thicken every line less than
+    linewidth to linewidth. Thickness given in points."""
     r = range_of_list(r)
     libc.pycpdf_thinLines(pdf.pdf, r, linewidth)
     deleteRange(r)
@@ -2053,40 +2042,39 @@ def thinLines(pdf, r, linewidth):
 
 
 def copyId(pdf, pdf2):
-    """copyId(from, to) copies the /ID from one document to another."""
+    """Copy the /ID from one pdf to pdf2."""
     libc.pycpdf_copyId(pdf.pdf, pdf2.pdf)
     checkerror()
 
 
 def removeId(pdf):
-    """removeId(pdf) removes a document's /ID"""
+    """Remove a document's /ID"""
     libc.pycpdf_removeId(pdf.pdf)
     checkerror()
 
 
 def setVersion(pdf, version):
-    """setVersion(pdf, version) sets the minor version number of a document."""
+    """Set the minor version number of a document."""
     libc.pycpdf_setVersion(pdf.pdf, version)
     checkerror()
 
 
 def setFullVersion(pdf, major, minor):
-    """setFullVersion(pdf, version) sets the major and minor version number of
+    """Set the major and minor version number of
     a document."""
     libc.pycpdf_setFullVersion(pdf.pdf, major, minor)
     checkerror()
 
 
 def removeDictEntry(pdf, key):
-    """removeDictEntry(pdf, key) removes any dictionary entry with the given
-    key anywhere in the document"""
+    """Remove any dictionary entry with the given
+    key anywhere in the document."""
     libc.pycpdf_removeDictEntry(pdf.pdf, str.encode(key))
     checkerror()
 
 
 def removeClipping(pdf, r):
-    """removeClipping(pdf, range) removes all clipping from pages in the given
-    range"""
+    """Remove all clipping from pages in the given range"""
     r = range_of_list(r)
     libc.pycpdf_removeClipping(pdf.pdf, r)
     deleteRange(r)
