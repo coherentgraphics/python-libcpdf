@@ -501,7 +501,7 @@ def toFile(pdf, filename, linearize, make_id):
 
 def toFileExt(pdf, filename, linearize, make_id, preserve_objstm,
               generate_objstm, compress_objstm):
-    """Write the file to a given filename. If If linearize is True, it will be
+    """Write the file to a given filename. If linearize is True, it will be
     linearized, if supported by libcpdf. If make_id is True, it will be given a
     new ID.  If preserve_objstm is True, existing object streams will be
     preserved. If generate_objstm is True, object streams will be generated
@@ -555,9 +555,10 @@ aes256bitisotrue = 7
 
 def toFileEncrypted(pdf, method, permissions, ownerpw, userpw, linearize,
                     makeid, filename):
-    """toFileEncrypted(pdf, encryption_method, permissions, permission_length,
-    owner_password, user password, linearize, makeid, filename) writes a file
-    as encrypted."""
+    """Write the file to a given filename encrypted with the given encryption
+    method, permissions list, and owener and user passwords. If linearize is
+    True, it will be linearized, if supported by libcpdf. If make_id is True,
+    it will be given a new ID."""
     c_perms = (c_uint8 * len(permissions))(*permissions)
     libc.pycpdf_toFileEncrypted(pdf.pdf, method, c_perms, len(permissions),
                                 str.encode(ownerpw), str.encode(userpw),
@@ -568,10 +569,14 @@ def toFileEncrypted(pdf, method, permissions, ownerpw, userpw, linearize,
 def toFileEncryptedExt(pdf, method, permissions, ownerpw, userpw, linearize,
                        makeid, preserve_objstm, generate_objstm,
                        compress_objstm, filename):
-    """toFileEncryptedExt(pdf, encryption_method, permissions,
-    permission_length, owner_password, user_password, linearize, makeid,
-    preserve_objstm, generate_objstm, compress_objstm, filename) WARNING: the
-    pdf argument will be invalid after this call, and should be discarded."""
+    """Write the file to a given filename encrypted with the given encryption
+    method, permissions list, and owener and user passwords. If linearize is
+    True, it will be linearized, if supported by libcpdf. If make_id is True,
+    it will be given a new ID. If preserve_objstm is True, existing object
+    streams will be preserved. If generate_objstm is True, object streams will
+    be generated even if not originally present. If compress_objstm is True,
+    object streams will be compressed (what we usually want). WARNING: the pdf
+    argument will be invalid after this call and should not be used again."""
     c_perms = (c_uint8 * len(permissions))(*permissions)
     libc.pycpdf_toFileEncryptedExt(pdf.pdf, method, c_perms, len(permissions),
                                    str.encode(ownerpw), str.encode(userpw),
@@ -582,30 +587,28 @@ def toFileEncryptedExt(pdf, method, permissions, ownerpw, userpw, linearize,
 
 
 def decryptPdf(pdf, userpw):
-    """decryptPdf(pdf, userpw) attempts to decrypt a PDF using the given user
-    password."""
+    """Attempts to decrypt a PDF using the given user password. An exception is
+    raised in the event of a bad password."""
     libc.pycpdf_decryptPdf(pdf.pdf, str.encode(userpw))
     checkerror()
 
 
 def decryptPdfOwner(pdf, ownerpw):
-    """decryptPdfOwner(pdf, ownerpw) attempts to decrypt a PDF using the given
-    owner password."""
+    """Attempts to decrypt a PDF using the given owner password. An exception
+    is raised in the event of a bad password."""
     libc.pycpdf_decryptPdfOwner(pdf.pdf, str.encode(ownerpw))
     checkerror()
 
 
 def hasPermission(pdf, perm):
-    """hasPermission(pdf, permission) returns True if the given permission
-    (restriction) is present."""
+    """Returns True if the given permission (restriction) is present."""
     r = libc.pycpdf_hasPermission(pdf.pdf, perm)
     checkerror()
     return r
 
 
 def encryptionKind(pdf):
-    """encryptionMethod(pdf) return the encryption method currently in use on
-    a document."""
+    """Return the encryption method currently in use on a document."""
     r = libc.pycpdf_encryptionKind(pdf.pdf)
     checkerror()
     return r
@@ -614,8 +617,8 @@ def encryptionKind(pdf):
 
 
 def mergeSimple(pdfs):
-    """mergeSimple(pdfs), given a list of PDFs,
-    merges the files into a new one, which is returned."""
+    """Given a list of PDFs, merges the documents into a new PDF, which is
+    returned."""
     raw_pdfs = list(map(lambda p: p.pdf, pdfs))
     c_pdfs = (c_int * len(pdfs))(*raw_pdfs)
     r = Pdf(libc.pycpdf_mergeSimple(c_pdfs, len(pdfs)))
@@ -624,8 +627,7 @@ def mergeSimple(pdfs):
 
 
 def merge(pdfs, retain_numbering, remove_duplicate_fonts):
-    """merge(pdfs, retain_numbering, remove_duplicate_fonts) merges
-    the list of PDFs. If retain_numbering is True page labels are not
+    """Merges the list of PDFs. If retain_numbering is True page labels are not
     rewritten. If remove_duplicate_fonts is True, duplicate fonts are merged.
     This is useful when the source documents for merging originate from the
     same source."""
@@ -638,11 +640,10 @@ def merge(pdfs, retain_numbering, remove_duplicate_fonts):
 
 
 def mergeSame(pdfs, retain_numbering, remove_duplicate_fonts, ranges):
-    """mergeSame(pdfs, retain_numbering, remove_duplicate_fonts, ranges)
-    is the same as merge, except that it has an additional argument
-    - an array of page ranges. This is used to select the pages to pick from
+    """The same as merge, except that it has an additional argument
+    - a list of page ranges. This is used to select the pages to pick from
     each PDF. This avoids duplication of information when multiple discrete
-    parts of a source PDF are included."""
+    parts of a single source PDF are included."""
     ranges = list(map(range_of_list, ranges))
     raw_pdfs = map(lambda p: p.pdf, pdfs)
     c_pdfs = (c_int * len(pdfs))(*raw_pdfs)
@@ -656,8 +657,7 @@ def mergeSame(pdfs, retain_numbering, remove_duplicate_fonts, ranges):
 
 
 def selectPages(pdf, r):
-    """ selectPages(pdf, range) returns a new document which just those pages
-    in the page range."""
+    """ Returns a new document which just those pages in the page range."""
     rn = range_of_list(r)
     r = Pdf(libc.pycpdf_selectPages(pdf.pdf, rn))
     deleteRange(rn)
@@ -668,28 +668,28 @@ def selectPages(pdf, r):
 
 
 def scalePages(pdf, r, sx, sy):
-    """scalePages(pdf, range, x scale, y scale) scales the page dimensions
-    and content by the given scale, about (0, 0). Other boxes (crop etc. are
-    altered as appropriate)"""
+    """Scale the page dimensions and content of the given range of pages by
+    the given scale (sx, sy), about (0, 0). Other boxes (crop etc. are altered
+    as appropriate)."""
     r = range_of_list(r)
     libc.pycpdf_scalePages(pdf.pdf, r, sx, sy)
     deleteRange(r)
     checkerror()
 
 
-def scaleToFit(pdf, r, sx, sy, scale_to_fit_scale):
-    """scaleToFit(pdf, range, width height, scale) scales the content to fit
-    new page dimensions (width x height) multiplied by scale (typically 1.0).
-    Other boxed (crop etc. are altered as appropriate)"""
+def scaleToFit(pdf, r, w, h, scale_to_fit_scale):
+    """Scales the pages in the range to fit new page dimensions (w and h)
+    multiplied by scale_to_fit_scale (typically 1.0).  Other boxes (crop etc.)
+    are altered as appropriate."""
     r = range_of_list(r)
-    libc.pycpdf_scaleToFit(pdf.pdf, r, sx, sy, scale_to_fit_scale)
+    libc.pycpdf_scaleToFit(pdf.pdf, r, w, h, scale_to_fit_scale)
     deleteRange(r)
     checkerror()
 
 
 def scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale):
-    """scaleToFitPaper(pdf, range, papersize, scale) scales the page content
-    to fit the given page size, possibly multiplied by scale (typically 1.0)"""
+    """Scales the given pages to fit the given page size, possibly multiplied
+    by scale_to_fit_scale (typically 1.0)"""
     r = range_of_list(r)
     libc.pycpdf_scaleToFitPaper(pdf.pdf, r, papersize, scale_to_fit_scale)
     deleteRange(r)
@@ -741,9 +741,8 @@ def tripleOfPosition(p):
 
 
 def scaleContents(pdf, r, pos, scale):
-    """scaleContents(pdf, range, position, scale) scales the contents of the
-    pages in the range about the point given by the position, by the
-    scale given."""
+    """Scales the contents of the pages in the range about the point given by
+    the position, by the scale given."""
     r = range_of_list(r)
     a, b, c = tripleOfPosition(pos)
     libc.pycpdf_scaleContents(pdf.pdf, r, a, b, c, scale)
@@ -752,8 +751,7 @@ def scaleContents(pdf, r, pos, scale):
 
 
 def shiftContents(pdf, r, dx, dy):
-    """shiftContents(pdf, range, dx, dy) shifts the content of the pages in
-    the range."""
+    """Shift the content of the pages in the range by (dx, dy)."""
     r = range_of_list(r)
     libc.pycpdf_shiftContents(pdf.pdf, r, dx, dy)
     deleteRange(r)
@@ -761,7 +759,7 @@ def shiftContents(pdf, r, dx, dy):
 
 
 def rotate(pdf, r, rotation):
-    """rotate(pdf, range, rotation) changes the viewing rotation to an
+    """Change the viewing rotation of the pages in the range to an
     absolute value. Appropriate rotations are 0, 90, 180, 270."""
     r = range_of_list(r)
     libc.pycpdf_rotate(pdf.pdf, r, rotation)
@@ -770,7 +768,7 @@ def rotate(pdf, r, rotation):
 
 
 def rotateBy(pdf, r, rotation):
-    """rotateBy(pdf, range, rotation) changes the viewing rotation by a
+    """Change the viewing rotation of the pages in the range by a
     given number of degrees. Appropriate values are 90, 180, 270."""
     r = range_of_list(r)
     libc.pycpdf_rotateBy(pdf.pdf, r, rotation)
@@ -779,7 +777,7 @@ def rotateBy(pdf, r, rotation):
 
 
 def rotateContents(pdf, r, rotation):
-    """rotateContents(pdf, range, angle) rotates the content about the centre
+    """Rotate the content about the centre
     of the page by the given number of degrees, in a clockwise direction."""
     r = range_of_list(r)
     libc.pycpdf_rotateContents(pdf.pdf, r, rotation)
@@ -788,9 +786,8 @@ def rotateContents(pdf, r, rotation):
 
 
 def upright(pdf, r):
-    """upright(pdf, range) changes the viewing rotation of the pages in the
-    range, counter-rotating the dimensions and content such that there is no
-    visual change."""
+    """Change the viewing rotation of the pages in the range, counter-rotating
+    the dimensions and content such that there is no visual change."""
     r = range_of_list(r)
     libc.pycpdf_upright(pdf.pdf, r)
     deleteRange(r)
@@ -798,7 +795,7 @@ def upright(pdf, r):
 
 
 def hFlip(pdf, r):
-    """hFlip(pdf, range) flips horizontally the pages in the range."""
+    """Flip horizontally the pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_hFlip(pdf.pdf, r)
     deleteRange(r)
@@ -806,7 +803,7 @@ def hFlip(pdf, r):
 
 
 def vFlip(pdf, r):
-    """vFlip(pdf, range) flips vertically the pages in the range."""
+    """Flip vertically the pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_vFlip(pdf.pdf, r)
     deleteRange(r)
@@ -814,8 +811,8 @@ def vFlip(pdf, r):
 
 
 def crop(pdf, r, x, y, w, h):
-    """crop(pdf, range, x, y, w, h) crops a page, replacing any existing
-    crop box. The dimensions are in points."""
+    """Crop a page to the box defined by (x, y, w, h), replacing any existing
+    crop box."""
     r = range_of_list(r)
     libc.pycpdf_crop(pdf.pdf, r, x, y, w, h)
     deleteRange(r)
@@ -823,7 +820,7 @@ def crop(pdf, r, x, y, w, h):
 
 
 def removeCrop(pdf, r):
-    """removeCrop(pdf, range) removes any crop box from pages in the range."""
+    """Remove any crop box from pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_removeCrop(pdf.pdf, r)
     deleteRange(r)
@@ -831,7 +828,7 @@ def removeCrop(pdf, r):
 
 
 def removeTrim(pdf, r):
-    """removeTrim(pdf, range) removes any crop box from pages in the range."""
+    """Remove any trim box from pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_removeTrim(pdf.pdf, r)
     deleteRange(r)
@@ -839,7 +836,7 @@ def removeTrim(pdf, r):
 
 
 def removeArt(pdf, r):
-    """removeArt(pdf, range) removes any crop box from pages in the range."""
+    """Remove any art box from pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_removeArt(pdf.pdf, r)
     deleteRange(r)
@@ -847,7 +844,7 @@ def removeArt(pdf, r):
 
 
 def removeBleed(pdf, r):
-    """removeBleed(pdf, range) removes any crop box from pages in the range."""
+    """Remove any bleed box from pages in the range."""
     r = range_of_list(r)
     libc.pycpdf_removeBleed(pdf.pdf, r)
     deleteRange(r)
@@ -855,8 +852,7 @@ def removeBleed(pdf, r):
 
 
 def trimMarks(pdf, r):
-    """trimMarks(pdf, range) adds trim marks to the given pages, if the trimbox
-    exists."""
+    """Add trim marks to the given pages, if the trimbox exists."""
     r = range_of_list(r)
     libc.pycpdf_trimMarks(pdf.pdf, r)
     deleteRange(r)
@@ -864,7 +860,7 @@ def trimMarks(pdf, r):
 
 
 def showBoxes(pdf, r):
-    """showBoxes(pdf, range) shows the boxes on the given pages, for debug."""
+    """Show the boxes on the given pages, for debug."""
     r = range_of_list(r)
     libc.pycpdf_showBoxes(pdf.pdf, r)
     deleteRange(r)
@@ -872,7 +868,8 @@ def showBoxes(pdf, r):
 
 
 def hardBox(pdf, r, boxname):
-    """hardBox make a given box a 'hard box' i.e clips it explicitly."""
+    """Make a given box a 'hard box' i.e clip it explicitly. Boxname could be,
+    for example "/TrimBox"."""
     r = range_of_list(r)
     libc.pycpdf_hardBox(pdf.pdf, r, str.encode(boxname))
     deleteRange(r)
@@ -886,21 +883,23 @@ def hardBox(pdf, r, boxname):
 
 
 def compress(pdf):
-    """compress(pdf) compresses any uncompressed streams in the given PDF
-    using the Flate algorithm."""
+    """Compress any uncompressed streams in the given PDF using the Flate
+    algorithm."""
     libc.pycpdf_compress(pdf.pdf)
     checkerror()
 
 
 def decompress(pdf):
-    """uncompress(pdf) uncompresses any streams in the given PDF, so long as
-    the compression method is supported."""
+    """Decompress any streams in the given PDF, so long as the compression
+    method is supported."""
     libc.pycpdf_decompress(pdf.pdf)
     checkerror()
 
 
 def squeezeInMemory(pdf):
-    """squeezeToMemory(pdf) squeezes a pdf in memory."""
+    """squeezeToMemory(pdf) squeezes a pdf in memory. Squeezing is a lossless
+    compression method which works be rearrangement of a PDFs internal
+    structure."""
     libc.pycpdf_squeezeInMemory(pdf.pdf)
     checkerror()
 
@@ -908,7 +907,7 @@ def squeezeInMemory(pdf):
 
 
 def getBookmarks(pdf):
-    """Get the bookmarks for a PDF as a list of tuples.
+    """Get the bookmarks for a PDF as a list of tuples of the form:
     (level : int, page : int, text : string, openstatus : bool)"""
     l = []
     libc.pycpdf_startGetBookmarkInfo(pdf.pdf)
@@ -925,7 +924,7 @@ def getBookmarks(pdf):
 
 
 def setBookmarks(pdf, marks):
-    """Set the bookmarks for a PDF as a list of tuples.
+    """Set the bookmarks for a PDF as a list of tuples of the form:
     (level : int, page : int, text : string, openstatus : bool)"""
     libc.pycpdf_startSetBookmarkInfo(len(marks))
     for n, m in enumerate(marks):
@@ -945,9 +944,8 @@ def setBookmarks(pdf, marks):
 
 
 def stampOn(pdf, pdf2, r):
-    """stampOn(stamp_pdf, pdf, range) stamps stamp_pdf on top of all the
-    pages in the document which are in the range. The stamp is placed with its
-    origin at the origin of the target document."""
+    """Stamps pdf on top of all the pages in pdf2 which are in the range. The
+    stamp is placed with its origin at the origin of the target document."""
     r = range_of_list(r)
     libc.pycpdf_stampOn(pdf.pdf, pdf2.pdf, r)
     deleteRange(r)
@@ -955,9 +953,8 @@ def stampOn(pdf, pdf2, r):
 
 
 def stampUnder(pdf, pdf2, r):
-    """stampUnder(stamp_pdf, pdf, range) stamps stamp_pdf under all the pages
-    in the document which are in the range. The stamp is placed with its origin
-    at the origin of the target document."""
+    """Stamps pdf under under all the pages in pdf2 which are in the range. The
+    stamp is placed with its origin at the origin of the target document."""
     r = range_of_list(r)
     libc.pycpdf_stampUnder(pdf.pdf, pdf2.pdf, r)
     deleteRange(r)
@@ -966,13 +963,12 @@ def stampUnder(pdf, pdf2, r):
 
 def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos,
                   relative_to_cropbox):
-    """stampExtended(pdf, pdf2, range, isover, scale_stamp_to_fit, pos,
-    relative_to_cropbox) is a stamping function with extra features.
+    """A stamping function with extra features:
 
      - isover True, pdf goes over pdf2, isover False, pdf goes under pdf2
      - scale_stamp_to_fit scales the stamp to fit the page
      - pos gives the position to put the stamp
-     - relative_to_cropbox: if True, pos is relative to cropbox not mediabox"""
+     - relative_to_cropbox: if True, pos is relative to crop box not media box"""
     r = range_of_list(r)
     a, b, c = tripleOfPosition(pos)
     libc.pycpdf_stampExtended(pdf.pdf, pdf2.pdf, r, isover, scale_stamp_to_fit,
@@ -982,8 +978,8 @@ def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos,
 
 
 def combinePages(pdf, pdf2):
-    """combinePages(under, over) combines the PDFs page-by-page, putting
-    each page of 'over' over each page of 'under'"""
+    """Combines the PDFs page-by-page, putting each page of pdf2 over each page
+    of pdf."""
     output = libc.pycpdf_combinePages(pdf.pdf, pdf2.pdf)
     checkerror()
     return Pdf(output)
@@ -1082,8 +1078,10 @@ def addText(metrics, pdf, r, text, p, line_spacing, bates, font, size, red,
 
 def addTextSimple(pdf, r, text, p, font, size):
     """like addText, but with most parameters default
+
          * pdf = the document
          * r = the range
+         * text = the text
          * p = the position
          * font = the font
          * size = the font size"""
@@ -1096,8 +1094,7 @@ def addTextSimple(pdf, r, text, p, font, size):
 
 
 def removeText(pdf, r):
-    """removeText(pdf, range) will remove any text added by libcpdf from the
-    given pages."""
+    """Remove any text added by libcpdf from the given pages."""
     r = range_of_list(r)
     libc.pycpdf_removeText(pdf.pdf, r)
     deleteRange(r)
@@ -1113,9 +1110,9 @@ def textWidth(font, string):
 
 
 def addContent(content, before, pdf, r):
-    """addContent(content, before, range, pdf) adds page content before (if
-    True) or after (if False) the existing content to pages in the given range
-    in the given PDF."""
+    """Add page content before (if True) or after (if False) the existing
+    content to pages in the given range in the given PDF. Warning: this a low
+    level function requiring understanding of the PDF format."""
     r = range_of_list(r)
     libc.pycpdf_addContent(str.encode(content), before, pdf.pdf, r)
     deleteRange(r)
@@ -1123,9 +1120,9 @@ def addContent(content, before, pdf, r):
 
 
 def stampAsXObject(pdf, r, stamp_pdf):
-    """stampAsXObject(pdf, range, stamp_pdf) stamps stamp_pdf onto the pages
-    in the given range in pdf as a shared Form XObject. The name of the
-    newly-created XObject is returned."""
+    """Stamps stamp_pdf onto the pages in the given range in pdf as a shared
+    Form XObject. The name of the newly-created XObject is returned, for use
+    with addContent. """
     r = range_of_list(r)
     r2 = string_at(libc.pycpdf_stampAsXObject(
         pdf.pdf, r, stamp_pdf.pdf)).decode()
@@ -1136,24 +1133,21 @@ def stampAsXObject(pdf, r, stamp_pdf):
 
 # CHAPTER 9. Mulitpage facilities
 def twoUp(pdf):
-    """Impose a document two up. twoUp does so by retaining the existing page
-    size, scaling pages down. twoUpStack does so by doubling the page size,
-    to fit two pages on one."""
+    """Impose a document two up by retaining the existing page
+    size, scaling pages down."""
     libc.pycpdf_twoUp(pdf.pdf)
     checkerror()
 
 
 def twoUpStack(pdf):
-    """Impose a document two up. twoUp does so by retaining the existing page
-    size, scaling pages down. twoUpStack does so by doubling the page size,
+    """Impose a document two up by doubling the page size,
     to fit two pages on one."""
     libc.pycpdf_twoUpStack(pdf.pdf)
     checkerror()
 
 
 def padBefore(pdf, r):
-    """padBefore(pdf, range) adds a blank page before each page in the given
-    range"""
+    """Adds a blank page before each page in the given range."""
     r = range_of_list(r)
     libc.pycpdf_padBefore(pdf.pdf, r)
     deleteRange(r)
@@ -1161,8 +1155,7 @@ def padBefore(pdf, r):
 
 
 def padAfter(pdf, r):
-    """padAfter(pdf, range) adds a blank page after each page in the given
-    range"""
+    """Adds a blank page after each page in the given range."""
     r = range_of_list(r)
     libc.pycpdf_padAfter(pdf.pdf, r)
     deleteRange(r)
@@ -1170,20 +1163,19 @@ def padAfter(pdf, r):
 
 
 def padEvery(pdf, n):
-    """pageEvery(pdf, n) adds a blank page after every n pages"""
+    """Adds a blank page after every n pages."""
     libc.pycpdf_padEvery(pdf.pdf, n)
     checkerror()
 
 
 def padMultiple(pdf, n):
-    """padMultiple(pdf, n) adds pages at the end to pad the file to a multiple
-    of n pages in length."""
+    """Adds pages at the end to pad the file to a multiple of n pages in length."""
     libc.pycpdf_padMultiple(pdf.pdf, n)
     checkerror()
 
 
 def padMultipleBefore(pdf, n):
-    """padMultiple(pdf, n) adds pages at the beginning to pad the file to a
+    """Adds pages at the beginning to pad the file to a
     multiple of n pages in length."""
     libc.pycpdf_padMultipleBefore(pdf.pdf, n)
     checkerror()
@@ -1196,7 +1188,7 @@ def padMultipleBefore(pdf, n):
 
 
 def isLinearized(filename):
-    """isLinearized(filename) finds out if a document is linearized as quickly
+    """Finds out if a document is linearized as quickly
     as possible without loading it."""
     r = libc.pycpdf_isLinearized(str.encode(filename))
     checkerror()
@@ -1204,253 +1196,250 @@ def isLinearized(filename):
 
 
 def getVersion(pdf):
-    """vetVersion(pdf) returns the minor version number of a document."""
+    """Return the minor version number of a document."""
     r = libc.pycpdf_getVersion(pdf.pdf)
     checkerror()
     return r
 
 
 def getMajorVersion(pdf):
-    """getMajorVersion(pdf) returns the minor version number of a document."""
+    """Return the minor version number of a document."""
     r = libc.pycpdf_getMajorVersion(pdf.pdf)
     checkerror()
     return r
 
 
 def getTitle(pdf):
-    """getTitle(pdf) returns the title of a document."""
+    """Return the title of a document."""
     r = string_at(libc.pycpdf_getTitle(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getAuthor(pdf):
-    """getSubject(pdf) returns the subject of a document."""
+    """Return the subject of a document."""
     r = string_at(libc.pycpdf_getAuthor(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getSubject(pdf):
-    """getSubject(pdf) returns the subject of a document."""
+    """Return the subject of a document."""
     r = string_at(libc.pycpdf_getSubject(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getKeywords(pdf):
-    """getKeywords(pdf) returns the keywords of a document."""
+    """Return the keywords of a document."""
     r = string_at(libc.pycpdf_getKeywords(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getCreator(pdf):
-    """getCreator(pdf) returns the creator of a document."""
+    """Return the creator of a document."""
     r = string_at(libc.pycpdf_getCreator(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getProducer(pdf):
-    """getProducer(pdf) returns the producer of a document."""
+    """Return the producer of a document."""
     r = string_at(libc.pycpdf_getProducer(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getCreationDate(pdf):
-    """getCreationDate(pdf) returns the creation date of a document."""
+    """Return the creation date of a document."""
     r = string_at(libc.pycpdf_getCreationDate(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getModificationDate(pdf):
-    """getModificationDate(pdf) returns the modification date of a document."""
+    """Return the modification date of a document."""
     r = string_at(libc.pycpdf_getModificationDate(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getTitleXMP(pdf):
-    """getTitleXMP(pdf) returns the XMP title of a document."""
+    """Return the XMP title of a document."""
     r = string_at(libc.pycpdf_getTitleXMP(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getAuthorXMP(pdf):
-    """getAuthorXMP(pdf) returns the XMP author of a document."""
+    """Return the XMP author of a document."""
     r = string_at(libc.pycpdf_getAuthorXMP(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getSubjectXMP(pdf):
-    """getSubjectXMP(pdf) returns the XMP subject of a document."""
+    """Return the XMP subject of a document."""
     r = string_at(libc.pycpdf_getSubjectXMP(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getKeywordsXMP(pdf):
-    """getKeywordsXMP(pdf) returns the XMP keywords of a document."""
+    """Return the XMP keywords of a document."""
     r = string_at(libc.pycpdf_getKeywordsXMP(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getCreatorXMP(pdf):
-    """getCreatorXMP(pdf) returns the XMP creator of a document."""
+    """Returs the XMP creator of a document."""
     r = string_at(libc.pycpdf_getCreatorXMP(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getProducerXMP(pdf):
-    """getProducerXMP(pdf) returns the XMP producer of a document."""
+    """Return the XMP producer of a document."""
     r = string_at(libc.pycpdf_getProducerXMP(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getCreationDateXMP(pdf):
-    """getCreationDateXMP(pdf) returns the XMP creation date of a document."""
+    """Return the XMP creation date of a document."""
     r = string_at(libc.pycpdf_getCreationDateXMP(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def getModificationDateXMP(pdf):
-    """getModificationDateXMP(pdf) returns the XMP modification date of a
-    document."""
+    """Return the XMP modification date of a document."""
     r = string_at(libc.pycpdf_getModificationDateXMP(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def setTitle(pdf, s):
-    """setTitle(pdf) sets the title of a document."""
+    """Set the title of a document."""
     libc.pycpdf_setTitle(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setAuthor(pdf, s):
-    """setAuthor(pdf) sets the author of a document."""
+    """Set the author of a document."""
     libc.pycpdf_setAuthor(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setSubject(pdf, s):
-    """setSubject(pdf) sets the subject of a document."""
+    """Set the subject of a document."""
     libc.pycpdf_setSubject(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setKeywords(pdf, s):
-    """setKeywords(pdf) sets the keywords of a document."""
+    """Set the keywords of a document."""
     libc.pycpdf_setKeywords(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setCreator(pdf, s):
-    """setCreator(pdf) sets the creator of a document."""
+    """Set the creator of a document."""
     libc.pycpdf_setCreator(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setProducer(pdf, s):
-    """setProducer(pdf) sets the producer of a document."""
+    """Set the producer of a document."""
     libc.pycpdf_setProducer(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setCreationDate(pdf, s):
-    """setCreationDate(pdf) sets the creation date of a document."""
+    """Set the creation date of a document."""
     libc.pycpdf_setCreationDate(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setModificationDate(pdf, s):
-    """setModificationDate(pdf) sets the modifcation date of a document."""
+    """Set the modifcation date of a document."""
     libc.pycpdf_setModificationDate(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setTitleXMP(pdf, s):
-    """setTitleXMP(pdf) set the XMP title of a document."""
+    """Set the XMP title of a document."""
     libc.pycpdf_setTitleXMP(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setAuthorXMP(pdf, s):
-    """setAuthorXMP(pdf) set the XMP author of a document."""
+    """Set the XMP author of a document."""
     libc.pycpdf_setAuthorXMP(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setSubjectXMP(pdf, s):
-    """setSubjectXMP(pdf) set the XMP subject of a document."""
+    """Set the XMP subject of a document."""
     libc.pycpdf_setSubjectXMP(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setKeywordsXMP(pdf, s):
-    """setKeywordsXMP(pdf) set the XMP keywords of a document."""
+    """Set the XMP keywords of a document."""
     libc.pycpdf_setKeywordsXMP(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setCreatorXMP(pdf, s):
-    """setCreatorXMP(pdf) set the XMP creator of a document."""
+    """Set the XMP creator of a document."""
     libc.pycpdf_setCreatorXMP(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setProducerXMP(pdf, s):
-    """setProducerXMP(pdf) set the XMP producer of a document."""
+    """Set the XMP producer of a document."""
     libc.pycpdf_setProducerXMP(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setCreationDateXMP(pdf, s):
-    """setCreationDateXMP(pdf) set the XMP creation date of a document."""
+    """Set the XMP creation date of a document."""
     libc.pycpdf_setCreationDateXMP(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def setModificationDateXMP(pdf, s):
-    """setModificationDateXMP(pdf) set the XMP modification date of a
-    document."""
+    """Set the XMP modification date of a document."""
     libc.pycpdf_setModificationDateXMP(pdf.pdf, str.encode(s))
     checkerror()
     return
 
 
 def getDateComponents(string):
-    """Dates: Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds
-    (0-59), hour_offset is the offset from UT in hours (-23 to 23);
-    minute_offset is the offset from UT in minutes (-59 to 59).
+    """Return the components (year, month, day, hour, minute, second,
+    hour_offset, minute_offset) from a PDF date string.
 
-    getDateComponents(datestring, year, month, day, hour, minute, second,
-    hour_offset, minute_offset) returns the components from a PDF date
-    string."""
+    Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds
+    (0-59), hour_offset is the offset from UT in hours (-23 to 23);
+    minute_offset is the offset from UT in minutes (-59 to 59)."""
     year = c_int(0)
     month = c_int(0)
     day = c_int(0)
@@ -1469,13 +1458,12 @@ def getDateComponents(string):
 
 
 def dateStringOfComponents(cs):
-    """Dates: Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds
+    """Build a PDF date string a (year, month, day, hour, minute, second,
+    hour_offset, minute_offset) tuple.
+    
+    Dates: Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds
     (0-59), hour_offset is the offset from UT in hours (-23 to 23);
-    minute_offset is the offset from UT in minutes (-59 to 59).
-
-    dateStringOfComponents(year, month, day, hour, minute, second,
-    hour_offset, minute_offset) builds a PDF date string from individual
-    components."""
+    minute_offset is the offset from UT in minutes (-59 to 59)."""
     year, month, day, hour, minute, second, hour_offset, minute_offset = cs
     r = string_at(libc.pycpdf_dateStringOfComponents(year, month, day, hour,
                                                      minute, second,
@@ -1486,16 +1474,14 @@ def dateStringOfComponents(cs):
 
 
 def getPageRotation(pdf, pagenumber):
-    """getPageRotation(pdf, pagenumber) gets the viewing rotation for a given
-    page."""
+    """Get the viewing rotation for a given page."""
     r = libc.pycpdf_getPageRotation(pdf.pdf, pagenumber)
     checkerror()
     return r
 
 
 def hasBox(pdf, pagenumber, boxname):
-    """hasBox(pdf, pagenumber, boxname) returns True, if that page has the
-    given box. E.g "/CropBox" """
+    """Returns True, if the page has the given box. E.g "/CropBox" """
     r = libc.pycpdf_hasBox(pdf.pdf, pagenumber, str.encode(boxname))
     checkerror()
     return r
