@@ -17,15 +17,21 @@ However, using pycpdf requires the DLLs ``libpycpdf`` and
 Commercial licenses may be purchased from `Coherent Graphics Ltd
 <https://www.coherentpdf.com/>`_.
 
+Enquires to contact@coherentgraphics.co.uk
+
 Documentation
 -------------
 
-cpdflibmanual.pdf
+This documentation should be read alongside the PDF manual `cpdflibmanual.pdf
+<https://coherentpdf.com/pycpdflibmanual.pdf>`_ which describes the command line
+tools upon which ``pycpdf`` is based.
 
-examples
 
 Obtaining the libpycpdf and libcpdf DLLs
 ----------------------------------------
+
+The DLLs required are available to download in binary form for most major
+platforms `from here <https:://github.com/coherentgraphics/cpdflib-binary/>`_.
 
 Loading the libpypcdf and libcpdf DLLs
 --------------------------------------
@@ -40,14 +46,16 @@ install ``libcpdf.so`` in a standard location ``/usr/local/lib/``, or use the
 Conventions
 -----------
 
-A 'range' is a list of integers specifying page numbers.
-
-Text arguments and results are in UTF8.
-
 Any function may raise the exception ``CPDFError``, carrying a string describing
 the error.
 
-Units in points (1/72) inch. Angles are in degrees.
+A 'range' is a list of integers specifying page numbers. Page numbers start at 1. Range arguments are called `r`.
+
+Text arguments and results are in UTF8.
+
+Units are in PDF points (1/72 inch).
+
+Angles are in degrees.
 
 
 Built-in values
@@ -55,58 +63,54 @@ Built-in values
 
 **Paper sizes**
 
-a0portrait a1portrait a2portrait a3portrait a4portrait
-a5portrait a0landscape a1landscape a2landscape a3landscape
-a4landscape a5landscape usletterportrait usletterlandscape
-uslegalportrait uslegallandscape
+``a0portrait`` ``a1portrait`` ``a2portrait`` ``a3portrait`` ``a4portrait`` ``a5portrait`` ``a0landscape``
+``a1landscape`` ``a2landscape`` ``a3landscape`` ``a4landscape`` ``a5landscape`` ``usletterportrait``
+``usletterlandscape`` ``uslegalportrait`` ``uslegallandscape``
 
 **Permissions**
 
-noEdit noPrint noCopy noAnnot noForms noExtract noAssemble
-noHqPrint
+``noEdit`` ``noPrint`` ``noCopy`` ``noAnnot`` ``noForms`` ``noExtract`` ``noAssemble`` ``noHqPrint``
 
 **Encryption methods**
 
-pdf40bit pdf128bit aes128bitfalse aes128bittrue aes256bitfalse
-aes256bittrue aes256bitisofalse aes256bitisotrue
+``pdf40bit`` ``pdf128bit`` ``aes128bitfalse`` ``aes128bittrue`` ``aes256bitfalse`` ``aes256bittrue``
+``aes256bitisofalse`` ``aes256bitisotrue``
 
 **Positions**
 
-Positions with two numbers in a tuple e.g (posLeft, 10.0, 20.0):
+*Positions with two numbers in a tuple e.g (posLeft, 10.0, 20.0)*
 
-posCentre posLeft posRight
+``posCentre`` ``posLeft`` ``posRight``
 
-Positions with one number in a tuple e.g (top, 5.0):
+*Positions with one number in a tuple e.g (top, 5.0)*
 
-top topLeft topRight left bottomLeft bottomRight right
+``top`` ``topLeft`` ``topRight`` ``left`` ``bottomLeft`` ``bottomRight`` ``right``
 
-Positions with no numbers e.g diagonal:
+*Positions with no numbers e.g diagonal*
 
-diagonal reverseDiagonal
+``diagonal`` ``reverseDiagonal``
 
 **Fonts**
 
-timesRoman timesBold timesItalic timesBoldItalic helvetica
-helveticaBold helveticaOblique helveticaBoldOblique courier
-courierBold courierOblique courierBoldOblique
+``timesRoman`` ``timesBold`` ``timesItalic`` ``timesBoldItalic`` ``helvetica`` ``helveticaBold``
+``helveticaOblique`` ``helveticaBoldOblique`` ``courier`` ``courierBold`` ``courierOblique``
+``courierBoldOblique``
 
 **Justification**
 
-leftJustify centreJustify rightJustify
+``leftJustify`` ``centreJustify`` ``rightJustify``
 
 **Page layouts**
 
-singlePage oneColumn twoColumnLeft twoColumnRight
-twoPageLeft twoPageRight
+``singlePage`` ``oneColumn`` ``twoColumnLeft`` ``twoColumnRight`` ``twoPageLeft`` ``twoPageRight``
 
 **Page modes**
 
-useNone useOutlines useThumbs useOC useAttachments
+``useNone`` ``useOutlines`` ``useThumbs`` ``useOC`` ``useAttachments``
 
 **Page label styles**
 
-decimalArabic uppercaseRoman lowercaseRoman
-uppercaseLetters lowercaseLetters
+``decimalArabic`` ``uppercaseRoman`` ``lowercaseRoman`` ``uppercaseLetters`` ``lowercaseLetters``
 
 Chapter 0. Preliminaries
 ------------------------
