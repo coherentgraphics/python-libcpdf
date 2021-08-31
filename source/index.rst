@@ -1,38 +1,76 @@
 Pycpdf: a python interface to cpdf
 ==================================
 
-Before using the library, you must load the libpycpdf and libcpdf DLLs. This is
-achieved with the pycpdf.loadDLL function, given the filename or full path of
-the libpycpdf DLL.  On Windows, you may have to call os.add_dll_directory
+Pycpdf is a library providing a huge range of tools for manipulating PDF files.
+It requires Python 3.8 or above.
+
+License
+-------
+
+Pycpdf itself is licensed under the BSD 3-clause license. See the file LICENSE
+in the distribution.
+
+However, using pycpdf requires the DLLs ``libpycpdf`` and
+``libcpdf`` which are free for non-commercial use only. See the license file
+`here <https://github.com/coherentgraphics/cpdflib-binary/blob/master/LICENSE>`_.
+
+Commercial licenses may be purchased from `Coherent Graphics Ltd
+<https://www.coherentpdf.com/>`_.
+
+Documentation
+-------------
+
+cpdflibmanual.pdf
+
+examples
+
+Obtaining the libpycpdf and libcpdf DLLs
+----------------------------------------
+
+Loading the libpypcdf and libcpdf DLLs
+--------------------------------------
+
+Before using the library, you must load the ``libpycpdf`` and ``libcpdf`` DLLs. This is
+achieved with the ``pycpdf.loadDLL`` function, given the filename or full path of
+the ``libpycpdf`` DLL.  On Windows, you may have to call ``os.add_dll_directory``
 first. On MacOS, you may need to give the full path, and you may need to
-install libcpdf.so in a standard location /usr/local/lib/, or use the
-install_name_tool command to tell libpycpdf.so where to find libcpdf.so.
+install ``libcpdf.so`` in a standard location ``/usr/local/lib/``, or use the
+``install_name_tool`` command to tell ``libpycpdf.so`` where to find ``libcpdf.so``.
+
+Conventions
+-----------
 
 A 'range' is a list of integers specifying page numbers.
 
 Text arguments and results are in UTF8.
 
-Any function may raise the exception CPDFError, carrying a string describing
+Any function may raise the exception ``CPDFError``, carrying a string describing
 the error.
 
-Built-in values.
+Units in points (1/72) inch. Angles are in degrees.
 
-Paper sizes:
+
+Built-in values
+---------------
+
+**Paper sizes**
 
 a0portrait a1portrait a2portrait a3portrait a4portrait
 a5portrait a0landscape a1landscape a2landscape a3landscape
 a4landscape a5landscape usletterportrait usletterlandscape
 uslegalportrait uslegallandscape
 
-Permissions:
+**Permissions**
 
 noEdit noPrint noCopy noAnnot noForms noExtract noAssemble
 noHqPrint
 
-Encryption Methods:
+**Encryption methods**
 
 pdf40bit pdf128bit aes128bitfalse aes128bittrue aes256bitfalse
 aes256bittrue aes256bitisofalse aes256bitisotrue
+
+**Positions**
 
 Positions with two numbers in a tuple e.g (posLeft, 10.0, 20.0):
 
@@ -46,28 +84,26 @@ Positions with no numbers e.g diagonal:
 
 diagonal reverseDiagonal
 
-
-Fonts:
+**Fonts**
 
 timesRoman timesBold timesItalic timesBoldItalic helvetica
 helveticaBold helveticaOblique helveticaBoldOblique courier
 courierBold courierOblique courierBoldOblique
 
-
-Justifications:
+**Justification**
 
 leftJustify centreJustify rightJustify
 
-Page layouts:
+**Page layouts**
 
 singlePage oneColumn twoColumnLeft twoColumnRight
 twoPageLeft twoPageRight
 
-Page modes:
+**Page modes**
 
 useNone useOutlines useThumbs useOC useAttachments
 
-Label styles:
+**Page label styles**
 
 decimalArabic uppercaseRoman lowercaseRoman
 uppercaseLetters lowercaseLetters

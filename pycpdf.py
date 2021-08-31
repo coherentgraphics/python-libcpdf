@@ -13,63 +13,6 @@ Text arguments and results are in UTF8.
 
 Any function may raise the exception CPDFError, carrying a string describing
 the error.
-
-Built-in values.
-
-Paper sizes:
-
-a0portrait a1portrait a2portrait a3portrait a4portrait
-a5portrait a0landscape a1landscape a2landscape a3landscape
-a4landscape a5landscape usletterportrait usletterlandscape
-uslegalportrait uslegallandscape
-
-Permissions:
-
-noEdit noPrint noCopy noAnnot noForms noExtract noAssemble
-noHqPrint
-
-Encryption Methods:
-
-pdf40bit pdf128bit aes128bitfalse aes128bittrue aes256bitfalse
-aes256bittrue aes256bitisofalse aes256bitisotrue
-
-Positions with two numbers in a tuple e.g (posLeft, 10.0, 20.0):
-
-posCentre posLeft posRight
-
-Positions with one number in a tuple e.g (top, 5.0):
-
-top topLeft topRight left bottomLeft bottomRight right
-
-Positions with no numbers e.g diagonal:
-
-diagonal reverseDiagonal
-
-
-Fonts:
-
-timesRoman timesBold timesItalic timesBoldItalic helvetica
-helveticaBold helveticaOblique helveticaBoldOblique courier
-courierBold courierOblique courierBoldOblique
-
-
-Justifications:
-
-leftJustify centreJustify rightJustify
-
-Page layouts:
-
-singlePage oneColumn twoColumnLeft twoColumnRight
-twoPageLeft twoPageRight
-
-Page modes:
-
-useNone useOutlines useThumbs useOC useAttachments
-
-Label styles:
-
-decimalArabic uppercaseRoman lowercaseRoman
-uppercaseLetters lowercaseLetters
 """
 
 from ctypes import *
