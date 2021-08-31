@@ -1,5 +1,76 @@
-Welcome to pycpdflib's documentation!
-=====================================
+Pycpdf: a python interface to cpdf
+==================================
+
+Before using the library, you must load the libpycpdf and libcpdf DLLs. This is
+achieved with the pycpdf.loadDLL function, given the filename or full path of
+the libpycpdf DLL.  On Windows, you may have to call os.add_dll_directory
+first. On MacOS, you may need to give the full path, and you may need to
+install libcpdf.so in a standard location /usr/local/lib/, or use the
+install_name_tool command to tell libpycpdf.so where to find libcpdf.so.
+
+A 'range' is a list of integers specifying page numbers.
+
+Text arguments and results are in UTF8.
+
+Any function may raise the exception CPDFError, carrying a string describing
+the error.
+
+Built-in values.
+
+Paper sizes:
+
+a0portrait a1portrait a2portrait a3portrait a4portrait
+a5portrait a0landscape a1landscape a2landscape a3landscape
+a4landscape a5landscape usletterportrait usletterlandscape
+uslegalportrait uslegallandscape
+
+Permissions:
+
+noEdit noPrint noCopy noAnnot noForms noExtract noAssemble
+noHqPrint
+
+Encryption Methods:
+
+pdf40bit pdf128bit aes128bitfalse aes128bittrue aes256bitfalse
+aes256bittrue aes256bitisofalse aes256bitisotrue
+
+Positions with two numbers in a tuple e.g (posLeft, 10.0, 20.0):
+
+posCentre posLeft posRight
+
+Positions with one number in a tuple e.g (top, 5.0):
+
+top topLeft topRight left bottomLeft bottomRight right
+
+Positions with no numbers e.g diagonal:
+
+diagonal reverseDiagonal
+
+
+Fonts:
+
+timesRoman timesBold timesItalic timesBoldItalic helvetica
+helveticaBold helveticaOblique helveticaBoldOblique courier
+courierBold courierOblique courierBoldOblique
+
+
+Justifications:
+
+leftJustify centreJustify rightJustify
+
+Page layouts:
+
+singlePage oneColumn twoColumnLeft twoColumnRight
+twoPageLeft twoPageRight
+
+Page modes:
+
+useNone useOutlines useThumbs useOC useAttachments
+
+Label styles:
+
+decimalArabic uppercaseRoman lowercaseRoman
+uppercaseLetters lowercaseLetters
 
 Chapter 0. Preliminaries
 ------------------------
@@ -25,26 +96,6 @@ Chapter 1. Basics
 .. autofunction:: fromMemory
 .. autofunction:: fromMemoryLazy
 .. autofunction:: blankDocument
-
-Paper sizes:
-
-* a0portrait
-* a1portrait
-* a2portrait
-* a3portrait
-* a4portrait
-* a5portrait
-* a0landscape
-* a1landscape
-* a2landscape
-* a3landscape
-* a4landscape
-* a5landscape
-* usletterportrait
-* usletterlandscape
-* uslegalportrait
-* uslegallandscape
-
 .. autofunction:: blankDocumentPaper
 .. autofunction:: ptOfCm
 .. autofunction:: ptOfMm 
@@ -73,29 +124,6 @@ Paper sizes:
 .. autofunction:: toFileExt
 .. autofunction:: toMemory
 .. autofunction:: isEncrypted
-
-Permissions:
-
-* noEdit
-* noPrint
-* noCopy
-* noAnnot
-* noForms
-* noExtract
-* noAssemble
-* noHqPrint
-
-Encryption Methods.
-
-* pdf40bit
-* pdf128bit
-* aes128bitfalse
-* aes128bittrue
-* aes256bitfalse
-* aes256bittrue
-* aes256bitisofalse
-* aes256bitisotrue
-
 .. autofunction:: toFileEncrypted
 .. autofunction:: toFileEncryptedExt
 .. autofunction:: decryptPdf
@@ -117,29 +145,6 @@ Chapter 3. Pages
 .. autofunction:: scalePages
 .. autofunction:: scaleToFit
 .. autofunction:: scaleToFitPaper
-
-
-Positions with two numbers in a tuple e.g (posLeft, 10.0, 20.0):
-
-* posCentre
-* posLeft
-* posRight
-
-Positions with one number in a tuple e.g (top, 5.0):
-
-* top
-* topLeft
-* topRight
-* left
-* bottomLeft
-* bottomRight
-* right
-
-Positions with no numbers e.g diagonal:
-
-* diagonal
-* reverseDiagonal
-
 .. autofunction:: scaleContents
 .. autofunction:: shiftContents
 .. autofunction:: rotate
@@ -187,30 +192,6 @@ Chapter 8. Logos, Watermarks and Stamps
 .. autofunction:: stampUnder
 .. autofunction:: stampExtended 
 .. autofunction:: combinePages
-
-Fonts:
-
-* timesRoman
-* timesBold
-* timesItalic
-* timesBoldItalic
-* helvetica
-* helveticaBold
-* helveticaOblique
-* helveticaBoldOblique
-* courier
-* courierBold
-* courierOblique
-* courierBoldOblique
-
-
-Jusitifications:
-
-* leftJustify
-* centreJustify
-* rightJustify
-
-
 .. autofunction:: addText
 .. autofunction:: addTextSimple
 .. autofunction:: removeText
@@ -288,27 +269,7 @@ Chapter 11. Document Information and Metadata
 .. autofunction:: markUntrapped
 .. autofunction:: markTrappedXMP
 .. autofunction:: markUntrappedXMP
-
-
-Page layouts:
-
-* singlePage
-* oneColumn
-* twoColumnLeft
-* twoColumnRight
-* twoPageLeft
-* twoPageRight
-
 .. autofunction:: setPageLayout
-
-Page modes:
-
-* useNone
-* useOutlines
-* useThumbs
-* useOC
-* useAttachments
-
 .. autofunction:: setPageMode
 .. autofunction:: hideToolbar
 .. autofunction:: hideMenubar
@@ -323,15 +284,6 @@ Page modes:
 .. autofunction:: removeMetadata
 .. autofunction:: createMetadata
 .. autofunction:: setMetadataDate
-
-Label styles:
-
-* decimalArabic
-* uppercaseRoman
-* lowercaseRoman
-* uppercaseLetters
-* lowercaseLetters
-
 .. autofunction:: getPageLabels
 .. autofunction:: addPageLabels
 .. autofunction:: getPageLabelStringForPage
