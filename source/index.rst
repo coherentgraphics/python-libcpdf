@@ -1,8 +1,9 @@
-Pycpdf: a python interface to cpdf
-==================================
+Pycpdf: PDF document manipulator
+================================
 
 Pycpdf is a library providing a huge range of tools for manipulating PDF files.
-It requires Python 3.8 or above.
+It is based on the ``cpdf``, the command line tool for PDF manipulation. It
+requires Python 3.8 or above.
 
 License
 -------
@@ -11,8 +12,8 @@ Pycpdf itself is licensed under the BSD 3-clause license. See the file LICENSE
 in the distribution.
 
 However, using pycpdf requires the DLLs ``libpycpdf`` and
-``libcpdf`` which are free for non-commercial use only. See the license file
-`here <https://github.com/coherentgraphics/cpdflib-binary/blob/master/LICENSE>`_.
+``libcpdf`` which are free for non-commercial use only. See the
+`license file <https://github.com/coherentgraphics/cpdflib-binary/blob/master/LICENSE>`_.
 
 Commercial licenses may be purchased from `Coherent Graphics Ltd
 <https://www.coherentpdf.com/>`_.
@@ -22,26 +23,32 @@ Enquires to contact@coherentgraphics.co.uk
 Documentation
 -------------
 
-This documentation should be read alongside the PDF manual `cpdflibmanual.pdf
+This documentation should be read alongside the PDF manual `pycpdflibmanual.pdf
 <https://coherentpdf.com/pycpdflibmanual.pdf>`_ which describes the command line
-tools upon which ``pycpdf`` is based.
+tools upon which ``pycpdf`` is based, together with the Python interface.
 
+There are `some examples
+<https://github.com/coherentgraphics/python-libcpdf/tree/master/examples>`_ in
+the project's GitHub repository.
 
 Obtaining the libpycpdf and libcpdf DLLs
 ----------------------------------------
 
 The DLLs required are available to download in binary form for most major
 platforms `from here <https:://github.com/coherentgraphics/cpdflib-binary/>`_.
+For other platforms, please write to contact@coherentgraphics.co.uk. 
 
 Loading the libpypcdf and libcpdf DLLs
 --------------------------------------
 
-Before using the library, you must load the ``libpycpdf`` and ``libcpdf`` DLLs. This is
-achieved with the ``pycpdf.loadDLL`` function, given the filename or full path of
-the ``libpycpdf`` DLL.  On Windows, you may have to call ``os.add_dll_directory``
-first. On MacOS, you may need to give the full path, and you may need to
-install ``libcpdf.so`` in a standard location ``/usr/local/lib/``, or use the
-``install_name_tool`` command to tell ``libpycpdf.so`` where to find ``libcpdf.so``.
+Before using the library, you must load the ``libpycpdf`` and ``libcpdf`` DLLs.
+This is achieved with the ``pycpdf.loadDLL`` function, given the filename or
+full path of the ``libpycpdf`` DLL.
+
+On Windows, you may have to call ``os.add_dll_directory`` first. On MacOS, you
+may need to give the full path, and you may need to install ``libcpdf.so`` in a
+standard location ``/usr/local/lib/``, or use the ``install_name_tool`` command
+to tell ``libpycpdf.so`` where to find ``libcpdf.so``.
 
 Conventions
 -----------
@@ -49,7 +56,8 @@ Conventions
 Any function may raise the exception ``CPDFError``, carrying a string describing
 the error.
 
-A 'range' is a list of integers specifying page numbers. Page numbers start at 1. Range arguments are called `r`.
+A 'range' is a list of integers specifying page numbers. Page numbers start at
+1. Range arguments are called `r`.
 
 Text arguments and results are in UTF8.
 
