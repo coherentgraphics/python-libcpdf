@@ -1131,7 +1131,8 @@ def stampAsXObject(pdf, r, stamp_pdf):
     return r2
 
 
-# CHAPTER 9. Mulitpage facilities
+# CHAPTER 9. Multipage facilities
+
 def twoUp(pdf):
     """Impose a document two up by retaining the existing page
     size, scaling pages down."""
