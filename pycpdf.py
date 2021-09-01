@@ -35,7 +35,8 @@ class Pdf:
 
 
 def loadDLL(f):
-    """Load the libpycpdf DLL from a given file, and set up pycpdflib. Must be called prior to using any other function in the library."""
+    """Load the libpycpdf DLL from a given file, and set up pycpdflib. Must be
+    called prior to using any other function in the library."""
     global libc
     libc = CDLL(f)
     libc.pycpdf_version.restype = POINTER(c_char)
@@ -169,17 +170,17 @@ def version():
 
 
 def setFast():
-    """ Set fast mode. Some operations have a fast mode. The default is 'slow' mode, which
-    works even on old-fashioned files. For more details, see section 1.13 of
-    the CPDF manual. This function sets the mode globally. """
+    """ Set fast mode. Some operations have a fast mode. The default is 'slow'
+    mode, which works even on old-fashioned files. For more details, see
+    section 1.13 of the CPDF manual. This function sets the mode globally. """
     libc.pycpdf_setFast()
     checkerror()
 
 
 def setSlow():
-    """ Set slow mode. Some operations have a fast mode. The default is 'slow' mode, which
-    works even on old-fashioned files. For more details, see section 1.13 of
-    the CPDF manual. This function sets the mode globally. """
+    """ Set slow mode. Some operations have a fast mode. The default is 'slow'
+    mode, which works even on old-fashioned files. For more details, see
+    section 1.13 of the CPDF manual. This function sets the mode globally. """
     libc.pycpdf_setSlow()
     checkerror()
 
@@ -230,7 +231,8 @@ def fromMemory(data, userpw):
 
 
 def fromMemoryLazy(data, userpw):
-    """ Load a file from from a byte array and the user password (blank if none), but lazily like fromFileLazy."""
+    """ Load a file from from a byte array and the user password (blank if
+    none), but lazily like fromFileLazy."""
     pdf = Pdf(libc.pycpdf_fromMemoryLazy(data, len(data), str.encode(userpw)))
     checkerror()
     return pdf
@@ -265,7 +267,8 @@ uslegallandscape = 15
 
 
 def blankDocumentPaper(papersize, pages):
-    """Create a blank document with pages of the given paper size, and number of pages. """
+    """Create a blank document with pages of the given paper size, and number
+    of pages. """
     r = Pdf(libc.pycpdf_blankDocumentPaper(papersize, pages))
     checkerror()
     return r
@@ -314,10 +317,9 @@ def inOfPt(i):
 
 
 def parsePagespec(pdf, pagespec):
-    """Parse a page specification such as "1-3,8-end" to a range with reference to
-    a given PDF (the PDF is supplied so that page ranges which reference pages
-    which do not exist are rejected)."""
-
+    """Parse a page specification such as "1-3,8-end" to a range with reference
+    to a given PDF (the PDF is supplied so that page ranges which reference
+    pages which do not exist are rejected)."""
     rn = libc.pycpdf_parsePagespec(pdf.pdf, str.encode(pagespec))
     r = list_of_range(rn)
     deleteRange(rn)
@@ -1170,7 +1172,8 @@ def padEvery(pdf, n):
 
 
 def padMultiple(pdf, n):
-    """Adds pages at the end to pad the file to a multiple of n pages in length."""
+    """Adds pages at the end to pad the file to a multiple of n pages in
+    length."""
     libc.pycpdf_padMultiple(pdf.pdf, n)
     checkerror()
 
@@ -1710,7 +1713,8 @@ def displayDocTitle(pdf, flag):
 
 
 def openAtPage(pdf, fitflag, pagenumber):
-    """Set the PDF to open, possibly with zoom-to-fit, at the given page number. """
+    """Set the PDF to open, possibly with zoom-to-fit, at the given page number.
+    """
     libc.pycpdf_openAtPage(pdf.pdf, fitflag, pagenumber)
     checkerror()
     return
@@ -1855,7 +1859,8 @@ def attachFileFromMemory(data, filename, pdf):
 
 
 def attachFileToPageFromMemory(data, filename, pdf, pagenumber):
-    """Attach a file to a given pag from a byte array. It is attached at document level."""
+    """Attach a file to a given pag from a byte array. It is attached at
+    document level."""
     libc.pycpdf_attachFileToPageFromMemory(
         data, len(data), str.encode(filename), pdf.pdf, pagenumber)
     checkerror()
@@ -1869,7 +1874,8 @@ def removeAttachedFiles(pdf):
 
 def getAttachments(pdf):
     """List information about attachements. Returns a list of tuples
-    (name, page number, byte array of data). Page 0 = document-level attachment."""
+    (name, page number, byte array of data). Page 0 = document-level
+    attachment."""
     libc.pycpdf_startGetAttachments(pdf.pdf)
     n = libc.pycpdf_numberGetAttachments()
     l = []
@@ -1975,7 +1981,8 @@ def OCGRename(pdf, n_from, n_to):
 
 
 def OCGOrderAll(pdf):
-    """Ensure that every optional content group appears in the OCG order list."""
+    """Ensure that every optional content group appears in the OCG order list.
+    """
     libc.pycpdf_OCGOrderAll(pdf.pdf)
     checkerror()
 
