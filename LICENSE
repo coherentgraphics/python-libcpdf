@@ -1,6 +1,6 @@
-(Note that actually using this software requires the external
-libcpdf.so / libcpdf.dll which has a more restrictive license.
-The license below is just for the contents of this repository.)
+(Note that actually using this software requires the external lib(py)cpdf.so /
+lib(py)cpdf.dll which have a more restrictive license.  The license below is
+just for the contents of this repository.)
 
 BSD 3-Clause License
 
