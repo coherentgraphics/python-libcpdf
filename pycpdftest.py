@@ -58,12 +58,12 @@ def chapter1():
     print('***** CHAPTER 1. Basics')
     print('---cpdf_fromFile()')
     try:
-        pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     print('---cpdf_fromFileLazy()')
     try:
-        pdf2 = pycpdf.fromFileLazy('cpdflibmanual.pdf', '')
+        pdf2 = pycpdf.fromFileLazy('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     print('---cpdf_toMemory()')
@@ -221,7 +221,7 @@ def chapter1():
         fatal_prerr()
     print('---cpdf_pages()')
     try:
-        pdfpages = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdfpages = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         prerr()
     try:
@@ -231,13 +231,13 @@ def chapter1():
     print(f'Pages = {pages}')
     print('---cpdf_pagesFast()')
     try:
-        pagesf = pycpdf.pagesFast('', 'cpdflibmanual.pdf')
+        pagesf = pycpdf.pagesFast('', 'testinputs/cpdflibmanual.pdf')
     except:
         fatal_prerr()
     print(f'Pages = {pagesf}')
     print('---cpdf_toFile()')
     try:
-        pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
@@ -264,7 +264,7 @@ def chapter1():
     print(f'islinearized:{int(linearized)}')
     print('---cpdf_toFileEncrypted()')
     try:
-        pdf5 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf5 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         prerr()
     try:
@@ -316,11 +316,11 @@ def chapter1():
 def chapter2():
     print('***** CHAPTER 2. Merging and Splitting')
     try:
-        pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pdf2 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf2 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     print('---cpdf_mergeSimple()')
@@ -367,79 +367,80 @@ def chapter2():
 def chapter3():
     print('***** CHAPTER 3. Pages')
     try:
-        pagespdf1 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf1 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf2 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf2 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf3 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf3 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf4 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf4 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf5 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf5 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf6 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf6 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf7 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf7 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf8 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf8 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf9 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf9 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf10 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf10 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf11 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf11 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
+
     except:
         fatal_prerr()
     try:
-        pagespdf12 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf12 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf13 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf13 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf14 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf14 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf15 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf15 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf16 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf16 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf17 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf17 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf18 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf18 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        pagespdf19 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pagespdf19 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
@@ -637,7 +638,7 @@ def chapter4(): pass
 def chapter5():
     print('***** CHAPTER 5. Compression')
     try:
-        pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     print('---cpdf_compress()')
@@ -676,7 +677,7 @@ def chapter6():
     print('***** CHAPTER 6. Bookmarks')
     print('---cpdf: get bookmarks')
     try:
-        pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
@@ -712,7 +713,7 @@ def chapter8():
     print('***** CHAPTER 8. Logos, Watermarks and Stamps')
     print('---cpdf_addText()')
     try:
-        pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         prerr()
     try:
@@ -746,7 +747,7 @@ def chapter8():
     except:
         prerr()
     try:
-        pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     print('---cpdf_stampOn()')
@@ -755,7 +756,7 @@ def chapter8():
     except:
         prerr()
     try:
-        stampee = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        stampee = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         prerr()
     try:
@@ -787,7 +788,7 @@ def chapter8():
     except:
         prerr()
     try:
-        c2 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        c2 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         prerr()
     try:
@@ -803,7 +804,7 @@ def chapter8():
     except:
         prerr()
     try:
-        undoc = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        undoc = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         prerr()
     print('---cpdf_stampAsXObject()')
@@ -826,13 +827,13 @@ def chapter8():
 # CHAPTER 9. Multipage facilities
 def chapter9():
     print('***** CHAPTER 9. Multipage facilities')
-    mp = pycpdf.fromFile('cpdflibmanual.pdf', '')
-    mp2 = pycpdf.fromFile('cpdflibmanual.pdf', '')
-    mp3 = pycpdf.fromFile('cpdflibmanual.pdf', '')
-    mp4 = pycpdf.fromFile('cpdflibmanual.pdf', '')
-    mp5 = pycpdf.fromFile('cpdflibmanual.pdf', '')
-    mp6 = pycpdf.fromFile('cpdflibmanual.pdf', '')
-    mp7 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+    mp = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
+    mp2 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
+    mp3 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
+    mp4 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
+    mp5 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
+    mp6 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
+    mp7 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     print('---cpdf_twoUp()')
     try:
         pycpdf.twoUp(mp)
@@ -910,7 +911,7 @@ def chapter10(): pass
 def chapter11():
     print('***** CHAPTER 11. Document Information and Metadata')
     try:
-        pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
 
@@ -1271,7 +1272,7 @@ def chapter11():
         prerr()
     print('---cpdf_setMetadataFromFile()')
     try:
-        pycpdf.setMetadataFromFile(pdf, 'cpdflibmanual.pdf')
+        pycpdf.setMetadataFromFile(pdf, 'testinputs/cpdflibmanual.pdf')
     except:
         prerr()
     try:
@@ -1425,7 +1426,7 @@ def chapter14():
     print('***** CHAPTER 14. Fonts')
     print('---cpdf: Get Fonts')
     try:
-        pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
         pdf2 = pycpdf.fromFile('testinputs/frontmatter.pdf', '')
         r = pycpdf.all(pdf)
     except:
@@ -1458,7 +1459,7 @@ def chapter14():
 def chapter15():
     print('***** CHAPTER 15. PDF and JSON')
     try:
-        pdf = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        pdf = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     print('---cpdf_outputJSON()')
@@ -1513,51 +1514,51 @@ def chapter16():
 def chapter17():
     print('***** CHAPTER 17. Miscellaneous')
     try:
-        misc = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        misc2 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc2 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        misc3 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc3 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        misc4 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc4 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        misc5 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc5 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        misc6 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc6 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        misc7 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc7 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        misc8 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc8 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        misc9 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc9 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        misc10 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc10 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        misc11 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc11 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
-        misc12 = pycpdf.fromFile('cpdflibmanual.pdf', '')
+        misc12 = pycpdf.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
