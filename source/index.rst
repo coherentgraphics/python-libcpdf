@@ -2,7 +2,7 @@ Pycpdf: PDF document manipulator
 ================================
 
 Pycpdf is a library providing a huge range of tools for manipulating PDF files.
-It is based on the ``cpdf``, the command line tool for PDF manipulation. It
+It is based on ``cpdf``, the command line tool for PDF manipulation. It
 requires Python 3.8 or above.
 
 License
