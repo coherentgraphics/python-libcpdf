@@ -5,6 +5,14 @@ including commercial licenses can be found at <https://www.coherentpdf.com/>
 
 The non-commercial home of pycpdflib is <http://community.coherentpdf.com/>
 
+The python package may be installed with
+
+pip install pycpdflib
+
+and imported into your program with
+
+import pycpdflib
+
 
 Functionality
 -------------
