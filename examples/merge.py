@@ -12,8 +12,6 @@ elif sys.platform.startswith('win32') or sys.platform.startswith('cygwin'):
     os.add_dll_directory("C:\\\\OCaml64/home/JohnWhitington/python-libcpdf/")
     pycpdflib.loadDLL("libpycpdf.dll")
 
-pycpdflib.startup()
-
 #We will take the input hello.pdf and repeat it three times
 mergepdf = pycpdflib.fromFile('../hello.pdf', '')
 

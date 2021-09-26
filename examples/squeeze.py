@@ -12,11 +12,8 @@ elif sys.platform.startswith('win32') or sys.platform.startswith('cygwin'):
     os.add_dll_directory("C:\\\\OCaml64/home/JohnWhitington/python-libcpdf/")
     pycpdflib.loadDLL("libpycpdf.dll")
 
-#Prepare cpdf for use
-pycpdflib.startup()
-
 #Load file
-pdf = pycpdflib.fromFile('../cpdflibmanual.pdf', '')
+pdf = pycpdflib.fromFile('../pycpdflibmanual.pdf', '')
 
 #Squeeze it
 pycpdflib.squeezeInMemory(pdf)
