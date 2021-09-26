@@ -1,14 +1,14 @@
-Pycpdf: PDF document manipulator
-================================
+Pycpdflib: PDF document manipulator
+===================================
 
-Pycpdf is a library providing a huge range of tools for manipulating PDF files.
+Pycpdflib is a library providing a huge range of tools for manipulating PDF files.
 It is based on ``cpdf``, the command line tool for PDF manipulation. It
 requires Python 3.8 or above.
 
 License
 -------
 
-Pycpdf itself is licensed under the BSD 3-clause license. See the file LICENSE
+Pycpdflib itself is licensed under the BSD 3-clause license. See the file LICENSE
 in the distribution.
 
 However, using pycpdf requires the DLLs ``libpycpdf`` and
@@ -25,7 +25,7 @@ Documentation
 
 This documentation should be read alongside the PDF manual `pycpdflibmanual.pdf
 <https://coherentpdf.com/pycpdflibmanual.pdf>`_ which describes the command line
-tools upon which ``pycpdf`` is based, together with the Python interface.
+tools upon which ``pycpdflib`` is based, together with the Python interface.
 
 There are `some examples
 <https://github.com/coherentgraphics/python-libcpdf/tree/master/examples>`_ in
@@ -42,7 +42,7 @@ Loading the libpypcdf and libcpdf DLLs
 --------------------------------------
 
 Before using the library, you must load the ``libpycpdf`` and ``libcpdf`` DLLs.
-This is achieved with the ``pycpdf.loadDLL`` function, given the filename or
+This is achieved with the ``pycpdflib.loadDLL`` function, given the filename or
 full path of the ``libpycpdf`` DLL.
 
 On Windows, you may have to call ``os.add_dll_directory`` first. On MacOS, you
@@ -123,7 +123,7 @@ Built-in values
 Chapter 0. Preliminaries
 ------------------------
 
-.. currentmodule:: pycpdf
+.. currentmodule:: pycpdflib
 .. autoclass:: Pdf
 .. autofunction:: loadDLL
 .. autoexception:: CPDFError
