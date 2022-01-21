@@ -625,6 +625,21 @@ void pycpdf_padMultipleBefore(int pdf, int n)
   return;
 }
 
+/* CHAPTER 10. Annotations */
+void *annotationsJSONData;
+
+void *pycpdf_annotationsJSON(int pdf, int *length)
+{
+  annotationsJSONData = cpdf_annotationsJSON(pdf, length);
+  return annotationsJSONData;
+}
+
+void pycpdf_annotationsJSONFree(void)
+{
+  free(annotationsJSONData);
+  return;
+}
+
 /* CHAPTER 11. Document Information and Metadata */
 int pycpdf_isLinearized(char *filename)
 {
@@ -992,8 +1007,8 @@ void *getMetadataData;
 
 void *pycpdf_getMetadata(int pdf, int *length)
 {
-  toMemoryData = cpdf_getMetadata(pdf, length);
-  return toMemoryData;
+  getMetadataData = cpdf_getMetadata(pdf, length);
+  return getMetadataData;
 }
 
 void pycpdf_getMetadataFree(void)

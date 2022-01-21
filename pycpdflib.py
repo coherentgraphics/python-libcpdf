@@ -1187,7 +1187,16 @@ def padMultipleBefore(pdf, n):
 
 # CHAPTER 10. Annotations
 
-# Not in the library version.
+def annotationsJSON(pdf):
+    """Get the annotations in JSON format."""
+    length = c_int32()
+    data = libc.pycpdf_annotationsJSON(pdf.pdf, byref(length))
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
+    libc.pycpdf_annotationsJSONFree()
+    checkerror()
+    return out_data.raw
+
 
 # CHAPTER 11. Document Information and Metadata
 

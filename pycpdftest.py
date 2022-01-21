@@ -900,6 +900,16 @@ def chapter9():
 
 def chapter10():
     print('***** CHAPTER 10. Annotations')
+    try:
+        annots = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    except:
+        fatal_prerr()
+    print('---cpdf_annotationsJSON()')
+#    try:
+#        data = pycpdflib.annotationsJSON(annots)
+#        print(f'Contains {len(data)} bytes of data')
+#    except:
+#        prerr()
 
 # CHAPTER 11. Document Information and Metadata
 
