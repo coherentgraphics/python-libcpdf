@@ -121,6 +121,8 @@ def loadDLL(f):
         c_int, c_int, c_int, c_int, c_int, c_int, c_double, c_double, c_int]
     libc.pycpdf_getImageResolutionXRes.restype = c_double
     libc.pycpdf_getImageResolutionYRes.restype = c_double
+    libc.pycpdf_impose.argtypes = [c_int, c_double, c_double, c_int,
+                                   c_int, c_int, c_int, c_int, c_double, c_double, c_double]
     LP_c_char = POINTER(c_char)
     LP_LP_c_char = POINTER(LP_c_char)
     argc = len(sys.argv)
@@ -1148,6 +1150,18 @@ def twoUpStack(pdf):
     """Impose a document two up by doubling the page size,
     to fit two pages on one."""
     libc.pycpdf_twoUpStack(pdf.pdf)
+    checkerror()
+
+
+def impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing, linewidth):
+    """impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing,
+    linewidth) imposes a PDF. There are two modes: imposing x * y, or imposing
+    to fit a page of size x * y. This is controlled by fit. Columns imposes by
+    columns rather than rows. rtl is right-to-left, btt bottom-to-top. Center
+    is unused for now. Margin is the margin around the output, spacing the
+    spacing between imposed inputs."""
+    libc.pycpdf_impose(pdf.pdf, x, y, fit, columns, rtl,
+                       btt, center, margin, spacing, linewidth)
     checkerror()
 
 

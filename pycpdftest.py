@@ -825,6 +825,8 @@ def chapter9():
     print('***** CHAPTER 9. Multipage facilities')
     mp = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     mp2 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    mp25 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    mp26 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     mp3 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     mp4 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     mp5 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
@@ -846,6 +848,25 @@ def chapter9():
         prerr()
     try:
         pycpdflib.toFile(mp2, 'testoutputs/09mp2.pdf', False, False)
+    except:
+        prerr()
+    print('---cpdf_impose()')
+    try:
+        pycpdflib.impose(mp25, 5.0, 4.0, False, False, False,
+                         False, False, 40.0, 20.0, 2.0)
+    except:
+        prerr()
+    try:
+        pycpdflib.toFile(mp25, 'testoutputs/09mp25.pdf', False, False)
+    except:
+        prerr()
+    try:
+        pycpdflib.impose(mp26, 2000.0, 1000.0, True, False,
+                         False, False, False, 40.0, 20.0, 2.0)
+    except:
+        prerr()
+    try:
+        pycpdflib.toFile(mp26, 'testoutputs/09mp2.pdf', False, False)
     except:
         prerr()
     print('---cpdf_padBefore()')
