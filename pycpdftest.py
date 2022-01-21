@@ -1515,6 +1515,7 @@ def chapter16():
 
 # CHAPTER 17. Creating New PDFs
 
+
 def chapter17():
     print('***** CHAPTER 17. Creating New PDFs')
     print('---cpdf_blankDocument()')
@@ -1535,6 +1536,7 @@ def chapter17():
         pycpdflib.toFile(pdf6, 'testoutputs/01blanka4.pdf', False, False)
     except:
         prerr()
+
 
 def chapter18():
     print('***** CHAPTER 18. Miscellaneous')
@@ -1584,6 +1586,22 @@ def chapter18():
         fatal_prerr()
     try:
         misc12 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    except:
+        fatal_prerr()
+    try:
+        misc13 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    except:
+        fatal_prerr()
+    try:
+        misc14 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    except:
+        fatal_prerr()
+    try:
+        misc15 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    except:
+        fatal_prerr()
+    try:
+        misc16 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
         fatal_prerr()
     try:
@@ -1691,6 +1709,36 @@ def chapter18():
     try:
         pycpdflib.toFile(
             misc11, 'testoutputs/17removedictentry.pdf', False, False)
+    except:
+        prerr()
+    print('---cpdf_removeDictEntrySearch()')
+    try:
+        pycpdflib.removeDictEntrySearch(misc13, '/Producer', '1')
+    except:
+        prerr()
+    try:
+        pycpdflib.toFile(
+            misc13, 'testoutputs/17removedictentrysearch.pdf', False, False)
+    except:
+        prerr()
+    print('---cpdf_replaceDictEntry()')
+    try:
+        pycpdflib.replaceDictEntry(misc14, '/Producer', '{"I" : 1}')
+    except:
+        prerr()
+    try:
+        pycpdflib.toFile(
+            misc14, 'testoutputs/17replacedictentry.pdf', False, False)
+    except:
+        prerr()
+    print('---cpdf_replaceDictEntrySearch()')
+    try:
+        pycpdflib.replaceDictEntrySearch(misc15, '/Producer', '1', '2')
+    except:
+        prerr()
+    try:
+        pycpdflib.toFile(
+            misc15, 'testoutputs/17replacedictentrysearch.pdf', False, False)
     except:
         prerr()
     print('---cpdf_removeClipping()')

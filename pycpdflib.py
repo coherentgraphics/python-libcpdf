@@ -2082,6 +2082,30 @@ def removeDictEntry(pdf, key):
     checkerror()
 
 
+def removeDictEntrySearch(pdf, key, searchterm):
+    """Remove any dictionary entry with the given
+    key anywhere in the document, if its value matches the given search term."""
+    libc.pycpdf_removeDictEntrySearch(
+        pdf.pdf, str.encode(key), str.encode(searchterm))
+    checkerror()
+
+
+def replaceDictEntry(pdf, key, newvalue):
+    """Replace any dictionary entry with the given
+    key anywhere in the document using the new value given."""
+    libc.pycpdf_replaceDictEntry(pdf.pdf, str.encode(key), str.encode(newvalue))
+    checkerror()
+
+
+def replaceDictEntrySearch(pdf, key, newvalue, searchterm):
+    """Replace any dictionary entry with the given key anywhere in the
+    document, if its value matches the given search term, with the new value
+    given."""
+    libc.pycpdf_replaceDictEntrySearch(
+        pdf.pdf, str.encode(key), str.encode(newvalue), str.encode(searchterm))
+    checkerror()
+
+
 def removeClipping(pdf, r):
     """Remove all clipping from pages in the given range"""
     r = range_of_list(r)
