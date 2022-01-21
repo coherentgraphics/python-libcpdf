@@ -1188,6 +1188,7 @@ def padMultipleBefore(pdf, n):
 
 # CHAPTER 10. Annotations
 
+
 def annotationsJSON(pdf):
     """Get the annotations in JSON format."""
     length = c_int32()
@@ -2104,7 +2105,8 @@ def removeDictEntrySearch(pdf, key, searchterm):
 def replaceDictEntry(pdf, key, newvalue):
     """Replace any dictionary entry with the given
     key anywhere in the document using the new value given."""
-    libc.pycpdf_replaceDictEntry(pdf.pdf, str.encode(key), str.encode(newvalue))
+    libc.pycpdf_replaceDictEntry(
+        pdf.pdf, str.encode(key), str.encode(newvalue))
     checkerror()
 
 
@@ -2116,6 +2118,7 @@ def replaceDictEntrySearch(pdf, key, newvalue, searchterm):
         pdf.pdf, str.encode(key), str.encode(newvalue), str.encode(searchterm))
     checkerror()
 
+
 def getDictEntries(pdf, key):
     """Return JSON of any dict entries with the given key."""
     length = c_int32()
@@ -2125,6 +2128,7 @@ def getDictEntries(pdf, key):
     libc.pycpdf_getDictEntriesFree()
     checkerror()
     return out_data.raw
+
 
 def removeClipping(pdf, r):
     """Remove all clipping from pages in the given range"""
