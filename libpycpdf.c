@@ -1310,9 +1310,9 @@ void pycpdf_addContent(char *content, int before, int pdf, int r)
   return;
 }
 
-void pycpdf_outputJSON(char* filename, int parse_content, int no_stream_data, int pdf)
+void pycpdf_outputJSON(char* filename, int parse_content, int no_stream_data, int decompress_streams, int pdf)
 {
-  cpdf_outputJSON(filename, parse_content, no_stream_data, pdf);
+  cpdf_outputJSON(filename, parse_content, no_stream_data, decompress_streams, pdf);
   return;
 }
 

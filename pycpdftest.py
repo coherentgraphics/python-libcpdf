@@ -86,7 +86,8 @@ def chapter1():
     except:
         fatal_prerr()
     try:
-        pycpdflib.toFile(pdf4, 'testoutputs/01fromMemoryLazy.pdf', False, False)
+        pycpdflib.toFile(
+            pdf4, 'testoutputs/01fromMemoryLazy.pdf', False, False)
     except:
         prerr()
     print('---cpdf_blankDocument()')
@@ -247,7 +248,7 @@ def chapter1():
     print('---cpdf_toFileExt()')
     try:
         pycpdflib.toFileExt(pdf, 'testoutputs/01tofileext.pdf',
-                         False, True, True, True, True)
+                            False, True, True, True, True)
     except:
         prerr()
     print('---cpdf_isEncrypted()')
@@ -269,13 +270,13 @@ def chapter1():
         prerr()
     try:
         pycpdflib.toFileEncrypted(pdf5, pycpdflib.pdf40bit, [
-                               pycpdflib.noEdit], 'owner', 'user', False, False, 'testoutputs/01encrypted.pdf')
+            pycpdflib.noEdit], 'owner', 'user', False, False, 'testoutputs/01encrypted.pdf')
     except:
         prerr()
     print('---cpdf_toFileEncryptedExt()')
     try:
         pycpdflib.toFileEncryptedExt(pdf5, pycpdflib.pdf40bit, [
-                                  pycpdflib.noEdit], 'owner', 'user', False, False, False, False, False, 'testoutputs/01encryptedext.pdf')
+            pycpdflib.noEdit], 'owner', 'user', False, False, False, False, False, 'testoutputs/01encryptedext.pdf')
     except:
         prerr()
     try:
@@ -453,7 +454,8 @@ def chapter3():
     except:
         prerr()
     try:
-        pycpdflib.toFile(pagespdf1, 'testoutputs/03scalepages.pdf', False, False)
+        pycpdflib.toFile(
+            pagespdf1, 'testoutputs/03scalepages.pdf', False, False)
     except:
         prerr()
     print('---cpdf_scaleToFit()')
@@ -462,7 +464,8 @@ def chapter3():
     except:
         prerr()
     try:
-        pycpdflib.toFile(pagespdf2, 'testoutputs/03scaletofit.pdf', False, False)
+        pycpdflib.toFile(
+            pagespdf2, 'testoutputs/03scaletofit.pdf', False, False)
     except:
         prerr()
     print('---cpdf_scaleToFitPaper()')
@@ -565,7 +568,8 @@ def chapter3():
     except:
         prerr()
     try:
-        pycpdflib.toFile(pagespdf17, 'testoutputs/03trim_marks.pdf', False, False)
+        pycpdflib.toFile(
+            pagespdf17, 'testoutputs/03trim_marks.pdf', False, False)
     except:
         prerr()
     print('---cpdf_showBoxes()')
@@ -574,7 +578,8 @@ def chapter3():
     except:
         prerr()
     try:
-        pycpdflib.toFile(pagespdf18, 'testoutputs/03show_boxes.pdf', False, False)
+        pycpdflib.toFile(
+            pagespdf18, 'testoutputs/03show_boxes.pdf', False, False)
     except:
         prerr()
     print('---cpdf_hardBox()')
@@ -583,7 +588,8 @@ def chapter3():
     except:
         prerr()
     try:
-        pycpdflib.toFile(pagespdf19, 'testoutputs/03hard_box.pdf', False, False)
+        pycpdflib.toFile(
+            pagespdf19, 'testoutputs/03hard_box.pdf', False, False)
     except:
         prerr()
     print('---cpdf_removeCrop()')
@@ -612,7 +618,8 @@ def chapter3():
     except:
         prerr()
     try:
-        pycpdflib.toFile(pagespdf15, 'testoutputs/03remove_art.pdf', False, False)
+        pycpdflib.toFile(
+            pagespdf15, 'testoutputs/03remove_art.pdf', False, False)
     except:
         prerr()
     print('---cpdf_removeBleed()')
@@ -665,7 +672,8 @@ def chapter5():
     except:
         prerr()
     try:
-        pycpdflib.toFile(pdf, 'testoutputs/05squeezedinmemory.pdf', False, False)
+        pycpdflib.toFile(
+            pdf, 'testoutputs/05squeezedinmemory.pdf', False, False)
     except:
         prerr()
 
@@ -718,7 +726,7 @@ def chapter8():
         prerr()
     try:
         pycpdflib.addText(False, pdf, pycpdflib.all(pdf), 'Some Text~~~~~~~~~~!', (pycpdflib.topLeft, 20.0, 20.0), 1.0, 1,
-                       pycpdflib.timesRoman, 20, 0.5, 0.5, 0.5, False, False, True, 0.5, pycpdflib.leftJustify, False, False, '', 1.0, False)
+                          pycpdflib.timesRoman, 20, 0.5, 0.5, 0.5, False, False, True, 0.5, pycpdflib.leftJustify, False, False, '', 1.0, False)
     except:
         prerr()
     print('---cpdf_addTextSimple()')
@@ -779,7 +787,8 @@ def chapter8():
     except:
         prerr()
     try:
-        pycpdflib.toFile(stampee, 'testoutputs/08stampee_after.pdf', False, False)
+        pycpdflib.toFile(
+            stampee, 'testoutputs/08stampee_after.pdf', False, False)
     except:
         prerr()
     print('---cpdf_combinePages()')
@@ -1166,27 +1175,32 @@ def chapter11():
     print(f'Trim: {a:.6f} {b:.6f} {c:.6f} {d:.6f}')
     print('---cpdf_setMediaBox()')
     try:
-        pycpdflib.setMediaBox(pdf, pycpdflib.all(pdf), 100.0, 500.0, 150.0, 550.0)
+        pycpdflib.setMediaBox(pdf, pycpdflib.all(pdf),
+                              100.0, 500.0, 150.0, 550.0)
     except:
         fatal_prerr()
     print('---cpdf_setCropBox()')
     try:
-        pycpdflib.setCropBox(pdf, pycpdflib.all(pdf), 100.0, 500.0, 150.0, 550.0)
+        pycpdflib.setCropBox(pdf, pycpdflib.all(
+            pdf), 100.0, 500.0, 150.0, 550.0)
     except:
         fatal_prerr()
     print('---cpdf_setTrimBox()')
     try:
-        pycpdflib.setTrimBox(pdf, pycpdflib.all(pdf), 100.0, 500.0, 150.0, 550.0)
+        pycpdflib.setTrimBox(pdf, pycpdflib.all(
+            pdf), 100.0, 500.0, 150.0, 550.0)
     except:
         prerr()
     print('---cpdf_setArtBox()')
     try:
-        pycpdflib.setArtBox(pdf, pycpdflib.all(pdf), 100.0, 500.0, 150.0, 550.0)
+        pycpdflib.setArtBox(pdf, pycpdflib.all(
+            pdf), 100.0, 500.0, 150.0, 550.0)
     except:
         prerr()
     print('---cpdf_setBleedBox()')
     try:
-        pycpdflib.setBleedBox(pdf, pycpdflib.all(pdf), 100.0, 500.0, 150.0, 550.0)
+        pycpdflib.setBleedBox(pdf, pycpdflib.all(pdf),
+                              100.0, 500.0, 150.0, 550.0)
     except:
         prerr()
     try:
@@ -1377,7 +1391,8 @@ def chapter12():
     except:
         prerr()
     try:
-        pycpdflib.toFile(pdf, 'testoutputs/12with_attachments.pdf', False, False)
+        pycpdflib.toFile(
+            pdf, 'testoutputs/12with_attachments.pdf', False, False)
     except:
         prerr()
     print('---cpdf: get attachments')
@@ -1464,15 +1479,18 @@ def chapter15():
         fatal_prerr()
     print('---cpdf_outputJSON()')
     try:
-        pycpdflib.outputJSON('testoutputs/15json.json', False, False, pdf)
+        pycpdflib.outputJSON('testoutputs/15json.json',
+                             False, False, False, pdf)
     except:
         prerr()
     try:
-        pycpdflib.outputJSON('testoutputs/15jsonnostream.json', False, True, pdf)
+        pycpdflib.outputJSON(
+            'testoutputs/15jsonnostream.json', False, True, False, pdf)
     except:
         prerr()
     try:
-        pycpdflib.outputJSON('testoutputs/15jsonparsed.json', True, False, pdf)
+        pycpdflib.outputJSON(
+            'testoutputs/15jsonparsed.json', True, False, False, pdf)
     except:
         prerr()
 
@@ -1581,7 +1599,8 @@ def chapter17():
     except:
         prerr()
     try:
-        pycpdflib.toFile(misc2, 'testoutputs/17removealltext.pdf', False, False)
+        pycpdflib.toFile(
+            misc2, 'testoutputs/17removealltext.pdf', False, False)
     except:
         prerr()
     print('---cpdf_blackText()')
@@ -1653,7 +1672,8 @@ def chapter17():
     except:
         prerr()
     try:
-        pycpdflib.toFile(misc10, 'testoutputs/17setfullversion.pdf', False, False)
+        pycpdflib.toFile(
+            misc10, 'testoutputs/17setfullversion.pdf', False, False)
     except:
         prerr()
     print('---cpdf_removeDictEntry()')
@@ -1672,7 +1692,8 @@ def chapter17():
     except:
         prerr()
     try:
-        pycpdflib.toFile(misc12, 'testoutputs/17removeclipping.pdf', False, False)
+        pycpdflib.toFile(
+            misc12, 'testoutputs/17removeclipping.pdf', False, False)
     except:
         prerr()
 

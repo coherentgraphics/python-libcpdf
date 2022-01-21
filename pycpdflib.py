@@ -1464,7 +1464,7 @@ def getDateComponents(string):
 def dateStringOfComponents(cs):
     """Build a PDF date string a (year, month, day, hour, minute, second,
     hour_offset, minute_offset) tuple.
-    
+
     Dates: Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds
     (0-59), hour_offset is the offset from UT in hours (-23 to 23);
     minute_offset is the offset from UT in minutes (-59 to 59)."""
@@ -1952,12 +1952,13 @@ def copyFont(pdf, pdf2, r, pagenumber, fontname):
 # CHAPTER 15. PDF and JSON
 
 
-def outputJSON(filename, parse_content, no_stream_data, pdf):
+def outputJSON(filename, parse_content, no_stream_data, decompress_streams, pdf):
     """Output a PDF in JSON format to the given filename. If parse_content is
-    True, page content is parsed. If no_stream_data is True, all stream data is
-    suppressed entirely."""
+    True, page content is parsed. If decompress_streams is True, streams are
+    decompressed. If no_stream_data is True, all stream data is suppressed
+    entirely."""
     libc.pycpdf_outputJSON(str.encode(filename),
-                           parse_content, no_stream_data, pdf.pdf)
+                           parse_content, no_stream_data, decompress_streams, pdf.pdf)
     checkerror()
 
 # CHAPTER 16. Optional Content Groups

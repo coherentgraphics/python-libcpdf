@@ -73,13 +73,6 @@ int cpdf_fromMemory(void *, int, const char[]);
  */
 int cpdf_fromMemoryLazy(void *, int, const char[]);
 
-/*
- * cpdf_blankDocument(width, height, num_pages) creates a blank document with
- * pages of the given width (in points), height (in points), and number of
- * pages.
- */
-int cpdf_blankDocument(double, double, int);
-
 /* Standard page sizes. */
 enum cpdf_papersize {
   cpdf_a0portrait,        /* A0 portrait */
@@ -99,12 +92,6 @@ enum cpdf_papersize {
   cpdf_uslegalportrait,   /* US Legal portrait */
   cpdf_uslegallandscape   /* US Legal landscape */
 };
-
-/*
- * cpdf_blankDocumentPaper(papersize, num_pages) makes a blank document given
- * a page size and number of pages.
- */
-int cpdf_blankDocumentPaper(enum cpdf_papersize, int);
 
 /* Remove a PDF from memory, given its number. */
 void cpdf_deletePdf(int);
@@ -277,7 +264,7 @@ int cpdf_pagesFast(const char[], const char[]);
 void cpdf_toFile(int, const char[], int, int);
 
 /*
- * cpdf_toFile (pdf, filename, linearize, make_id, preserve_objstm,
+ * cpdf_toFileExt (pdf, filename, linearize, make_id, preserve_objstm,
  * generate_objstm, compress_objstm) writes the file to a given filename. If
  * make_id is true, it will be given a new ID.  If preserve_objstm is true,
  * existing object streams will be preserved. If generate_objstm is true,
@@ -289,9 +276,8 @@ void cpdf_toFile(int, const char[], int, int);
 void cpdf_toFileExt(int, const char[], int, int, int, int, int);
 
 /*
- * Given a buffer of the correct size, cpdf_toFileMemory (pdf, linearize,
- * make_id, &length) writes it and returns the buffer. The buffer length is
- * filled in &length.
+ * cpdf_toFileMemory (pdf, linearize, make_id, &length) writes a PDF file it
+ * and returns the buffer. The buffer length is filled in &length.
  */
 void *cpdf_toMemory(int, int, int, int *);
 
@@ -415,7 +401,7 @@ int cpdf_selectPages(int, int);
 void cpdf_scalePages(int, int, double, double);
 
 /*
- * cpdf_scaleToFit(pdf, range, width height, scale) scales the content to fit
+ * cpdf_scaleToFit(pdf, range, width, height, scale) scales the content to fit
  * new page dimensions (width x height) multiplied by scale (typically 1.0).
  * Other boxed (crop etc. are altered as appropriate)
  */
@@ -570,7 +556,7 @@ void cpdf_hardBox(int, int, const char[]);
 void cpdf_compress(int);
 
 /*
- * cpdf_uncompress(pdf) uncompresses any streams in the given PDF, so long as
+ * cpdf_decompress(pdf) decompresses any streams in the given PDF, so long as
  * the compression method is supported.
  */
 void cpdf_decompress(int);
@@ -647,6 +633,19 @@ void cpdf_setBookmarkText(int, const char[]);
  * bookmarks to the given PDF.
  */
 void cpdf_endSetBookmarkInfo(int);
+
+/* cpdf_getBookmarksJSON(pdf, length) returns the bookmark data and sets the
+ * length. */
+void *cpdf_getBookmarksJSON(int, int *);
+
+/* cpdf_setBookmarksJSON(pdf, data, datalength) sets the bookmarks from JSON
+ * bookmark data. */
+void cpdf_setBookmarksJSON(int, void *, int);
+
+/* cpdf_tableOfContents(pdf, font, fontsize, title, bookmark) typesets a table
+ * of contents from existing bookmarks and prepends it to the document. If
+ * bookmark is set, the table of contents gets its own bookmark. */
+void cpdf_tableOfContents(int, int, double, const char[], int);
 
 /* CHAPTER 7. Presentations */
 
@@ -829,6 +828,15 @@ char *cpdf_stampAsXObject(int, int, int);
 
 /* CHAPTER 9. Multipage facilities */
 
+/* cpdf_impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing,
+ * linewidth) imposes a PDF. There are two modes: imposing x * y, or imposing
+ * to fit a page of size x * y. This is controlled by fit. Columns imposes by
+ * columns rather than rows. rtl is right-to-left, btt bottom-to-top. Center is
+ * unused for now. Margin is the margin around the output, spacing the spacing
+ * between imposed inputs. */
+void cpdf_impose(int, double, double, int, int, int, int, int, double, double,
+                 double);
+
 /*
  * Impose a document two up. cpdf_twoUp does so by retaining the existing
  * page size, scaling pages down. cpdf_twoUpStack does so by doubling the
@@ -866,7 +874,9 @@ void cpdf_padMultipleBefore(int, int);
 
 /* CHAPTER 10. Annotations */
 
-/* Not in the library version */
+/* Return the annotations from a PDF in JSON format, returning also its length.
+ */
+void *cpdf_annotationsJSON(int, int *);
 
 /* CHAPTER 11. Document Information and Metadata */
 
@@ -1017,7 +1027,7 @@ int cpdf_getPageRotation(int, int);
 int cpdf_hasBox(int, int, const char[]);
 
 /*
- * These functions get a box given the document, page range, min x, max x,
+ * These functions get a box given the document, page number, min x, max x,
  * min y, max y in points. Only succeeds if such a box exists, as checked by
  * cpdf_hasBox.
  */
@@ -1283,7 +1293,7 @@ void cpdf_removeFonts(int);
 /*
  * cpdf_copyFont(from, to, range, pagenumber, fontname) copies the given font
  * from the given page in the 'from' PDF to every page in the 'to' PDF. The
- * new font is stored under it's font name.
+ * new font is stored under its font name.
  */
 void cpdf_copyFont(int, int, int, int, const char[]);
 
@@ -1293,7 +1303,17 @@ void cpdf_copyFont(int, int, int, int, const char[]);
  * in JSON format to the given filename. If parse_content is true, page content
  * is parsed. If no_stream_data is true, all stream data is suppressed entirely.
  * */
-void cpdf_outputJSON(const char[], int, int, int);
+void cpdf_outputJSON(const char[], int, int, int, int);
+
+/* cpdf_outputJSONMemory(parse_content, no_stream_data, pdf, &length) is like
+ * outputJSON, but it write to a buffer in memory. The length is filled in. */
+void *cpdf_outputJSONMemory(int, int, int, int, int *);
+
+/* Load a PDF from a JSON file given its filename */
+int cpdf_fromJSON(const char[]);
+
+/* Load a PDF from a JSON file in memory, given the buffer and its length */
+int cpdf_fromJSONMemory(void *, int);
 
 /* CHAPTER 16. Optional Content Groups */
 
@@ -1319,7 +1339,30 @@ void cpdf_OCGOrderAll(int);
  * content group. */
 void cpdf_OCGCoalesce(int);
 
-/* CHAPTER 17. Miscellaneous */
+/* CHAPTER 17. Creating New PDFs */
+
+/* cpdf_blankDocument(width, height, num_pages) creates a blank document with
+ * pages of the given width (in points), height (in points), and number of
+ * pages.
+ */
+int cpdf_blankDocument(double, double, int);
+
+/*
+ * cpdf_blankDocumentPaper(papersize, num_pages) makes a blank document given
+ * a page size and number of pages.
+ */
+int cpdf_blankDocumentPaper(enum cpdf_papersize, int);
+
+/* cpdf_textToPDF(w, h, font, fontsize, filename) typesets a UTF8 text file
+ * ragged right on a page of size w * h in points in the given font and font
+ * size. */
+int cpdf_textToPDF(double, double, int, double, const char[]);
+
+/* cpdf_textToPDF(papersize font, fontsize, filename) typesets a UTF8 text file
+ * ragged right on a page of the given size in the given font and font size. */
+int cpdf_textToPDFPaper(int, int, double, const char[]);
+
+/* CHAPTER 18. Miscellaneous */
 
 /*
  * cpdf_draft(pdf, range, boxes) removes images on the given pages, replacing
@@ -1366,6 +1409,23 @@ void cpdf_setFullVersion(int, int, int);
  * key anywhere in the document.
  */
 void cpdf_removeDictEntry(int, const char[]);
+
+/* cpdf_removeDictEntrySearch(pdf, key, seachterm) removes any dictionary entry
+ * with the given key whose value matches the given search term. */
+void cpdf_removeDictEntrySearch(int, const char[], const char[]);
+
+/* cpdf_replaceDictEntry(pdf, key, newvalue) replaces the value associated with
+ * the given key */
+void cpdf_replaceDictEntry(int, const char[], const char[]);
+
+/* cpdf_replaceDictEntry(pdf, key, newvalue, searchterm) replaces the value
+ * associated with the given key if the existing value matches the search term.
+ */
+void cpdf_replaceDictEntrySearch(int, const char[], const char[], const char[]);
+
+/* cpdf_getDictEntries(pdf, key, length) returns a JSON array containing any
+ * and all values associated with the given key, and fills in its length. */
+void *cpdf_getDictEntries(int, const char[], int *retlen);
 
 /*
  * cpdf_removeClipping(pdf, range) removes all clipping from pages in the

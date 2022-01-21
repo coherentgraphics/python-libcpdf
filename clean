@@ -1,7 +1,7 @@
 rm -f libcpdf.so libcpdf.dll
 rm -f libpycpdf.o libpycpdf.so libpycpdf.dll
 rm -rf testoutputs/*.pdf testoutputs/*.json testoutputs/*.txt __pycache__
-rm -f foo foo2
+rm -f foo foo2 foo.diff
 rm -f pycpdf.html pycpdf.pyc
 rm -f examples/*.pdf
 make clean

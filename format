@@ -1,2 +1,2 @@
-autopep8 --in-place pycpdf.py
+autopep8 --in-place pycpdflib.py
 autopep8 --in-place pycpdftest.py
