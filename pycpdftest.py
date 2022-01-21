@@ -90,24 +90,7 @@ def chapter1():
             pdf4, 'testoutputs/01fromMemoryLazy.pdf', False, False)
     except:
         prerr()
-    print('---cpdf_blankDocument()')
-    try:
-        pdf5 = pycpdflib.blankDocument(100.0, 200.0, 20)
-    except:
-        fatal_prerr()
-    try:
-        pycpdflib.toFile(pdf5, 'testoutputs/01blank.pdf', False, False)
-    except:
-        prerr()
-    print('---cpdf_blankDocumentPaper()')
-    try:
-        pdf6 = pycpdflib.blankDocumentPaper(pycpdflib.a4portrait, 10)
-    except:
-        fatal_prerr()
-    try:
-        pycpdflib.toFile(pdf6, 'testoutputs/01blanka4.pdf', False, False)
-    except:
-        prerr()
+
     print('---cpdf: enumerate PDFs')
     print('---cpdf_ptOfIn()')
     try:
@@ -252,6 +235,10 @@ def chapter1():
     except:
         prerr()
     print('---cpdf_isEncrypted()')
+    try:
+        pdf5 = pycpdflib.blankDocument(100.0, 200.0, 20)
+    except:
+        fatal_prerr()
     try:
         isenc = pycpdflib.isEncrypted(pdf5)
     except:
@@ -1526,11 +1513,31 @@ def chapter16():
     except:
         prerr()
 
-# CHAPTER 17. Miscellaneous
-
+# CHAPTER 17. Creating New PDFs
 
 def chapter17():
-    print('***** CHAPTER 17. Miscellaneous')
+    print('***** CHAPTER 17. Creating New PDFs')
+    print('---cpdf_blankDocument()')
+    try:
+        pdf5 = pycpdflib.blankDocument(100.0, 200.0, 20)
+    except:
+        fatal_prerr()
+    try:
+        pycpdflib.toFile(pdf5, 'testoutputs/01blank.pdf', False, False)
+    except:
+        prerr()
+    print('---cpdf_blankDocumentPaper()')
+    try:
+        pdf6 = pycpdflib.blankDocumentPaper(pycpdflib.a4portrait, 10)
+    except:
+        fatal_prerr()
+    try:
+        pycpdflib.toFile(pdf6, 'testoutputs/01blanka4.pdf', False, False)
+    except:
+        prerr()
+
+def chapter18():
+    print('***** CHAPTER 18. Miscellaneous')
     try:
         misc = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
