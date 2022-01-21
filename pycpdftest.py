@@ -905,11 +905,11 @@ def chapter10():
     except:
         fatal_prerr()
     print('---cpdf_annotationsJSON()')
-#    try:
-#        data = pycpdflib.annotationsJSON(annots)
-#        print(f'Contains {len(data)} bytes of data')
-#    except:
-#        prerr()
+    try:
+        data = pycpdflib.annotationsJSON(annots)
+        print(f'Contains {len(data)} bytes of data')
+    except:
+        prerr()
 
 # CHAPTER 11. Document Information and Metadata
 

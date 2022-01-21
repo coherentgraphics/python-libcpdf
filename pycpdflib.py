@@ -1191,10 +1191,15 @@ def annotationsJSON(pdf):
     """Get the annotations in JSON format."""
     length = c_int32()
     data = libc.pycpdf_annotationsJSON(pdf.pdf, byref(length))
+    print(f'annotationsJSON: libc.pycpdf_annotationsJSON returned {length.value}')
     out_data = create_string_buffer(length.value)
+    print('A')
     memmove(out_data, data, length.value)
+    print('B')
     libc.pycpdf_annotationsJSONFree()
+    print('C')
     checkerror()
+    print('D')
     return out_data.raw
 
 
