@@ -1314,9 +1314,24 @@ void pycpdf_replaceDictEntrySearch(int pdf, char *key, char *newvalue, char *sea
   cpdf_replaceDictEntrySearch(pdf, key, newvalue, searchterm);
   return;
 }
+
 void pycpdf_removeClipping(int pdf, int r)
 {
   cpdf_removeClipping(pdf, r);
+  return;
+}
+
+void *getDictEntriesData;
+
+void *pycpdf_getDictEntries(int pdf, char *key, int *length)
+{
+  getDictEntriesData = cpdf_getDictEntries(pdf, key, length);
+  return getDictEntriesData;
+}
+
+void pycpdf_getDictEntriesFree(void)
+{
+  free(getDictEntriesData);
   return;
 }
 

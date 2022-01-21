@@ -898,8 +898,8 @@ def chapter9():
 # CHAPTER 10. Annotations
 
 
-def chapter10(): pass
-# Not in the library version.
+def chapter10():
+    print('***** CHAPTER 10. Annotations')
 
 # CHAPTER 11. Document Information and Metadata
 
@@ -1739,6 +1739,12 @@ def chapter18():
     try:
         pycpdflib.toFile(
             misc15, 'testoutputs/17replacedictentrysearch.pdf', False, False)
+    except:
+        prerr()
+    print('---cpdf_getDictEntries()')
+    try:
+        data = pycpdflib.getDictEntries(misc16, '/Producer')
+        print(f'length of entries data = {len(data)}')
     except:
         prerr()
     print('---cpdf_removeClipping()')

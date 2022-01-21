@@ -104,6 +104,7 @@ def loadDLL(f):
         [c_int, c_int, POINTER(c_char), c_int, c_double,
          c_double, c_int, c_double]
     libc.pycpdf_getMetadata.restype = POINTER(c_uint8)
+    libc.pycpdf_getDictEntries.restype = POINTER(c_uint8)
     libc.pycpdf_getAttachmentData.restype = POINTER(c_uint8)
     libc.pycpdf_getAttachmentName.restype = POINTER(c_uint8)
     libc.pycpdf_startGetImageResolution.argtypes = [c_int, c_double]
@@ -2105,6 +2106,15 @@ def replaceDictEntrySearch(pdf, key, newvalue, searchterm):
         pdf.pdf, str.encode(key), str.encode(newvalue), str.encode(searchterm))
     checkerror()
 
+def getDictEntries(pdf, key):
+    """Return JSON of any dict entries with the given key."""
+    length = c_int32()
+    data = libc.pycpdf_getDictEntries(pdf.pdf, str.encode(key), byref(length))
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
+    libc.pycpdf_getDictEntriesFree()
+    checkerror()
+    return out_data.raw
 
 def removeClipping(pdf, r):
     """Remove all clipping from pages in the given range"""
