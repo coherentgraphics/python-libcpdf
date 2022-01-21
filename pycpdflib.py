@@ -56,6 +56,7 @@ def loadDLL(f):
     libc.pycpdf_inOfPt.restype = c_double
     libc.pycpdf_stringOfPagespec.restype = POINTER(c_char)
     libc.pycpdf_toMemory.restype = POINTER(c_uint8)
+    libc.pycpdf_annotationsJSON.restype = POINTER(c_uint8)
     libc.pycpdf_scalePages.argtypes = [c_int, c_int, c_double, c_double]
     libc.pycpdf_scaleToFit.argtypes =\
         [c_int, c_int, c_double, c_double, c_double]
@@ -1191,15 +1192,10 @@ def annotationsJSON(pdf):
     """Get the annotations in JSON format."""
     length = c_int32()
     data = libc.pycpdf_annotationsJSON(pdf.pdf, byref(length))
-    print(f'annotationsJSON: libc.pycpdf_annotationsJSON returned {length.value}')
     out_data = create_string_buffer(length.value)
-    print('A')
     memmove(out_data, data, length.value)
-    print('B')
     libc.pycpdf_annotationsJSONFree()
-    print('C')
     checkerror()
-    print('D')
     return out_data.raw
 
 
