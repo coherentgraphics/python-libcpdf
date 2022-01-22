@@ -63,6 +63,7 @@ def loadDLL(f):
     libc.pycpdf_stringOfPagespec.restype = POINTER(c_char)
     libc.pycpdf_toMemory.restype = POINTER(c_uint8)
     libc.pycpdf_annotationsJSON.restype = POINTER(c_uint8)
+    libc.pycpdf_getBookmarksJSON.restype = POINTER(c_uint8)
     libc.pycpdf_scalePages.argtypes = [c_int, c_int, c_double, c_double]
     libc.pycpdf_scaleToFit.argtypes =\
         [c_int, c_int, c_double, c_double, c_double]
@@ -967,6 +968,17 @@ def setBookmarks(pdf, marks):
         libc.pycpdf_setBookmarkText(n, str.encode(text))
     libc.pycpdf_endSetBookmarkInfo(pdf.pdf)
     checkerror()
+
+
+def getBookmarksJSON(pdf):
+    """Get the bookmarks in JSON format."""
+    length = c_int32()
+    data = libc.pycpdf_getBookmarksJSON(pdf.pdf, byref(length))
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
+    libc.pycpdf_getBookmarksJSONFree()
+    checkerror()
+    return out_data.raw
 
 
 def tableOfContents(pdf, font, fontsize, title, bookmark):

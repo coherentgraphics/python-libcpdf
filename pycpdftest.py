@@ -694,6 +694,16 @@ def chapter6():
         pycpdflib.toFile(pdf, 'testoutputs/06newmarks.pdf', False, False)
     except:
         prerr()
+    try:
+        marks = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    except:
+        fatal_prerr()
+    print('---cpdf_getBookmarksJSON()')
+    try:
+        data = pycpdflib.getBookmarksJSON(marks)
+        print(f'Contains {len(data)} bytes of data')
+    except:
+        prerr()
     print('---cpdf_tableOfContents()')
     try:
         tocfile = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
@@ -880,7 +890,7 @@ def chapter9():
     except:
         prerr()
     try:
-        pycpdflib.toFile(mp26, 'testoutputs/09mp2.pdf', False, False)
+        pycpdflib.toFile(mp26, 'testoutputs/09mp26.pdf', False, False)
     except:
         prerr()
     print('---cpdf_padBefore()')

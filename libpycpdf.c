@@ -376,6 +376,18 @@ void pycpdf_endSetBookmarkInfo(int pdf) {
   return;
 }
 
+void *getBookmarksJSONData;
+
+void *pycpdf_getBookmarksJSON(int pdf, int *length) {
+  getBookmarksJSONData = cpdf_getBookmarksJSON(pdf, length);
+  return getBookmarksJSONData;
+}
+
+void pycpdf_getBookmarksJSONFree(void) {
+  free(getBookmarksJSONData);
+  return;
+}
+
 void pycpdf_tableOfContents(int pdf, int font, double fontsize, char *title,
                             int bookmark) {
   cpdf_tableOfContents(pdf, font, fontsize, title, bookmark);
