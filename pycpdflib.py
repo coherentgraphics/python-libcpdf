@@ -100,9 +100,9 @@ Page label styles:
 decimalArabic uppercaseRoman lowercaseRoman uppercaseLetters lowercaseLetters
 """
 
+
 from ctypes import *
 import sys
-
 libc = None
 
 # CHAPTER 0. Preliminaries
@@ -1465,7 +1465,7 @@ def getKeywordsXMP(pdf):
 
 
 def getCreatorXMP(pdf):
-    """Returs the XMP creator of a document."""
+    """Return the XMP creator of a document."""
     r = string_at(libc.pycpdf_getCreatorXMP(pdf.pdf)).decode()
     checkerror()
     return r
@@ -2321,12 +2321,6 @@ def removeClipping(pdf, r):
     checkerror()
 
 # CHAPTER X. Undocumented or Internal
-
-
-def setDemo(v):
-    """Internal."""
-    libc.pycpdf_setDemo(v)
-    checkerror()
 
 
 def list_of_range(r):
