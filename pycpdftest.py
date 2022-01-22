@@ -1544,6 +1544,11 @@ def chapter15():
             'testoutputs/15jsonparsed.json', True, False, False, pdf)
     except:
         prerr()
+    try:
+        pycpdflib.outputJSON(
+            'testoutputs/15jsondecomp.json', False, False, True, pdf)
+    except:
+        prerr()
     print('---cpdf_fromJSON()')
     try:
         jsonpdf = pycpdflib.fromJSON('testoutputs/15jsonparsed.json')
@@ -1553,7 +1558,21 @@ def chapter15():
         pycpdflib.toFile(jsonpdf, 'testoutputs/15fromjson.pdf', False, False)
     except:
         prerr()
-    
+    print('---cpdf_outputJSONMemory()')
+    try:
+        jbuf = pycpdflib.outputJSONMemory(jsonpdf, False, False, False)
+    except:
+        fatal_prerr()
+    print('---cpdf_fromJSONMemory()')
+    try:
+        jfrommem = pycpdflib.fromJSONMemory(jbuf)
+    except:
+        prerr()
+    try:
+        pycpdflib.toFile(jfrommem, 'testoutputs/15fromJSONMemory.pdf', False, False)
+    except:
+        prerr()
+
 
 # CHAPTER 16. Optional Content Groups
 

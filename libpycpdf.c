@@ -1078,7 +1078,26 @@ void pycpdf_outputJSON(char *filename, int parse_content, int no_stream_data,
   return;
 }
 
+void *outputJSONData;
+
+void *pycpdf_outputJSONMemory(int pdf, int parse_content, int no_stream_data,
+                              int decompress_stream, int *retlen) {
+  outputJSONData = cpdf_outputJSONMemory(pdf, parse_content, no_stream_data,
+                               decompress_stream, retlen);
+  return outputJSONData;
+}
+
+void pycpdf_outputJSONMemoryFree(void)
+{
+  free(outputJSONData);
+  return;
+}
+
 int pycpdf_fromJSON(char *filename) { return cpdf_fromJSON(filename); }
+
+int pycpdf_fromJSONMemory(void *data, int len) {
+  return cpdf_fromJSONMemory(data, len);
+}
 
 int pycpdf_startGetOCGList(int pdf) { return cpdf_startGetOCGList(pdf); }
 

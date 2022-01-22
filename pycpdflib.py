@@ -62,6 +62,7 @@ def loadDLL(f):
     libc.pycpdf_inOfPt.restype = c_double
     libc.pycpdf_stringOfPagespec.restype = POINTER(c_char)
     libc.pycpdf_toMemory.restype = POINTER(c_uint8)
+    libc.pycpdf_outputJSONMemory.restype = POINTER(c_uint8)
     libc.pycpdf_annotationsJSON.restype = POINTER(c_uint8)
     libc.pycpdf_getBookmarksJSON.restype = POINTER(c_uint8)
     libc.pycpdf_scalePages.argtypes = [c_int, c_int, c_double, c_double]
@@ -2043,11 +2044,31 @@ def outputJSON(filename, parse_content, no_stream_data, decompress_streams, pdf)
     checkerror()
 
 
+def outputJSONMemory(pdf, parse_content, no_stream_data, decompress_streams):
+    """outputJSONMemory(pdf, parse_content, no_stream_data, decompress_stream)
+    is like outputJSON, but it write to a buffer in memory)."""
+    length = c_int32()
+    data = libc.pycpdf_outputJSONMemory(pdf.pdf, parse_content, no_stream_data, decompress_streams, byref(length))
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
+    libc.pycpdf_outputJSONMemoryFree()
+    checkerror()
+    return out_data.raw
+
+
 def fromJSON(filename):
     """Load a PDF from a JSON file given its filename."""
     pdf = Pdf(libc.pycpdf_fromJSON(str.encode(filename)))
     checkerror()
     return pdf
+
+
+def fromJSONMemory(data):
+    """ Load a PDF from a JSON file in memory, given the buffer and its length."""
+    pdf = Pdf(libc.pycpdf_fromJSONMemory(data, len(data)))
+    checkerror()
+    return pdf
+
 
 # CHAPTER 16. Optional Content Groups
 
