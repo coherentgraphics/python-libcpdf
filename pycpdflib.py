@@ -42,6 +42,10 @@ def loadDLL(f):
     libc.pycpdf_version.restype = POINTER(c_char)
     libc.pycpdf_lastErrorString.restype = POINTER(c_char)
     libc.pycpdf_blankDocument.argtypes = [c_double, c_double, c_int]
+    libc.pycpdf_textToPDF.argtypes = [
+        c_double, c_double, c_int, c_double, POINTER(c_char)]
+    libc.pycpdf_textToPDFPaper.argtypes = [
+        c_int, c_int, c_double, POINTER(c_char)]
     libc.pycpdf_ptOfCm.argtypes = [c_double]
     libc.pycpdf_ptOfCm.restype = c_double
     libc.pycpdf_ptOfMm.argtypes = [c_double]
@@ -247,6 +251,26 @@ def blankDocument(w, h, pages):
     with pages of the given width (in points), height (in points), and number
     of pages."""
     pdf = Pdf(libc.pycpdf_blankDocument(w, h, pages))
+    checkerror()
+    return pdf
+
+
+def textToPDF(w, h, font, fontsize, filename):
+    """textToPDF(w, h, font, fontsize, filename) typesets a UTF8 text file
+    ragged right on a page of size w * h in points in the given font and font
+    size."""
+    pdf = Pdf(libc.pycpdf_textToPDF(
+        w, h, font, fontsize, str.encode(filename)))
+    checkerror()
+    return pdf
+
+
+def textToPDFPaper(papersize, font, fontsize, filename):
+    """textToPDF(papersize font, fontsize, filename) typesets a UTF8 text file
+    ragged right on a page of the given size in the given font and font
+    size."""
+    pdf = Pdf(libc.pycpdf_textToPDFPaper(
+        papersize, font, fontsize, str.encode(filename)))
     checkerror()
     return pdf
 

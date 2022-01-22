@@ -70,6 +70,16 @@ int pycpdf_blankDocumentPaper(int papersize, int pages) {
   return cpdf_blankDocumentPaper(papersize, pages);
 }
 
+int pycpdf_textToPDF(double w, double h, int font, double fontsize,
+                     char *filename) {
+  return cpdf_textToPDF(w, h, font, fontsize, filename);
+}
+
+int pycpdf_textToPDFPaper(int papersize, int font, double fontsize,
+                          char *filename) {
+  return cpdf_textToPDFPaper(papersize, font, fontsize, filename);
+}
+
 void pycpdf_deletePdf(int pdf) { return cpdf_deletePdf(pdf); }
 
 void pycpdf_replacePdf(int pdf, int pdf2) { return cpdf_replacePdf(pdf, pdf2); }

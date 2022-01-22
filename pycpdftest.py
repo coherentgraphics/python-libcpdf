@@ -1567,6 +1567,27 @@ def chapter17():
         pycpdflib.toFile(pdf6, 'testoutputs/01blanka4.pdf', False, False)
     except:
         prerr()
+    print('---cpdf_textToPDF()')
+    try:
+        ttpdf = pycpdflib.textToPDF(
+            500.0, 600.0, pycpdflib.timesItalic, 8.0, '../cpdflib-source/cpdflibtest.c')
+    except:
+        fatal_prerr()
+    try:
+        pycpdflib.toFile(ttpdf, 'testoutputs/01ttpdf.pdf', False, False)
+    except:
+        prerr()
+    print('---cpdf_textToPDFPaper()')
+    try:
+        ttpdfpaper = pycpdflib.textToPDFPaper(
+            pycpdflib.a4portrait, pycpdflib.timesBoldItalic, 10.0, '../cpdflib-source/cpdflibtest.c')
+    except:
+        fatal_prerr()
+    try:
+        pycpdflib.toFile(
+            ttpdfpaper, 'testoutputs/01ttpdfpaper.pdf', False, False)
+    except:
+        prerr()
 
 
 def chapter18():
