@@ -376,6 +376,12 @@ void pycpdf_endSetBookmarkInfo(int pdf) {
   return;
 }
 
+void pycpdf_tableOfContents(int pdf, int font, double fontsize, char *title,
+                            int bookmark) {
+  cpdf_tableOfContents(pdf, font, fontsize, title, bookmark);
+  return;
+}
+
 /* CHAPTER 7. Presentations */
 
 /* Not included in the library version */

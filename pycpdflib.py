@@ -39,6 +39,8 @@ def loadDLL(f):
     called prior to using any other function in the library."""
     global libc
     libc = CDLL(f)
+    libc.pycpdf_tableOfContents.argtypes = [
+        c_int, c_int, c_double, POINTER(c_char), c_int]
     libc.pycpdf_version.restype = POINTER(c_char)
     libc.pycpdf_lastErrorString.restype = POINTER(c_char)
     libc.pycpdf_blankDocument.argtypes = [c_double, c_double, c_int]
@@ -965,6 +967,16 @@ def setBookmarks(pdf, marks):
         libc.pycpdf_setBookmarkText(n, str.encode(text))
     libc.pycpdf_endSetBookmarkInfo(pdf.pdf)
     checkerror()
+
+
+def tableOfContents(pdf, font, fontsize, title, bookmark):
+    """tableOfContents(pdf, font, fontsize, title, bookmark) typesets a table
+    of contents from existing bookmarks and prepends it to the document. If
+    bookmark is set, the table of contents gets its own bookmark."""
+    pdf = libc.pycpdf_tableOfContents(
+        pdf.pdf, font, fontsize, str.encode(title), bookmark)
+    checkerror()
+    return pdf
 
 # CHAPTER 7. Presentations
 

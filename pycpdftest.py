@@ -694,6 +694,20 @@ def chapter6():
         pycpdflib.toFile(pdf, 'testoutputs/06newmarks.pdf', False, False)
     except:
         prerr()
+    print('---cpdf_tableOfContents()')
+    try:
+        tocfile = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    except:
+        fatal_prerr()
+    try:
+        pycpdflib.tableOfContents(
+            tocfile, pycpdflib.timesRoman, 12.0, 'Table of Contents', False)
+    except:
+        fatal_prerr()
+    try:
+        pycpdflib.toFile(tocfile, 'testoutputs/06toc.pdf', False, False)
+    except:
+        prerr()
 
 # CHAPTER 7. Presentations
 
