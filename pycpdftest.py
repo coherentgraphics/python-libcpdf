@@ -1544,6 +1544,16 @@ def chapter15():
             'testoutputs/15jsonparsed.json', True, False, False, pdf)
     except:
         prerr()
+    print('---cpdf_fromJSON()')
+    try:
+        jsonpdf = pycpdflib.fromJSON('testoutputs/15jsonparsed.json')
+    except:
+        fatal_prerr()
+    try:
+        pycpdflib.toFile(jsonpdf, 'testoutputs/15fromjson.pdf', False, False)
+    except:
+        prerr()
+    
 
 # CHAPTER 16. Optional Content Groups
 

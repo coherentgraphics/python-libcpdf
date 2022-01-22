@@ -1078,6 +1078,8 @@ void pycpdf_outputJSON(char *filename, int parse_content, int no_stream_data,
   return;
 }
 
+int pycpdf_fromJSON(char *filename) { return cpdf_fromJSON(filename); }
+
 int pycpdf_startGetOCGList(int pdf) { return cpdf_startGetOCGList(pdf); }
 
 char *pycpdf_OCGListEntry(int i) { return cpdf_OCGListEntry(i); }

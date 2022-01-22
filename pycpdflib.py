@@ -980,11 +980,13 @@ def getBookmarksJSON(pdf):
     checkerror()
     return out_data.raw
 
+
 def setBookmarksJSON(pdf, data):
     """setBookmarksJSON(pdf, data) sets the bookmarks from JSON bookmark data."""
     libc.pycpdf_setBookmarksJSON(pdf.pdf, str.encode(data), len(data))
     checkerror()
     return
+
 
 def tableOfContents(pdf, font, fontsize, title, bookmark):
     """tableOfContents(pdf, font, fontsize, title, bookmark) typesets a table
@@ -2039,6 +2041,13 @@ def outputJSON(filename, parse_content, no_stream_data, decompress_streams, pdf)
     libc.pycpdf_outputJSON(str.encode(filename),
                            parse_content, no_stream_data, decompress_streams, pdf.pdf)
     checkerror()
+
+
+def fromJSON(filename):
+    """Load a PDF from a JSON file given its filename."""
+    pdf = Pdf(libc.pycpdf_fromJSON(str.encode(filename)))
+    checkerror()
+    return pdf
 
 # CHAPTER 16. Optional Content Groups
 
