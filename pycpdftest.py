@@ -704,6 +704,15 @@ def chapter6():
         print(f'Contains {len(data)} bytes of data')
     except:
         prerr()
+    print('---cpdf_setBookmarksJSON()')
+    try:
+        pycpdflib.setBookmarksJSON(marks, data.decode('utf-8'))
+    except:
+        fatal_prerr()
+    try:
+        pycpdflib.toFile(marks, 'testoutputs/06jsonmarks.pdf', False, False)
+    except:
+        prerr()
     print('---cpdf_tableOfContents()')
     try:
         tocfile = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')

@@ -980,6 +980,11 @@ def getBookmarksJSON(pdf):
     checkerror()
     return out_data.raw
 
+def setBookmarksJSON(pdf, data):
+    """setBookmarksJSON(pdf, data) sets the bookmarks from JSON bookmark data."""
+    libc.pycpdf_setBookmarksJSON(pdf.pdf, str.encode(data), len(data))
+    checkerror()
+    return
 
 def tableOfContents(pdf, font, fontsize, title, bookmark):
     """tableOfContents(pdf, font, fontsize, title, bookmark) typesets a table
