@@ -2048,7 +2048,8 @@ def outputJSONMemory(pdf, parse_content, no_stream_data, decompress_streams):
     """outputJSONMemory(pdf, parse_content, no_stream_data, decompress_stream)
     is like outputJSON, but it write to a buffer in memory)."""
     length = c_int32()
-    data = libc.pycpdf_outputJSONMemory(pdf.pdf, parse_content, no_stream_data, decompress_streams, byref(length))
+    data = libc.pycpdf_outputJSONMemory(
+        pdf.pdf, parse_content, no_stream_data, decompress_streams, byref(length))
     out_data = create_string_buffer(length.value)
     memmove(out_data, data, length.value)
     libc.pycpdf_outputJSONMemoryFree()

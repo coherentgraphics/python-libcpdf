@@ -1569,7 +1569,8 @@ def chapter15():
     except:
         prerr()
     try:
-        pycpdflib.toFile(jfrommem, 'testoutputs/15fromJSONMemory.pdf', False, False)
+        pycpdflib.toFile(
+            jfrommem, 'testoutputs/15fromJSONMemory.pdf', False, False)
     except:
         prerr()
 
@@ -1872,17 +1873,6 @@ def chapter18():
     except:
         prerr()
 
-# CHAPTER X. Undocumented or Internal
-
-
-def chapterx():
-    print('***** CHAPTER X. Undocumented or Internal')
-    print('---cpdf_setDemo()')
-    try:
-        pycpdflib.setDemo(True)
-    except:
-        prerr()
-
 
 # Run the tests
 chapter0()
@@ -1904,4 +1894,3 @@ chapter15()
 chapter16()
 chapter17()
 chapter18()
-chapterx()

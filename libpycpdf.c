@@ -62,24 +62,6 @@ int pycpdf_fromMemoryLazy(void *data, int len, char *userpw) {
   return cpdf_fromMemoryLazy(data, len, userpw);
 }
 
-int pycpdf_blankDocument(double w, double h, int pages) {
-  return cpdf_blankDocument(w, h, pages);
-}
-
-int pycpdf_blankDocumentPaper(int papersize, int pages) {
-  return cpdf_blankDocumentPaper(papersize, pages);
-}
-
-int pycpdf_textToPDF(double w, double h, int font, double fontsize,
-                     char *filename) {
-  return cpdf_textToPDF(w, h, font, fontsize, filename);
-}
-
-int pycpdf_textToPDFPaper(int papersize, int font, double fontsize,
-                          char *filename) {
-  return cpdf_textToPDFPaper(papersize, font, fontsize, filename);
-}
-
 void pycpdf_deletePdf(int pdf) { return cpdf_deletePdf(pdf); }
 
 void pycpdf_replacePdf(int pdf, int pdf2) { return cpdf_replacePdf(pdf, pdf2); }
@@ -460,6 +442,15 @@ void pycpdf_removeText(int pdf, int r) {
 
 int pycpdf_textWidth(int font, char *string) {
   return cpdf_textWidth(font, string);
+}
+
+void pycpdf_addContent(char *content, int before, int pdf, int r) {
+  cpdf_addContent(content, before, pdf, r);
+  return;
+}
+
+char *pycpdf_stampAsXObject(int pdf, int r, int stamp_pdf) {
+  return cpdf_stampAsXObject(pdf, r, stamp_pdf);
 }
 
 /* CHAPTER 9. Multipage facilities */
@@ -976,7 +967,82 @@ void pycpdf_endGetFontInfo(void) {
   return;
 }
 
-/* CHAPTER 15. Miscellaneous */
+/* CHAPTER 15. PDF and JSON */
+
+void pycpdf_outputJSON(char *filename, int parse_content, int no_stream_data,
+                       int decompress_streams, int pdf) {
+  cpdf_outputJSON(filename, parse_content, no_stream_data, decompress_streams,
+                  pdf);
+  return;
+}
+
+void *outputJSONData;
+
+void *pycpdf_outputJSONMemory(int pdf, int parse_content, int no_stream_data,
+                              int decompress_stream, int *retlen) {
+  outputJSONData = cpdf_outputJSONMemory(pdf, parse_content, no_stream_data,
+                                         decompress_stream, retlen);
+  return outputJSONData;
+}
+
+void pycpdf_outputJSONMemoryFree(void) {
+  free(outputJSONData);
+  return;
+}
+
+int pycpdf_fromJSON(char *filename) { return cpdf_fromJSON(filename); }
+
+int pycpdf_fromJSONMemory(void *data, int len) {
+  return cpdf_fromJSONMemory(data, len);
+}
+
+/* CHAPTER 16. Optional Content Groups */
+
+int pycpdf_startGetOCGList(int pdf) { return cpdf_startGetOCGList(pdf); }
+
+char *pycpdf_OCGListEntry(int i) { return cpdf_OCGListEntry(i); }
+
+void pycpdf_endGetOCGList() {
+  cpdf_endGetOCGList();
+  return;
+}
+
+void pycpdf_OCGCoalesce(int pdf) {
+  cpdf_OCGCoalesce(pdf);
+  return;
+}
+
+void pycpdf_OCGRename(int pdf, char *n_from, char *n_to) {
+  cpdf_OCGRename(pdf, n_from, n_to);
+  return;
+}
+
+void pycpdf_OCGOrderAll(int pdf) {
+  cpdf_OCGOrderAll(pdf);
+  return;
+}
+
+/* CHAPTER 17. Creating New PDFs */
+
+int pycpdf_blankDocument(double w, double h, int pages) {
+  return cpdf_blankDocument(w, h, pages);
+}
+
+int pycpdf_blankDocumentPaper(int papersize, int pages) {
+  return cpdf_blankDocumentPaper(papersize, pages);
+}
+
+int pycpdf_textToPDF(double w, double h, int font, double fontsize,
+                     char *filename) {
+  return cpdf_textToPDF(w, h, font, fontsize, filename);
+}
+
+int pycpdf_textToPDFPaper(int papersize, int font, double fontsize,
+                          char *filename) {
+  return cpdf_textToPDFPaper(papersize, font, fontsize, filename);
+}
+
+/* CHAPTER 18. Miscellaneous */
 void pycpdf_draft(int pdf, int r, int boxes) {
   cpdf_draft(pdf, r, boxes);
   return;
@@ -1062,72 +1128,5 @@ void *pycpdf_getDictEntries(int pdf, char *key, int *length) {
 
 void pycpdf_getDictEntriesFree(void) {
   free(getDictEntriesData);
-  return;
-}
-
-/* Undocumented. To come in v2.4 */
-void pycpdf_addContent(char *content, int before, int pdf, int r) {
-  cpdf_addContent(content, before, pdf, r);
-  return;
-}
-
-void pycpdf_outputJSON(char *filename, int parse_content, int no_stream_data,
-                       int decompress_streams, int pdf) {
-  cpdf_outputJSON(filename, parse_content, no_stream_data, decompress_streams,
-                  pdf);
-  return;
-}
-
-void *outputJSONData;
-
-void *pycpdf_outputJSONMemory(int pdf, int parse_content, int no_stream_data,
-                              int decompress_stream, int *retlen) {
-  outputJSONData = cpdf_outputJSONMemory(pdf, parse_content, no_stream_data,
-                               decompress_stream, retlen);
-  return outputJSONData;
-}
-
-void pycpdf_outputJSONMemoryFree(void)
-{
-  free(outputJSONData);
-  return;
-}
-
-int pycpdf_fromJSON(char *filename) { return cpdf_fromJSON(filename); }
-
-int pycpdf_fromJSONMemory(void *data, int len) {
-  return cpdf_fromJSONMemory(data, len);
-}
-
-int pycpdf_startGetOCGList(int pdf) { return cpdf_startGetOCGList(pdf); }
-
-char *pycpdf_OCGListEntry(int i) { return cpdf_OCGListEntry(i); }
-
-void pycpdf_endGetOCGList() {
-  cpdf_endGetOCGList();
-  return;
-}
-
-void pycpdf_OCGCoalesce(int pdf) {
-  cpdf_OCGCoalesce(pdf);
-  return;
-}
-
-void pycpdf_OCGRename(int pdf, char *n_from, char *n_to) {
-  cpdf_OCGRename(pdf, n_from, n_to);
-  return;
-}
-
-void pycpdf_OCGOrderAll(int pdf) {
-  cpdf_OCGOrderAll(pdf);
-  return;
-}
-
-char *pycpdf_stampAsXObject(int pdf, int r, int stamp_pdf) {
-  return cpdf_stampAsXObject(pdf, r, stamp_pdf);
-}
-
-void pycpdf_setDemo(int v) {
-  cpdf_setDemo(v);
   return;
 }
