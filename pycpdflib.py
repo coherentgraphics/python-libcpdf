@@ -13,6 +13,91 @@ Text arguments and results are in UTF8.
 
 Any function may raise the exception CPDFError, carrying a string describing
 the error.
+
+"""
+
+"""
+Loading the libpypcdf and libcpdf DLLs
+--------------------------------------
+
+Before using the library, you must load the ``libpycpdf`` and ``libcpdf`` DLLs.
+This is achieved with the ``pycpdflib.loadDLL`` function, given the filename or
+full path of the ``libpycpdf`` DLL.
+
+On Windows, you may have to call ``os.add_dll_directory`` first. On MacOS, you
+may need to give the full path, and you may need to install ``libcpdf.so`` in a
+standard location ``/usr/local/lib/``, or use the ``install_name_tool`` command
+to tell ``libpycpdf.so`` where to find ``libcpdf.so``.
+
+Conventions
+-----------
+
+Any function may raise the exception ``CPDFError``, carrying a string describing
+the error.
+
+A 'range' is a list of integers specifying page numbers. Page numbers start at
+1. Range arguments are called `r`.
+
+Text arguments and results are in UTF8.
+
+Units are in PDF points (1/72 inch).
+
+Angles are in degrees.
+
+
+Built-in values
+---------------
+
+Paper sizes:
+
+a0portrait a1portrait a2portrait a3portrait a4portrait a5portrait a0landscape
+a1landscape a2landscape a3landscape a4landscape a5landscape usletterportrait
+usletterlandscape uslegalportrait uslegallandscape
+
+Permissions:
+
+noEdit noPrint noCopy noAnnot noForms noExtract noAssemble noHqPrint
+
+Encryption methods:
+
+pdf40bit pdf128bit aes128bitfalse aes128bittrue aes256bitfalse aes256bittrue
+aes256bitisofalse aes256bitisotrue
+
+Positions:
+
+Positions with two numbers in a tuple e.g (posLeft, 10.0, 20.0)
+
+posCentre posLeft posRight
+
+Positions with one number in a tuple e.g (top, 5.0)
+
+top topLeft topRight left bottomLeft bottomRight right
+
+Positions with no numbers e.g diagonal
+
+diagonal reverseDiagonal
+
+Fonts:
+
+timesRoman timesBold timesItalic timesBoldItalic helvetica helveticaBold
+helveticaOblique helveticaBoldOblique courier courierBold courierOblique
+courierBoldOblique
+
+Justification:
+
+leftJustify centreJustify rightJustify
+
+Page layouts:
+
+singlePage oneColumn twoColumnLeft twoColumnRight twoPageLeft twoPageRight
+
+Page modes:
+
+useNone useOutlines useThumbs useOC useAttachments
+
+Page label styles:
+
+decimalArabic uppercaseRoman lowercaseRoman uppercaseLetters lowercaseLetters
 """
 
 from ctypes import *
