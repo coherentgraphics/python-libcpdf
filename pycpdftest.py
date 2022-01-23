@@ -706,7 +706,7 @@ def chapter6():
         prerr()
     print('---cpdf_setBookmarksJSON()')
     try:
-        pycpdflib.setBookmarksJSON(marks, data.decode('utf-8'))
+        pycpdflib.setBookmarksJSON(marks, data)
     except:
         fatal_prerr()
     try:
@@ -1346,7 +1346,7 @@ def chapter11():
         prerr()
     print('---cpdf_setMetadataFromByteArray()')
     try:
-        pycpdflib.setMetadataFromByteArray(pdf, 'BYTEARRAY')
+        pycpdflib.setMetadataFromByteArray(pdf, b'BYTEARRAY')
     except:
         prerr()
     try:
@@ -1433,12 +1433,12 @@ def chapter12():
         prerr()
     print('---cpdf_attachFileFromMemory()')
     try:
-        pycpdflib.attachFileFromMemory('', 'metadata.txt', pdf)
+        pycpdflib.attachFileFromMemory(b'', 'metadata.txt', pdf)
     except:
         prerr()
     print('---cpdf_attachFileToPageFromMemory()')
     try:
-        pycpdflib.attachFileToPageFromMemory('', 'metadata.txt', pdf, 1)
+        pycpdflib.attachFileToPageFromMemory(b'', 'metadata.txt', pdf, 1)
     except:
         prerr()
     try:

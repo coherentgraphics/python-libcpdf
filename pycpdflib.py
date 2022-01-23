@@ -9,7 +9,7 @@ install_name_tool command to tell libpycpdf.so where to find libcpdf.so.
 
 A 'range' is a list of integers specifying page numbers.
 
-Text arguments and results are in UTF8.
+Text arguments and results are in UTF8. Data is of type 'bytes'.
 
 Any function may raise the exception CPDFError, carrying a string describing
 the error.
@@ -200,7 +200,7 @@ def loadDLL(f):
     libc.pycpdf_getMetadata.restype = POINTER(c_uint8)
     libc.pycpdf_getDictEntries.restype = POINTER(c_uint8)
     libc.pycpdf_getAttachmentData.restype = POINTER(c_uint8)
-    libc.pycpdf_getAttachmentName.restype = POINTER(c_uint8)
+    libc.pycpdf_getAttachmentName.restype = POINTER(c_char)
     libc.pycpdf_startGetImageResolution.argtypes = [c_int, c_double]
     libc.pycpdf_getImageResolutionImageName.restype = POINTER(c_char)
     libc.pycpdf_getFontName.restype = POINTER(c_char)
@@ -1014,7 +1014,7 @@ def getBookmarksJSON(pdf):
 
 def setBookmarksJSON(pdf, data):
     """setBookmarksJSON(pdf, data) sets the bookmarks from JSON bookmark data."""
-    libc.pycpdf_setBookmarksJSON(pdf.pdf, str.encode(data), len(data))
+    libc.pycpdf_setBookmarksJSON(pdf.pdf, data, len(data))
     checkerror()
     return
 
@@ -1841,7 +1841,7 @@ def setMetadataFromFile(pdf, filename):
 
 def setMetadataFromByteArray(pdf, data):
     """Set the XMP metadata from an array of bytes."""
-    libc.pycpdf_setMetadataFromByteArray(pdf.pdf, str.encode(data), len(data))
+    libc.pycpdf_setMetadataFromByteArray(pdf.pdf, data, len(data))
     checkerror()
     return
 
