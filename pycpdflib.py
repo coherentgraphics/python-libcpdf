@@ -335,61 +335,6 @@ def fromMemoryLazy(data, userpw):
     return pdf
 
 
-def blankDocument(w, h, pages):
-    """ Create a blank document
-    with pages of the given width (in points), height (in points), and number
-    of pages."""
-    pdf = Pdf(libc.pycpdf_blankDocument(w, h, pages))
-    checkerror()
-    return pdf
-
-
-def textToPDF(w, h, font, fontsize, filename):
-    """textToPDF(w, h, font, fontsize, filename) typesets a UTF8 text file
-    ragged right on a page of size w * h in points in the given font and font
-    size."""
-    pdf = Pdf(libc.pycpdf_textToPDF(
-        w, h, font, fontsize, str.encode(filename)))
-    checkerror()
-    return pdf
-
-
-def textToPDFPaper(papersize, font, fontsize, filename):
-    """textToPDF(papersize font, fontsize, filename) typesets a UTF8 text file
-    ragged right on a page of the given size in the given font and font
-    size."""
-    pdf = Pdf(libc.pycpdf_textToPDFPaper(
-        papersize, font, fontsize, str.encode(filename)))
-    checkerror()
-    return pdf
-
-
-"""Paper sizes."""
-a0portrait = 0
-a1portrait = 1
-a2portrait = 2
-a3portrait = 3
-a4portrait = 4
-a5portrait = 5
-a0landscape = 6
-a1landscape = 7
-a2landscape = 8
-a3landscape = 9
-a4landscape = 10
-a5landscape = 11
-usletterportrait = 12
-usletterlandscape = 13
-uslegalportrait = 14
-uslegallandscape = 15
-
-
-def blankDocumentPaper(papersize, pages):
-    """Create a blank document with pages of the given paper size, and number
-    of pages. """
-    r = Pdf(libc.pycpdf_blankDocumentPaper(papersize, pages))
-    checkerror()
-    return r
-
 
 def ptOfCm(i):
     """Convert a figure in centimetres to points (72 points to 1 inch)."""
@@ -2150,7 +2095,7 @@ def fromJSON(filename):
 
 
 def fromJSONMemory(data):
-    """ Load a PDF from a JSON file in memory, given the buffer and its length."""
+    """ Load a PDF from JSON data in memory."""
     pdf = Pdf(libc.pycpdf_fromJSONMemory(data, len(data)))
     checkerror()
     return pdf
@@ -2191,8 +2136,61 @@ def OCGCoalesce(pdf):
     libc.pycpdf_OCGCoalesce(pdf.pdf)
     checkerror()
 
+# CHAPTER 17. Making New PDFs
 
-# CHAPTER 17. Miscellaneous
+def blankDocument(w, h, pages):
+    """ Create a blank document
+    with pages of the given width (in points), height (in points), and number
+    of pages."""
+    pdf = Pdf(libc.pycpdf_blankDocument(w, h, pages))
+    checkerror()
+    return pdf
+
+"""Paper sizes."""
+a0portrait = 0
+a1portrait = 1
+a2portrait = 2
+a3portrait = 3
+a4portrait = 4
+a5portrait = 5
+a0landscape = 6
+a1landscape = 7
+a2landscape = 8
+a3landscape = 9
+a4landscape = 10
+a5landscape = 11
+usletterportrait = 12
+usletterlandscape = 13
+uslegalportrait = 14
+uslegallandscape = 15
+
+
+def blankDocumentPaper(papersize, pages):
+    """Create a blank document with pages of the given paper size, and number
+    of pages. """
+    r = Pdf(libc.pycpdf_blankDocumentPaper(papersize, pages))
+    checkerror()
+    return r
+
+def textToPDF(w, h, font, fontsize, filename):
+    """textToPDF(w, h, font, fontsize, filename) typesets a UTF8 text file
+    ragged right on a page of size w * h in points in the given font and font
+    size."""
+    pdf = Pdf(libc.pycpdf_textToPDF(
+        w, h, font, fontsize, str.encode(filename)))
+    checkerror()
+    return pdf
+
+def textToPDFPaper(papersize, font, fontsize, filename):
+    """textToPDF(papersize font, fontsize, filename) typesets a UTF8 text file
+    ragged right on a page of the given size in the given font and font
+    size."""
+    pdf = Pdf(libc.pycpdf_textToPDFPaper(
+        papersize, font, fontsize, str.encode(filename)))
+    checkerror()
+    return pdf
+
+# CHAPTER 18. Miscellaneous
 
 
 def draft(pdf, r, boxes):
