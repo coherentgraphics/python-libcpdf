@@ -335,7 +335,6 @@ def fromMemoryLazy(data, userpw):
     return pdf
 
 
-
 def ptOfCm(i):
     """Convert a figure in centimetres to points (72 points to 1 inch)."""
     r = libc.pycpdf_ptOfCm(i)
@@ -2138,6 +2137,7 @@ def OCGCoalesce(pdf):
 
 # CHAPTER 17. Making New PDFs
 
+
 def blankDocument(w, h, pages):
     """ Create a blank document
     with pages of the given width (in points), height (in points), and number
@@ -2145,6 +2145,7 @@ def blankDocument(w, h, pages):
     pdf = Pdf(libc.pycpdf_blankDocument(w, h, pages))
     checkerror()
     return pdf
+
 
 """Paper sizes."""
 a0portrait = 0
@@ -2172,6 +2173,7 @@ def blankDocumentPaper(papersize, pages):
     checkerror()
     return r
 
+
 def textToPDF(w, h, font, fontsize, filename):
     """textToPDF(w, h, font, fontsize, filename) typesets a UTF8 text file
     ragged right on a page of size w * h in points in the given font and font
@@ -2180,6 +2182,7 @@ def textToPDF(w, h, font, fontsize, filename):
         w, h, font, fontsize, str.encode(filename)))
     checkerror()
     return pdf
+
 
 def textToPDFPaper(papersize, font, fontsize, filename):
     """textToPDF(papersize font, fontsize, filename) typesets a UTF8 text file
