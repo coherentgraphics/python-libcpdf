@@ -59,7 +59,7 @@ the error.
 A 'range' is a list of integers specifying page numbers. Page numbers start at
 1. Range arguments are called `r`.
 
-Text arguments and results are in UTF8.
+Text arguments and results are in UTF8. Data is of type 'bytes'.
 
 Units are in PDF points (1/72 inch).
 
@@ -143,8 +143,6 @@ Chapter 1. Basics
 .. autofunction:: fromFileLazy
 .. autofunction:: fromMemory
 .. autofunction:: fromMemoryLazy
-.. autofunction:: blankDocument
-.. autofunction:: blankDocumentPaper
 .. autofunction:: ptOfCm
 .. autofunction:: ptOfMm 
 .. autofunction:: ptOfIn
@@ -227,6 +225,9 @@ Chapter 6. Bookmarks
 
 .. autofunction:: getBookmarks
 .. autofunction:: setBookmarks
+.. autofunction:: getBookmarksJSON
+.. autofunction:: setBookmarksJSON
+.. autofunction:: tableOfContents
 
 Chapter 7. Presentations
 ------------------------
@@ -252,6 +253,7 @@ Chapter 9. Multipage facilities
 
 .. autofunction:: twoUp
 .. autofunction:: twoUpStack
+.. autofunction:: impose
 .. autofunction:: padBefore
 .. autofunction:: padAfter
 .. autofunction:: padEvery
@@ -362,6 +364,9 @@ Chapter 15. PDF and JSON
 ------------------------
 
 .. autofunction:: outputJSON
+.. autofunction:: outputJSONMemory
+.. autofunction:: fromJSON
+.. autofunction:: fromJSONMemory
 
 Chapter 16. Optional Content Groups
 -----------------------------------
@@ -371,7 +376,15 @@ Chapter 16. Optional Content Groups
 .. autofunction:: OCGOrderAll
 .. autofunction:: OCGCoalesce
 
-Chapter 17. Miscellaneous
+Chapter 17. Making New PDFs
+---------------------------
+
+.. autofunction:: blankDocument
+.. autofunction:: blankDocumentPaper
+.. autofunction:: textToPDF
+.. autofunction:: textToPDFPaper
+
+Chapter 18. Miscellaneous
 -------------------------
 
 .. autofunction:: draft
@@ -385,4 +398,8 @@ Chapter 17. Miscellaneous
 .. autofunction:: setVersion
 .. autofunction:: setFullVersion
 .. autofunction:: removeDictEntry
+.. autofunction:: removeDictEntrySearch
+.. autofunction:: replaceDictEntry
+.. autofunction:: replaceDictEntrySearch
+.. autofunction:: getDictEntries
 .. autofunction:: removeClipping
