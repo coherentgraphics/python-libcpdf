@@ -753,7 +753,7 @@ def chapter8():
     r = pycpdflib.all(pdf)
     try:
         pycpdflib.addTextSimple(
-            pdf, r, 'The text', (pycpdflib.posCentre, 100.0, 200.0), pycpdflib.timesRoman, 12.0)
+            pdf, r, 'The text!', (pycpdflib.topLeft, 20.0, 20.0), pycpdflib.timesRoman, 50.0)
     except:
         prerr()
     try:
