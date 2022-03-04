@@ -742,6 +742,25 @@ def scaleToFit(pdf, r, w, h, scale_to_fit_scale):
     checkerror()
 
 
+"""Paper sizes."""
+a0portrait = 0
+a1portrait = 1
+a2portrait = 2
+a3portrait = 3
+a4portrait = 4
+a5portrait = 5
+a0landscape = 6
+a1landscape = 7
+a2landscape = 8
+a3landscape = 9
+a4landscape = 10
+a5landscape = 11
+usletterportrait = 12
+usletterlandscape = 13
+uslegalportrait = 14
+uslegallandscape = 15
+
+
 def scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale):
     """Scales the given pages to fit the given page size, possibly multiplied
     by scale_to_fit_scale (typically 1.0)"""
@@ -2137,25 +2156,6 @@ def blankDocument(w, h, pages):
     pdf = Pdf(libc.pycpdf_blankDocument(w, h, pages))
     checkerror()
     return pdf
-
-
-"""Paper sizes."""
-a0portrait = 0
-a1portrait = 1
-a2portrait = 2
-a3portrait = 3
-a4portrait = 4
-a5portrait = 5
-a0landscape = 6
-a1landscape = 7
-a2landscape = 8
-a3landscape = 9
-a4landscape = 10
-a5landscape = 11
-usletterportrait = 12
-usletterlandscape = 13
-uslegalportrait = 14
-uslegallandscape = 15
 
 
 def blankDocumentPaper(papersize, pages):
