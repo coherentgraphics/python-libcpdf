@@ -1838,7 +1838,7 @@ def chapter18():
         prerr()
     print('---cpdf_replaceDictEntry()')
     try:
-        pycpdflib.replaceDictEntry(misc14, '/Producer', '{"I" : 1}')
+        pycpdflib.replaceDictEntry(misc14, '/Producer', '"NewProducer"')
     except:
         prerr()
     try:
@@ -1848,7 +1848,7 @@ def chapter18():
         prerr()
     print('---cpdf_replaceDictEntrySearch()')
     try:
-        pycpdflib.replaceDictEntrySearch(misc15, '/Producer', '1', '2')
+        pycpdflib.replaceDictEntrySearch(misc15, '/Producer', '"NewProducer2"', '"pdfTeX-1.40.22"')
     except:
         prerr()
     try:
