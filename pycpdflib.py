@@ -292,7 +292,7 @@ def onExit():
 
 def fromFile(filename, userpw):
     """ Load a PDF file from a given file.
-    Supply a user password (possibly blank) in case the file is encypted. It
+    Supply a user password (possibly blank) in case the file is encrypted. It
     won't be decrypted, but sometimes the password is needed just to load the
     file."""
     pdf = Pdf(libc.pycpdf_fromFile(str.encode(filename), str.encode(userpw)))
@@ -304,7 +304,7 @@ def fromFileLazy(filename, userpw):
     """ Loads a PDF from a file, doing only
     minimal parsing. The objects will be read and parsed when they are actually
     needed.  Use this when the whole file won't be required. Also supply a user
-    password (possibly blank) in case the file is encypted. It won't be
+    password (possibly blank) in case the file is encrypted. It won't be
     decrypted, but sometimes the password is needed just to load the file."""
     pdf = Pdf(libc.pycpdf_fromFileLazy(
         str.encode(filename), str.encode(userpw)))
