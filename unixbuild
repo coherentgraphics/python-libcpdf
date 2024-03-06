@@ -1,3 +1,5 @@
+#Make code
+cd auto; make; ./auto; cd ..
 #install into /usr/local/lib/
 cp ../cpdflib-source/libcpdf.so /usr/local/lib/
 #Builds clib1.o

@@ -5,3 +5,4 @@ rm -f foo foo2 foo.diff
 rm -f pycpdf.html pycpdf.pyc
 rm -f examples/*.pdf
 make clean
+cd auto; make clean
