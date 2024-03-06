@@ -1,3 +1,5 @@
+#Make code
+cd auto; make; ./auto; cd ..
 #Builds clib1.o
 cc -c -Wall -Werror -fpic libpycpdf.c
 #pull in libcpdf.dll
