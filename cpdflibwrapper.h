@@ -22,6 +22,14 @@ char *cpdf_version();
 void cpdf_setFast();
 void cpdf_setSlow();
 
+/* Calling this function with a true argument sets embedding for the Standard
+ * 14 fonts.  You must also set the directory to load them from with the next
+ * function. Default value: false. */
+void cpdf_embedStd14(int);
+
+/* Set the directory to load Standard 14 fonts for embedding. */
+void cpdf_embedStd14Dir(char *);
+
 /*
  * Errors. cpdf_lastError and cpdf_lastErrorString hold information about the
  * last error to have occurred. They should be consulted after each call. If
@@ -31,6 +39,11 @@ void cpdf_setSlow();
  */
 extern int cpdf_lastError;
 extern char *cpdf_lastErrorString;
+
+/* In some contexts, for example, .NET or JNI, constants in DLLs can be
+ * difficult or impossible to access. we provide functions in addition. */
+int cpdf_fLastError(void);
+char *cpdf_fLastErrorString(void);
 
 /* cpdf_clearError clears the current error state. */
 void cpdf_clearError(void);
@@ -72,26 +85,6 @@ int cpdf_fromMemory(void *, int, const char[]);
  * cpdf_fromFileLazy.
  */
 int cpdf_fromMemoryLazy(void *, int, const char[]);
-
-/* Standard page sizes. */
-enum cpdf_papersize {
-  cpdf_a0portrait,        /* A0 portrait */
-  cpdf_a1portrait,        /* A1 portrait */
-  cpdf_a2portrait,        /* A2 portrait */
-  cpdf_a3portrait,        /* A3 portrait */
-  cpdf_a4portrait,        /* A4 portrait */
-  cpdf_a5portrait,        /* A5 portrait */
-  cpdf_a0landscape,       /* A0 landscape */
-  cpdf_a1landscape,       /* A1 landscape */
-  cpdf_a2landscape,       /* A2 landscape */
-  cpdf_a3landscape,       /* A3 landscape */
-  cpdf_a4landscape,       /* A4 landscape */
-  cpdf_a5landscape,       /* A5 landscape */
-  cpdf_usletterportrait,  /* US Letter portrait */
-  cpdf_usletterlandscape, /* US Letter landscape */
-  cpdf_uslegalportrait,   /* US Legal portrait */
-  cpdf_uslegallandscape   /* US Legal landscape */
-};
 
 /* Remove a PDF from memory, given its number. */
 void cpdf_deletePdf(int);
@@ -360,6 +353,11 @@ int cpdf_hasPermission(int, enum cpdf_permission);
  */
 enum cpdf_encryptionMethod cpdf_encryptionKind(int);
 
+/* cpdf_loadFont(name, filename) loads a TrueType font from the given file
+ * name, and names it. It may then be used when adding text or drawing, using
+ * the name in place of a standard font name. */
+void cpdf_loadFont(char *, char *);
+
 /* CHAPTER 2. Merging and Splitting */
 
 /*
@@ -403,9 +401,29 @@ void cpdf_scalePages(int, int, double, double);
 /*
  * cpdf_scaleToFit(pdf, range, width, height, scale) scales the content to fit
  * new page dimensions (width x height) multiplied by scale (typically 1.0).
- * Other boxed (crop etc. are altered as appropriate)
+ * Other boxes (crop etc. are altered as appropriate)
  */
 void cpdf_scaleToFit(int, int, double, double, double);
+
+/* Standard page sizes. */
+enum cpdf_papersize {
+  cpdf_a0portrait,        /* A0 portrait */
+  cpdf_a1portrait,        /* A1 portrait */
+  cpdf_a2portrait,        /* A2 portrait */
+  cpdf_a3portrait,        /* A3 portrait */
+  cpdf_a4portrait,        /* A4 portrait */
+  cpdf_a5portrait,        /* A5 portrait */
+  cpdf_a0landscape,       /* A0 landscape */
+  cpdf_a1landscape,       /* A1 landscape */
+  cpdf_a2landscape,       /* A2 landscape */
+  cpdf_a3landscape,       /* A3 landscape */
+  cpdf_a4landscape,       /* A4 landscape */
+  cpdf_a5landscape,       /* A5 landscape */
+  cpdf_usletterportrait,  /* US Letter portrait */
+  cpdf_usletterlandscape, /* US Letter landscape */
+  cpdf_uslegalportrait,   /* US Legal portrait */
+  cpdf_uslegallandscape   /* US Legal landscape */
+};
 
 /*
  * cpdf_scaleToFitPaper(pdf, range, papersize, scale) scales the page content
@@ -482,6 +500,12 @@ void cpdf_scaleContents(int, int, struct cpdf_position, double);
 void cpdf_shiftContents(int, int, double, double);
 
 /*
+ * cpdf_shiftContents(pdf, range, dx, dy) shifts the boxes of the pages in
+ * the range.
+ */
+void cpdf_shiftBoxes(int, int, double, double);
+
+/*
  * cpdf_rotate(pdf, range, rotation) changes the viewing rotation to an
  * absolute value. Appropriate rotations are 0, 90, 180, 270.
  */
@@ -522,13 +546,14 @@ void cpdf_crop(int, int, double, double, double, double);
 /* cpdf_removeCrop(pdf, range) removes any crop box from pages in the range. */
 void cpdf_removeCrop(int, int);
 
-/* cpdf_removeTrim(pdf, range) removes any crop box from pages in the range. */
+/* cpdf_removeTrim(pdf, range) removes any trim box from pages in the range. */
 void cpdf_removeTrim(int, int);
 
-/* cpdf_removeArt(pdf, range) removes any crop box from pages in the range. */
+/* cpdf_removeArt(pdf, range) removes any art box from pages in the range. */
 void cpdf_removeArt(int, int);
 
-/* cpdf_removeBleed(pdf, range) removes any crop box from pages in the range. */
+/* cpdf_removeBleed(pdf, range) removes any bleed box from pages in the range.
+ */
 void cpdf_removeBleed(int, int);
 
 /*
@@ -540,7 +565,7 @@ void cpdf_trimMarks(int, int);
 /* cpdf_showBoxes(pdf, range) shows the boxes on the given pages, for debug. */
 void cpdf_showBoxes(int, int);
 
-/* cpdf_hardBox make a given box a 'hard box' i.e clips it explicitly. */
+/* cpdf_hardBox makes a given box a 'hard box' i.e clips it explicitly. */
 void cpdf_hardBox(int, int, const char[]);
 
 /* CHAPTER 4. Encryption */
@@ -567,7 +592,7 @@ void cpdf_squeezeInMemory(int);
 /* CHAPTER 6. Bookmarks */
 
 /*
- * cpdf_startGetBookmarkInfo(pdf) start the bookmark retrieval process for a
+ * cpdf_startGetBookmarkInfo(pdf) starts the bookmark retrieval process for a
  * given PDF.
  */
 void cpdf_startGetBookmarkInfo(int);
@@ -683,7 +708,7 @@ void cpdf_stampExtended(int, int, int, int, int, struct cpdf_position, int);
  */
 int cpdf_combinePages(int, int);
 
-/* Adding text. Adds text to a PDF, if the characters exist in the font. */
+/* Adding text. */
 
 /*
  * Special codes
@@ -816,7 +841,7 @@ void cpdf_removeText(int, int);
  */
 int cpdf_textWidth(enum cpdf_font, const char[]);
 
-/* cpdf_addContent(content, before, range, pdf) adds page content before (if
+/* cpdf_addContent(content, before, pdf, range) adds page content before (if
  * true) or after (if false) the existing content to pages in the given range
  * in the given PDF. */
 void cpdf_addContent(const char[], int, int, int);
@@ -827,23 +852,6 @@ void cpdf_addContent(const char[], int, int, int);
 char *cpdf_stampAsXObject(int, int, int);
 
 /* CHAPTER 9. Multipage facilities */
-
-/* cpdf_impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing,
- * linewidth) imposes a PDF. There are two modes: imposing x * y, or imposing
- * to fit a page of size x * y. This is controlled by fit. Columns imposes by
- * columns rather than rows. rtl is right-to-left, btt bottom-to-top. Center is
- * unused for now. Margin is the margin around the output, spacing the spacing
- * between imposed inputs. */
-void cpdf_impose(int, double, double, int, int, int, int, int, double, double,
-                 double);
-
-/*
- * Impose a document two up. cpdf_twoUp does so by retaining the existing
- * page size, scaling pages down. cpdf_twoUpStack does so by doubling the
- * page size, to fit two pages on one.
- */
-void cpdf_twoUp(int);
-void cpdf_twoUpStack(int);
 
 /*
  * cpdf_padBefore(pdf, range) adds a blank page before each page in the given
@@ -872,11 +880,45 @@ void cpdf_padMultiple(int, int);
  */
 void cpdf_padMultipleBefore(int, int);
 
+/* cpdf_impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing,
+ * linewidth) imposes a PDF. There are two modes: imposing x * y, or imposing
+ * to fit a page of size x * y. This is controlled by fit. Columns imposes by
+ * columns rather than rows. rtl is right-to-left, btt bottom-to-top. Center is
+ * unused for now. Margin is the margin around the output, spacing the spacing
+ * between imposed inputs. */
+void cpdf_impose(int, double, double, int, int, int, int, int, double, double,
+                 double);
+
+/* cpdf_chop(pdf, range, x, y, columns, rtl, btt) */
+void cpdf_chop(int, int, int, int, int, int, int);
+
+/* cpdf_choph(pdf, range, columns, y) */
+void cpdf_chopH(int, int, int, double);
+
+/* cpdf_chopv(pdf, range, columns, x) */
+void cpdf_chopV(int, int, int, double);
+
+/*
+ * Impose a document two up. cpdf_twoUp does so by retaining the existing
+ * page size, scaling pages down. cpdf_twoUpStack does so by doubling the
+ * page size, to fit two pages on one.
+ */
+void cpdf_twoUp(int);
+void cpdf_twoUpStack(int);
+
 /* CHAPTER 10. Annotations */
 
 /* Return the annotations from a PDF in JSON format, returning also its length.
  */
 void *cpdf_annotationsJSON(int, int *);
+
+/* cpdf_removeAnnotations(pdf, range) removes all annotations from pages in the
+ * given range. */
+void cpdf_removeAnnotations(int, int);
+
+/* cpdf_setAnnotationsJSON(length, data, pdf) adds the annotations given in
+ * JSON format to the PDF, on top of any exisiting annotations. */
+void cpdf_setAnnotationsJSON(int, void *, int);
 
 /* CHAPTER 11. Document Information and Metadata */
 
@@ -885,6 +927,20 @@ void *cpdf_annotationsJSON(int, int *);
  * quickly as possible without loading it.
  */
 int cpdf_isLinearized(const char[]);
+
+int cpdf_hasObjectStreams(int);
+
+char* cpdf_id1(int);
+
+char* cpdf_id2(int);
+
+int cpdf_hasAcroForm(int);
+
+int cpdf_startGetSubformats(int);
+
+char* cpdf_getSubformat(int);
+
+void cpdf_endGetSubformats(void);
 
 /* cpdf_getVersion(pdf) returns the minor version number of a document. */
 int cpdf_getVersion(int);
@@ -967,29 +1023,29 @@ void cpdf_setCreationDate(int, const char[]);
 /* cpdf_setModificationDate(pdf) sets the modifcation date of a document. */
 void cpdf_setModificationDate(int, const char[]);
 
-/* cpdf_setTitleXMP(pdf) set the XMP title of a document. */
+/* cpdf_setTitleXMP(pdf) sets the XMP title of a document. */
 void cpdf_setTitleXMP(int, const char[]);
 
-/* cpdf_setAuthorXMP(pdf) set the XMP author of a document. */
+/* cpdf_setAuthorXMP(pdf) sets the XMP author of a document. */
 void cpdf_setAuthorXMP(int, const char[]);
 
-/* cpdf_setSubjectXMP(pdf) set the XMP subject of a document. */
+/* cpdf_setSubjectXMP(pdf) sets the XMP subject of a document. */
 void cpdf_setSubjectXMP(int, const char[]);
 
-/* cpdf_setKeywordsXMP(pdf) set the XMP keywords of a document. */
+/* cpdf_setKeywordsXMP(pdf) sets the XMP keywords of a document. */
 void cpdf_setKeywordsXMP(int, const char[]);
 
-/* cpdf_setCreatorXMP(pdf) set the XMP creator of a document. */
+/* cpdf_setCreatorXMP(pdf) sets the XMP creator of a document. */
 void cpdf_setCreatorXMP(int, const char[]);
 
-/* cpdf_setProducerXMP(pdf) set the XMP producer of a document. */
+/* cpdf_setProducerXMP(pdf) sets the XMP producer of a document. */
 void cpdf_setProducerXMP(int, const char[]);
 
-/* cpdf_setCreationDateXMP(pdf) set the XMP creation date of a document. */
+/* cpdf_setCreationDateXMP(pdf) sets the XMP creation date of a document. */
 void cpdf_setCreationDateXMP(int, const char[]);
 
 /*
- * cpdf_setModificationDateXMP(pdf) set the XMP modification date of a
+ * cpdf_setModificationDateXMP(pdf) sets the XMP modification date of a
  * document.
  */
 void cpdf_setModificationDateXMP(int, const char[]);
@@ -1021,6 +1077,12 @@ char *cpdf_dateStringOfComponents(int, int, int, int, int, int, int, int);
 int cpdf_getPageRotation(int, int);
 
 /*
+ * cpdf_numAnnots(pdf, pagenumber) returns the number of annotations on
+ * a given page.
+ */
+int cpdf_numAnnots(int, int);
+
+/*
  * cpdf_hasBox(pdf, pagenumber, boxname) returns true, if that page has the
  * given box. E.g "/CropBox".
  */
@@ -1047,6 +1109,10 @@ void cpdf_setTrimBox(int, int, double, double, double, double);
 void cpdf_setArtBox(int, int, double, double, double, double);
 void cpdf_setBleedBox(int, int, double, double, double, double);
 
+/* cpdf_pageInfoJSON(pdf, retlen) returns JSON data for the page
+information, and fills in the return length. */
+void *cpdf_pageInfoJSON(int, int *);
+
 /* cpdf_markTrapped(pdf) marks a document as trapped. */
 void cpdf_markTrapped(int);
 
@@ -1072,6 +1138,8 @@ enum cpdf_layout {
 /* cpdf_setPageLayout(pdf, layout) sets the page layout for a document. */
 void cpdf_setPageLayout(int, enum cpdf_layout);
 
+enum cpdf_layout cpdf_getPageLayout(int);
+
 /* Document page modes. */
 enum cpdf_pageMode {
   cpdf_useNone,
@@ -1084,27 +1152,59 @@ enum cpdf_pageMode {
 /* cpdf_setPageMode(pdf, mode) sets the page mode for a document. */
 void cpdf_setPageMode(int, enum cpdf_pageMode);
 
+/* cpdf_getPageMode(pdf) returns the page mode for a document. */
+enum cpdf_pageMode cpdf_getPageMode(int);
+
 /* cpdf_hideToolbar(pdf, flag) sets the hide toolbar flag. */
 void cpdf_hideToolbar(int, int);
+
+/* cpdf_getHideToolbar(pdf) gets the hide toolbar flag. */
+int cpdf_getHideToolbar(int);
 
 /* cpdf_hideMenubar(pdf, flag) sets the hide menu bar flag. */
 void cpdf_hideMenubar(int, int);
 
+/* cpdf_getHideMenubar(pdf) gets the hide menu bar flag. */
+int cpdf_getHideMenubar(int);
+
 /* cpdf_hideWindowUi(pdf, flag) sets the hide window UI flag. */
 void cpdf_hideWindowUi(int, int);
+
+/* cpdf_getHideWindowUi(pdf) gets the hide window UI flag. */
+int cpdf_getHideWindowUi(int);
 
 /* cpdf_fitWindow(pdf, flag) sets the fit window flag. */
 void cpdf_fitWindow(int, int);
 
+/* cpdf_getFitWindow(pdf) gets the fit window flag. */
+int cpdf_getFitWindow(int);
+
 /* cpdf_centerWindow(pdf, flag) sets the center window flag. */
 void cpdf_centerWindow(int, int);
 
-/* cpdf_displayDocTitle(pdf, flag) sets the display doc title flag. */
+/* cpdf_getCenterWindow(pdf) gets the center window flag. */
+int cpdf_getCenterWindow(int);
+
+/* cpdf_displayDocTitle(pdf, flag) sets the display document title flag. */
 void cpdf_displayDocTitle(int, int);
+
+/* cpdf_getDisplayDocTitle(pdf) gets the display document title flag. */
+int cpdf_getDisplayDocTitle(int);
+
+/* cpdf_nonFullScreenPageMode(pdf, page mode) sets the non full screen page
+ * mode. */
+void cpdf_nonFullScreenPageMode(int, enum cpdf_pageMode);
+
+/* cpdf_getNonFullScreenPageMode(pdf) gets the non full screen page mode. */
+enum cpdf_pageMode cpdf_getNonFullScreenPageMode(int);
 
 /* cpdf_openAtPage(pdf, fit, pagenumber) sets the PDF to open, possibly with
  * zoom-to-fit, at the given page number. */
 void cpdf_openAtPage(int, int, int);
+
+/* cpdf_openAtPageCustom(pdf, destination) sets the PDF to open at the
+ * destination described by the string. */
+void cpdf_openAtPageCustom(int, char *);
 
 /*
  * cpdf_setMetadataFromFile(pdf, filename) set the XMP metadata of a
@@ -1195,6 +1295,10 @@ int cpdf_getPageLabelOffset(int);
 int cpdf_getPageLabelRange(int);
 void cpdf_endGetPageLabels();
 
+/* cpdf_compositionJSON(filesize, pdf, size returns the composition data in
+ * JSON format. */
+void *cpdf_compositionJSON(int, int, int *);
+
 /* CHAPTER 12. File Attachments */
 
 /*
@@ -1221,13 +1325,13 @@ void cpdf_attachFileFromMemory(void *, int, const char[], int);
  */
 void cpdf_attachFileToPageFromMemory(void *, int, const char[], int, int);
 
-/* Remove all page- and document-level attachments from a document */
+/* Remove all page- and document-level attachments from a document. */
 void cpdf_removeAttachedFiles(int);
 
 /*
  * List information about attachments. Call cpdf_startGetAttachments(pdf)
  * first, then cpdf_numberGetAttachments to find out how many there are. Then
- * cpdf_getAttachmentName to return each one 0...(n - 1). Finally, call
+ * cpdf_getAttachmentName etc. to return each one 0...(n - 1). Finally, call
  * cpdf_endGetAttachments to clean up.
  */
 void cpdf_startGetAttachments(int);
@@ -1252,6 +1356,21 @@ void cpdf_endGetAttachments(void);
 
 /* CHAPTER 13. Images. */
 
+/* Get list of images. Call cpdf_startGetImages, which returns the total number
+ * of images. Then serial numbers 0..<total number> - 1 are used to retreive
+ * data. Finally, call cpdf_endGetImages to clean up. */
+int cpdf_startGetImages(int);
+int cpdf_getImageObjNum(int);
+char *cpdf_getImagePages(int);
+char *cpdf_getImageName(int);
+int cpdf_getImageWidth(int);
+int cpdf_getImageHeight(int);
+int cpdf_getImageSize(int);
+int cpdf_getImageBPC(int);
+char *cpdf_getImageColSpace(int);
+char *cpdf_getImageFilter(int);
+void cpdf_endGetImages(void);
+
 /*
  * Get image data, including resolution at all points of use. Call
  * cpdf_startGetImageResolution(pdf, min_required_resolution) will begin the
@@ -1261,14 +1380,21 @@ void cpdf_endGetAttachments(void);
  * serial number 0..<total number> - 1, to retrieve the data. Finally, call
  * cpdf_endGetImageResolution to clean up.
  */
-int cpdf_startGetImageResolution(int, float);
+int cpdf_startGetImageResolution(int, double);
 int cpdf_getImageResolutionPageNumber(int);
 char *cpdf_getImageResolutionImageName(int);
 int cpdf_getImageResolutionXPixels(int);
 int cpdf_getImageResolutionYPixels(int);
 double cpdf_getImageResolutionXRes(int);
 double cpdf_getImageResolutionYRes(int);
+int cpdf_getImageResolutionObjNum(int);
 void cpdf_endGetImageResolution(void);
+
+/* Get image resolution data in JSON format */
+void *cpdf_imageResolutionJSON(int, int *, float);
+
+/* Get image data in JSON format */
+void *cpdf_imagesJSON(int, int *);
 
 /* CHAPTER 14. Fonts. */
 
@@ -1287,6 +1413,10 @@ char *cpdf_getFontType(int);
 char *cpdf_getFontEncoding(int);
 void cpdf_endGetFontInfo(void);
 
+/* cpdf_fontsJSON(pdf, retlen) returns JSON data for the font list, and fills
+ * in the return length. */
+void *cpdf_fontsJSON(int, int *);
+
 /* cpdf_removeFonts(pdf) removes all font data from a file. */
 void cpdf_removeFonts(int);
 
@@ -1299,6 +1429,8 @@ void cpdf_copyFont(int, int, int, int, const char[]);
 
 /* CHAPTER 15. PDF and JSON */
 
+void cpdf_JSONUTF8(int);
+
 /* cpdf_outputJSON(filename, parse_content, no_stream_data, pdf) outputs a PDF
  * in JSON format to the given filename. If parse_content is true, page content
  * is parsed. If no_stream_data is true, all stream data is suppressed entirely.
@@ -1306,13 +1438,13 @@ void cpdf_copyFont(int, int, int, int, const char[]);
 void cpdf_outputJSON(const char[], int, int, int, int);
 
 /* cpdf_outputJSONMemory(parse_content, no_stream_data, pdf, &length) is like
- * outputJSON, but it write to a buffer in memory. The length is filled in. */
+ * outputJSON, but it writes to a buffer in memory. The length is filled in. */
 void *cpdf_outputJSONMemory(int, int, int, int, int *);
 
-/* Load a PDF from a JSON file given its filename */
+/* Load a PDF from a JSON file given its filename. */
 int cpdf_fromJSON(const char[]);
 
-/* Load a PDF from a JSON file in memory, given the buffer and its length */
+/* Load a PDF from a JSON file in memory, given the buffer and its length. */
 int cpdf_fromJSONMemory(void *, int);
 
 /* CHAPTER 16. Optional Content Groups */
@@ -1362,11 +1494,240 @@ int cpdf_textToPDF(double, double, int, double, const char[]);
  * ragged right on a page of the given size in the given font and font size. */
 int cpdf_textToPDFPaper(int, int, double, const char[]);
 
-/* CHAPTER 18. Miscellaneous */
+/* cpdf_fromPNG(filename) builds a PDF from a 24-bit non-interlaced
+ * non-transparent PNG. */
+int cpdf_fromPNG(const char[]);
+
+/* cpdf_fromJPEG(filename) builds a PDF from a JPEG/ */
+int cpdf_fromJPEG(const char[]);
+
+/* CHAPTER 18. Drawing on PDFs */
+
+/* cpdf_drawBegin sets up the drawing process. It must be called before any
+ * other cpdf_draw* function. */
+void cpdf_drawBegin(void);
+
+/* cpdf_drawEnd(pdf, range) commits the drawing to the given PDF on pages in
+ * the given range. */
+void cpdf_drawEnd(int, int);
+
+/* cpdf_drawExtended(pdf, range, underneath, bates, filename) is the same as
+ * cpdf_drawEnd, but provides the special parameters which may be required when
+ * using cpdf_drawSText. */
+void cpdf_drawEndExtended(int, int, int, int, char *);
+
+/* cpdf_drawRect(x, y, w, h) adds a rectangle to the current path. */
+void cpdf_drawRect(double, double, double, double);
+
+/* cpdf_drawTo(x, y) moves the current point to (x, y). */
+void cpdf_drawTo(double, double);
+
+/* cpdf_drawLine(x, y) adds a line from the current point to (x, y) to the
+ * current path. */
+void cpdf_drawLine(double, double);
+
+/* cpdf_drawBez(x1, y1, x2, y2, x3, y3) adds a bezier curve to the current
+ * path. */
+void cpdf_drawBez(double, double, double, double, double, double);
+
+/* cpdf_drawBez23(x2, y2, x3, y3) add a bezier curve with (x1, y1) = current
+ * point. */
+void cpdf_drawBez23(double, double, double, double);
+
+/* cpdf_drawBez13(x1, y1, x3, y3) add a bezier curve with (x3, y3) = new
+ * current point. */
+void cpdf_drawBez13(double, double, double, double);
+
+/* cpdf_drawCircle(x, y, r) adds a circle to the current path. */
+void cpdf_drawCircle(double, double, double);
+
+/* cpdf_drawStroke() strokes the curent path, and clears it. */
+void cpdf_drawStroke(void);
+
+/* cpdf_drawFill() fills the current path with a non-zero winding rule, and
+ * clears it. */
+void cpdf_drawFill(void);
+
+/* cpdf_drawFillEo() fills the current path with an even-odd winding rule, and
+ * clears it. */
+void cpdf_drawFillEo(void);
+
+/* cpdf_drawStrokeFill() fills and then strokes the current path with a
+ * non-zero winding rule, and clears it. */
+void cpdf_drawStrokeFill(void);
+
+/* cpdf_drawStrokeFillEo() fills and then strokes the current path with an even
+ * odd winding rule, and clears it. */
+void cpdf_drawStrokeFillEo(void);
+
+/* cpdf_drawClose closes the current path by appending a straight line segment
+ * from the current point to the starting point of the subpath. */
+void cpdf_drawClose(void);
+
+/* cpdf_drawClip uses the current path as a clipping region, using the non-zero
+ * winding rule. */
+void cpdf_drawClip(void);
+
+/* cpdf_drawClipEo uses the current path as a clipping region, using the
+ * even-odd winding rule. */
+void cpdf_drawClipEo(void);
+
+/* cpdf_drawStrokColGrey(g) changes to a greyscale stroke colourspace and sets
+ * the stroke colour. */
+void cpdf_drawStrokeColGrey(double);
+
+/* cpdf_drawStrokeColRGB(r, g, b) changes to an RGB stroke colourspace and sets
+ * the stroke colour. */
+void cpdf_drawStrokeColRGB(double, double, double);
+
+/* cpdf_drawStrokeColCYMK(c, y, m, k) changes to a CYMK stroke colourspace and
+ * sets the stroke colour. */
+void cpdf_drawStrokeColCYMK(double, double, double, double);
+
+/* cpdf_drawFillColGrey(g) changes to a greyscale fill colourspace and sets the
+ * fill colour. */
+void cpdf_drawFillColGrey(double);
+
+/* cpdf_drawFillColRGB(r, g, b) changes to an RGB fill colourspace and sets the
+ * fill colour. */
+void cpdf_drawFillColRGB(double, double, double);
+
+/* cpdf_drawFillColCYMK(c, y, m, k) changes to a CYMK fill colourspace and sets
+ * the fill colour. */
+void cpdf_drawFillColCYMK(double, double, double, double);
+
+/* cpdf_drawThick(thickness) sets the line thickness. */
+void cpdf_drawThick(double);
+
+/* Line caps. */
+enum cpdf_cap { cpdf_capButt, cpdf_capRound, cpdf_capSquare };
+
+/* cpdf_drawCap(captype) sets the line cap. */
+void cpdf_drawCap(enum cpdf_cap);
+
+/* Line joins. */
+enum cpdf_join { cpdf_joinMiter, cpdf_joinRound, cpdf_joinBevel };
+
+/* cpdf_drawJoin(jointype) sets the line join type. */
+void cpdf_drawJoin(enum cpdf_join);
+
+/* cpdf_drawMiter(m) sets the miter limit. */
+void cpdf_drawMiter(double);
+
+/* cpdf_drawDash(dash description) sets the line dash style. */
+void cpdf_drawDash(char *);
+
+/* cpdf_drawPush() saves the current graphics state on the stack. */
+void cpdf_drawPush(void);
+
+/* cpdf_drawPop() restores the graphics state from the stack. */
+void cpdf_drawPop(void);
+
+/* cpdf_drawMatrix(a, b, c, d, e, f) appends the given matrix to the Current
+ * Transformation Matrix. */
+void cpdf_drawMatrix(double, double, double, double, double, double);
+
+/* cpdf_drawMTrans(tx, ty) appends a translation by (tx, ty) to the Current
+ * Transformation Matrix. */
+void cpdf_drawMTrans(double, double);
+
+/* cpdf_drawMRot(x, y, a) appends a rotation by a around (a, y) to the Current
+ * Transformation Matrix. */
+void cpdf_drawMRot(double, double, double);
+
+/* cpdf_drawMScale(x, y, sx, sy) appends a scaling by (sx, sy) around (x, y) to
+ * the Current Transformation Matrix. */
+void cpdf_drawMScale(double, double, double, double);
+
+/* cpdf_drawMShearX(x, y, a) appends an X shearing of angle a around (x, y) to
+ * the Current Transformation Matrix. */
+void cpdf_drawMShearX(double, double, double);
+
+/* cpdf_drawMShearY(x, y, a) appends an Y shearing of angle a around (x, y) to
+ * the Current Transformation Matrix. */
+void cpdf_drawMShearY(double, double, double);
+
+/* cpdf_drawXObjBBox(x, y, w, h) sets the XObject bounding box. */
+void cpdf_drawXObjBBox(double, double, double, double);
+
+/* cpdf_drawXObj(name) begins the storing of an XObject. */
+void cpdf_drawXObj(char *);
+
+/* cpdf_drawEndXObj() ends the storing of an XObject. */
+void cpdf_drawEndXObj(void);
+
+/* cpdf_drawUse(name) uses the named XObject. */
+void cpdf_drawUse(char *);
+
+/* cpdf_drawJPEG(name, filename) loads a JPEG from the given file, storing it
+ * under the given name. */
+void cpdf_drawJPEG(char *, char *);
+
+/* cpdf_drawPNG(name, filename) loads a 24 bit non-interlaced non-transparent
+ * PNG from the given file, storing it under the given name. */
+void cpdf_drawPNG(char *, char *);
+
+/* cpdf_drawImage(name) draws a stored image. To draw at the expected size, it
+ * is required to scale the Current Transformation Matrix by the width and
+ * height of the image. */
+void cpdf_drawImage(char *);
+
+/* cpdf_drawFillOpacity(n) sets the fill opacity. */
+void cpdf_drawFillOpacity(double);
+
+/* cpdf_drawStrokeOpacity(n) sets the stroke opacity. */
+void cpdf_drawStrokeOpacity(double);
+
+/* cpdf_drawBT() begins a text section. */
+void cpdf_drawBT(void);
+
+/* cpdf_drawET() ends a text section. */
+void cpdf_drawET(void);
+
+/* cpdf_drawFont(fontname) sets the font. */
+void cpdf_drawFont(char *);
+
+/* cpdf_drawFontSize(n) sets the font size. */
+void cpdf_drawFontSize(double);
+
+/* cpdf_drawText(text) draws text. */
+void cpdf_drawText(char *);
+
+/* cpdf_drawSText(text) draws text with %Specials. You may need to use
+ * cpdf_drawEndExtended instead of cpdf_drawEnd later, to provide the extra
+ * information required. */
+void cpdf_drawSText(char *);
+
+/* cpdf_drawLeading(n) sets the leading. */
+void cpdf_drawLeading(double);
+
+/* cpdf_drawCharSpace(n) sets the character spacing. */
+void cpdf_drawCharSpace(double);
+
+/* cpdf_drawWordSpace(n) sets the word spacing. */
+void cpdf_drawWordSpace(double);
+
+/* cpdf_drawTextScale(n) sets the text scaling. */
+void cpdf_drawTextScale(double);
+
+/* cpdf_drawRenderMode(n) sets the text rendering mode. */
+void cpdf_drawRenderMode(int);
+
+/* cpdf_drawRise(n) sets the text rise. */
+void cpdf_drawRise(double);
+
+/* cpdf_drawNL() moves to the next line. */
+void cpdf_drawNL(void);
+
+/* cpdf_drawNewPage() moves to the next page, creating it if necessary, and
+ * setting the range to just that new page. */
+void cpdf_drawNewPage(void);
+
+/* CHAPTER 19. Miscellaneous */
 
 /*
  * cpdf_draft(pdf, range, boxes) removes images on the given pages, replacing
- * them with crossed boxes if 'boxes' is true
+ * them with crossed boxes if 'boxes' is true.
  */
 void cpdf_draft(int, int, int);
 
@@ -1415,7 +1776,7 @@ void cpdf_removeDictEntry(int, const char[]);
 void cpdf_removeDictEntrySearch(int, const char[], const char[]);
 
 /* cpdf_replaceDictEntry(pdf, key, newvalue) replaces the value associated with
- * the given key */
+ * the given key. */
 void cpdf_replaceDictEntry(int, const char[], const char[]);
 
 /* cpdf_replaceDictEntry(pdf, key, newvalue, searchterm) replaces the value
@@ -1425,7 +1786,7 @@ void cpdf_replaceDictEntrySearch(int, const char[], const char[], const char[]);
 
 /* cpdf_getDictEntries(pdf, key, length) returns a JSON array containing any
  * and all values associated with the given key, and fills in its length. */
-void *cpdf_getDictEntries(int, const char[], int *retlen);
+void *cpdf_getDictEntries(int, const char[], int *);
 
 /*
  * cpdf_removeClipping(pdf, range) removes all clipping from pages in the
