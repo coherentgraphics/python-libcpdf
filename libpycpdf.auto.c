@@ -49,18 +49,6 @@ void pycpdf_onExit(void) {
 
 /* __AUTO int fromFile(char *filename, char *userpw) */
 
-/* becomes:
-
-int pycpdf_fromFile(char *filename, char *userpw) {
-  return cpdf_fromFile(filename, userpw);
-}
-
- */
-
-int pycpdf_fromFile(char *filename, char *userpw) {
-  return cpdf_fromFile(filename, userpw);
-}
-
 int pycpdf_fromFileLazy(char *filename, char *userpw) {
   return cpdf_fromFileLazy(filename, userpw);
 }
