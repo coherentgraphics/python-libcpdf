@@ -46,6 +46,16 @@ void pycpdf_onExit(void) {
 }
 
 /* CHAPTER 1. Basics */
+
+
+/* becomes:
+
+int pycpdf_fromFile(char *filename, char *userpw) {
+  return cpdf_fromFile(filename, userpw);
+}
+
+ */
+
 int pycpdf_fromFile(char *filename, char *userpw) {
   return cpdf_fromFile(filename, userpw);
 }
