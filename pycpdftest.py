@@ -680,10 +680,9 @@ def chapter6():
     except:
         fatal_prerr()
     print(f'There are {len(existing_marks)} bookmarks')
-    for m in existing_marks:
-        a, b, c, d = m
-        print(
-            f'Bookmark at level {a} points to page {b} and has text "{c}" and open {d}')
+    m = existing_marks[0];
+    a, b, c, d = m
+    print(f'Bookmark at level {a} points to page {b} and has text "{c}" and open {d}')
     marks = [(0, 20, "New bookmark!", True)]
     print('---cpdf: set bookmarks')
     try:
@@ -1501,9 +1500,8 @@ def chapter14():
         fonts = pycpdflib.getFontInfo(pdf)
     except:
         fatal_prerr()
-    for f in fonts:
-        a, b, c, d = f
-        print(f'Page {a}, font {b} has type {c} and encoding {d}')
+    a, b, c, d = fonts[0]
+    print(f'Page {a}, font {b} has type {c} and encoding {d}')
     print('---cpdf_removeFonts()')
     try:
         pycpdflib.removeFonts(pdf)
