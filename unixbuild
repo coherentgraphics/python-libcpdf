@@ -3,7 +3,7 @@ cd auto; make; ./auto; cd ..
 #install into /usr/local/lib/
 cp ../cpdflib-source/libcpdf.so /usr/local/lib/
 #Builds clib1.o
-cc -c -Wall -Werror -fpic libpycpdf.c
+cc -c -Wall -Wno-return-type -Werror -fpic libpycpdf.c
 #Builds libclib1.so
 cc -shared -o libpycpdf.so libpycpdf.o -L/usr/local/lib/ -lcpdf
 #Tell OS X where libpycpdf.so will find libcpdf.so
