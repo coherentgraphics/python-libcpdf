@@ -313,48 +313,15 @@ char *pycpdf_stampAsXObject(int pdf, int r, int stamp_pdf) {
 }
 
 /* CHAPTER 9. Multipage facilities */
-void pycpdf_impose(int pdf, double x, double y, int fit, int columns, int rtl,
-                   int btt, int center, double margin, double spacing,
-                   double linewidth) {
-  cpdf_impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing,
-              linewidth);
-  return;
-}
 
-void pycpdf_twoUp(int pdf) {
-  cpdf_twoUp(pdf);
-  return;
-}
-
-void pycpdf_twoUpStack(int pdf) {
-  cpdf_twoUpStack(pdf);
-  return;
-}
-
-void pycpdf_padBefore(int pdf, int r) {
-  cpdf_padBefore(pdf, r);
-  return;
-}
-
-void pycpdf_padAfter(int pdf, int r) {
-  cpdf_padAfter(pdf, r);
-  return;
-}
-
-void pycpdf_padEvery(int pdf, int r) {
-  cpdf_padEvery(pdf, r);
-  return;
-}
-
-void pycpdf_padMultiple(int pdf, int n) {
-  cpdf_padMultiple(pdf, n);
-  return;
-}
-
-void pycpdf_padMultipleBefore(int pdf, int n) {
-  cpdf_padMultipleBefore(pdf, n);
-  return;
-}
+/* __AUTO void impose(int pdf, double x, double y, int fit, int columns, int rtl, int btt, int center, double margin, double spacing, double linewidth) */
+/* __AUTO void twoUp(int pdf) */
+/* __AUTO void twoUpStack(int pdf) */
+/* __AUTO void padBefore(int pdf, int r) */
+/* __AUTO void padAfter(int pdf, int r) */
+/* __AUTO void padEvery(int pdf, int r) */
+/* __AUTO void padMultiple(int pdf, int n) */
+/* __AUTO void padMultipleBefore(int pdf, int n) */
 
 /* CHAPTER 10. Annotations */
 void *annotationsJSONData;
@@ -370,182 +337,51 @@ void pycpdf_annotationsJSONFree(void) {
 }
 
 /* CHAPTER 11. Document Information and Metadata */
-int pycpdf_isLinearized(char *filename) { return cpdf_isLinearized(filename); }
 
-int pycpdf_getVersion(int pdf) { return cpdf_getVersion(pdf); }
-
-int pycpdf_getMajorVersion(int pdf) { return cpdf_getMajorVersion(pdf); }
-
-char *pycpdf_getTitle(int pdf) { return cpdf_getTitle(pdf); }
-
-char *pycpdf_getAuthor(int pdf) { return cpdf_getAuthor(pdf); }
-
-char *pycpdf_getSubject(int pdf) { return cpdf_getSubject(pdf); }
-
-char *pycpdf_getKeywords(int pdf) { return cpdf_getKeywords(pdf); }
-
-char *pycpdf_getCreator(int pdf) { return cpdf_getCreator(pdf); }
-
-char *pycpdf_getProducer(int pdf) { return cpdf_getProducer(pdf); }
-
-char *pycpdf_getCreationDate(int pdf) { return cpdf_getCreationDate(pdf); }
-
-char *pycpdf_getModificationDate(int pdf) {
-  return cpdf_getModificationDate(pdf);
-}
-
-char *pycpdf_getTitleXMP(int pdf) { return cpdf_getTitleXMP(pdf); }
-
-char *pycpdf_getAuthorXMP(int pdf) { return cpdf_getAuthorXMP(pdf); }
-
-char *pycpdf_getSubjectXMP(int pdf) { return cpdf_getSubjectXMP(pdf); }
-
-char *pycpdf_getKeywordsXMP(int pdf) { return cpdf_getKeywordsXMP(pdf); }
-
-char *pycpdf_getCreatorXMP(int pdf) { return cpdf_getCreatorXMP(pdf); }
-
-char *pycpdf_getProducerXMP(int pdf) { return cpdf_getProducerXMP(pdf); }
-
-char *pycpdf_getCreationDateXMP(int pdf) {
-  return cpdf_getCreationDateXMP(pdf);
-}
-
-char *pycpdf_getModificationDateXMP(int pdf) {
-  return cpdf_getModificationDateXMP(pdf);
-}
-
-void pycpdf_setTitle(int pdf, char *s) {
-  cpdf_setTitle(pdf, s);
-  return;
-}
-
-void pycpdf_setAuthor(int pdf, char *s) {
-  cpdf_setAuthor(pdf, s);
-  return;
-}
-
-void pycpdf_setSubject(int pdf, char *s) {
-  cpdf_setSubject(pdf, s);
-  return;
-}
-
-void pycpdf_setKeywords(int pdf, char *s) {
-  cpdf_setKeywords(pdf, s);
-  return;
-}
-
-void pycpdf_setCreator(int pdf, char *s) {
-  cpdf_setCreator(pdf, s);
-  return;
-}
-
-void pycpdf_setProducer(int pdf, char *s) {
-  cpdf_setProducer(pdf, s);
-  return;
-}
-
-void pycpdf_setCreationDate(int pdf, char *s) {
-  cpdf_setCreationDate(pdf, s);
-  return;
-}
-
-void pycpdf_setModificationDate(int pdf, char *s) {
-  cpdf_setModificationDate(pdf, s);
-  return;
-}
-
-void pycpdf_setTitleXMP(int pdf, char *s) {
-  cpdf_setTitleXMP(pdf, s);
-  return;
-}
-
-void pycpdf_setAuthorXMP(int pdf, char *s) {
-  cpdf_setAuthorXMP(pdf, s);
-  return;
-}
-
-void pycpdf_setSubjectXMP(int pdf, char *s) {
-  cpdf_setSubjectXMP(pdf, s);
-  return;
-}
-
-void pycpdf_setKeywordsXMP(int pdf, char *s) {
-  cpdf_setKeywordsXMP(pdf, s);
-  return;
-}
-
-void pycpdf_setCreatorXMP(int pdf, char *s) {
-  cpdf_setCreatorXMP(pdf, s);
-  return;
-}
-
-void pycpdf_setProducerXMP(int pdf, char *s) {
-  cpdf_setProducerXMP(pdf, s);
-  return;
-}
-
-void pycpdf_setCreationDateXMP(int pdf, char *s) {
-  cpdf_setCreationDateXMP(pdf, s);
-  return;
-}
-
-void pycpdf_setModificationDateXMP(int pdf, char *s) {
-  cpdf_setModificationDateXMP(pdf, s);
-  return;
-}
-
-void pycpdf_getDateComponents(char *str, int *year, int *month, int *day,
-                              int *hour, int *minute, int *second,
-                              int *hour_offset, int *minute_offset) {
-  cpdf_getDateComponents(str, year, month, day, hour, minute, second,
-                         hour_offset, minute_offset);
-  return;
-}
-
-char *pycpdf_dateStringOfComponents(int year, int month, int day, int hour,
-                                    int minute, int second, int hour_offset,
-                                    int minute_offset) {
-  return cpdf_dateStringOfComponents(year, month, day, hour, minute, second,
-                                     hour_offset, minute_offset);
-}
-
-int pycpdf_getPageRotation(int pdf, int pagenumber) {
-  return cpdf_getPageRotation(pdf, pagenumber);
-}
-
-int pycpdf_hasBox(int pdf, int pagenumber, char *box) {
-  return cpdf_hasBox(pdf, pagenumber, box);
-}
-
-void pycpdf_getMediaBox(int pdf, int pagenumber, double *minx, double *maxx,
-                        double *miny, double *maxy) {
-  cpdf_getMediaBox(pdf, pagenumber, minx, maxx, miny, maxy);
-  return;
-}
-
-void pycpdf_getCropBox(int pdf, int pagenumber, double *minx, double *maxx,
-                       double *miny, double *maxy) {
-  cpdf_getCropBox(pdf, pagenumber, minx, maxx, miny, maxy);
-  return;
-}
-
-void pycpdf_getTrimBox(int pdf, int pagenumber, double *minx, double *maxx,
-                       double *miny, double *maxy) {
-  cpdf_getTrimBox(pdf, pagenumber, minx, maxx, miny, maxy);
-  return;
-}
-
-void pycpdf_getArtBox(int pdf, int pagenumber, double *minx, double *maxx,
-                      double *miny, double *maxy) {
-  cpdf_getArtBox(pdf, pagenumber, minx, maxx, miny, maxy);
-  return;
-}
-
-void pycpdf_getBleedBox(int pdf, int pagenumber, double *minx, double *maxx,
-                        double *miny, double *maxy) {
-  cpdf_getBleedBox(pdf, pagenumber, minx, maxx, miny, maxy);
-  return;
-}
+/* __AUTO int isLinearized(char *filename) */
+/* __AUTO int getVersion(int pdf) */
+/* __AUTO int getMajorVersion(int pdf) */
+/* __AUTO char* getTitle(int pdf) */
+/* __AUTO char* getAuthor(int pdf) */
+/* __AUTO char* getSubject(int pdf) */
+/* __AUTO char* getKeywords(int pdf) */
+/* __AUTO char* getCreator(int pdf) */
+/* __AUTO char* getProducer(int pdf) */
+/* __AUTO char* getCreationDate(int pdf) */
+/* __AUTO char* getModificationDate(int pdf) */
+/* __AUTO char* getTitleXMP(int pdf) */
+/* __AUTO char* getAuthorXMP(int pdf) */
+/* __AUTO char* getSubjectXMP(int pdf) */
+/* __AUTO char* getKeywordsXMP(int pdf) */
+/* __AUTO char* getCreatorXMP(int pdf) */
+/* __AUTO char* getProducerXMP(int pdf) */
+/* __AUTO char* getCreationDateXMP(int pdf) */
+/* __AUTO char* getModificationDateXMP(int pdf) */
+/* __AUTO void setTitle(int pdf, char *s) */
+/* __AUTO void setAuthor(int pdf, char *s) */
+/* __AUTO void setSubject(int pdf, char *s) */
+/* __AUTO void setKeywords(int pdf, char *s) */
+/* __AUTO void setCreator(int pdf, char *s) */
+/* __AUTO void setProducer(int pdf, char *s) */
+/* __AUTO void setCreationDate(int pdf, char *s) */
+/* __AUTO void setModificationDate(int pdf, char *s) */
+/* __AUTO void setTitleXMP(int pdf, char *s) */
+/* __AUTO void setAuthorXMP(int pdf, char *s) */
+/* __AUTO void setSubjectXMP(int pdf, char *s) */
+/* __AUTO void setKeywordsXMP(int pdf, char *s) */
+/* __AUTO void setCreatorXMP(int pdf, char *s) */
+/* __AUTO void setProducerXMP(int pdf, char *s) */
+/* __AUTO void setCreationDateXMP(int pdf, char *s) */
+/* __AUTO void setModificationDateXMP(int pdf, char *s) */
+/* __AUTO void getDateComponents(char *str, int *year, int *month, int *day, int *hour, int *minute, int *second, int *hour_offset, int *minute_offset) */
+/* __AUTO char* dateStringOfComponents(int year, int month, int day, int hour, int minute, int second, int hour_offset, int minute_offset) */
+/* __AUTO int getPageRotation(int pdf, int pagenumber) */
+/* __AUTO int hasBox(int pdf, int pagenumber, char *box) */
+/* __AUTO void getMediaBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy) */
+/* __AUTO void getCropBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy) */
+/* __AUTO void getTrimBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy) */
+/* __AUTO void getArtBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy) */
+/* __AUTO void getBleedBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy) */
 
 void pycpdf_setMediaBox(int pdf, int range, double minx, double maxx,
                         double miny, double maxy) {
@@ -553,104 +389,25 @@ void pycpdf_setMediaBox(int pdf, int range, double minx, double maxx,
   return;
 }
 
-void pycpdf_setCropBox(int pdf, int range, double minx, double maxx,
-                       double miny, double maxy) {
-  cpdf_setCropBox(pdf, range, minx, maxx, miny, maxy);
-  return;
-}
-
-void pycpdf_setTrimBox(int pdf, int range, double minx, double maxx,
-                       double miny, double maxy) {
-  cpdf_setTrimBox(pdf, range, minx, maxx, miny, maxy);
-  return;
-}
-
-void pycpdf_setArtBox(int pdf, int range, double minx, double maxx, double miny,
-                      double maxy) {
-  cpdf_setArtBox(pdf, range, minx, maxx, miny, maxy);
-  return;
-}
-
-void pycpdf_setBleedBox(int pdf, int range, double minx, double maxx,
-                        double miny, double maxy) {
-  cpdf_setBleedBox(pdf, range, minx, maxx, miny, maxy);
-  return;
-}
-
-void pycpdf_markTrapped(int pdf) {
-  cpdf_markTrapped(pdf);
-  return;
-}
-
-void pycpdf_markUntrapped(int pdf) {
-  cpdf_markUntrapped(pdf);
-  return;
-}
-
-void pycpdf_markTrappedXMP(int pdf) {
-  cpdf_markTrappedXMP(pdf);
-  return;
-}
-
-void pycpdf_markUntrappedXMP(int pdf) {
-  cpdf_markUntrappedXMP(pdf);
-  return;
-}
-
-void pycpdf_setPageLayout(int pdf, int layout) {
-  cpdf_setPageLayout(pdf, layout);
-  return;
-}
-
-void pycpdf_setPageMode(int pdf, int mode) {
-  cpdf_setPageMode(pdf, mode);
-  return;
-}
-
-void pycpdf_hideToolbar(int pdf, int flag) {
-  cpdf_hideToolbar(pdf, flag);
-  return;
-}
-
-void pycpdf_hideMenubar(int pdf, int flag) {
-  cpdf_hideMenubar(pdf, flag);
-  return;
-}
-
-void pycpdf_hideWindowUi(int pdf, int flag) {
-  cpdf_hideWindowUi(pdf, flag);
-  return;
-}
-
-void pycpdf_fitWindow(int pdf, int flag) {
-  cpdf_fitWindow(pdf, flag);
-  return;
-}
-
-void pycpdf_centerWindow(int pdf, int flag) {
-  cpdf_centerWindow(pdf, flag);
-  return;
-}
-
-void pycpdf_displayDocTitle(int pdf, int flag) {
-  cpdf_displayDocTitle(pdf, flag);
-  return;
-}
-
-void pycpdf_openAtPage(int pdf, int flag, int pagenumber) {
-  cpdf_openAtPage(pdf, flag, pagenumber);
-  return;
-}
-
-void pycpdf_setMetadataFromFile(int pdf, char *filename) {
-  cpdf_setMetadataFromFile(pdf, filename);
-  return;
-}
-
-void pycpdf_setMetadataFromByteArray(int pdf, void *data, int len) {
-  cpdf_setMetadataFromByteArray(pdf, data, len);
-  return;
-}
+/* __AUTO void setCropBox(int pdf, int range, double minx, double maxx, double miny, double maxy) */
+/* __AUTO void setTrimBox(int pdf, int range, double minx, double maxx, double miny, double maxy) */
+/* __AUTO void setArtBox(int pdf, int range, double minx, double maxx, double miny, double maxy) */
+/* __AUTO void setBleedBox(int pdf, int range, double minx, double maxx, double miny, double maxy) */
+/* __AUTO void markTrapped(int pdf) */
+/* __AUTO void markUntrapped(int pdf) */
+/* __AUTO void markTrappedXMP(int pdf) */
+/* __AUTO void markUntrappedXMP(int pdf) */
+/* __AUTO void setPageLayout(int pdf, int layout) */
+/* __AUTO void setPageMode(int pdf, int mode) */
+/* __AUTO void hideToolbar(int pdf, int flag) */
+/* __AUTO void hideMenubar(int pdf, int flag) */
+/* __AUTO void hideWindowUi(int pdf, int flag) */
+/* __AUTO void fitWindow(int pdf, int flag) */
+/* __AUTO void centerWindow(int pdf, int flag) */
+/* __AUTO void displayDocTitle(int pdf, int flag) */
+/* __AUTO void openAtPage(int pdf, int flag, int pagenumber) */
+/* __AUTO void setMetadataFromFile(int pdf, char* filename) */
+/* __AUTO void setMetadataFromByteArray(int pdf, void* data, int len) */
 
 void *getMetadataData;
 
@@ -883,100 +640,28 @@ void pycpdf_OCGOrderAll(int pdf) {
 
 /* CHAPTER 17. Creating New PDFs */
 
-int pycpdf_blankDocument(double w, double h, int pages) {
-  return cpdf_blankDocument(w, h, pages);
-}
-
-int pycpdf_blankDocumentPaper(int papersize, int pages) {
-  return cpdf_blankDocumentPaper(papersize, pages);
-}
-
-int pycpdf_textToPDF(double w, double h, int font, double fontsize,
-                     char *filename) {
-  return cpdf_textToPDF(w, h, font, fontsize, filename);
-}
-
-int pycpdf_textToPDFPaper(int papersize, int font, double fontsize,
-                          char *filename) {
-  return cpdf_textToPDFPaper(papersize, font, fontsize, filename);
-}
+/* __AUTO int blankDocument(double w, double h, int pages) */
+/* __AUTO int blankDocumentPaper(int papersize, int pages) */
+/* __AUTO int textToPDF(double w, double h, int font, double fontsize, char *filename) */
+/* __AUTO int textToPDFPaper(int papersize, int font, double fontsize, char *filename) */
 
 /* CHAPTER 18. Miscellaneous */
-void pycpdf_draft(int pdf, int r, int boxes) {
-  cpdf_draft(pdf, r, boxes);
-  return;
-}
 
-void pycpdf_removeAllText(int pdf, int r) {
-  cpdf_removeAllText(pdf, r);
-  return;
-}
-
-void pycpdf_blackText(int pdf, int r) {
-  cpdf_blackText(pdf, r);
-  return;
-}
-
-void pycpdf_blackLines(int pdf, int r) {
-  cpdf_blackLines(pdf, r);
-  return;
-}
-
-void pycpdf_blackFills(int pdf, int r) {
-  cpdf_blackFills(pdf, r);
-  return;
-}
-
-void pycpdf_thinLines(int pdf, int r, double linewidth) {
-  cpdf_thinLines(pdf, r, linewidth);
-  return;
-}
-
-void pycpdf_copyId(int pdf, int pdf2) {
-  cpdf_copyId(pdf, pdf2);
-  return;
-}
-
-void pycpdf_removeId(int pdf) {
-  cpdf_removeId(pdf);
-  return;
-}
-
-void pycpdf_setVersion(int pdf, int version) {
-  cpdf_setVersion(pdf, version);
-  return;
-}
-
-void pycpdf_setFullVersion(int pdf, int major, int minor) {
-  cpdf_setFullVersion(pdf, major, minor);
-  return;
-}
-
-void pycpdf_removeDictEntry(int pdf, char *key) {
-  cpdf_removeDictEntry(pdf, key);
-  return;
-}
-
-void pycpdf_removeDictEntrySearch(int pdf, char *key, char *searchterm) {
-  cpdf_removeDictEntrySearch(pdf, key, searchterm);
-  return;
-}
-
-void pycpdf_replaceDictEntry(int pdf, char *key, char *newvalue) {
-  cpdf_replaceDictEntry(pdf, key, newvalue);
-  return;
-}
-
-void pycpdf_replaceDictEntrySearch(int pdf, char *key, char *newvalue,
-                                   char *searchterm) {
-  cpdf_replaceDictEntrySearch(pdf, key, newvalue, searchterm);
-  return;
-}
-
-void pycpdf_removeClipping(int pdf, int r) {
-  cpdf_removeClipping(pdf, r);
-  return;
-}
+/* __AUTO void draft(int pdf, int r, int boxes) */
+/* __AUTO void removeAllText(int pdf, int r) */ 
+/* __AUTO void blackText(int pdf, int r) */
+/* __AUTO void blackLines(int pdf, int r) */
+/* __AUTO void blackFills(int pdf, int r) */
+/* __AUTO void thinLines(int pdf, int r, double linewidth) */
+/* __AUTO void copyId(int pdf, int pdf2) */
+/* __AUTO void removeId(int pdf) */
+/* __AUTO void setVersion(int pdf, int version) */
+/* __AUTO void setFullVersion(int pdf, int major, int minor) */
+/* __AUTO void removeDictEntry(int pdf, char *key) */
+/* __AUTO void removeDictEntrySearch(int pdf, char *key, char *searchterm) */
+/* __AUTO void replaceDictEntry(int pdf, char *key, char *newvalue) */
+/* __AUTO void replaceDictEntrySearch(int pdf, char *key, char *newvalue, char *searchterm) */
+/* __AUTO void removeClipping(int pdf, int r) */
 
 void *getDictEntriesData;
 
