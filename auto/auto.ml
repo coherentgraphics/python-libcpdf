@@ -36,19 +36,30 @@ int pycpdf_fromFile(char *filename, char *userpw) {
 
 let spliton c s =
   let a, b = cleavewhile (neq c) (explode s) in
-    implode a, implode b
+    String.trim (implode a), String.trim (implode b)
 
-let getmany s =
-  (fun x -> x = ' ' || x = ',' || x = ')') 
+let getmany l =
+  let r = ref [] in
+  let l = ref (explode l) in
+  while !l <> ['*'; '/'] do
+      let x, y = cleavewhile (fun x -> x <> ' ' && x <> ',' && x <> ')')  !l in
+        (*Printf.printf "x = |%S|, y = |%S|\n%!" (implode x) (implode y);*)
+        l := if y <> [] then explode (String.trim (implode (tl y))) else !l;
+        r =| x
+    done;
+    rev (map String.trim (map implode !r))
 
 let mkauto l =
   let l = String.sub l 10 (String.length l - 10) in
   let type_name, l = spliton ' ' l in
   let function_name, l = spliton '(' l in
-  let param_types_and_names = getmany s in
-  Printf.sprintf "%s pycpdf_%s(%s) {\n  return cpdf_%s(%s);\n}\n"
-    type_name function_name (string_of_params_and_types param_types param_names)
-    function_name (string_of_param_names param_names)
+  let param_types_and_names = getmany l in
+  let types, names = really_drop_evens param_types_and_names, drop_odds param_types_and_names in
+  let cparams = implode (rev (tl (tl (rev (explode (fold_left ( ^ ) "" (map2 (fun t n -> t ^ " " ^ n ^ ", ") types names))))))) in
+  let trim_star s = match explode s with '*'::t -> implode t | _ -> s in
+  Printf.sprintf "%s pycpdf_%s%s) {\n  return cpdf_%s(%s);\n}\n"
+    type_name function_name cparams function_name
+    (fold_left (fun a b -> if a = "" then b else a ^ ", " ^ b) "" (map trim_star (drop_odds param_types_and_names)))
 
 let rec process a = function
   | [] -> rev (map (fun x -> x ^ "\n") a)
