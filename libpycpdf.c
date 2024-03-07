@@ -438,14 +438,13 @@ void pycpdf_tableOfContents(int pdf, int font, double fontsize, char* title, int
 /* CHAPTER 8. Logos, Watermarks and Stamps */
 
 void pycpdf_stampOn(int pdf, int pdf2, int r) {
-  cpdf_stampOn(pdf, pdf2, r);
-  return;
+  return cpdf_stampOn(pdf, pdf2, r);
 }
 
 void pycpdf_stampUnder(int pdf, int pdf2, int r) {
-  cpdf_stampUnder(pdf, pdf2, r);
-  return;
+  return cpdf_stampUnder(pdf, pdf2, r);
 }
+
 
 void pycpdf_stampExtended(int pdf, int pdf2, int r, int isover,
                           int scale_stamp_to_fit, int pos, int c1, int c2,
@@ -458,9 +457,9 @@ void pycpdf_stampExtended(int pdf, int pdf2, int r, int isover,
 }
 
 void pycpdf_combinePages(int pdf, int pdf2) {
-  cpdf_combinePages(pdf, pdf2);
-  return;
+  return cpdf_combinePages(pdf, pdf2);
 }
+
 
 void pycpdf_addText(int metrics, int pdf, int r, char *text, int pos, double p1,
                     double p2, double line_spacing, int bates, int font,
@@ -486,22 +485,21 @@ void pycpdf_addTextSimple(int pdf, int r, char *text, int pos, double p1,
 }
 
 void pycpdf_removeText(int pdf, int r) {
-  cpdf_removeText(pdf, r);
-  return;
+  return cpdf_removeText(pdf, r);
 }
 
-int pycpdf_textWidth(int font, char *string) {
+int pycpdf_textWidth(int font, char* string) {
   return cpdf_textWidth(font, string);
 }
 
-void pycpdf_addContent(char *content, int before, int pdf, int r) {
-  cpdf_addContent(content, before, pdf, r);
-  return;
+void pycpdf_addContent(char* content, int before, int pdf, int r) {
+  return cpdf_addContent(content, before, pdf, r);
 }
 
-char *pycpdf_stampAsXObject(int pdf, int r, int stamp_pdf) {
+char* pycpdf_stampAsXObject(int pdf, int r, int stamp_pdf) {
   return cpdf_stampAsXObject(pdf, r, stamp_pdf);
 }
+
 
 /* CHAPTER 9. Multipage facilities */
 
@@ -826,92 +824,99 @@ void pycpdf_getMetadataFree(void) {
 }
 
 void pycpdf_removeMetadata(int pdf) {
-  cpdf_removeMetadata(pdf);
-  return;
+  return cpdf_removeMetadata(pdf);
 }
 
 void pycpdf_createMetadata(int pdf) {
-  cpdf_createMetadata(pdf);
-  return;
+  return cpdf_createMetadata(pdf);
 }
 
-void pycpdf_setMetadataDate(int pdf, char *date) {
-  cpdf_setMetadataDate(pdf, date);
-  return;
+void pycpdf_setMetadataDate(int pdf, char* date) {
+  return cpdf_setMetadataDate(pdf, date);
 }
 
-int pycpdf_startGetPageLabels(int pdf) { return cpdf_startGetPageLabels(pdf); }
+int pycpdf_startGetPageLabels(int pdf) {
+  return cpdf_startGetPageLabels(pdf);
+}
 
-int pycpdf_getPageLabelStyle(int n) { return cpdf_getPageLabelStyle(n); }
+int pycpdf_getPageLabelStyle(int n) {
+  return cpdf_getPageLabelStyle(n);
+}
 
-char *pycpdf_getPageLabelPrefix(int n) { return cpdf_getPageLabelPrefix(n); }
+char* pycpdf_getPageLabelPrefix(int n) {
+  return cpdf_getPageLabelPrefix(n);
+}
 
-int pycpdf_getPageLabelOffset(int n) { return cpdf_getPageLabelOffset(n); }
+int pycpdf_getPageLabelOffset(int n) {
+  return cpdf_getPageLabelOffset(n);
+}
 
-int pycpdf_getPageLabelRange(int n) { return cpdf_getPageLabelRange(n); }
+int pycpdf_getPageLabelRange(int n) {
+  return cpdf_getPageLabelRange(n);
+}
+
 
 void pycpdf_endGetPageLabels(void) {
   cpdf_endGetPageLabels();
   return;
 }
 
-void pycpdf_addPageLabels(int pdf, int style, char *prefix, int offset,
-                          int range, int progress) {
-  cpdf_addPageLabels(pdf, style, prefix, offset, range, progress);
-  return;
+void pycpdf_addPageLabels(int pdf, int style, char *prefix, int offset, int range, int progress) {
+  return cpdf_addPageLabels(pdf, style, prefix, offset, range, progress);
 }
 
 void pycpdf_removePageLabels(int pdf) {
-  cpdf_removePageLabels(pdf);
-  return;
+  return cpdf_removePageLabels(pdf);
 }
 
-char *pycpdf_getPageLabelStringForPage(int pdf, int pagenumber) {
+char* pycpdf_getPageLabelStringForPage(int pdf, int pagenumber) {
   return cpdf_getPageLabelStringForPage(pdf, pagenumber);
 }
 
+
 /* CHAPTER 12. File Attachments */
-void pycpdf_attachFile(char *filename, int pdf) {
-  cpdf_attachFile(filename, pdf);
-  return;
+
+void pycpdf_attachFile(char* filename, int pdf) {
+  return cpdf_attachFile(filename, pdf);
 }
 
-void pycpdf_attachFileToPage(char *filename, int pdf, int pagenumber) {
-  cpdf_attachFileToPage(filename, pdf, pagenumber);
-  return;
+void pycpdf_attachFileToPage(char* filename, int pdf, int pagenumber) {
+  return cpdf_attachFileToPage(filename, pdf, pagenumber);
 }
 
-void pycpdf_attachFileFromMemory(void *data, int len, char *filename, int pdf) {
-  cpdf_attachFileFromMemory(data, len, filename, pdf);
-  return;
+void pycpdf_attachFileFromMemory(void* data, int len, char* filename, int pdf) {
+  return cpdf_attachFileFromMemory(data, len, filename, pdf);
 }
 
-void pycpdf_attachFileToPageFromMemory(void *data, int len, char *filename,
-                                       int pdf, int pagenumber) {
-  cpdf_attachFileToPageFromMemory(data, len, filename, pdf, pagenumber);
-  return;
+void pycpdf_attachFileToPageFromMemory(void* data, int len, char* filename, int pdf, int pagenumber) {
+  return cpdf_attachFileToPageFromMemory(data, len, filename, pdf, pagenumber);
 }
 
 void pycpdf_removeAttachedFiles(int pdf) {
-  cpdf_removeAttachedFiles(pdf);
-  return;
+  return cpdf_removeAttachedFiles(pdf);
 }
 
 void pycpdf_startGetAttachments(int pdf) {
-  cpdf_startGetAttachments(pdf);
-  return;
+  return cpdf_startGetAttachments(pdf);
 }
+
 
 int pycpdf_numberGetAttachments() { return cpdf_numberGetAttachments(); }
 
-char *pycpdf_getAttachmentName(int n) { return cpdf_getAttachmentName(n); }
+char* pycpdf_getAttachmentName(int n) {
+  return cpdf_getAttachmentName(n);
+}
 
-int pycpdf_getAttachmentPage(int n) { return cpdf_getAttachmentPage(n); }
+int pycpdf_getAttachmentPage(int n) {
+  return cpdf_getAttachmentPage(n);
+}
+
 
 void *getAttachmentData;
 
 void *pycpdf_getAttachmentData(int n, int *length) {
-  return cpdf_getAttachmentData(n, length);
+  getAttachmentData = cpdf_getAttachmentData(n, length);
+  return getAttachmentData;
 }
 
 void pycpdf_getAttachmentFree(void) {
