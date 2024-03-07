@@ -207,124 +207,132 @@ void pycpdf_toMemoryFree(void) {
   return;
 }
 
-int pycpdf_isEncrypted(int pdf) { return cpdf_isEncrypted(pdf); }
-
-void pycpdf_toFileEncrypted(int pdf, int method, int *permissions,
-                            int permlength, char *ownerpw, char *userpw,
-                            int linearize, int makeid, char *filename) {
-  cpdf_toFileEncrypted(pdf, method, permissions, permlength, ownerpw, userpw,
-                       linearize, makeid, filename);
-  return;
+int pycpdf_isEncrypted(int pdf) {
+  return cpdf_isEncrypted(pdf);
 }
 
-void pycpdf_toFileEncryptedExt(int pdf, int method, int *permissions,
-                               int permlength, char *ownerpw, char *userpw,
-                               int linearize, int makeid, int preserve_objstm,
-                               int generate_objstm, int compress_objstm,
-                               char *filename) {
-  cpdf_toFileEncryptedExt(pdf, method, permissions, permlength, ownerpw, userpw,
-                          linearize, makeid, preserve_objstm, generate_objstm,
-                          compress_objstm, filename);
-  return;
+void pycpdf_toFileEncrypted(int pdf, int method, int *permissions, int permlength, char *ownerpw, char *userpw, int linearize, int makeid, char *filename) {
+  return cpdf_toFileEncrypted(pdf, method, permissions, permlength, ownerpw, userpw, linearize, makeid, filename);
+}
+
+void pycpdf_toFileEncryptedExt(int pdf, int method, int *permissions, int permlength, char *ownerpw, char *userpw, int linearize, int makeid, int preserve_objstm, int generate_objstm, int compress_objstm, char *filename) {
+  return cpdf_toFileEncryptedExt(pdf, method, permissions, permlength, ownerpw, userpw, linearize, makeid, preserve_objstm, generate_objstm, compress_objstm, filename);
 }
 
 void pycpdf_decryptPdf(int pdf, char *userpw) {
-  cpdf_decryptPdf(pdf, userpw);
-  return;
+  return cpdf_decryptPdf(pdf, userpw);
 }
 
 void pycpdf_decryptPdfOwner(int pdf, char *ownerpw) {
-  cpdf_decryptPdfOwner(pdf, ownerpw);
-  return;
+  return cpdf_decryptPdfOwner(pdf, ownerpw);
 }
 
 int pycpdf_hasPermission(int pdf, int perm) {
   return cpdf_hasPermission(pdf, perm);
 }
 
-int pycpdf_encryptionKind(int pdf) { return cpdf_encryptionKind(pdf); }
+int pycpdf_encryptionKind(int pdf) {
+  return cpdf_encryptionKind(pdf);
+}
 
 int pycpdf_mergeSimple(int *pdfs, int len) {
   return cpdf_mergeSimple(pdfs, len);
 }
 
-int pycpdf_merge(int *pdfs, int len, int retain_numbering,
-                 int remove_duplicate_fonts) {
+int pycpdf_merge(int *pdfs, int len, int retain_numbering, int remove_duplicate_fonts) {
   return cpdf_merge(pdfs, len, retain_numbering, remove_duplicate_fonts);
 }
 
-int pycpdf_mergeSame(int *pdfs, int len, int retain_numbering,
-                     int remove_duplicate_fonts, int *ranges) {
-  return cpdf_mergeSame(pdfs, len, retain_numbering, remove_duplicate_fonts,
-                        ranges);
+int pycpdf_mergeSame(int *pdfs, int len, int retain_numbering, int remove_duplicate_fonts, int *ranges) {
+  return cpdf_mergeSame(pdfs, len, retain_numbering, remove_duplicate_fonts, ranges);
 }
 
-int pycpdf_selectPages(int pdf, int r) { return cpdf_selectPages(pdf, r); }
+int pycpdf_selectPages(int pdf, int r) {
+  return cpdf_selectPages(pdf, r);
+}
+
 
 /* CHAPTER 3. Pages */
 
 void pycpdf_scalePages(int pdf, int r, double sx, double sy) {
-  cpdf_scalePages(pdf, r, sx, sy);
+  return cpdf_scalePages(pdf, r, sx, sy);
 }
 
-void pycpdf_scaleToFit(int pdf, int r, double sx, double sy,
-                       double scale_to_fit_scale) {
-  cpdf_scaleToFit(pdf, r, sx, sy, scale_to_fit_scale);
+void pycpdf_scaleToFit(int pdf, int r, double sx, double sy, double scale_to_fit_scale) {
+  return cpdf_scaleToFit(pdf, r, sx, sy, scale_to_fit_scale);
 }
 
-void pycpdf_scaleToFitPaper(int pdf, int r, int papersize,
-                            double scale_to_fit_scale) {
-  cpdf_scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale);
+void pycpdf_scaleToFitPaper(int pdf, int r, int papersize, double scale_to_fit_scale) {
+  return cpdf_scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale);
 }
 
-void pycpdf_scaleContents(int pdf, int r, int pos, double p1, double p2,
-                          double scale) {
+
+void pycpdf_scaleContents(int pdf, int r, int pos, double p1, double p2, double scale) {
   struct cpdf_position p = {
       .cpdf_anchor = pos, .cpdf_coord1 = p1, .cpdf_coord2 = p2};
   cpdf_scaleContents(pdf, r, p, scale);
 }
 
 void pycpdf_shiftContents(int pdf, int r, double dx, double dy) {
-  cpdf_shiftContents(pdf, r, dx, dy);
+  return cpdf_shiftContents(pdf, r, dx, dy);
 }
 
 void pycpdf_rotate(int pdf, int r, int rotation) {
-  cpdf_rotate(pdf, r, rotation);
+  return cpdf_rotate(pdf, r, rotation);
 }
 
 void pycpdf_rotateBy(int pdf, int r, int rotation) {
-  cpdf_rotateBy(pdf, r, rotation);
+  return cpdf_rotateBy(pdf, r, rotation);
 }
 
 void pycpdf_rotateContents(int pdf, int r, double rotation) {
-  cpdf_rotateContents(pdf, r, rotation);
+  return cpdf_rotateContents(pdf, r, rotation);
 }
 
-void pycpdf_upright(int pdf, int r) { cpdf_upright(pdf, r); }
+void pycpdf_upright(int pdf, int r) {
+  return cpdf_upright(pdf, r);
+}
 
-void pycpdf_hFlip(int pdf, int r) { cpdf_hFlip(pdf, r); }
+void pycpdf_hFlip(int pdf, int r) {
+  return cpdf_hFlip(pdf, r);
+}
 
-void pycpdf_vFlip(int pdf, int r) { cpdf_vFlip(pdf, r); }
+void pycpdf_vFlip(int pdf, int r) {
+  return cpdf_vFlip(pdf, r);
+}
 
 void pycpdf_crop(int pdf, int r, double x, double y, double w, double h) {
-  cpdf_crop(pdf, r, x, y, w, h);
+  return cpdf_crop(pdf, r, x, y, w, h);
 }
 
-void pycpdf_removeCrop(int pdf, int r) { cpdf_removeCrop(pdf, r); }
+void pycpdf_removeCrop(int pdf, int r) {
+  return cpdf_removeCrop(pdf, r);
+}
 
-void pycpdf_removeTrim(int pdf, int r) { cpdf_removeTrim(pdf, r); }
+void pycpdf_removeTrim(int pdf, int r) {
+  return cpdf_removeTrim(pdf, r);
+}
 
-void pycpdf_removeArt(int pdf, int r) { cpdf_removeArt(pdf, r); }
+void pycpdf_removeArt(int pdf, int r) {
+  return cpdf_removeArt(pdf, r);
+}
 
-void pycpdf_removeBleed(int pdf, int r) { cpdf_removeBleed(pdf, r); }
+void pycpdf_removeBleed(int pdf, int r) {
+  return cpdf_removeBleed(pdf, r);
+}
 
-void pycpdf_trimMarks(int pdf, int r) { cpdf_trimMarks(pdf, r); }
+void pycpdf_trimMarks(int pdf, int r) {
+  return cpdf_trimMarks(pdf, r);
+}
 
-void pycpdf_showBoxes(int pdf, int r) { cpdf_showBoxes(pdf, r); }
+void pycpdf_showBoxes(int pdf, int r) {
+  return cpdf_showBoxes(pdf, r);
+}
 
 void pycpdf_hardBox(int pdf, int r, char *boxname) {
-  cpdf_hardBox(pdf, r, boxname);
+  return cpdf_hardBox(pdf, r, boxname);
 }
+
 
 /* CHAPTER 4. Encryption */
 
@@ -333,19 +341,17 @@ void pycpdf_hardBox(int pdf, int r, char *boxname) {
 /* CHAPTER 5. Compression */
 
 void pycpdf_compress(int pdf) {
-  cpdf_compress(pdf);
-  return;
+  return cpdf_compress(pdf);
 }
 
 void pycpdf_decompress(int pdf) {
-  cpdf_decompress(pdf);
-  return;
+  return cpdf_decompress(pdf);
 }
 
 void pycpdf_squeezeInMemory(int pdf) {
-  cpdf_squeezeInMemory(pdf);
-  return;
+  return cpdf_squeezeInMemory(pdf);
 }
+
 
 /* CHAPTER 6. Bookmarks */
 
