@@ -163,59 +163,27 @@ void pycpdf_scaleContents(int pdf, int r, int pos, double p1, double p2, double 
 
 /* CHAPTER 6. Bookmarks */
 
-void pycpdf_startGetBookmarkInfo(int pdf) {
-  cpdf_startGetBookmarkInfo(pdf);
-  return;
-}
+/* __AUTO void startGetBookmarkInfo(int pdf) */
 
 int pycpdf_numberBookmarks() { return cpdf_numberBookmarks(); }
 
-int pycpdf_getBookmarkLevel(int n) { return cpdf_getBookmarkLevel(n); }
+/* __AUTO int getBookmarkLevel(int n) */
+/* __AUTO int getBookmarkPage(int pdf, int page) */
+/* __AUTO char* getBookmarkText(int n) */
+/* __AUTO int getBookmarkOpenStatus(int n) */
 
-int pycpdf_getBookmarkPage(int pdf, int page) {
-  return cpdf_getBookmarkPage(pdf, page);
-}
-
-char *pycpdf_getBookmarkText(int n) { return cpdf_getBookmarkText(n); }
-
-int pycpdf_getBookmarkOpenStatus(int n) {
-  return cpdf_getBookmarkOpenStatus(n);
-}
-
+/* FIXME infinite loop in auto due to (). Can we replace all (void) with () then that fixes void too? */
 void pycpdf_endGetBookmarkInfo() {
   cpdf_endGetBookmarkInfo();
   return;
 }
 
-void pycpdf_startSetBookmarkInfo(int n) {
-  cpdf_startSetBookmarkInfo(n);
-  return;
-}
-
-void pycpdf_setBookmarkLevel(int n, int level) {
-  cpdf_setBookmarkLevel(n, level);
-  return;
-}
-
-void pycpdf_setBookmarkPage(int pdf, int n, int targetpage) {
-  cpdf_setBookmarkPage(pdf, n, targetpage);
-  return;
-}
-
-void pycpdf_setBookmarkOpenStatus(int n, int status) {
-  cpdf_setBookmarkOpenStatus(n, status);
-  return;
-}
-
-void pycpdf_setBookmarkText(int n, char *text) {
-  cpdf_setBookmarkText(n, text);
-  return;
-}
-
-void pycpdf_endSetBookmarkInfo(int pdf) {
-  cpdf_endSetBookmarkInfo(pdf);
-  return;
-}
+/* __AUTO void startSetBookmarkInfo(int n) */
+/* __AUTO void setBookmarkLevel(int n, int level) */
+/* __AUTO void setBookmarkPage(int pdf, int n, int targetpage) */
+/* __AUTO void setBookmarkOpenStatus(int n, int status) */
+/* __AUTO void setBookmarkText(int n, char *text) */
+/* __AUTO void endSetBookmarkInfo(int pdf) */
 
 void *getBookmarksJSONData;
 
@@ -229,16 +197,8 @@ void pycpdf_getBookmarksJSONFree(void) {
   return;
 }
 
-void pycpdf_setBookmarksJSON(int pdf, void *data, int length) {
-  cpdf_setBookmarksJSON(pdf, data, length);
-  return;
-}
-
-void pycpdf_tableOfContents(int pdf, int font, double fontsize, char *title,
-                            int bookmark) {
-  cpdf_tableOfContents(pdf, font, fontsize, title, bookmark);
-  return;
-}
+/* __AUTO void setBookmarksJSON(int pdf, void* data, int length) */
+/* __AUTO void tableOfContents(int pdf, int font, double fontsize, char* title, int bookmark) */
 
 /* CHAPTER 7. Presentations */
 
@@ -521,62 +481,31 @@ void pycpdf_endGetAttachments() {
 }
 
 /* CHAPTER 13. Images. */
-int pycpdf_startGetImageResolution(int pdf, double min_required_resolution) {
-  return cpdf_startGetImageResolution(pdf, min_required_resolution);
-}
 
-int pycpdf_getImageResolutionPageNumber(int n) {
-  return cpdf_getImageResolutionPageNumber(n);
-}
-
-char *pycpdf_getImageResolutionImageName(int n) {
-  return cpdf_getImageResolutionImageName(n);
-}
-
-int pycpdf_getImageResolutionXPixels(int n) {
-  return cpdf_getImageResolutionXPixels(n);
-}
-
-int pycpdf_getImageResolutionYPixels(int n) {
-  return cpdf_getImageResolutionYPixels(n);
-}
-
-double pycpdf_getImageResolutionXRes(int n) {
-  return cpdf_getImageResolutionXRes(n);
-}
-
-double pycpdf_getImageResolutionYRes(int n) {
-  return cpdf_getImageResolutionYRes(n);
-}
+/* __AUTO int startGetImageResolution(int pdf, double min_required_resolution) */
+/* __AUTO int getImageResolutionPageNumber(int n) */
+/* __AUTO char* getImageResolutionImageName(int n) */
+/* __AUTO int getImageResolutionXPixels(int n) */
+/* __AUTO int getImageResolutionYPixels(int n) */
+/* __AUTO double getImageResolutionXRes(int n) */
+/* __AUTO double getImageResolutionYRes(int n) */
 
 void pycpdf_endGetImageResolution(void) { return cpdf_endGetImageResolution(); }
 
 /* CHAPTER 14. Fonts */
-void pycpdf_removeFonts(int pdf) {
-  cpdf_removeFonts(pdf);
-  return;
+
+/* __AUTO void removeFonts(int pdf) */
+/* __AUTO void copyFont(int pdf, int pdf2, int range, int pagenumber, char *fontname) */
+/* __AUTO void startGetFontInfo(int pdf) */
+
+int pycpdf_numberFonts(void) {
+  return cpdf_numberFonts();
 }
 
-void pycpdf_copyFont(int pdf, int pdf2, int range, int pagenumber,
-                     char *fontname) {
-  cpdf_copyFont(pdf, pdf2, range, pagenumber, fontname);
-  return;
-}
-
-void pycpdf_startGetFontInfo(int pdf) {
-  cpdf_startGetFontInfo(pdf);
-  return;
-}
-
-int pycpdf_numberFonts(void) { return cpdf_numberFonts(); }
-
-int pycpdf_getFontPage(int n) { return cpdf_getFontPage(n); }
-
-char *pycpdf_getFontName(int n) { return cpdf_getFontName(n); }
-
-char *pycpdf_getFontType(int n) { return cpdf_getFontType(n); }
-
-char *pycpdf_getFontEncoding(int n) { return cpdf_getFontEncoding(n); }
+/* __AUTO int getFontPage(int n) */
+/* __AUTO char* getFontName(int n) */
+/* __AUTO char* getFontType(int n) */
+/* __AUTO char* getFontEncoding(int n) */
 
 void pycpdf_endGetFontInfo(void) {
   cpdf_endGetFontInfo();
@@ -585,12 +514,7 @@ void pycpdf_endGetFontInfo(void) {
 
 /* CHAPTER 15. PDF and JSON */
 
-void pycpdf_outputJSON(char *filename, int parse_content, int no_stream_data,
-                       int decompress_streams, int pdf) {
-  cpdf_outputJSON(filename, parse_content, no_stream_data, decompress_streams,
-                  pdf);
-  return;
-}
+/* __AUTO void outputJSON(char* filename, int parse_content, int no_stream_data, int decompress_streams, int pdf) */
 
 void *outputJSONData;
 
@@ -606,37 +530,22 @@ void pycpdf_outputJSONMemoryFree(void) {
   return;
 }
 
-int pycpdf_fromJSON(char *filename) { return cpdf_fromJSON(filename); }
-
-int pycpdf_fromJSONMemory(void *data, int len) {
-  return cpdf_fromJSONMemory(data, len);
-}
+/* __AUTO int fromJSON(char *filename) */
+/* __AUTO int fromJSONMemory(void *data, int len) */
 
 /* CHAPTER 16. Optional Content Groups */
 
-int pycpdf_startGetOCGList(int pdf) { return cpdf_startGetOCGList(pdf); }
+/* __AUTO int startGetOCGList(int pdf) */
+/* __AUTO char* OCGListEntry(int i) */
 
-char *pycpdf_OCGListEntry(int i) { return cpdf_OCGListEntry(i); }
-
-void pycpdf_endGetOCGList() {
+void pycpdf_endGetOCGList(void) {
   cpdf_endGetOCGList();
   return;
 }
 
-void pycpdf_OCGCoalesce(int pdf) {
-  cpdf_OCGCoalesce(pdf);
-  return;
-}
-
-void pycpdf_OCGRename(int pdf, char *n_from, char *n_to) {
-  cpdf_OCGRename(pdf, n_from, n_to);
-  return;
-}
-
-void pycpdf_OCGOrderAll(int pdf) {
-  cpdf_OCGOrderAll(pdf);
-  return;
-}
+/* __AUTO void OCGCoalesce(int pdf) */
+/* __AUTO void OCGRename(int pdf, char* n_from, char* n_to) */
+/* __AUTO void OCGOrderAll(int pdf) */
 
 /* CHAPTER 17. Creating New PDFs */
 
