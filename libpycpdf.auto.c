@@ -15,6 +15,9 @@ int pycpdf_startup(char **argv) {
 /* __AUTO char* version() */
 /* __AUTO void setFast() */
 /* __AUTO void setSlow() */
+/* __AUTO void embedStd14(int embed) */
+/* __AUTO void embedStd14Dir(char* d) */
+/* __AUTO void JSONUTF8(int utf8) */
 
 int pycpdf_lastError(void) {
   return cpdf_lastError;
@@ -116,6 +119,7 @@ void pycpdf_scaleContents(int pdf, int r, int pos, double p1, double p2, double 
 }
 
 /* __AUTO void shiftContents(int pdf, int r, double dx, double dy) */
+/* __AUTO void shiftBoxes(int pdf, int r, double dx, double dy) */
 /* __AUTO void rotate(int pdf, int r, int rotation) */
 /* __AUTO void rotateBy(int pdf, int r, int rotation) */
 /* __AUTO void rotateContents(int pdf, int r, double rotation) */

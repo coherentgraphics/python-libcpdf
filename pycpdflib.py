@@ -265,7 +265,6 @@ def setFast():
     libc.pycpdf_setFast()
     checkerror()
 
-
 def setSlow():
     """ Set slow mode. Some operations have a fast mode. The default is 'slow'
     mode, which works even on old-fashioned files. For more details, see
@@ -273,6 +272,20 @@ def setSlow():
     libc.pycpdf_setSlow()
     checkerror()
 
+def embedStd14(embed):
+    """ FIXME """
+    libc.pycpdf_embedStd14(embed)
+    checkerror()
+
+def embedStd14Dir(d):
+    """ FIXME """
+    libc.pycpdf_embedStd14Dir(str.encode(d))
+    checkerror()
+
+def JSONUTF8(utf8):
+    """ FIXME """
+    libc.pycpdf_JSONUTF8(utf8)
+    checkerror()
 
 def clearError():
     """ Clear the current error state. """
@@ -831,6 +844,12 @@ def shiftContents(pdf, r, dx, dy):
     deleteRange(r)
     checkerror()
 
+def shiftBoxes(pdf, r, dx, dy):
+    """Shift the pages boxes in the range by (dx, dy)."""
+    r = range_of_list(r)
+    libc.pycpdf_shiftBoxes(pdf.pdf, r, dx, dy)
+    deleteRange(r)
+    checkerror()
 
 def rotate(pdf, r, rotation):
     """Change the viewing rotation of the pages in the range to an

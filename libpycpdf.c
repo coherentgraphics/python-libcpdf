@@ -24,6 +24,18 @@ void pycpdf_setSlow() {
   return cpdf_setSlow();
 }
 
+void pycpdf_embedStd14(int embed) {
+  return cpdf_embedStd14(embed);
+}
+
+void pycpdf_embedStd14Dir(char* d) {
+  return cpdf_embedStd14Dir(d);
+}
+
+void pycpdf_JSONUTF8(int utf8) {
+  return cpdf_JSONUTF8(utf8);
+}
+
 
 int pycpdf_lastError(void) {
   return cpdf_lastError;
@@ -276,6 +288,10 @@ void pycpdf_scaleContents(int pdf, int r, int pos, double p1, double p2, double 
 
 void pycpdf_shiftContents(int pdf, int r, double dx, double dy) {
   return cpdf_shiftContents(pdf, r, dx, dy);
+}
+
+void pycpdf_shiftBoxes(int pdf, int r, double dx, double dy) {
+  return cpdf_shiftBoxes(pdf, r, dx, dy);
 }
 
 void pycpdf_rotate(int pdf, int r, int rotation) {

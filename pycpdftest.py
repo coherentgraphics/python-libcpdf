@@ -46,6 +46,21 @@ def chapter0():
         pycpdflib.setSlow()
     except:
         prerr()
+    print('---cpdf_embedStd14()')
+    try:
+        pycpdflib.embedStd14(True)
+    except:
+        prerr()
+    print('---cpdf_embedStd14Dir()')
+    try:
+        pycpdflib.embedStd14Dir('fonts')
+    except:
+        prerr()
+    print('---cpdf_JSONUTF8()')
+    try:
+        pycpdflib.JSONUTF8(True)
+    except:
+        prerr()
     print('---cpdf_clearError()')
     try:
         pycpdflib.clearError()
@@ -483,6 +498,16 @@ def chapter3():
     try:
         pycpdflib.toFile(
             pagespdf5, 'testoutputs/03shiftcontents.pdf', False, False)
+    except:
+        prerr()
+    print('---cpdf_shiftBoxes()')
+    try:
+        pycpdflib.shiftBoxes(pagespdf5, r, 100, 100)
+    except:
+        prerr()
+    try:
+        pycpdflib.toFile(
+            pagespdf5, 'testoutputs/03shiftboxes.pdf', False, False)
     except:
         prerr()
     print('---cpdf_rotate()')
