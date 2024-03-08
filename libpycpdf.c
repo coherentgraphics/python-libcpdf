@@ -570,6 +570,14 @@ int pycpdf_isLinearized(char *filename) {
   return cpdf_isLinearized(filename);
 }
 
+int pycpdf_hasObjectStreams(int pdf) {
+  return cpdf_hasObjectStreams(pdf);
+}
+
+int pycpdf_hasAcroForm(int pdf) {
+  return cpdf_hasAcroForm(pdf);
+}
+
 int pycpdf_getVersion(int pdf) {
   return cpdf_getVersion(pdf);
 }
@@ -720,6 +728,10 @@ int pycpdf_getPageRotation(int pdf, int pagenumber) {
 
 int pycpdf_hasBox(int pdf, int pagenumber, char *box) {
   return cpdf_hasBox(pdf, pagenumber, box);
+}
+
+int pycpdf_numAnnots(int pdf, int pagenumber) {
+  return cpdf_numAnnots(pdf, pagenumber);
 }
 
 void pycpdf_getMediaBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy) {

@@ -1339,6 +1339,17 @@ def isLinearized(filename):
     checkerror()
     return r
 
+def hasAcroForm(pdf):
+    """ FIXME """
+    r = libc.pycpdf_hasAcroForm(pdf.pdf)
+    checkerror()
+    return r
+
+def hasObjectStreams(pdf):
+    """ FIXME """
+    r = libc.pycpdf_hasObjectStreams(pdf.pdf)
+    checkerror()
+    return r
 
 def getVersion(pdf):
     """Return the minor version number of a document."""
@@ -1631,6 +1642,11 @@ def hasBox(pdf, pagenumber, boxname):
     checkerror()
     return r
 
+def numAnnots(pdf, pagenumber):
+    """FIXME"""
+    r = libc.pycpdf_numAnnots(pdf.pdf, pagenumber)
+    checkerror()
+    return r
 
 def getMediaBox(pdf, pagenumber):
     """Get a mediabox box given the document, page range, min x, max x,

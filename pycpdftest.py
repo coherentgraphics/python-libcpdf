@@ -265,6 +265,20 @@ def chapter1():
     except:
         fatal_prerr()
     print(f'islinearized:{int(linearized)}')
+    print('---cpdf_hasObjectStreams()')
+    try:
+        pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+        hasobjectstreams = pycpdflib.hasObjectStreams(pdf)
+    except:
+        fatal_prerr()
+    print(f'hasObjectStreams:{int(hasobjectstreams)}')
+    print('---cpdf_hasAcroForm()')
+    try:
+        pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+        hasacroform = pycpdflib.hasAcroForm(pdf)
+    except:
+        fatal_prerr()
+    print(f'hasAcroForm:{int(hasacroform)}')
     print('---cpdf_toFileEncrypted()')
     try:
         pdf5 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
@@ -1213,6 +1227,12 @@ def chapter11():
     except:
         fatal_prerr()
     print(f'hasbox: {int(hasBox)}')
+    print('---cpdf_numAnnots()')
+    try:
+        numAnnots = pycpdflib.numAnnots(pdf, 1)
+        print(f'numAnnots: {numAnnots}')
+    except:
+        fatal_prerr()
     print('---cpdf_getMediaBox()')
     try:
         mediaBox = pycpdflib.getMediaBox(pdf, 1)
@@ -1675,9 +1695,11 @@ def chapter17():
     except:
         prerr()
 
-
 def chapter18():
-    print('***** CHAPTER 18. Miscellaneous')
+    print('***** CHAPTER 18. Drawing on PDFs')
+
+def chapter19():
+    print('***** CHAPTER 19. Miscellaneous')
     try:
         misc = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     except:
@@ -1917,3 +1939,4 @@ chapter15()
 chapter16()
 chapter17()
 chapter18()
+chapter19()

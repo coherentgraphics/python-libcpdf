@@ -252,6 +252,8 @@ void pycpdf_annotationsJSONFree(void) {
 /* CHAPTER 11. Document Information and Metadata */
 
 /* __AUTO int isLinearized(char *filename) */
+/* __AUTO int hasObjectStreams(int pdf) */
+/* __AUTO int hasAcroForm(int pdf) */
 /* __AUTO int getVersion(int pdf) */
 /* __AUTO int getMajorVersion(int pdf) */
 /* __AUTO char* getTitle(int pdf) */
@@ -290,6 +292,7 @@ void pycpdf_annotationsJSONFree(void) {
 /* __AUTO char* dateStringOfComponents(int year, int month, int day, int hour, int minute, int second, int hour_offset, int minute_offset) */
 /* __AUTO int getPageRotation(int pdf, int pagenumber) */
 /* __AUTO int hasBox(int pdf, int pagenumber, char *box) */
+/* __AUTO int numAnnots(int pdf, int pagenumber) */
 /* __AUTO void getMediaBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy) */
 /* __AUTO void getCropBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy) */
 /* __AUTO void getTrimBox(int pdf, int pagenumber, double *minx, double *maxx, double *miny, double *maxy) */
