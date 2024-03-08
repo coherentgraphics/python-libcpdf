@@ -55,9 +55,13 @@ let mkauto l =
   let function_name, l = spliton '(' l in
   let param_types_and_names = getmany l in
   let types, names = really_drop_evens param_types_and_names, drop_odds param_types_and_names in
-  let cparams = implode (rev (tl (tl (rev (explode (fold_left ( ^ ) "" (map2 (fun t n -> t ^ " " ^ n ^ ", ") types names))))))) in
+  (*Printf.printf "%i types, %i names\n" (length types) (length names);*)
+  let cparams =
+    if length types > length names then "" else
+      implode (tl (rev (tl (tl (rev (explode (fold_left ( ^ ) "" (map2 (fun t n -> t ^ " " ^ n ^ ", ") types names))))))))
+  in
   let trim_star s = match explode s with '*'::t -> implode t | _ -> s in
-  Printf.sprintf "%s pycpdf_%s%s) {\n  return cpdf_%s(%s);\n}\n"
+  Printf.sprintf "%s pycpdf_%s(%s) {\n  return cpdf_%s(%s);\n}\n"
     type_name function_name cparams function_name
     (fold_left (fun a b -> if a = "" then b else a ^ ", " ^ b) "" (map trim_star (drop_odds param_types_and_names)))
 

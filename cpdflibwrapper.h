@@ -930,15 +930,15 @@ int cpdf_isLinearized(const char[]);
 
 int cpdf_hasObjectStreams(int);
 
-char* cpdf_id1(int);
+char *cpdf_id1(int);
 
-char* cpdf_id2(int);
+char *cpdf_id2(int);
 
 int cpdf_hasAcroForm(int);
 
 int cpdf_startGetSubformats(int);
 
-char* cpdf_getSubformat(int);
+char *cpdf_getSubformat(int);
 
 void cpdf_endGetSubformats(void);
 

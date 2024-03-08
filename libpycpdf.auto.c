@@ -12,19 +12,13 @@ int pycpdf_startup(char **argv) {
   return 0;
 }
 
-char *pycpdf_version(void) { return cpdf_version(); }
+/* __AUTO char* version() */
+/* __AUTO void setFast() */
+/* __AUTO void setSlow() */
 
-void pycpdf_setFast(void) {
-  cpdf_setFast();
-  return;
+int pycpdf_lastError(void) {
+  return cpdf_lastError;
 }
-
-void pycpdf_setSlow(void) {
-  cpdf_setSlow();
-  return;
-}
-
-int pycpdf_lastError(void) { return cpdf_lastError; }
 
 char *pycpdf_lastErrorString(void) {
   // printf("cpdf_lastErrorString is %s\n", cpdf_lastErrorString);
@@ -40,10 +34,7 @@ void pycpdf_clearError(void) {
   return;
 }
 
-void pycpdf_onExit(void) {
-  cpdf_onExit();
-  return;
-}
+/* __AUTO void onExit() */
 
 /* CHAPTER 1. Basics */
 
@@ -59,25 +50,14 @@ void pycpdf_onExit(void) {
 /* __AUTO double cmOfPt(double i) */
 /* __AUTO double mmOfPt(double i) */
 /* __AUTO double inOfPt(double i) */
-
-void pycpdf_startEnumeratePDFs(void) {
-  return cpdf_startEnumeratePDFs();
-}
-
+/* __AUTO void startEnumeratePDFs() */
 /* __AUTO int enumeratePDFsKey(int n) */
 /* __AUTO char* enumeratePDFsInfo(int n) */
-
-void pycpdf_endEnumeratePDFs(void) {
-  cpdf_endEnumeratePDFs();
-  return;
-}
-
+/* __AUTO void endEnumeratePDFs() */
 /* __AUTO int parsePagespec(int pdf, char *pagespec) */
 /* __AUTO int validatePagespec(char *pagespec) */
 /* __AUTO char* stringOfPagespec(int pdf, int range) */
-
-int pycpdf_blankRange(void) { return cpdf_blankRange(); }
-
+/* __AUTO int blankRange() */
 /* __AUTO void deleteRange(int r) */
 
 int pycpdf_pageRange(int f, int t) { return cpdf_range(f, t); }
@@ -164,20 +144,12 @@ void pycpdf_scaleContents(int pdf, int r, int pos, double p1, double p2, double 
 /* CHAPTER 6. Bookmarks */
 
 /* __AUTO void startGetBookmarkInfo(int pdf) */
-
-int pycpdf_numberBookmarks() { return cpdf_numberBookmarks(); }
-
+/* __AUTO int numberBookmarks() */
 /* __AUTO int getBookmarkLevel(int n) */
 /* __AUTO int getBookmarkPage(int pdf, int page) */
 /* __AUTO char* getBookmarkText(int n) */
 /* __AUTO int getBookmarkOpenStatus(int n) */
-
-/* FIXME infinite loop in auto due to (). Can we replace all (void) with () then that fixes void too? */
-void pycpdf_endGetBookmarkInfo() {
-  cpdf_endGetBookmarkInfo();
-  return;
-}
-
+/* __AUTO void endGetBookmarkInfo() */
 /* __AUTO void startSetBookmarkInfo(int n) */
 /* __AUTO void setBookmarkLevel(int n, int level) */
 /* __AUTO void setBookmarkPage(int pdf, int n, int targetpage) */
@@ -366,12 +338,7 @@ void pycpdf_getMetadataFree(void) {
 /* __AUTO char* getPageLabelPrefix(int n) */
 /* __AUTO int getPageLabelOffset(int n) */
 /* __AUTO int getPageLabelRange(int n) */
-
-void pycpdf_endGetPageLabels(void) {
-  cpdf_endGetPageLabels();
-  return;
-}
-
+/* __AUTO void endGetPageLabels() */
 /* __AUTO void addPageLabels(int pdf, int style, char *prefix, int offset, int range, int progress) */
 /* __AUTO void removePageLabels(int pdf) */
 /* __AUTO char* getPageLabelStringForPage(int pdf, int pagenumber) */
@@ -384,9 +351,7 @@ void pycpdf_endGetPageLabels(void) {
 /* __AUTO void attachFileToPageFromMemory(void* data, int len, char* filename, int pdf, int pagenumber) */
 /* __AUTO void removeAttachedFiles(int pdf) */
 /* __AUTO void startGetAttachments(int pdf) */
-
-int pycpdf_numberGetAttachments() { return cpdf_numberGetAttachments(); }
-
+/* __AUTO int numberGetAttachments() */
 /* __AUTO char* getAttachmentName(int n) */
 /* __AUTO int getAttachmentPage(int n) */
 
@@ -402,10 +367,7 @@ void pycpdf_getAttachmentFree(void) {
   return;
 }
 
-void pycpdf_endGetAttachments() {
-  cpdf_endGetAttachments();
-  return;
-}
+/* __AUTO void endGetAttachments() */
 
 /* CHAPTER 13. Images. */
 
@@ -416,28 +378,19 @@ void pycpdf_endGetAttachments() {
 /* __AUTO int getImageResolutionYPixels(int n) */
 /* __AUTO double getImageResolutionXRes(int n) */
 /* __AUTO double getImageResolutionYRes(int n) */
-
-void pycpdf_endGetImageResolution(void) { return cpdf_endGetImageResolution(); }
+/* __AUTO void endGetImageResolution() */
 
 /* CHAPTER 14. Fonts */
 
 /* __AUTO void removeFonts(int pdf) */
 /* __AUTO void copyFont(int pdf, int pdf2, int range, int pagenumber, char *fontname) */
 /* __AUTO void startGetFontInfo(int pdf) */
-
-int pycpdf_numberFonts(void) {
-  return cpdf_numberFonts();
-}
-
+/* __AUTO int numberFonts() */
 /* __AUTO int getFontPage(int n) */
 /* __AUTO char* getFontName(int n) */
 /* __AUTO char* getFontType(int n) */
 /* __AUTO char* getFontEncoding(int n) */
-
-void pycpdf_endGetFontInfo(void) {
-  cpdf_endGetFontInfo();
-  return;
-}
+/* __AUTO void endGetFontInfo() */
 
 /* CHAPTER 15. PDF and JSON */
 
@@ -464,12 +417,7 @@ void pycpdf_outputJSONMemoryFree(void) {
 
 /* __AUTO int startGetOCGList(int pdf) */
 /* __AUTO char* OCGListEntry(int i) */
-
-void pycpdf_endGetOCGList(void) {
-  cpdf_endGetOCGList();
-  return;
-}
-
+/* __AUTO void endGetOCGList() */
 /* __AUTO void OCGCoalesce(int pdf) */
 /* __AUTO void OCGRename(int pdf, char* n_from, char* n_to) */
 /* __AUTO void OCGOrderAll(int pdf) */

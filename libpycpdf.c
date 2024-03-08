@@ -12,19 +12,22 @@ int pycpdf_startup(char **argv) {
   return 0;
 }
 
-char *pycpdf_version(void) { return cpdf_version(); }
-
-void pycpdf_setFast(void) {
-  cpdf_setFast();
-  return;
+char* pycpdf_version() {
+  return cpdf_version();
 }
 
-void pycpdf_setSlow(void) {
-  cpdf_setSlow();
-  return;
+void pycpdf_setFast() {
+  return cpdf_setFast();
 }
 
-int pycpdf_lastError(void) { return cpdf_lastError; }
+void pycpdf_setSlow() {
+  return cpdf_setSlow();
+}
+
+
+int pycpdf_lastError(void) {
+  return cpdf_lastError;
+}
 
 char *pycpdf_lastErrorString(void) {
   // printf("cpdf_lastErrorString is %s\n", cpdf_lastErrorString);
@@ -40,10 +43,10 @@ void pycpdf_clearError(void) {
   return;
 }
 
-void pycpdf_onExit(void) {
-  cpdf_onExit();
-  return;
+void pycpdf_onExit() {
+  return cpdf_onExit();
 }
+
 
 /* CHAPTER 1. Basics */
 
@@ -95,8 +98,7 @@ double pycpdf_inOfPt(double i) {
   return cpdf_inOfPt(i);
 }
 
-
-void pycpdf_startEnumeratePDFs(void) {
+void pycpdf_startEnumeratePDFs() {
   return cpdf_startEnumeratePDFs();
 }
 
@@ -108,10 +110,8 @@ char* pycpdf_enumeratePDFsInfo(int n) {
   return cpdf_enumeratePDFsInfo(n);
 }
 
-
-void pycpdf_endEnumeratePDFs(void) {
-  cpdf_endEnumeratePDFs();
-  return;
+void pycpdf_endEnumeratePDFs() {
+  return cpdf_endEnumeratePDFs();
 }
 
 int pycpdf_parsePagespec(int pdf, char *pagespec) {
@@ -126,8 +126,9 @@ char* pycpdf_stringOfPagespec(int pdf, int range) {
   return cpdf_stringOfPagespec(pdf, range);
 }
 
-
-int pycpdf_blankRange(void) { return cpdf_blankRange(); }
+int pycpdf_blankRange() {
+  return cpdf_blankRange();
+}
 
 void pycpdf_deleteRange(int r) {
   return cpdf_deleteRange(r);
@@ -359,8 +360,9 @@ void pycpdf_startGetBookmarkInfo(int pdf) {
   return cpdf_startGetBookmarkInfo(pdf);
 }
 
-
-int pycpdf_numberBookmarks() { return cpdf_numberBookmarks(); }
+int pycpdf_numberBookmarks() {
+  return cpdf_numberBookmarks();
+}
 
 int pycpdf_getBookmarkLevel(int n) {
   return cpdf_getBookmarkLevel(n);
@@ -378,11 +380,8 @@ int pycpdf_getBookmarkOpenStatus(int n) {
   return cpdf_getBookmarkOpenStatus(n);
 }
 
-
-/* FIXME infinite loop in auto due to (). Can we replace all (void) with () then that fixes void too? */
 void pycpdf_endGetBookmarkInfo() {
-  cpdf_endGetBookmarkInfo();
-  return;
+  return cpdf_endGetBookmarkInfo();
 }
 
 void pycpdf_startSetBookmarkInfo(int n) {
@@ -855,10 +854,8 @@ int pycpdf_getPageLabelRange(int n) {
   return cpdf_getPageLabelRange(n);
 }
 
-
-void pycpdf_endGetPageLabels(void) {
-  cpdf_endGetPageLabels();
-  return;
+void pycpdf_endGetPageLabels() {
+  return cpdf_endGetPageLabels();
 }
 
 void pycpdf_addPageLabels(int pdf, int style, char *prefix, int offset, int range, int progress) {
@@ -900,8 +897,9 @@ void pycpdf_startGetAttachments(int pdf) {
   return cpdf_startGetAttachments(pdf);
 }
 
-
-int pycpdf_numberGetAttachments() { return cpdf_numberGetAttachments(); }
+int pycpdf_numberGetAttachments() {
+  return cpdf_numberGetAttachments();
+}
 
 char* pycpdf_getAttachmentName(int n) {
   return cpdf_getAttachmentName(n);
@@ -925,9 +923,9 @@ void pycpdf_getAttachmentFree(void) {
 }
 
 void pycpdf_endGetAttachments() {
-  cpdf_endGetAttachments();
-  return;
+  return cpdf_endGetAttachments();
 }
+
 
 /* CHAPTER 13. Images. */
 
@@ -959,8 +957,10 @@ double pycpdf_getImageResolutionYRes(int n) {
   return cpdf_getImageResolutionYRes(n);
 }
 
+void pycpdf_endGetImageResolution() {
+  return cpdf_endGetImageResolution();
+}
 
-void pycpdf_endGetImageResolution(void) { return cpdf_endGetImageResolution(); }
 
 /* CHAPTER 14. Fonts */
 
@@ -976,8 +976,7 @@ void pycpdf_startGetFontInfo(int pdf) {
   return cpdf_startGetFontInfo(pdf);
 }
 
-
-int pycpdf_numberFonts(void) {
+int pycpdf_numberFonts() {
   return cpdf_numberFonts();
 }
 
@@ -997,11 +996,10 @@ char* pycpdf_getFontEncoding(int n) {
   return cpdf_getFontEncoding(n);
 }
 
-
-void pycpdf_endGetFontInfo(void) {
-  cpdf_endGetFontInfo();
-  return;
+void pycpdf_endGetFontInfo() {
+  return cpdf_endGetFontInfo();
 }
+
 
 /* CHAPTER 15. PDF and JSON */
 
@@ -1043,10 +1041,8 @@ char* pycpdf_OCGListEntry(int i) {
   return cpdf_OCGListEntry(i);
 }
 
-
-void pycpdf_endGetOCGList(void) {
-  cpdf_endGetOCGList();
-  return;
+void pycpdf_endGetOCGList() {
+  return cpdf_endGetOCGList();
 }
 
 void pycpdf_OCGCoalesce(int pdf) {
