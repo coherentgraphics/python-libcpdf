@@ -272,6 +272,20 @@ def chapter1():
     except:
         fatal_prerr()
     print(f'hasObjectStreams:{int(hasobjectstreams)}')
+    print('---cpdf_id1()')
+    try:
+        pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+        id1 = pycpdflib.id1(pdf)
+    except:
+        fatal_prerr()
+    print(f'id1:{id1}')
+    print('---cpdf_id2()')
+    try:
+        pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+        id2 = pycpdflib.id2(pdf)
+    except:
+        fatal_prerr()
+    print(f'id2:{id2}')
     print('---cpdf_hasAcroForm()')
     try:
         pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')

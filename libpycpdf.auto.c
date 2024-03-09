@@ -253,6 +253,8 @@ void pycpdf_annotationsJSONFree(void) {
 
 /* __AUTO int isLinearized(char *filename) */
 /* __AUTO int hasObjectStreams(int pdf) */
+/* __AUTO char* id1(int pdf) */
+/* __AUTO char* id2(int pdf) */ 
 /* __AUTO int hasAcroForm(int pdf) */
 /* __AUTO int getVersion(int pdf) */
 /* __AUTO int getMajorVersion(int pdf) */

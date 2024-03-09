@@ -574,6 +574,14 @@ int pycpdf_hasObjectStreams(int pdf) {
   return cpdf_hasObjectStreams(pdf);
 }
 
+char* pycpdf_id1(int pdf) {
+  return cpdf_id1(pdf);
+}
+
+char* pycpdf_id2(int pdf) {
+  return cpdf_id2(pdf);
+}
+
 int pycpdf_hasAcroForm(int pdf) {
   return cpdf_hasAcroForm(pdf);
 }

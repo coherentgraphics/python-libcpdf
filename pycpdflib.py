@@ -1351,6 +1351,18 @@ def hasObjectStreams(pdf):
     checkerror()
     return r
 
+def id1(pdf):
+    """ FIXME """
+    r = string_at(libc.pycpdf_id1(pdf.pdf)).decode()
+    checkerror()
+    return r
+
+def id2(pdf):
+    """ FIXME """
+    r = string_at(libc.pycpdf_id2(pdf.pdf)).decode()
+    checkerror()
+    return r
+
 def getVersion(pdf):
     """Return the minor version number of a document."""
     r = libc.pycpdf_getVersion(pdf.pdf)
