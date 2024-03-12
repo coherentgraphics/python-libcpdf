@@ -214,6 +214,11 @@ def loadDLL(f):
     libc.pycpdf_id1.restype = POINTER(c_char)
     libc.pycpdf_id2.restype = POINTER(c_char)
     libc.pycpdf_getSubformat.restype = POINTER(c_char)
+    libc.pycpdf_pageInfoJSON.restype = POINTER(c_char)
+    libc.pycpdf_fontsJSON.restype = POINTER(c_char)
+    libc.pycpdf_imagesJSON.restype = POINTER(c_char)
+    libc.pycpdf_imageResolutionJSON.restype = POINTER(c_char)
+    libc.pycpdf_imageResolutionJSON.argtypes = [c_int, POINTER(c_int), c_double]
     LP_c_char = POINTER(c_char)
     LP_LP_c_char = POINTER(LP_c_char)
     argc = len(sys.argv)
@@ -1812,6 +1817,15 @@ def setArtBox(pdf, r, minx, maxx, miny, maxy):
     checkerror()
     return
 
+def pageInfoJSON(pdf):
+    """FIXME"""
+    length = c_int32()
+    data = libc.pycpdf_pageInfoJSON(pdf.pdf, byref(length))
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
+    libc.pycpdf_pageInfoJSONFree()
+    checkerror()
+    return out_data.raw
 
 def setBleedBox(pdf, r, minx, maxx, miny, maxy):
     """Set the bleed box given the document, page range, min x, max x,
@@ -2136,6 +2150,27 @@ def getImageResolution(pdf, min_required_resolution):
     checkerror()
     return l
 
+
+def imagesJSON(pdf):
+    """FIXME"""
+    length = c_int32()
+    data = libc.pycpdf_imagesJSON(pdf.pdf, byref(length))
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
+    libc.pycpdf_imagesJSONFree()
+    checkerror()
+    return out_data.raw
+
+def imageResolutionJSON(pdf, resolution):
+    """FIXME"""
+    length = c_int32()
+    data = libc.pycpdf_imageResolutionJSON(pdf.pdf, byref(length), resolution)
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
+    libc.pycpdf_imageResolutionJSONFree()
+    checkerror()
+    return out_data.raw
+
 # CHAPTER 14. Fonts
 
 
@@ -2155,6 +2190,15 @@ def getFontInfo(pdf):
     checkerror()
     return l
 
+def fontsJSON(pdf):
+    """FIXME"""
+    length = c_int32()
+    data = libc.pycpdf_fontsJSON(pdf.pdf, byref(length))
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
+    libc.pycpdf_fontsJSONFree()
+    checkerror()
+    return out_data.raw
 
 def removeFonts(pdf):
     """Remove all font data from a file."""

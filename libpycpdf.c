@@ -809,6 +809,20 @@ void pycpdf_setBleedBox(int pdf, int range, double minx, double maxx, double min
   return cpdf_setBleedBox(pdf, range, minx, maxx, miny, maxy);
 }
 
+
+
+void *pageInfoJSONData;
+
+void *pycpdf_pageInfoJSON(int pdf, int *length) {
+  pageInfoJSONData = cpdf_pageInfoJSON(pdf, length);
+  return pageInfoJSONData;
+}
+
+void pycpdf_pageInfoJSONFree(void) {
+  free(pageInfoJSONData);
+  return;
+}
+
 void pycpdf_markTrapped(int pdf) {
   return cpdf_markTrapped(pdf);
 }
@@ -1034,6 +1048,30 @@ void pycpdf_endGetImageResolution() {
 }
 
 
+void *imageResolutionJSONData;
+
+void *pycpdf_imageResolutionJSON(int pdf, int *length, float resolution) {
+  imageResolutionJSONData = cpdf_imageResolutionJSON(pdf, length, resolution);
+  return imageResolutionJSONData;
+}
+
+void pycpdf_imageResolutionJSONFree(void) {
+  free(imageResolutionJSONData);
+  return;
+}
+
+void *imagesJSONData;
+
+void *pycpdf_imagesJSON(int pdf, int *length) {
+  imagesJSONData = cpdf_imagesJSON(pdf, length);
+  return imagesJSONData;
+}
+
+void pycpdf_imagesJSONFree(void) {
+  free(imagesJSONData);
+  return;
+}
+
 /* CHAPTER 14. Fonts */
 
 void pycpdf_removeFonts(int pdf) {
@@ -1072,6 +1110,18 @@ void pycpdf_endGetFontInfo() {
   return cpdf_endGetFontInfo();
 }
 
+
+void *fontsJSONData;
+
+void *pycpdf_fontsJSON(int pdf, int *length) {
+  fontsJSONData = cpdf_fontsJSON(pdf, length);
+  return fontsJSONData;
+}
+
+void pycpdf_fontsJSONFree(void) {
+  free(fontsJSONData);
+  return;
+}
 
 /* CHAPTER 15. PDF and JSON */
 

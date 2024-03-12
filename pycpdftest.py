@@ -1164,6 +1164,12 @@ def chapter11():
     except:
         prerr()
     print(f'modificationdateXMP: {modificationDateXMP}')
+    print('---cpdf_pageInfoJSON()')
+    try:
+        pageInfoJSON = pycpdflib.pageInfoJSON(pdf)
+    except:
+        prerr()
+    print(f'Contains {len(pageInfoJSON)} bytes of data')
     print('---cpdf_setTitle()')
     try:
         pycpdflib.setTitle(pdf, 'title')
@@ -1578,6 +1584,18 @@ def chapter13():
     for i in images:
         a, b, c, d, e, f = i
         print(f'IMAGE: {a}, {b}, {c}, {d}, {e:.6f}, {f:.6f}')
+    print('---cpdf_imageResolutionJSON()')
+    try:
+        imageResolutionJSON = pycpdflib.imageResolutionJSON(pdf, 300)
+    except:
+        fatal_prerr()
+    print(f'Contains {len(imageResolutionJSON)} bytes of data')
+    print('---cpdf_imagesJSON()')
+    try:
+        imagesJSON = pycpdflib.imagesJSON(pdf)
+    except:
+        fatal_prerr()
+    print(f'Contains {len(imagesJSON)} bytes of data')
 
 # CHAPTER 14. Fonts
 
@@ -1597,6 +1615,12 @@ def chapter14():
         fatal_prerr()
     a, b, c, d = fonts[0]
     print(f'Page {a}, font {b} has type {c} and encoding {d}')
+    print('---cpdf_fontsJSON()')
+    try:
+        fontsJSON = pycpdflib.fontsJSON(pdf)
+    except:
+        prerr()
+    print(f'Contains {len(fontsJSON)} bytes of data')
     print('---cpdf_removeFonts()')
     try:
         pycpdflib.removeFonts(pdf)
