@@ -142,6 +142,7 @@ def loadDLL(f):
     libc.pycpdf_outputJSONMemory.restype = POINTER(c_uint8)
     libc.pycpdf_annotationsJSON.restype = POINTER(c_uint8)
     libc.pycpdf_getBookmarksJSON.restype = POINTER(c_uint8)
+    libc.pycpdf_compositionJSON.restype = POINTER(c_uint8)
     libc.pycpdf_scalePages.argtypes = [c_int, c_int, c_double, c_double]
     libc.pycpdf_scaleToFit.argtypes =\
         [c_int, c_int, c_double, c_double, c_double]
@@ -2045,6 +2046,16 @@ def getPageLabelStringForPage(pdf, pagenumber):
         pdf.pdf, pagenumber)).decode()
     checkerror()
     return r
+
+def compositionJSON(filesize, pdf):
+    """Get the composition in JSON format."""
+    length = c_int32()
+    data = libc.pycpdf_compositionJSON(filesize, pdf.pdf, byref(length))
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
+    libc.pycpdf_compositionJSONFree()
+    checkerror()
+    return out_data.raw
 
 # CHAPTER 12. File Attachments
 

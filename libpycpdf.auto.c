@@ -358,6 +358,18 @@ void pycpdf_getMetadataFree(void) {
 /* __AUTO void removePageLabels(int pdf) */
 /* __AUTO char* getPageLabelStringForPage(int pdf, int pagenumber) */
 
+void *compositionJSONData;
+
+void *pycpdf_compositionJSON(int filesize, int pdf, int *length) {
+  compositionJSONData = cpdf_compositionJSON(filesize, pdf, length);
+  return compositionJSONData;
+}
+
+void pycpdf_compositionJSONFree(void) {
+  free(compositionJSONData);
+  return;
+}
+
 /* CHAPTER 12. File Attachments */
 
 /* __AUTO void attachFile(char* filename, int pdf) */

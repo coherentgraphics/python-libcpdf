@@ -1498,6 +1498,13 @@ def chapter11():
         pycpdflib.toFile(pdf, 'testoutputs/11pagelabels.pdf', False, False)
     except:
         prerr()
+    print(f'---cpdf_compositionJSON()')
+    try:
+        pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+        data = pycpdflib.compositionJSON(1000000, pdf)
+        print(f'Contains {len(data)} bytes of data')
+    except:
+        fatal_prerr()
 
 # CHAPTER 12. File Attachments
 

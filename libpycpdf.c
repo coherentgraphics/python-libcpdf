@@ -931,6 +931,18 @@ char* pycpdf_getPageLabelStringForPage(int pdf, int pagenumber) {
 }
 
 
+void *compositionJSONData;
+
+void *pycpdf_compositionJSON(int filesize, int pdf, int *length) {
+  compositionJSONData = cpdf_compositionJSON(filesize, pdf, length);
+  return compositionJSONData;
+}
+
+void pycpdf_compositionJSONFree(void) {
+  free(compositionJSONData);
+  return;
+}
+
 /* CHAPTER 12. File Attachments */
 
 void pycpdf_attachFile(char* filename, int pdf) {
