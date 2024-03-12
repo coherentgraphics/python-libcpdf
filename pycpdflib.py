@@ -208,6 +208,10 @@ def loadDLL(f):
     libc.pycpdf_getImageResolutionYRes.restype = c_double
     libc.pycpdf_impose.argtypes = [c_int, c_double, c_double, c_int,
                                    c_int, c_int, c_int, c_int, c_double, c_double, c_double]
+    libc.pycpdf_chopH.argtypes = [c_int, c_int, c_int, c_double]
+    libc.pycpdf_chopV.argtypes = [c_int, c_int, c_int, c_double]
+    libc.pycpdf_id1.restype = POINTER(c_char)
+    libc.pycpdf_id2.restype = POINTER(c_char)
     LP_c_char = POINTER(c_char)
     LP_LP_c_char = POINTER(LP_c_char)
     argc = len(sys.argv)
@@ -1279,6 +1283,26 @@ def impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing, linewidth
                        btt, center, margin, spacing, linewidth)
     checkerror()
 
+def chop(pdf, r, x, y, columns, rtl, btt):
+    """ FIXME """
+    r = range_of_list(r)
+    libc.pycpdf_chop(pdf.pdf, r, x, y, columns, rtl, btt)
+    deleteRange(r)
+    checkerror()
+
+def chopH(pdf, r, columns, y):
+    """ FIXME """
+    r = range_of_list(r)
+    libc.pycpdf_chopH(pdf.pdf, r, columns, y)
+    deleteRange(r)
+    checkerror()
+
+def chopV(pdf, r, columns, x):
+    """ FIXME """
+    r = range_of_list(r)
+    libc.pycpdf_chopV(pdf.pdf, r, columns, x)
+    deleteRange(r)
+    checkerror()
 
 def padBefore(pdf, r):
     """Adds a blank page before each page in the given range."""

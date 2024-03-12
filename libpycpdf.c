@@ -522,6 +522,18 @@ void pycpdf_impose(int pdf, double x, double y, int fit, int columns, int rtl, i
   return cpdf_impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing, linewidth);
 }
 
+void pycpdf_chop(int pdf, int range, int x, int y, int columns, int rtl, int btt) {
+  return cpdf_chop(pdf, range, x, y, columns, rtl, btt);
+}
+
+void pycpdf_chopH(int pdf, int range, int columns, double y) {
+  return cpdf_chopH(pdf, range, columns, y);
+}
+
+void pycpdf_chopV(int pdf, int range, int columns, double x) {
+  return cpdf_chopV(pdf, range, columns, x);
+}
+
 void pycpdf_twoUp(int pdf) {
   return cpdf_twoUp(pdf);
 }

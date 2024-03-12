@@ -228,6 +228,9 @@ void pycpdf_addTextSimple(int pdf, int r, char *text, int pos, double p1,
 /* CHAPTER 9. Multipage facilities */
 
 /* __AUTO void impose(int pdf, double x, double y, int fit, int columns, int rtl, int btt, int center, double margin, double spacing, double linewidth) */
+/* __AUTO void chop(int pdf, int range, int x, int y, int columns, int rtl, int btt) */
+/* __AUTO void chopH(int pdf, int range, int columns, double y) */
+/* __AUTO void chopV(int pdf, int range, int columns, double x) */
 /* __AUTO void twoUp(int pdf) */
 /* __AUTO void twoUpStack(int pdf) */
 /* __AUTO void padBefore(int pdf, int r) */

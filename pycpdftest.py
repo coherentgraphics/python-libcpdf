@@ -272,20 +272,20 @@ def chapter1():
     except:
         fatal_prerr()
     print(f'hasObjectStreams:{int(hasobjectstreams)}')
-    #print('---cpdf_id1()')
-    #try:
-    #    pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
-    #    id1 = pycpdflib.id1(pdf)
-    #except:
-    #    fatal_prerr()
-    #print(f'id1:{id1}')
-    #print('---cpdf_id2()')
-    #try:
-    #    pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
-    #    id2 = pycpdflib.id2(pdf)
-    #except:
-    #    fatal_prerr()
-    #print(f'id2:{id2}')
+    print('---cpdf_id1()')
+    try:
+        pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+        id1 = pycpdflib.id1(pdf)
+    except:
+        fatal_prerr()
+    print(f'id1:{id1}')
+    print('---cpdf_id2()')
+    try:
+        pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+        id2 = pycpdflib.id2(pdf)
+    except:
+        fatal_prerr()
+    print(f'id2:{id2}')
     print('---cpdf_hasAcroForm()')
     try:
         pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
@@ -939,6 +939,21 @@ def chapter9():
     try:
         pycpdflib.impose(mp25, 5.0, 4.0, False, False, False,
                          False, False, 40.0, 20.0, 2.0)
+    except:
+        prerr()
+    print('---cpdf_chop()')
+    try:
+        pycpdflib.chop(mp25, pycpdflib.all(mp25), 2, 3, False, False, False)
+    except:
+        prerr()
+    print('---cpdf_chopH()')
+    try:
+        pycpdflib.chopH(mp25, pycpdflib.all(mp25), False, 200)
+    except:
+        prerr()
+    print('---cpdf_chopV()')
+    try:
+        pycpdflib.chopV(mp25, pycpdflib.all(mp25), True, 300)
     except:
         prerr()
     try:
