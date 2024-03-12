@@ -212,6 +212,7 @@ def loadDLL(f):
     libc.pycpdf_chopV.argtypes = [c_int, c_int, c_int, c_double]
     libc.pycpdf_id1.restype = POINTER(c_char)
     libc.pycpdf_id2.restype = POINTER(c_char)
+    libc.pycpdf_getSubformat.restype = POINTER(c_char)
     LP_c_char = POINTER(c_char)
     LP_LP_c_char = POINTER(LP_c_char)
     argc = len(sys.argv)
@@ -1368,6 +1369,23 @@ def hasAcroForm(pdf):
     r = libc.pycpdf_hasAcroForm(pdf.pdf)
     checkerror()
     return r
+
+def startGetSubformats(pdf):
+    """ FIXME """
+    r = libc.pycpdf_startGetSubformats(pdf.pdf)
+    checkerror()
+    return r
+
+def getSubformat(serial):
+    """ FIXME """
+    r = string_at(libc.pycpdf_getSubformat(serial)).decode()
+    checkerror()
+    return r
+
+def endGetSubformats():
+    """ FIXME """
+    libc.pycpdf_endGetSubformats()
+    checkerror()
 
 def hasObjectStreams(pdf):
     """ FIXME """

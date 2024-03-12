@@ -598,6 +598,18 @@ int pycpdf_hasAcroForm(int pdf) {
   return cpdf_hasAcroForm(pdf);
 }
 
+int pycpdf_startGetSubformats(int pdf) {
+  return cpdf_startGetSubformats(pdf);
+}
+
+char* pycpdf_getSubformat(int s) {
+  return cpdf_getSubformat(s);
+}
+
+void pycpdf_endGetSubformats() {
+  return cpdf_endGetSubformats();
+}
+
 int pycpdf_getVersion(int pdf) {
   return cpdf_getVersion(pdf);
 }
