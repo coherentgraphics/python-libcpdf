@@ -1299,8 +1299,239 @@ int pycpdf_textToPDFPaper(int papersize, int font, double fontsize, char *filena
   return cpdf_textToPDFPaper(papersize, font, fontsize, filename);
 }
 
+int pycpdf_fromPNG(char* filename) {
+  return cpdf_fromPNG(filename);
+}
 
-/* CHAPTER 18. Miscellaneous */
+int pycpdf_fromJPEG(char* filename) {
+  return cpdf_fromJPEG(filename);
+}
+
+
+/* CHAPTER 18. Drawing on PDFs */
+
+void pycpdf_drawBegin() {
+  return cpdf_drawBegin();
+}
+
+void pycpdf_drawEnd(int pdf, int range) {
+  return cpdf_drawEnd(pdf, range);
+}
+
+void pycpdf_drawEndExtended(int pdf, int range, int underneath, int bates, char* filename) {
+  return cpdf_drawEndExtended(pdf, range, underneath, bates, filename);
+}
+
+void pycpdf_drawRect(double x, double y, double w, double h) {
+  return cpdf_drawRect(x, y, w, h);
+}
+
+void pycpdf_drawTo(double x, double y) {
+  return cpdf_drawTo(x, y);
+}
+
+void pycpdf_drawLine(double x, double y) {
+  return cpdf_drawLine(x, y);
+}
+
+void pycpdf_drawBez(double x1, double y1, double x2, double y2, double x3, double y3) {
+  return cpdf_drawBez(x1, y1, x2, y2, x3, y3);
+}
+
+void pycpdf_drawBez23(double x2, double y2, double x3, double y3) {
+  return cpdf_drawBez23(x2, y2, x3, y3);
+}
+
+void pycpdf_drawBez13(double x1, double y1, double x3, double y3) {
+  return cpdf_drawBez13(x1, y1, x3, y3);
+}
+
+void pycpdf_drawCircle(double x, double y, double r) {
+  return cpdf_drawCircle(x, y, r);
+}
+
+void pycpdf_drawFill() {
+  return cpdf_drawFill();
+}
+
+void pycpdf_drawFillEo() {
+  return cpdf_drawFillEo();
+}
+
+void pycpdf_drawStrokeFill() {
+  return cpdf_drawStrokeFill();
+}
+
+void pycpdf_drawStrokeFillEo() {
+  return cpdf_drawStrokeFillEo();
+}
+
+void pycpdf_drawClose() {
+  return cpdf_drawClose();
+}
+
+void pycpdf_drawClip() {
+  return cpdf_drawClip();
+}
+
+void pycpdf_drawClipEo() {
+  return cpdf_drawClipEo();
+}
+
+void pycpdf_drawStrokeColGrey(double g) {
+  return cpdf_drawStrokeColGrey(g);
+}
+
+void pycpdf_drawStrokeColRGB(double r, double g, double b) {
+  return cpdf_drawStrokeColRGB(r, g, b);
+}
+
+void pycpdf_drawStrokeColCYMK(double c, double y, double m, double k) {
+  return cpdf_drawStrokeColCYMK(c, y, m, k);
+}
+
+void pycpdf_drawFillColGrey(double g) {
+  return cpdf_drawFillColGrey(g);
+}
+
+void pycpdf_drawFillColRGB(double r, double g, double b) {
+  return cpdf_drawFillColRGB(r, g, b);
+}
+
+void pycpdf_drawFillColCYMK(double c, double y, double m, double k) {
+  return cpdf_drawFillColCYMK(c, y, m, k);
+}
+
+void pycpdf_drawThick(double thickness) {
+  return cpdf_drawThick(thickness);
+}
+
+void pycpdf_drawCap(int captype) {
+  return cpdf_drawCap(captype);
+}
+
+void pycpdf_drawMiter(double m) {
+  return cpdf_drawMiter(m);
+}
+
+void pycpdf_drawDash(char* description) {
+  return cpdf_drawDash(description);
+}
+
+void pycpdf_drawPush() {
+  return cpdf_drawPush();
+}
+
+void pycpdf_drawPop() {
+  return cpdf_drawPop();
+}
+
+void pycpdf_drawMatrix(double a, double b, double c, double d, double e, double f) {
+  return cpdf_drawMatrix(a, b, c, d, e, f);
+}
+
+void pycpdf_drawMTrans(double tx, double ty) {
+  return cpdf_drawMTrans(tx, ty);
+}
+
+void pycpdf_drawMRot(double x, double y, double a) {
+  return cpdf_drawMRot(x, y, a);
+}
+
+void pycpdf_drawMScale(double x, double y, double sx, double sy) {
+  return cpdf_drawMScale(x, y, sx, sy);
+}
+
+void pycpdf_drawMShearX(double x, double y, double a) {
+  return cpdf_drawMShearX(x, y, a);
+}
+
+void pycpdf_drawMShearY(double x, double y, double a) {
+  return cpdf_drawMShearY(x, y, a);
+}
+
+void pycpdf_drawXObjBBox(double x, double y, double w, double h) {
+  return cpdf_drawXObjBBox(x, y, w, h);
+}
+
+void pycpdf_drawXObj(char* name) {
+  return cpdf_drawXObj(name);
+}
+
+void pycpdf_drawEndXObj() {
+  return cpdf_drawEndXObj();
+}
+
+void pycpdf_drawImage(char* name) {
+  return cpdf_drawImage(name);
+}
+
+void pycpdf_drawFillOpacity(double n) {
+  return cpdf_drawFillOpacity(n);
+}
+
+void pycpdf_drawStrokeOpacity(double n) {
+  return cpdf_drawStrokeOpacity(n);
+}
+
+void pycpdf_drawBT() {
+  return cpdf_drawBT();
+}
+
+void pycpdf_drawET() {
+  return cpdf_drawET();
+}
+
+void pycpdf_drawFont(char* fontname) {
+  return cpdf_drawFont(fontname);
+}
+
+void pycpdf_drawFontSize(double n) {
+  return cpdf_drawFontSize(n);
+}
+
+void pycpdf_drawText(char* text) {
+  return cpdf_drawText(text);
+}
+
+void pycpdf_drawSText(char* text) {
+  return cpdf_drawSText(text);
+}
+
+void pycpdf_drawLeading(double n) {
+  return cpdf_drawLeading(n);
+}
+
+void pycpdf_drawCharSpace(double n) {
+  return cpdf_drawCharSpace(n);
+}
+
+void pycpdf_drawWordSpace(double n) {
+  return cpdf_drawWordSpace(n);
+}
+
+void pycpdf_drawTextScale(double n) {
+  return cpdf_drawTextScale(n);
+}
+
+void pycpdf_drawRenderMode(int n) {
+  return cpdf_drawRenderMode(n);
+}
+
+void pycpdf_drawRise(double n) {
+  return cpdf_drawRise(n);
+}
+
+void pycpdf_drawNL() {
+  return cpdf_drawNL();
+}
+
+void pycpdf_drawNewPage() {
+  return cpdf_drawNewPage();
+}
+
+
+/* CHAPTER 19. Miscellaneous */
 
 void pycpdf_draft(int pdf, int r, int boxes) {
   return cpdf_draft(pdf, r, boxes);

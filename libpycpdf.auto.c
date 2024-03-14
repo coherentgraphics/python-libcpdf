@@ -531,8 +531,68 @@ void pycpdf_outputJSONMemoryFree(void) {
 /* __AUTO int blankDocumentPaper(int papersize, int pages) */
 /* __AUTO int textToPDF(double w, double h, int font, double fontsize, char *filename) */
 /* __AUTO int textToPDFPaper(int papersize, int font, double fontsize, char *filename) */
+/* __AUTO int fromPNG(char* filename) */
+/* __AUTO int fromJPEG(char* filename) */
 
-/* CHAPTER 18. Miscellaneous */
+/* CHAPTER 18. Drawing on PDFs */
+
+/* __AUTO void drawBegin() */
+/* __AUTO void drawEnd(int pdf, int range) */
+/* __AUTO void drawEndExtended(int pdf, int range, int underneath, int bates, char* filename) */
+/* __AUTO void drawRect(double x, double y, double w, double h) */
+/* __AUTO void drawTo(double x, double y) */
+/* __AUTO void drawLine(double x, double y) */
+/* __AUTO void drawBez(double x1, double y1, double x2, double y2, double x3, double y3) */
+/* __AUTO void drawBez23(double x2, double y2, double x3, double y3) */
+/* __AUTO void drawBez13(double x1, double y1, double x3, double y3) */
+/* __AUTO void drawCircle(double x, double y, double r) */
+/* __AUTO void drawFill() */
+/* __AUTO void drawFillEo() */
+/* __AUTO void drawStrokeFill() */
+/* __AUTO void drawStrokeFillEo() */
+/* __AUTO void drawClose() */
+/* __AUTO void drawClip() */
+/* __AUTO void drawClipEo() */
+/* __AUTO void drawStrokeColGrey(double g) */
+/* __AUTO void drawStrokeColRGB(double r, double g, double b) */
+/* __AUTO void drawStrokeColCYMK(double c, double y, double m, double k) */
+/* __AUTO void drawFillColGrey(double g) */
+/* __AUTO void drawFillColRGB(double r, double g, double b) */
+/* __AUTO void drawFillColCYMK(double c, double y, double m, double k) */
+/* __AUTO void drawThick(double thickness) */
+/* __AUTO void drawCap(int captype) */
+/* __AUTO void drawMiter(double m) */
+/* __AUTO void drawDash(char* description) */
+/* __AUTO void drawPush() */
+/* __AUTO void drawPop() */
+/* __AUTO void drawMatrix(double a, double b, double c, double d, double e, double f) */
+/* __AUTO void drawMTrans(double tx, double ty) */
+/* __AUTO void drawMRot(double x, double y, double a) */
+/* __AUTO void drawMScale(double x, double y, double sx, double sy) */
+/* __AUTO void drawMShearX(double x, double y, double a) */
+/* __AUTO void drawMShearY(double x, double y, double a) */
+/* __AUTO void drawXObjBBox(double x, double y, double w, double h) */
+/* __AUTO void drawXObj(char* name) */
+/* __AUTO void drawEndXObj() */
+/* __AUTO void drawImage(char* name) */
+/* __AUTO void drawFillOpacity(double n) */
+/* __AUTO void drawStrokeOpacity(double n) */
+/* __AUTO void drawBT() */
+/* __AUTO void drawET() */
+/* __AUTO void drawFont(char* fontname) */
+/* __AUTO void drawFontSize(double n) */
+/* __AUTO void drawText(char* text) */
+/* __AUTO void drawSText(char* text) */
+/* __AUTO void drawLeading(double n) */
+/* __AUTO void drawCharSpace(double n) */
+/* __AUTO void drawWordSpace(double n) */
+/* __AUTO void drawTextScale(double n) */
+/* __AUTO void drawRenderMode(int n) */
+/* __AUTO void drawRise(double n) */
+/* __AUTO void drawNL() */
+/* __AUTO void drawNewPage() */
+
+/* CHAPTER 19. Miscellaneous */
 
 /* __AUTO void draft(int pdf, int r, int boxes) */
 /* __AUTO void removeAllText(int pdf, int r) */ 

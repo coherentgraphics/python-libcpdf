@@ -1841,6 +1841,16 @@ def chapter17():
             ttpdfpaper, 'testoutputs/01ttpdfpaper.pdf', False, False)
     except:
         prerr()
+    print('---cpdf_fromPNG()')
+    try:
+        png = pycpdflib.fromPNG('testinputs/png.png')
+    except:
+        prerr()
+    print('---cpdf_fromJPEG()')
+    try:
+        png = pycpdflib.fromJPEG('testinputs/jpg.jpg')
+    except:
+        prerr()
 
 def chapter18():
     print('***** CHAPTER 18. Drawing on PDFs')

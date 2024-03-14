@@ -2423,6 +2423,18 @@ def textToPDFPaper(papersize, font, fontsize, filename):
     checkerror()
     return pdf
 
+def fromPNG(filename):
+    """FIXME"""
+    pdf = Pdf(libc.pycpdf_fromPNG(str.encode(filename)))
+    checkerror()
+    return pdf
+
+def fromJPEG(filename):
+    """FIXME"""
+    pdf = Pdf(libc.pycpdf_fromJPEG(str.encode(filename)))
+    checkerror()
+    return pdf
+
 # CHAPTER 18. Miscellaneous
 
 
