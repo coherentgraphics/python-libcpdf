@@ -196,6 +196,10 @@ def loadDLL(f):
     libc.pycpdf_getAttachmentName.restype = POINTER(c_char)
     libc.pycpdf_startGetImageResolution.argtypes = [c_int, c_double]
     libc.pycpdf_getImageResolutionImageName.restype = POINTER(c_char)
+    libc.pycpdf_getImagePages.restype = POINTER(c_char)
+    libc.pycpdf_getImageName.restype = POINTER(c_char)
+    libc.pycpdf_getImageColSpace.restype = POINTER(c_char)
+    libc.pycpdf_getImageFilter.restype = POINTER(c_char)
     libc.pycpdf_getFontName.restype = POINTER(c_char)
     libc.pycpdf_getFontType.restype = POINTER(c_char)
     libc.pycpdf_getFontEncoding.restype = POINTER(c_char)
@@ -2148,7 +2152,7 @@ def getAttachments(pdf):
 def getImageResolution(pdf, min_required_resolution):
     """Return a list of all uses of images in the PDF which do not meet the
     minimum required resolution in dpi as tuples of:
-    (pagenumber, name, x pixels, y pixels, x resolution, y resolution)."""
+    (pagenumber, name, x pixels, y pixels, x resolution, y resolution, objnum)."""
     n = libc.pycpdf_startGetImageResolution(pdf.pdf, min_required_resolution)
     l = []
     for x in range(n):
@@ -2159,11 +2163,30 @@ def getImageResolution(pdf, min_required_resolution):
         yp = libc.pycpdf_getImageResolutionYPixels(x)
         xr = libc.pycpdf_getImageResolutionXRes(x)
         yr = libc.pycpdf_getImageResolutionYRes(x)
-        l.append((pagenumber, imagename, xp, yp, xr, yr))
+        on = libc.pycpdf_getImageResolutionObjNum(x)
+        l.append((pagenumber, imagename, xp, yp, xr, yr, on))
     libc.pycpdf_endGetImageResolution()
     checkerror()
     return l
 
+def getImages(pdf):
+    """FIXME"""
+    n = libc.pycpdf_startGetImages(pdf.pdf)
+    l = []
+    for x in range(n):
+        on = libc.pycpdf_getImageObjNum(x)
+        pages = string_at(libc.pycpdf_getImagePages(x)).decode()
+        imagename = string_at(libc.pycpdf_getImageName(x)).decode()
+        w = libc.pycpdf_getImageWidth(x)
+        h = libc.pycpdf_getImageHeight(x)
+        size = libc.pycpdf_getImageSize(x)
+        bpc = libc.pycpdf_getImageBPC(x)
+        colspace = string_at(libc.pycpdf_getImageColSpace(x)).decode()
+        filt = string_at(libc.pycpdf_getImageFilter(x)).decode()
+        l.append((on, pages, imagename, w, h, size, bpc, colspace, filt))
+    libc.pycpdf_endGetImages()
+    checkerror()
+    return l
 
 def imagesJSON(pdf):
     """FIXME"""

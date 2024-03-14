@@ -422,7 +422,19 @@ void pycpdf_getAttachmentFree(void) {
 /* __AUTO int getImageResolutionYPixels(int n) */
 /* __AUTO double getImageResolutionXRes(int n) */
 /* __AUTO double getImageResolutionYRes(int n) */
+/* __AUTO int getImageResolutionObjNum(int n) */
 /* __AUTO void endGetImageResolution() */
+/* __AUTO int startGetImages(int pdf) */
+/* __AUTO int getImageObjNum(int serial) */
+/* __AUTO char* getImagePages(int serial) */
+/* __AUTO char* getImageName(int serial) */
+/* __AUTO int getImageWidth(int serial) */
+/* __AUTO int getImageHeight(int serial) */
+/* __AUTO int getImageSize(int serial) */
+/* __AUTO int getImageBPC(int serial) */
+/* __AUTO char* getImageColSpace(int serial) */
+/* __AUTO char* getImageFilter(int serial) */
+/* __AUTO void endGetImages() */
 
 void *imageResolutionJSONData;
 

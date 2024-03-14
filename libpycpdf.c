@@ -1052,8 +1052,56 @@ double pycpdf_getImageResolutionYRes(int n) {
   return cpdf_getImageResolutionYRes(n);
 }
 
+int pycpdf_getImageResolutionObjNum(int n) {
+  return cpdf_getImageResolutionObjNum(n);
+}
+
 void pycpdf_endGetImageResolution() {
   return cpdf_endGetImageResolution();
+}
+
+int pycpdf_startGetImages(int pdf) {
+  return cpdf_startGetImages(pdf);
+}
+
+int pycpdf_getImageObjNum(int serial) {
+  return cpdf_getImageObjNum(serial);
+}
+
+char* pycpdf_getImagePages(int serial) {
+  return cpdf_getImagePages(serial);
+}
+
+char* pycpdf_getImageName(int serial) {
+  return cpdf_getImageName(serial);
+}
+
+int pycpdf_getImageWidth(int serial) {
+  return cpdf_getImageWidth(serial);
+}
+
+int pycpdf_getImageHeight(int serial) {
+  return cpdf_getImageHeight(serial);
+}
+
+int pycpdf_getImageSize(int serial) {
+  return cpdf_getImageSize(serial);
+}
+
+int pycpdf_getImageBPC(int serial) {
+  return cpdf_getImageBPC(serial);
+}
+
+char* pycpdf_getImageColSpace(int serial) {
+  return cpdf_getImageColSpace(serial);
+}
+
+char* pycpdf_getImageFilter(int serial) {
+  return cpdf_getImageFilter(serial);
+}
+
+void pycpdf_endGetImages() {
+  return cpdf_endGetImages();
 }
 
 

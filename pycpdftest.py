@@ -1586,14 +1586,22 @@ def chapter13():
         pdf = pycpdflib.fromFile('testinputs/image.pdf', '')
     except:
         fatal_prerr()
+    print('---cpdf: get images')
+    try:
+        images = pycpdflib.getImages(pdf)
+    except:
+        fatal_prerr()
+    for im in images:
+        a, b, c, d, e, f, g, h, i = im
+        print(f'IMAGE: {a}, {b}, {c}, {d}, {e}, {f}, {g}, {h}, {i}')
     print('---cpdf: get image resolution')
     try:
         images = pycpdflib.getImageResolution(pdf, 500000.)
     except:
         fatal_prerr()
     for i in images:
-        a, b, c, d, e, f = i
-        print(f'IMAGE: {a}, {b}, {c}, {d}, {e:.6f}, {f:.6f}')
+        a, b, c, d, e, f, g = i
+        print(f'IMAGE: {a}, {b}, {c}, {d}, {e:.6f}, {f:.6f}, {g}')
     print('---cpdf_imageResolutionJSON()')
     try:
         imageResolutionJSON = pycpdflib.imageResolutionJSON(pdf, 300)
