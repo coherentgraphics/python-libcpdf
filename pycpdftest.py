@@ -1394,9 +1394,19 @@ def chapter11():
         pycpdflib.setPageLayout(pdf, pycpdflib.twoColumnLeft)
     except:
         prerr()
+    print('---cpdf_getPageLayout()')
+    try:
+        pagelayout = pycpdflib.getPageLayout(pdf)
+    except:
+        prerr()
     print('---cpdf_setPageMode()')
     try:
         pycpdflib.setPageMode(pdf, pycpdflib.useOutlines)
+    except:
+        prerr()
+    print('---cpdf_getPageMode()')
+    try:
+        pagemode = pycpdflib.getPageMode(pdf)
     except:
         prerr()
     print('---cpdf_hideToolbar()')
@@ -1404,9 +1414,19 @@ def chapter11():
         pycpdflib.hideToolbar(pdf, True)
     except:
         prerr()
+    print('---cpdf_getHideToolbar()')
+    try:
+        hidetoolbar = pycpdflib.getHideToolbar(pdf)
+    except:
+        prerr()
     print('---cpdf_hideMenubar()')
     try:
         pycpdflib.hideMenubar(pdf, True)
+    except:
+        prerr()
+    print('---cpdf_getHideMenubar()')
+    try:
+        hidemenubar = pycpdflib.getHideMenubar(pdf)
     except:
         prerr()
     print('---cpdf_hideWindowUi()')
@@ -1414,14 +1434,29 @@ def chapter11():
         pycpdflib.hideWindowUi(pdf, True)
     except:
         prerr()
+    print('---cpdf_getHideWindowUi()')
+    try:
+        hidewindowui = pycpdflib.getHideWindowUi(pdf)
+    except:
+        prerr()
     print('---cpdf_fitWindow()')
     try:
         pycpdflib.fitWindow(pdf, True)
     except:
         prerr()
+    print('---cpdf_getFitWindow()')
+    try:
+        fitwindow = pycpdflib.getFitWindow(pdf)
+    except:
+        prerr()
     print('---cpdf_centerWindow()')
     try:
         pycpdflib.centerWindow(pdf, True)
+    except:
+        prerr()
+    print('---cpdf_getCenterWindow()')
+    try:
+        centerwindow = pycpdflib.getCenterWindow(pdf)
     except:
         prerr()
     print('---cpdf_displayDocTitle()')

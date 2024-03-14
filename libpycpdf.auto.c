@@ -339,12 +339,19 @@ void pycpdf_pageInfoJSONFree(void) {
 /* __AUTO void markTrappedXMP(int pdf) */
 /* __AUTO void markUntrappedXMP(int pdf) */
 /* __AUTO void setPageLayout(int pdf, int layout) */
+/* __AUTO int getPageLayout(int pdf) */
 /* __AUTO void setPageMode(int pdf, int mode) */
+/* __AUTO int getPageMode(int pdf) */
 /* __AUTO void hideToolbar(int pdf, int flag) */
+/* __AUTO int getHideToolbar(int pdf) */
 /* __AUTO void hideMenubar(int pdf, int flag) */
+/* __AUTO int getHideMenubar(int pdf) */
 /* __AUTO void hideWindowUi(int pdf, int flag) */
+/* __AUTO int getHideWindowUi(int pdf) */
 /* __AUTO void fitWindow(int pdf, int flag) */
+/* __AUTO int getFitWindow(int pdf) */
 /* __AUTO void centerWindow(int pdf, int flag) */
+/* __AUTO int getCenterWindow(int pdf) */
 /* __AUTO void displayDocTitle(int pdf, int flag) */
 /* __AUTO void openAtPage(int pdf, int flag, int pagenumber) */
 /* __AUTO void setMetadataFromFile(int pdf, char* filename) */

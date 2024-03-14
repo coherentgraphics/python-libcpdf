@@ -852,28 +852,56 @@ void pycpdf_setPageLayout(int pdf, int layout) {
   return cpdf_setPageLayout(pdf, layout);
 }
 
+int pycpdf_getPageLayout(int pdf) {
+  return cpdf_getPageLayout(pdf);
+}
+
 void pycpdf_setPageMode(int pdf, int mode) {
   return cpdf_setPageMode(pdf, mode);
+}
+
+int pycpdf_getPageMode(int pdf) {
+  return cpdf_getPageMode(pdf);
 }
 
 void pycpdf_hideToolbar(int pdf, int flag) {
   return cpdf_hideToolbar(pdf, flag);
 }
 
+int pycpdf_getHideToolbar(int pdf) {
+  return cpdf_getHideToolbar(pdf);
+}
+
 void pycpdf_hideMenubar(int pdf, int flag) {
   return cpdf_hideMenubar(pdf, flag);
+}
+
+int pycpdf_getHideMenubar(int pdf) {
+  return cpdf_getHideMenubar(pdf);
 }
 
 void pycpdf_hideWindowUi(int pdf, int flag) {
   return cpdf_hideWindowUi(pdf, flag);
 }
 
+int pycpdf_getHideWindowUi(int pdf) {
+  return cpdf_getHideWindowUi(pdf);
+}
+
 void pycpdf_fitWindow(int pdf, int flag) {
   return cpdf_fitWindow(pdf, flag);
 }
 
+int pycpdf_getFitWindow(int pdf) {
+  return cpdf_getFitWindow(pdf);
+}
+
 void pycpdf_centerWindow(int pdf, int flag) {
   return cpdf_centerWindow(pdf, flag);
+}
+
+int pycpdf_getCenterWindow(int pdf) {
+  return cpdf_getCenterWindow(pdf);
 }
 
 void pycpdf_displayDocTitle(int pdf, int flag) {

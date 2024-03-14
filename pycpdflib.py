@@ -1898,6 +1898,11 @@ def setPageLayout(pdf, layout):
     checkerror()
     return
 
+def getPageLayout(pdf):
+    """FIXME"""
+    r = libc.pycpdf_getPageLayout(pdf.pdf)
+    checkerror()
+    return r
 
 """Page modes."""
 useNone = 0
@@ -1913,6 +1918,11 @@ def setPageMode(pdf, mode):
     checkerror()
     return
 
+def getPageMode(pdf):
+    """FIXME"""
+    r = libc.pycpdf_getPageMode(pdf.pdf)
+    checkerror()
+    return r
 
 def hideToolbar(pdf, flag):
     """Sets the hide toolbar flag."""
@@ -1920,6 +1930,11 @@ def hideToolbar(pdf, flag):
     checkerror()
     return
 
+def getHideToolbar(pdf):
+    """FIXME"""
+    r = libc.pycpdf_getHideToolbar(pdf.pdf)
+    checkerror()
+    return r
 
 def hideMenubar(pdf, flag):
     """Set the hide menu bar flag."""
@@ -1927,6 +1942,11 @@ def hideMenubar(pdf, flag):
     checkerror()
     return
 
+def getHideMenubar(pdf):
+    """FIXME"""
+    r = libc.pycpdf_getHideMenubar(pdf.pdf)
+    checkerror()
+    return r
 
 def hideWindowUi(pdf, flag):
     """Set the hide window UI flag."""
@@ -1934,6 +1954,11 @@ def hideWindowUi(pdf, flag):
     checkerror()
     return
 
+def getHideWindowUi(pdf):
+    """FIXME"""
+    r = libc.pycpdf_getHideWindowUi(pdf.pdf)
+    checkerror()
+    return r
 
 def fitWindow(pdf, flag):
     """Set the fit window flag."""
@@ -1941,6 +1966,11 @@ def fitWindow(pdf, flag):
     checkerror()
     return
 
+def getFitWindow(pdf):
+    """FIXME"""
+    r = libc.pycpdf_getFitWindow(pdf.pdf)
+    checkerror()
+    return r
 
 def centerWindow(pdf, flag):
     """Set the center window flag."""
@@ -1948,6 +1978,11 @@ def centerWindow(pdf, flag):
     checkerror()
     return
 
+def getCenterWindow(pdf):
+    """FIXME"""
+    r = libc.pycpdf_getCenterWindow(pdf.pdf)
+    checkerror()
+    return r
 
 def displayDocTitle(pdf, flag):
     """Set the display document title flag."""
