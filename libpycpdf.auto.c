@@ -252,6 +252,9 @@ void pycpdf_annotationsJSONFree(void) {
   return;
 }
 
+/* __AUTO void removeAnnotations(int pdf, int range) */
+/* __AUTO void setAnnotationsJSON(int pdf, void* data, int length) */
+
 /* CHAPTER 11. Document Information and Metadata */
 
 /* __AUTO int isLinearized(char *filename) */

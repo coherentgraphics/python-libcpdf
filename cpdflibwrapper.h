@@ -916,7 +916,7 @@ void *cpdf_annotationsJSON(int, int *);
  * given range. */
 void cpdf_removeAnnotations(int, int);
 
-/* cpdf_setAnnotationsJSON(length, data, pdf) adds the annotations given in
+/* cpdf_setAnnotationsJSON(pdf, data, length) adds the annotations given in
  * JSON format to the PDF, on top of any exisiting annotations. */
 void cpdf_setAnnotationsJSON(int, void *, int);
 

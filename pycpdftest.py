@@ -1045,6 +1045,16 @@ def chapter10():
         print(f'Contains {len(data)} bytes of data')
     except:
         prerr()
+    print('---cpdf_removeAnnotations()')
+    try:
+        pycpdflib.removeAnnotations(annots, pycpdflib.all(annots))
+    except:
+        prerr()
+    print('---cpdf_setAnnotationsJSON()')
+    try:
+        pycpdflib.setAnnotationsJSON(annots, data)
+    except:
+        fatal_prerr()
 
 # CHAPTER 11. Document Information and Metadata
 

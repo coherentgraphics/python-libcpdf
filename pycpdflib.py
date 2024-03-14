@@ -1360,6 +1360,20 @@ def annotationsJSON(pdf):
     return out_data.raw
 
 
+def removeAnnotations(pdf, r):
+    """FIXME"""
+    rn = range_of_list(r)
+    libc.pycpdf_removeAnnotations(pdf.pdf, rn)
+    deleteRange(rn)
+    checkerror()
+    return
+
+def setAnnotationsJSON(pdf, data):
+    """FIXME"""
+    libc.pycpdf_setAnnotationsJSON(pdf.pdf, data, len(data))
+    checkerror()
+    return
+
 # CHAPTER 11. Document Information and Metadata
 
 
