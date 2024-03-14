@@ -1996,6 +1996,12 @@ def getDisplayDocTitle(pdf):
     checkerror()
     return r
 
+def nonFullScreenPageMode(pdf, flag):
+    """FIXME"""
+    libc.pycpdf_nonFullScreenPageMode(pdf.pdf, flag)
+    checkerror()
+    return
+
 def getNonFullScreenPageMode(pdf):
     """FIXME"""
     r = libc.pycpdf_getNonFullScreenPageMode(pdf.pdf)
@@ -2009,6 +2015,11 @@ def openAtPage(pdf, fitflag, pagenumber):
     checkerror()
     return
 
+def openAtPageCustom(pdf, custom):
+    """FIXME"""
+    libc.pycpdf_openAtPageCustom(pdf.pdf, str.encode(custom))
+    checkerror()
+    return
 
 def setMetadataFromFile(pdf, filename):
     """Set the XMP metadata of a document, given a file name."""

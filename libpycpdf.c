@@ -912,12 +912,20 @@ int pycpdf_getDisplayDocTitle(int pdf) {
   return cpdf_getDisplayDocTitle(pdf);
 }
 
+void pycpdf_nonFullScreenPageMode(int pdf, int flag) {
+  return cpdf_nonFullScreenPageMode(pdf, flag);
+}
+
 int pycpdf_getNonFullScreenPageMode(int pdf) {
   return cpdf_getNonFullScreenPageMode(pdf);
 }
 
 void pycpdf_openAtPage(int pdf, int flag, int pagenumber) {
   return cpdf_openAtPage(pdf, flag, pagenumber);
+}
+
+void pycpdf_openAtPageCustom(int pdf, char* custom) {
+  return cpdf_openAtPageCustom(pdf, custom);
 }
 
 void pycpdf_setMetadataFromFile(int pdf, char* filename) {

@@ -354,8 +354,10 @@ void pycpdf_pageInfoJSONFree(void) {
 /* __AUTO int getCenterWindow(int pdf) */
 /* __AUTO void displayDocTitle(int pdf, int flag) */
 /* __AUTO int getDisplayDocTitle(int pdf) */
+/* __AUTO void nonFullScreenPageMode(int pdf, int flag) */
 /* __AUTO int getNonFullScreenPageMode(int pdf) */
 /* __AUTO void openAtPage(int pdf, int flag, int pagenumber) */
+/* __AUTO void openAtPageCustom(int pdf, char* custom) */
 /* __AUTO void setMetadataFromFile(int pdf, char* filename) */
 /* __AUTO void setMetadataFromByteArray(int pdf, void* data, int len) */
 
