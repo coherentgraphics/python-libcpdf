@@ -1464,6 +1464,16 @@ def chapter11():
         pycpdflib.displayDocTitle(pdf, True)
     except:
         prerr()
+    print('---cpdf_getDisplayDocTitle()')
+    try:
+        displaydoctitle = pycpdflib.getDisplayDocTitle(pdf)
+    except:
+        prerr()
+    print('---cpdf_getNonFullScreenPageMode()')
+    try:
+        nonfullscreenpagemode = pycpdflib.getNonFullScreenPageMode(pdf)
+    except:
+        prerr()
     print('---cpdf_openAtPage()')
     try:
         pycpdflib.openAtPage(pdf, True, 4)

@@ -908,6 +908,14 @@ void pycpdf_displayDocTitle(int pdf, int flag) {
   return cpdf_displayDocTitle(pdf, flag);
 }
 
+int pycpdf_getDisplayDocTitle(int pdf) {
+  return cpdf_getDisplayDocTitle(pdf);
+}
+
+int pycpdf_getNonFullScreenPageMode(int pdf) {
+  return cpdf_getNonFullScreenPageMode(pdf);
+}
+
 void pycpdf_openAtPage(int pdf, int flag, int pagenumber) {
   return cpdf_openAtPage(pdf, flag, pagenumber);
 }

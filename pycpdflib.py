@@ -1990,6 +1990,17 @@ def displayDocTitle(pdf, flag):
     checkerror()
     return
 
+def getDisplayDocTitle(pdf):
+    """FIXME"""
+    r = libc.pycpdf_getDisplayDocTitle(pdf.pdf)
+    checkerror()
+    return r
+
+def getNonFullScreenPageMode(pdf):
+    """FIXME"""
+    r = libc.pycpdf_getNonFullScreenPageMode(pdf.pdf)
+    checkerror()
+    return r
 
 def openAtPage(pdf, fitflag, pagenumber):
     """Set the PDF to open, possibly with zoom-to-fit, at the given page number.
