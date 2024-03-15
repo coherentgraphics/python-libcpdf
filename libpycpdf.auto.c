@@ -562,6 +562,7 @@ void pycpdf_outputJSONMemoryFree(void) {
 /* __AUTO void drawFillColCYMK(double c, double y, double m, double k) */
 /* __AUTO void drawThick(double thickness) */
 /* __AUTO void drawCap(int captype) */
+/* __AUTO void drawJoin(int jointype) */
 /* __AUTO void drawMiter(double m) */
 /* __AUTO void drawDash(char* description) */
 /* __AUTO void drawPush() */

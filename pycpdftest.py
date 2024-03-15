@@ -2028,48 +2028,65 @@ def chapter18():
        pycpdflib.drawPop()
     except:
         prerr()
+    print("---cpdf_drawThick()")
+    try:
+        pycpdflib.drawThick(20.0)
+        pycpdflib.drawTo(0, 0)
+        pycpdflib.drawLine(100, 50)
+        pycpdflib.drawStroke()
+    except:
+        prerr()
+    print("---cpdf_drawCap()")
+    try:
+        pycpdflib.drawCap(pycpdflib.capRound)
+        pycpdflib.drawTo(100, 100)
+        pycpdflib.drawLine(150, 100)
+        pycpdflib.drawStroke()
+    except:
+        prerr()
+    print("---cpdf_drawJoin()")
+    try:
+        pycpdflib.drawJoin(pycpdflib.joinRound)
+        pycpdflib.drawTo(200, 200)
+        pycpdflib.drawLine(250, 200)
+        pycpdflib.drawLine(350, 0)
+        pycpdflib.drawStroke()
+    except:
+        prerr()
+    print("---cpdf_drawMiter()")
+    try:
+        pycpdflib.drawMiter(0.0)
+    except:
+        prerr()
+    print("---cpdf_drawDash()")
+    try:
+        pycpdflib.drawDash("30 20 10")
+        pycpdflib.drawStrokeColRGB(0, 0.0, 0.9)
+        pycpdflib.drawTo(200, 200)
+        pycpdflib.drawLine(250, 200)
+        pycpdflib.drawLine(350, 0)
+        pycpdflib.drawStroke()
+    except:
+        prerr()
+#  Here, we will use push/pop and the translation functions to draw a
+#  rectangle, transformed.
+    try:
+        pycpdflib.drawThick(5)
+        pycpdflib.drawRect(100, 500, 100, 100)
+        pycpdflib.drawStroke()
+    except:
+        prerr()
+    print("---cpdf_drawPush()")
+    try:
+        pycpdflib.drawPush()
+    except:
+        prerr()
+    print("---cpdf_drawPop()")
+    try:
+        pycpdflib.drawPop()
+    except:
+        prerr()
 
-#  printf("---cpdf_drawThick\n");
-#  cpdf_drawThick(20.0);
-#  prerr();
-#  cpdf_drawTo(0, 0);
-#  cpdf_drawLine(100, 50);
-#  cpdf_drawStroke();
-#  printf("---cpdf_drawCap\n");
-#  cpdf_drawCap(cpdf_capRound);
-#  prerr();
-#  cpdf_drawTo(100, 100);
-#  cpdf_drawLine(150, 100);
-#  cpdf_drawStroke();
-#  printf("---cpdf_drawJoin\n");
-#  cpdf_drawJoin(cpdf_joinRound);
-#  prerr();
-#  cpdf_drawTo(200, 200);
-#  cpdf_drawLine(250, 200);
-#  cpdf_drawLine(350, 0);
-#  cpdf_drawStroke();
-#  printf("---cpdf_drawMiter\n");
-#  cpdf_drawMiter(0.0);
-#  prerr();
-#  printf("---cpdf_drawDash\n");
-#  cpdf_drawDash("30 20 10");
-#  prerr();
-#  cpdf_drawStrokeColRGB(0, 0.0, 0.9);
-#  cpdf_drawTo(200, 200);
-#  cpdf_drawLine(250, 200);
-#  cpdf_drawLine(350, 0);
-#  cpdf_drawStroke();
-#  /* Here, we will use push/pop and the translation functions to draw a
-#   * rectangle, transformed */
-#  cpdf_drawThick(5);
-#  cpdf_drawRect(100, 500, 100, 100);
-#  cpdf_drawStroke();
-#  printf("---cpdf_drawPush\n");
-#  cpdf_drawPush();
-#  prerr();
-#  printf("---cpdf_drawPop\n");
-#  cpdf_drawPop();
-#  prerr();
 #  printf("---cpdf_drawMTrans\n");
 #  cpdf_drawPush();
 #  cpdf_drawMTrans(20.0, 20.0);

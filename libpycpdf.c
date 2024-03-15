@@ -1414,6 +1414,10 @@ void pycpdf_drawCap(int captype) {
   return cpdf_drawCap(captype);
 }
 
+void pycpdf_drawJoin(int jointype) {
+  return cpdf_drawJoin(jointype);
+}
+
 void pycpdf_drawMiter(double m) {
   return cpdf_drawMiter(m);
 }

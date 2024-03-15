@@ -236,6 +236,8 @@ def loadDLL(f):
     libc.pycpdf_drawFillColGrey.argtypes = [c_double]
     libc.pycpdf_drawFillColRGB.argtypes = [c_double, c_double, c_double]
     libc.pycpdf_drawFillColCYMK.argtypes = [c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawThick.argtypes = [c_double]
+    libc.pycpdf_drawMiter.argtypes = [c_double]
     LP_c_char = POINTER(c_char)
     LP_LP_c_char = POINTER(LP_c_char)
     argc = len(sys.argv)
@@ -2558,6 +2560,46 @@ def drawClip():
 def drawClipEo():
     """FIXME"""
     libc.pycpdf_drawClipEo()
+    checkerror()
+    return
+
+def drawThick(thickness):
+    """FIXME"""
+    libc.pycpdf_drawThick(thickness)
+    checkerror()
+    return
+
+"""Cap types."""
+capButt = 0
+capRound = 1
+capSquare = 2
+
+def drawCap(captype):
+    """FIXME"""
+    libc.pycpdf_drawCap(captype)
+    checkerror()
+    return
+
+"""Join types."""
+joinMiter = 0
+joinRound = 1
+joinBevel = 2
+
+def drawJoin(jointype):
+    """FIXME"""
+    libc.pycpdf_drawJoin(jointype)
+    checkerror()
+    return
+
+def drawMiter(miter):
+    """FIXME"""
+    libc.pycpdf_drawMiter(miter)
+    checkerror()
+    return
+
+def drawDash(description):
+    """FIXME"""
+    libc.pycpdf_drawDash(str.encode(description))
     checkerror()
     return
 
