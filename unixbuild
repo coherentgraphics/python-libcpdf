@@ -1,12 +1,15 @@
+#set -o xtrace
+#e.g /usr/local/lib
+LOCATION=/tmp
 #Make code
 cd auto; make; ./auto; cd ..
-#install into /usr/local/lib/
-cp ../cpdflib-source/libcpdf.so /usr/local/lib/
-#Builds clib1.o
+#install
+cp ../cpdflib-source/libcpdf.so $LOCATION/
+#Builds libpycpdf.o
 cc -c -Wall -Wno-return-type -Werror -fpic libpycpdf.c
-#Builds libclib1.so
-cc -shared -o libpycpdf.so libpycpdf.o -L/usr/local/lib/ -lcpdf
+#Builds libpycpdf.so
+cc -shared -o libpycpdf.so libpycpdf.o -L$LOCATION -lcpdf
 #Tell OS X where libpycpdf.so will find libcpdf.so
 if [[ $(uname) == 'Darwin' ]]; then
-  install_name_tool -change libcpdf.so /usr/local/lib/libcpdf.so libpycpdf.so   
+  install_name_tool -change libcpdf.so $LOCATION/libcpdf.so libpycpdf.so   
 fi
