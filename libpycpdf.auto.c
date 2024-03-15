@@ -546,6 +546,7 @@ void pycpdf_outputJSONMemoryFree(void) {
 /* __AUTO void drawBez23(double x2, double y2, double x3, double y3) */
 /* __AUTO void drawBez13(double x1, double y1, double x3, double y3) */
 /* __AUTO void drawCircle(double x, double y, double r) */
+/* __AUTO void drawStroke() */
 /* __AUTO void drawFill() */
 /* __AUTO void drawFillEo() */
 /* __AUTO void drawStrokeFill() */

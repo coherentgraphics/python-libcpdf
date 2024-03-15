@@ -1854,6 +1854,340 @@ def chapter17():
 
 def chapter18():
     print('***** CHAPTER 18. Drawing on PDFs')
+    draw = pycpdflib.fromFile("hello.pdf", "")
+    drawall = pycpdflib.all(draw)
+    print('---cpdf_drawBegin()')
+    try:
+        pycpdflib.drawBegin()
+    except:
+        prerr()
+    print("---cpdf_drawTo()")
+    try:
+        pycpdflib.drawTo(0, 0)
+    except:
+        prerr()
+    print("---cpdf_drawLine()")
+    try:
+        pycpdflib.drawLine(100, 100)
+    except:
+        prerr()
+    print("---cpdf_drawStroke()")
+    try:
+        pycpdflib.drawStroke()
+    except:
+        prerr()
+    print("---cpdf_drawRect()")
+    try:
+        pycpdflib.drawRect(200.0, 200.0, 300.0, 300.0)
+        pycpdflib.drawFill()
+    except:
+        prerr()
+    print("---cpdf_drawBez()")
+    try:
+        pycpdflib.drawTo(300.0, 300.0)
+        pycpdflib.drawStrokeColRGB(1.0, 0.0, 0.0)
+        pycpdflib.drawBez(100.0, 200.0, 100.0, 100.0, 200.0, 250.0)
+    except:
+        prerr()
+    print("---cpdf_drawBez23()")
+    try:
+        pycpdflib.drawBez23(50.0, 450.0, 200.0, 50.0)
+    except:
+        prerr()
+    print("---cpdf_drawBez13()")
+    try:
+        pycpdflib.drawBez13(75.0, 150.0, 123.0, 456.0)
+        pycpdflib.drawStroke()
+    except:
+        prerr()
+    print("---cpdf_drawCircle()")
+    try:
+        pycpdflib.drawFillColRGB(0.0, 1.0, 0.5)
+        pycpdflib.drawCircle(500.0, 400.0, 50.0)
+        pycpdflib.drawFill();
+    except:
+        prerr()
+#  printf("---cpdf_drawStrokeColGrey\n");
+#  cpdf_drawStrokeColGrey(0.5);
+#  prerr();
+#  cpdf_drawCircle(500.0, 420.0, 50.0);
+#  cpdf_drawStroke();
+#  printf("---cpdf_drawStrokeColRGB\n");
+#  cpdf_drawStrokeColRGB(0.5, 0.0, 0.5);
+#  prerr();
+#  cpdf_drawCircle(500.0, 440.0, 50.0);
+#  cpdf_drawStroke();
+#  printf("---cpdf_drawStrokeColCYMK\n");
+#  cpdf_drawStrokeColCYMK(0.3, 0.4, 0.5, 0.1);
+#  prerr();
+#  cpdf_drawCircle(500.0, 460.0, 50.0);
+#  cpdf_drawStroke();
+#  printf("---cpdf_drawFillColGrey\n");
+#  cpdf_drawFillColGrey(0.5);
+#  prerr();
+#  cpdf_drawCircle(500.0, 480.0, 50.0);
+#  cpdf_drawFill();
+#  printf("---cpdf_drawFillColRGB\n");
+#  cpdf_drawFillColRGB(0.5, 0.0, 0.5);
+#  prerr();
+#  cpdf_drawCircle(500.0, 500.0, 50.0);
+#  cpdf_drawFill();
+#  printf("---cpdf_drawFillColCYMK\n");
+#  cpdf_drawFillColCYMK(0.3, 0.4, 0.5, 0.1);
+#  prerr();
+#  cpdf_drawCircle(500.0, 520.0, 50.0);
+#  cpdf_drawFill();
+#  printf("---cpdf_drawFill\n");
+#  cpdf_drawFill();
+#  prerr();
+#  cpdf_drawTo(100, 100);
+#  cpdf_drawLine(100, 300);
+#  cpdf_drawLine(200, 100);
+#  cpdf_drawLine(0, 200);
+#  cpdf_drawLine(200, 200);
+#  cpdf_drawClose();
+#  printf("---cpdf_drawFillEo\n");
+#  cpdf_drawFill();
+#  prerr();
+#  cpdf_drawFillColRGB(0, 0.5, 0);
+#  cpdf_drawTo(100, 100);
+#  cpdf_drawLine(100, 300);
+#  cpdf_drawLine(200, 100);
+#  cpdf_drawLine(0, 200);
+#  cpdf_drawLine(200, 200);
+#  cpdf_drawClose();
+#  printf("---cpdf_drawFillEo\n");
+#  cpdf_drawFillEo();
+#  cpdf_drawTo(300, 300);
+#  cpdf_drawLine(300, 500);
+#  cpdf_drawLine(400, 300);
+#  cpdf_drawLine(200, 400);
+#  cpdf_drawLine(400, 400);
+#  cpdf_drawClose();
+#  printf("---cpdf_drawStrokeFill\n");
+#  cpdf_drawStrokeFill();
+#  prerr();
+#  cpdf_drawFillColRGB(0, 0, 0.5);
+#  cpdf_drawStrokeColRGB(0, 0.5, 0.5);
+#  cpdf_drawFillEo();
+#  cpdf_drawTo(300, 300);
+#  cpdf_drawLine(300, 500);
+#  cpdf_drawLine(400, 300);
+#  cpdf_drawLine(200, 400);
+#  cpdf_drawLine(400, 400);
+#  cpdf_drawClose();
+#  printf("---cpdf_drawStrokeFillEo\n");
+#  cpdf_drawStrokeFillEo();
+#  prerr();
+#  printf("---cpdf_drawClose\n");
+#  cpdf_drawClose();
+#  prerr();
+#  cpdf_drawPush();
+#  cpdf_drawCircle(300, 300, 100);
+#  printf("---cpdf_drawClip\n");
+#  cpdf_drawClip();
+#  prerr();
+#  cpdf_drawCircle(300, 350, 100);
+#  cpdf_drawFill();
+#  cpdf_drawCircle(500, 500, 300);
+#  printf("---cpdf_drawClipEo\n");
+#  cpdf_drawClipEo();
+#  prerr();
+#  cpdf_drawCircle(500, 550, 300);
+#  cpdf_drawFill();
+#  cpdf_drawPop();
+#  printf("---cpdf_drawThick\n");
+#  cpdf_drawThick(20.0);
+#  prerr();
+#  cpdf_drawTo(0, 0);
+#  cpdf_drawLine(100, 50);
+#  cpdf_drawStroke();
+#  printf("---cpdf_drawCap\n");
+#  cpdf_drawCap(cpdf_capRound);
+#  prerr();
+#  cpdf_drawTo(100, 100);
+#  cpdf_drawLine(150, 100);
+#  cpdf_drawStroke();
+#  printf("---cpdf_drawJoin\n");
+#  cpdf_drawJoin(cpdf_joinRound);
+#  prerr();
+#  cpdf_drawTo(200, 200);
+#  cpdf_drawLine(250, 200);
+#  cpdf_drawLine(350, 0);
+#  cpdf_drawStroke();
+#  printf("---cpdf_drawMiter\n");
+#  cpdf_drawMiter(0.0);
+#  prerr();
+#  printf("---cpdf_drawDash\n");
+#  cpdf_drawDash("30 20 10");
+#  prerr();
+#  cpdf_drawStrokeColRGB(0, 0.0, 0.9);
+#  cpdf_drawTo(200, 200);
+#  cpdf_drawLine(250, 200);
+#  cpdf_drawLine(350, 0);
+#  cpdf_drawStroke();
+#  /* Here, we will use push/pop and the translation functions to draw a
+#   * rectangle, transformed */
+#  cpdf_drawThick(5);
+#  cpdf_drawRect(100, 500, 100, 100);
+#  cpdf_drawStroke();
+#  printf("---cpdf_drawPush\n");
+#  cpdf_drawPush();
+#  prerr();
+#  printf("---cpdf_drawPop\n");
+#  cpdf_drawPop();
+#  prerr();
+#  printf("---cpdf_drawMTrans\n");
+#  cpdf_drawPush();
+#  cpdf_drawMTrans(20.0, 20.0);
+#  cpdf_drawRect(100, 500, 100, 100);
+#  cpdf_drawStroke();
+#  prerr();
+#  cpdf_drawPop();
+#  printf("---cpdf_drawMRot\n");
+#  cpdf_drawPush();
+#  cpdf_drawMRot(0.0, 0.0, 0.1);
+#  cpdf_drawRect(100, 500, 100, 100);
+#  cpdf_drawStroke();
+#  prerr();
+#  cpdf_drawPop();
+#  printf("---cpdf_drawMScale\n");
+#  cpdf_drawPush();
+#  cpdf_drawMScale(0.0, 0.0, 0.9, 1.1);
+#  cpdf_drawRect(100, 500, 100, 100);
+#  cpdf_drawStroke();
+#  prerr();
+#  cpdf_drawPop();
+#  printf("---cpdf_drawShearX\n");
+#  cpdf_drawPush();
+#  cpdf_drawMShearX(100.0, 500.0, 0.5);
+#  cpdf_drawRect(100, 500, 100, 100);
+#  cpdf_drawStroke();
+#  prerr();
+#  cpdf_drawPop();
+#  printf("---cpdf_drawShearY\n");
+#  cpdf_drawPush();
+#  cpdf_drawMShearY(100.0, 500.0, 0.5);
+#  cpdf_drawRect(100, 500, 100, 100);
+#  cpdf_drawStroke();
+#  prerr();
+#  cpdf_drawPop();
+#  printf("---cpdf_drawMatrix\n");
+#  cpdf_drawPush();
+#  cpdf_drawMatrix(0.0, 1.0, 2.0, 3.0, 4.0, 5.0);
+#  cpdf_drawRect(100, 500, 100, 100);
+#  cpdf_drawStroke();
+#  prerr();
+#  cpdf_drawPop();
+#  printf("---cpdf_drawXObjBBox\n");
+#  cpdf_drawXObjBBox(0.0, 0.0, 1000.0, 1000.0);
+#  prerr();
+#  printf("---cpdf_drawXObj\n");
+#  cpdf_drawXObj("A");
+#  prerr();
+#  cpdf_drawCircle(0.0, 0.0, 200.0);
+#  cpdf_drawStroke();
+#  printf("---cpdf_drawEndXObj\n");
+#  cpdf_drawEndXObj();
+#  prerr();
+#  printf("---cpdf_drawUse\n");
+#  cpdf_drawUse("A");
+#  prerr();
+#  cpdf_drawMTrans(100, 100);
+#  cpdf_drawUse("A");
+#  cpdf_drawPush();
+#  cpdf_drawMScale(0, 0, 100, 100);
+#  prerr();
+#  printf("---cpdf_drawJPEG\n");
+#  cpdf_drawJPEG("A", "testinputs/jpg.jpg");
+#  prerr();
+#  printf("---cpdf_drawPNG\n");
+#  cpdf_drawPNG("B", "testinputs/png.png");
+#  prerr();
+#  printf("---cpdf_drawImage\n");
+#  cpdf_drawImage("A");
+#  cpdf_drawMScale(0, 0, 0.7, 0.7);
+#  cpdf_drawImage("B");
+#  prerr();
+#  cpdf_drawPop();
+#  printf("---cpdf_drawFillOpacity\n");
+#  cpdf_drawFillOpacity(0.5);
+#  prerr();
+#  printf("---cpdf_drawStrokeOpacity\n");
+#  cpdf_drawStrokeOpacity(0.5);
+#  prerr();
+#  cpdf_drawCircle(0., 0., 300.);
+#  cpdf_drawStrokeFill();
+#  printf("---cpdf_drawBT\n");
+#  cpdf_drawBT();
+#  prerr();
+#  printf("---cpdf_loadFont\n");
+#  cpdf_loadFont("A", "testinputs/NotoSans-Black.ttf");
+#  prerr();
+#  printf("---cpdf_drawFont\n");
+#  cpdf_drawFont("Times-Roman");
+#  prerr();
+#  printf("---cpdf_drawFontSize\n");
+#  cpdf_drawFontSize(15.0);
+#  prerr();
+#  printf("---cpdf_drawText\n");
+#  cpdf_drawText("Hello!");
+#  prerr();
+#  cpdf_drawFont("A");
+#  printf("---cpdf_drawSText\n");
+#  cpdf_drawSText("Page %Page on %filename with bates |%Bates|");
+#  prerr();
+#  printf("---cpdf_drawET\n");
+#  cpdf_drawET();
+#  prerr();
+#  cpdf_drawMTrans(100, 100);
+#  cpdf_drawDash("0");
+#  cpdf_drawStrokeColGrey(1.0);
+#  cpdf_drawThick(0.5);
+#  printf("---cpdf_drawCharSpace\n");
+#  cpdf_drawCharSpace(10.0);
+#  prerr();
+#  printf("---cpdf_drawWordSpace\n");
+#  cpdf_drawWordSpace(20.0);
+#  prerr();
+#  printf("---cpdf_drawTextScale\n");
+#  cpdf_drawTextScale(70.0);
+#  prerr();
+#  printf("---cpdf_drawRenderMode\n");
+#  cpdf_drawRenderMode(1);
+#  prerr();
+#  printf("---cpdf_drawRise\n");
+#  cpdf_drawRise(10.0);
+#  prerr();
+#  cpdf_drawBT();
+#  cpdf_drawText("With parameters...");
+#  printf("---cpdf_drawLeading\n");
+#  cpdf_drawLeading(30.0);
+#  prerr();
+#  printf("---cpdf_drawNL\n");
+#  cpdf_drawNL();
+#  cpdf_drawText("another line...");
+#  prerr();
+#  cpdf_drawNL();
+#  cpdf_drawText("and yet more......");
+#  cpdf_drawET();
+#  printf("---cpdf_drawNewPage\n");
+#  cpdf_drawNewPage();
+#  prerr();
+#  cpdf_drawBT();
+#  cpdf_drawText("Another page");
+#  cpdf_drawET();
+#  /*printf("---cpdf_drawEnd\n");
+#  cpdf_drawEnd(draw, drawall);*/
+    print("---cpdf_drawEndExtended()")
+    try:
+        pycpdflib.drawEndExtended(draw, drawall, True, 10, "filename.txt")
+    except:
+        prerr()
+    try:
+        pycpdflib.toFile(draw, "testoutputs/drawn.pdf", False, False)
+    except:
+        prerr()
 
 def chapter19():
     print('***** CHAPTER 19. Miscellaneous')

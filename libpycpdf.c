@@ -1350,6 +1350,10 @@ void pycpdf_drawCircle(double x, double y, double r) {
   return cpdf_drawCircle(x, y, r);
 }
 
+void pycpdf_drawStroke() {
+  return cpdf_drawStroke();
+}
+
 void pycpdf_drawFill() {
   return cpdf_drawFill();
 }

@@ -223,6 +223,15 @@ def loadDLL(f):
     libc.pycpdf_imagesJSON.restype = POINTER(c_char)
     libc.pycpdf_imageResolutionJSON.restype = POINTER(c_char)
     libc.pycpdf_imageResolutionJSON.argtypes = [c_int, POINTER(c_int), c_double]
+    libc.pycpdf_drawTo.argtypes = [c_double, c_double]
+    libc.pycpdf_drawLine.argtypes = [c_double, c_double]
+    libc.pycpdf_drawRect.argtypes = [c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawBez.argtypes = [c_double, c_double, c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawBez23.argtypes = [c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawBez13.argtypes = [c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawCircle.argtypes = [c_double, c_double, c_double]
+    libc.pycpdf_drawStrokeColRGB.argtypes = [c_double, c_double, c_double]
+    libc.pycpdf_drawFillColRGB.argtypes = [c_double, c_double, c_double]
     LP_c_char = POINTER(c_char)
     LP_LP_c_char = POINTER(LP_c_char)
     argc = len(sys.argv)
@@ -2435,7 +2444,98 @@ def fromJPEG(filename):
     checkerror()
     return pdf
 
-# CHAPTER 18. Miscellaneous
+
+# CHAPTER 18. Drawing on PDFs
+
+def drawBegin():
+    """FIXME"""
+    libc.pycpdf_drawBegin()
+    checkerror()
+    return
+
+def drawEnd(pdf, r):
+    """FIXME"""
+    libc.pycpdf_drawEnd()
+    checkerror()
+    return
+
+def drawEndExtended(pdf, r, underneath, bates, filename):
+    """FIXME"""
+    rn = range_of_list(r)
+    libc.pycpdf_drawEndExtended(pdf.pdf, rn, underneath, bates, filename, str.encode(filename))
+    deleteRange(rn)
+    checkerror()
+    return
+
+def drawRect(x, y, w, h):
+    """FIXME"""
+    libc.pycpdf_drawRect(x, y, w, h)
+    checkerror()
+    return
+
+def drawTo(x, y):
+    """FIXME"""
+    libc.pycpdf_drawTo(x, y)
+    checkerror()
+    return
+
+def drawLine(x, y):
+    """FIXME"""
+    libc.pycpdf_drawLine(x, y)
+    checkerror()
+    return
+
+def drawBez(x1, y1, x2, y2, x3, y3):
+    """FIXME"""
+    libc.pycpdf_drawBez(x1, y1, x2, y2, x3, y3)
+    checkerror()
+    return
+
+def drawBez23(x2, y2, x3, y3):
+    """FIXME"""
+    libc.pycpdf_drawBez23(x2, y2, x3, y3)
+    checkerror()
+    return
+
+def drawBez13(x1, y1, x3, y3):
+    """FIXME"""
+    libc.pycpdf_drawBez13(x1, y1, x3, y3)
+    checkerror()
+    return
+
+def drawCircle(x, y, r):
+    """FIXME"""
+    libc.pycpdf_drawCircle(x, y, r)
+    checkerror()
+    return
+
+def drawStroke():
+    """FIXME"""
+    libc.pycpdf_drawStroke()
+    checkerror()
+    return
+
+def drawFill():
+    """FIXME"""
+    libc.pycpdf_drawFill()
+    checkerror()
+    return
+
+#fixme drawfill....drawstrokecolgrey
+
+def drawStrokeColRGB(r, g, b):
+    """FIXME"""
+    libc.pycpdf_drawStrokeColRGB(r, g, b)
+    checkerror()
+    return
+
+def drawFillColRGB(r, g, b):
+    """FIXME"""
+    libc.pycpdf_drawFillColRGB(r, g, b)
+    checkerror()
+    return
+
+# CHAPTER 19. Miscellaneous
 
 
 def draft(pdf, r, boxes):
