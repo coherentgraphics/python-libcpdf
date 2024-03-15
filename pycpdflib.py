@@ -230,8 +230,12 @@ def loadDLL(f):
     libc.pycpdf_drawBez23.argtypes = [c_double, c_double, c_double, c_double]
     libc.pycpdf_drawBez13.argtypes = [c_double, c_double, c_double, c_double]
     libc.pycpdf_drawCircle.argtypes = [c_double, c_double, c_double]
+    libc.pycpdf_drawStrokeColGrey.argtypes = [c_double]
     libc.pycpdf_drawStrokeColRGB.argtypes = [c_double, c_double, c_double]
+    libc.pycpdf_drawStrokeColCYMK.argtypes = [c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawFillColGrey.argtypes = [c_double]
     libc.pycpdf_drawFillColRGB.argtypes = [c_double, c_double, c_double]
+    libc.pycpdf_drawFillColCYMK.argtypes = [c_double, c_double, c_double, c_double]
     LP_c_char = POINTER(c_char)
     LP_LP_c_char = POINTER(LP_c_char)
     argc = len(sys.argv)
@@ -2521,7 +2525,47 @@ def drawFill():
     checkerror()
     return
 
-#fixme drawfill....drawstrokecolgrey
+def drawFillEo():
+    """FIXME"""
+    libc.pycpdf_drawFillEo()
+    checkerror()
+    return
+
+def drawStrokeFill():
+    """FIXME"""
+    libc.pycpdf_drawStrokeFill()
+    checkerror()
+    return
+
+def drawStrokeFillEo():
+    """FIXME"""
+    libc.pycpdf_drawStrokeFillEo()
+    checkerror()
+    return
+
+def drawClose():
+    """FIXME"""
+    libc.pycpdf_drawClose()
+    checkerror()
+    return
+
+def drawClip():
+    """FIXME"""
+    libc.pycpdf_drawClip()
+    checkerror()
+    return
+
+def drawClipEo():
+    """FIXME"""
+    libc.pycpdf_drawClipEo()
+    checkerror()
+    return
+
+def drawStrokeColGrey(g):
+    """FIXME"""
+    libc.pycpdf_drawStrokeColGrey(g)
+    checkerror()
+    return
 
 def drawStrokeColRGB(r, g, b):
     """FIXME"""
@@ -2529,9 +2573,39 @@ def drawStrokeColRGB(r, g, b):
     checkerror()
     return
 
+def drawStrokeColCYMK(c, y, m, k):
+    """FIXME"""
+    libc.pycpdf_drawStrokeColCYMK(c, y, m, k)
+    checkerror()
+    return
+
+def drawFillColGrey(g):
+    """FIXME"""
+    libc.pycpdf_drawFillColGrey(g)
+    checkerror()
+    return
+
 def drawFillColRGB(r, g, b):
     """FIXME"""
     libc.pycpdf_drawFillColRGB(r, g, b)
+    checkerror()
+    return
+
+def drawFillColCYMK(c, y, m, k):
+    """FIXME"""
+    libc.pycpdf_drawFillColCYMK(c, y, m, k)
+    checkerror()
+    return
+
+def drawPush():
+    """FIXME"""
+    libc.pycpdf_drawPush()
+    checkerror()
+    return
+
+def drawPop():
+    """FIXME"""
+    libc.pycpdf_drawPop()
     checkerror()
     return
 

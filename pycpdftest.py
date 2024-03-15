@@ -1907,95 +1907,128 @@ def chapter18():
         pycpdflib.drawFill();
     except:
         prerr()
-#  printf("---cpdf_drawStrokeColGrey\n");
-#  cpdf_drawStrokeColGrey(0.5);
-#  prerr();
-#  cpdf_drawCircle(500.0, 420.0, 50.0);
-#  cpdf_drawStroke();
-#  printf("---cpdf_drawStrokeColRGB\n");
-#  cpdf_drawStrokeColRGB(0.5, 0.0, 0.5);
-#  prerr();
-#  cpdf_drawCircle(500.0, 440.0, 50.0);
-#  cpdf_drawStroke();
-#  printf("---cpdf_drawStrokeColCYMK\n");
-#  cpdf_drawStrokeColCYMK(0.3, 0.4, 0.5, 0.1);
-#  prerr();
-#  cpdf_drawCircle(500.0, 460.0, 50.0);
-#  cpdf_drawStroke();
-#  printf("---cpdf_drawFillColGrey\n");
-#  cpdf_drawFillColGrey(0.5);
-#  prerr();
-#  cpdf_drawCircle(500.0, 480.0, 50.0);
-#  cpdf_drawFill();
-#  printf("---cpdf_drawFillColRGB\n");
-#  cpdf_drawFillColRGB(0.5, 0.0, 0.5);
-#  prerr();
-#  cpdf_drawCircle(500.0, 500.0, 50.0);
-#  cpdf_drawFill();
-#  printf("---cpdf_drawFillColCYMK\n");
-#  cpdf_drawFillColCYMK(0.3, 0.4, 0.5, 0.1);
-#  prerr();
-#  cpdf_drawCircle(500.0, 520.0, 50.0);
-#  cpdf_drawFill();
-#  printf("---cpdf_drawFill\n");
-#  cpdf_drawFill();
-#  prerr();
-#  cpdf_drawTo(100, 100);
-#  cpdf_drawLine(100, 300);
-#  cpdf_drawLine(200, 100);
-#  cpdf_drawLine(0, 200);
-#  cpdf_drawLine(200, 200);
-#  cpdf_drawClose();
-#  printf("---cpdf_drawFillEo\n");
-#  cpdf_drawFill();
-#  prerr();
-#  cpdf_drawFillColRGB(0, 0.5, 0);
-#  cpdf_drawTo(100, 100);
-#  cpdf_drawLine(100, 300);
-#  cpdf_drawLine(200, 100);
-#  cpdf_drawLine(0, 200);
-#  cpdf_drawLine(200, 200);
-#  cpdf_drawClose();
-#  printf("---cpdf_drawFillEo\n");
-#  cpdf_drawFillEo();
-#  cpdf_drawTo(300, 300);
-#  cpdf_drawLine(300, 500);
-#  cpdf_drawLine(400, 300);
-#  cpdf_drawLine(200, 400);
-#  cpdf_drawLine(400, 400);
-#  cpdf_drawClose();
-#  printf("---cpdf_drawStrokeFill\n");
-#  cpdf_drawStrokeFill();
-#  prerr();
-#  cpdf_drawFillColRGB(0, 0, 0.5);
-#  cpdf_drawStrokeColRGB(0, 0.5, 0.5);
-#  cpdf_drawFillEo();
-#  cpdf_drawTo(300, 300);
-#  cpdf_drawLine(300, 500);
-#  cpdf_drawLine(400, 300);
-#  cpdf_drawLine(200, 400);
-#  cpdf_drawLine(400, 400);
-#  cpdf_drawClose();
-#  printf("---cpdf_drawStrokeFillEo\n");
-#  cpdf_drawStrokeFillEo();
-#  prerr();
-#  printf("---cpdf_drawClose\n");
-#  cpdf_drawClose();
-#  prerr();
-#  cpdf_drawPush();
-#  cpdf_drawCircle(300, 300, 100);
-#  printf("---cpdf_drawClip\n");
-#  cpdf_drawClip();
-#  prerr();
-#  cpdf_drawCircle(300, 350, 100);
-#  cpdf_drawFill();
-#  cpdf_drawCircle(500, 500, 300);
-#  printf("---cpdf_drawClipEo\n");
-#  cpdf_drawClipEo();
-#  prerr();
-#  cpdf_drawCircle(500, 550, 300);
-#  cpdf_drawFill();
-#  cpdf_drawPop();
+    print("---cpdf_drawStrokeColGrey()")
+    try:
+        pycpdflib.drawStrokeColGrey(0.5)
+        pycpdflib.drawCircle(500.0, 420.0, 50.0)
+        pycpdflib.drawStroke()
+    except:
+        prerr()
+    print("---cpdf_drawStrokeColRGB()")
+    try:
+        pycpdflib.drawStrokeColRGB(0.5, 0.0, 0.5)
+        pycpdflib.drawCircle(500.0, 440.0, 50.0)
+        pycpdflib.drawStroke()
+    except:
+        prerr()
+    print("---cpdf_drawStrokeColCYMK()")
+    try:
+        pycpdflib.drawStrokeColCYMK(0.3, 0.4, 0.5, 0.1)
+        pycpdflib.drawCircle(500.0, 460.0, 50.0)
+        pycpdflib.drawStroke()
+    except:
+        prerr()
+    print("---cpdf_drawFillColGrey()")
+    try:
+        pycpdflib.drawFillColGrey(0.5)
+        pycpdflib.drawCircle(500.0, 480.0, 50.0)
+        pycpdflib.drawFill()
+    except:
+        prerr()
+    print("---cpdf_drawFillColRGB()")
+    try:
+        pycpdflib.drawFillColRGB(0.5, 0.0, 0.5)
+        pycpdflib.drawCircle(500.0, 500.0, 50.0)
+        pycpdflib.drawFill()
+    except:
+        prerr()
+    print("---cpdf_drawFillColCYMK()")
+    try:
+        pycpdflib.drawFillColCYMK(0.3, 0.4, 0.5, 0.1)
+        pycpdflib.drawCircle(500.0, 520.0, 50.0)
+        pycpdflib.drawFill()
+    except:
+        prerr()
+    print("---cpdf_drawFill()")
+    try:
+        pycpdflib.drawFill()
+        pycpdflib.drawTo(100, 100)
+        pycpdflib.drawLine(100, 300)
+        pycpdflib.drawLine(200, 100)
+        pycpdflib.drawLine(0, 200)
+        pycpdflib.drawLine(200, 200)
+        pycpdflib.drawClose()
+    except:
+        prerr()
+    print("---cpdf_drawFillEo()")
+    try:
+        pycpdflib.drawFill()
+        pycpdflib.drawFillColRGB(0, 0.5, 0)
+        pycpdflib.drawTo(100, 100)
+        pycpdflib.drawLine(100, 300)
+        pycpdflib.drawLine(200, 100)
+        pycpdflib.drawLine(0, 200)
+        pycpdflib.drawLine(200, 200)
+        pycpdflib.drawClose()
+    except:
+       prerr()
+    print("---cpdf_drawFillEo()")
+    try:
+        pycpdflib.drawFillEo()
+        pycpdflib.drawTo(300, 300)
+        pycpdflib.drawLine(300, 500)
+        pycpdflib.drawLine(400, 300)
+        pycpdflib.drawLine(200, 400)
+        pycpdflib.drawLine(400, 400)
+        pycpdflib.drawClose()
+    except:
+        prerr()
+    print("---cpdf_drawStrokeFill()")
+    try:
+        pycpdflib.drawStrokeFill()
+        pycpdflib.drawFillColRGB(0, 0, 0.5)
+        pycpdflib.drawStrokeColRGB(0, 0.5, 0.5)
+        pycpdflib.drawFillEo()
+        pycpdflib.drawTo(300, 300)
+        pycpdflib.drawLine(300, 500)
+        pycpdflib.drawLine(400, 300)
+        pycpdflib.drawLine(200, 400)
+        pycpdflib.drawLine(400, 400)
+        pycpdflib.drawClose()
+    except:
+        prerr()
+    print("---cpdf_drawStrokeFillEo()")
+    try:
+        pycpdflib.drawStrokeFillEo()
+    except:
+        prerr()
+    print("---cpdf_drawClose()")
+    try:
+        pycpdflib.drawClose()
+    except:
+        prerr()
+    try:
+        pycpdflib.drawPush()
+        pycpdflib.drawCircle(300, 300, 100)
+    except:
+        prerr()
+    print("---cpdf_drawClip()")
+    try: 
+        pycpdflib.drawClip()
+        pycpdflib.drawCircle(300, 350, 100)
+        pycpdflib.drawFill()
+        pycpdflib.drawCircle(500, 500, 300)
+    except:
+        prerr()
+    print("---cpdf_drawClipEo()")
+    try:
+       pycpdflib.drawClipEo();
+       pycpdflib.drawCircle(500, 550, 300)
+       pycpdflib.drawFill()
+       pycpdflib.drawPop()
+    except:
+        prerr()
+
 #  printf("---cpdf_drawThick\n");
 #  cpdf_drawThick(20.0);
 #  prerr();
