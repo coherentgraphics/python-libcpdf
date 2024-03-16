@@ -1466,6 +1466,10 @@ void pycpdf_drawXObj(char* name) {
   return cpdf_drawXObj(name);
 }
 
+void pycpdf_drawUse(char* name) {
+  return cpdf_drawUse(name);
+}
+
 void pycpdf_drawEndXObj() {
   return cpdf_drawEndXObj();
 }

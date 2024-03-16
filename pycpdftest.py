@@ -2087,67 +2087,87 @@ def chapter18():
     except:
         prerr()
 
-#  printf("---cpdf_drawMTrans\n");
-#  cpdf_drawPush();
-#  cpdf_drawMTrans(20.0, 20.0);
-#  cpdf_drawRect(100, 500, 100, 100);
-#  cpdf_drawStroke();
-#  prerr();
-#  cpdf_drawPop();
-#  printf("---cpdf_drawMRot\n");
-#  cpdf_drawPush();
-#  cpdf_drawMRot(0.0, 0.0, 0.1);
-#  cpdf_drawRect(100, 500, 100, 100);
-#  cpdf_drawStroke();
-#  prerr();
-#  cpdf_drawPop();
-#  printf("---cpdf_drawMScale\n");
-#  cpdf_drawPush();
-#  cpdf_drawMScale(0.0, 0.0, 0.9, 1.1);
-#  cpdf_drawRect(100, 500, 100, 100);
-#  cpdf_drawStroke();
-#  prerr();
-#  cpdf_drawPop();
-#  printf("---cpdf_drawShearX\n");
-#  cpdf_drawPush();
-#  cpdf_drawMShearX(100.0, 500.0, 0.5);
-#  cpdf_drawRect(100, 500, 100, 100);
-#  cpdf_drawStroke();
-#  prerr();
-#  cpdf_drawPop();
-#  printf("---cpdf_drawShearY\n");
-#  cpdf_drawPush();
-#  cpdf_drawMShearY(100.0, 500.0, 0.5);
-#  cpdf_drawRect(100, 500, 100, 100);
-#  cpdf_drawStroke();
-#  prerr();
-#  cpdf_drawPop();
-#  printf("---cpdf_drawMatrix\n");
-#  cpdf_drawPush();
-#  cpdf_drawMatrix(0.0, 1.0, 2.0, 3.0, 4.0, 5.0);
-#  cpdf_drawRect(100, 500, 100, 100);
-#  cpdf_drawStroke();
-#  prerr();
-#  cpdf_drawPop();
-#  printf("---cpdf_drawXObjBBox\n");
-#  cpdf_drawXObjBBox(0.0, 0.0, 1000.0, 1000.0);
-#  prerr();
-#  printf("---cpdf_drawXObj\n");
-#  cpdf_drawXObj("A");
-#  prerr();
-#  cpdf_drawCircle(0.0, 0.0, 200.0);
-#  cpdf_drawStroke();
-#  printf("---cpdf_drawEndXObj\n");
-#  cpdf_drawEndXObj();
-#  prerr();
-#  printf("---cpdf_drawUse\n");
-#  cpdf_drawUse("A");
-#  prerr();
-#  cpdf_drawMTrans(100, 100);
-#  cpdf_drawUse("A");
-#  cpdf_drawPush();
-#  cpdf_drawMScale(0, 0, 100, 100);
-#  prerr();
+    print("---cpdf_drawMTrans()")
+    try:
+        pycpdflib.drawPush()
+        pycpdflib.drawMTrans(20.0, 20.0)
+        pycpdflib.drawRect(100, 500, 100, 100)
+        pycpdflib.drawStroke()
+        pycpdflib.drawPop()
+    except:
+        prerr()
+    print("---cpdf_drawMRot()")
+    try:
+        pycpdflib.drawPush()
+        pycpdflib.drawMRot(0.0, 0.0, 0.1)
+        pycpdflib.drawRect(100, 500, 100, 100)
+        pycpdflib.drawStroke()
+        pycpdflib.drawPop()
+    except:
+        prerr()
+    print("---cpdf_drawMScale()")
+    try:
+        pycpdflib.drawPush()
+        pycpdflib.drawMScale(0.0, 0.0, 0.9, 1.1)
+        pycpdflib.drawRect(100, 500, 100, 100)
+        pycpdflib.drawStroke()
+        pycpdflib.drawPop()
+    except:
+        prerr()
+    print("---cpdf_drawShearX()")
+    try:
+        pycpdflib.drawPush()
+        pycpdflib.drawMShearX(100.0, 500.0, 0.5)
+        pycpdflib.drawRect(100, 500, 100, 100)
+        pycpdflib.drawStroke()
+        pycpdflib.drawPop()
+    except:
+        prerr()
+    print("---cpdf_drawShearY()")
+    try:
+        pycpdflib.drawPush()
+        pycpdflib.drawMShearY(100.0, 500.0, 0.5)
+        pycpdflib.drawRect(100, 500, 100, 100)
+        pycpdflib.drawStroke()
+        pycpdflib.drawPop()
+    except:
+        prerr()
+    print("---cpdf_drawMatrix()")
+    try:
+        pycpdflib.drawPush()
+        pycpdflib.drawMatrix(0.0, 1.0, 2.0, 3.0, 4.0, 5.0)
+        pycpdflib.drawRect(100, 500, 100, 100)
+        pycpdflib.drawStroke()
+        pycpdflib.drawPop()
+    except:
+        prerr()
+    print("---cpdf_drawXObjBBox()")
+    try:
+        pycpdflib.drawXObjBBox(0.0, 0.0, 1000.0, 1000.0)
+    except:
+        prerr()
+    print("---cpdf_drawXObj()")
+    try:
+        pycpdflib.drawXObj("A")
+        pycpdflib.drawCircle(0.0, 0.0, 200.0)
+        pycpdflib.drawStroke()
+    except:
+        prerr()
+    print("---cpdf_drawEndXObj()")
+    try:
+        pycpdflib.drawEndXObj()
+    except:
+        prerr()
+    print("---cpdf_drawUse()")
+    try:
+        pycpdflib.drawUse("A")
+        pycpdflib.drawMTrans(100, 100)
+        pycpdflib.drawUse("A")
+        pycpdflib.drawPush()
+        pycpdflib.drawMScale(0, 0, 100, 100)
+    except:
+        prerr()
+
 #  printf("---cpdf_drawJPEG\n");
 #  cpdf_drawJPEG("A", "testinputs/jpg.jpg");
 #  prerr();

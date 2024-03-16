@@ -575,6 +575,7 @@ void pycpdf_outputJSONMemoryFree(void) {
 /* __AUTO void drawMShearY(double x, double y, double a) */
 /* __AUTO void drawXObjBBox(double x, double y, double w, double h) */
 /* __AUTO void drawXObj(char* name) */
+/* __AUTO void drawUse(char* name) */
 /* __AUTO void drawEndXObj() */
 /* __AUTO void drawImage(char* name) */
 /* __AUTO void drawFillOpacity(double n) */

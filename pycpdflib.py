@@ -238,6 +238,13 @@ def loadDLL(f):
     libc.pycpdf_drawFillColCYMK.argtypes = [c_double, c_double, c_double, c_double]
     libc.pycpdf_drawThick.argtypes = [c_double]
     libc.pycpdf_drawMiter.argtypes = [c_double]
+    libc.pycpdf_drawMTrans.argtypes = [c_double, c_double]
+    libc.pycpdf_drawMRot.argtypes = [c_double, c_double, c_double]
+    libc.pycpdf_drawMScale.argtypes = [c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawMShearX.argtypes = [c_double, c_double, c_double]
+    libc.pycpdf_drawMShearY.argtypes = [c_double, c_double, c_double]
+    libc.pycpdf_drawMatrix.argtypes = [c_double, c_double, c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawXObjBBox.argtypes = [c_double, c_double, c_double, c_double]
     LP_c_char = POINTER(c_char)
     LP_LP_c_char = POINTER(LP_c_char)
     argc = len(sys.argv)
@@ -2648,6 +2655,66 @@ def drawPush():
 def drawPop():
     """FIXME"""
     libc.pycpdf_drawPop()
+    checkerror()
+    return
+
+def drawMTrans(tx, ty):
+    """FIXME"""
+    libc.pycpdf_drawMTrans(tx, ty)
+    checkerror()
+    return
+
+def drawMRot(x, y, a):
+    """FIXME"""
+    libc.pycpdf_drawMRot(x, y, a)
+    checkerror()
+    return
+
+def drawMScale(x, y, sx, sy):
+    """FIXME"""
+    libc.pycpdf_drawMScale(x, y, sx, sy)
+    checkerror()
+    return
+
+def drawMShearX(x, y, a):
+    """FIXME"""
+    libc.pycpdf_drawMShearX(x, y, a)
+    checkerror()
+    return
+
+def drawMShearY(x, y, a):
+    """FIXME"""
+    libc.pycpdf_drawMShearY(x, y, a)
+    checkerror()
+    return
+
+def drawMatrix(a, b, c, d, e, f):
+    """FIXME"""
+    libc.pycpdf_drawMatrix(a, b, c, d, e, f)
+    checkerror()
+    return
+
+def drawXObjBBox(x, y, w, h):
+    """FIXME"""
+    libc.pycpdf_drawXObjBBox(x, y, w, h)
+    checkerror()
+    return
+
+def drawXObj(name):
+    """FIXME"""
+    libc.pycpdf_drawXObj(str.encode(name))
+    checkerror()
+    return
+
+def drawEndXObj():
+    """FIXME"""
+    libc.pycpdf_drawEndXObj()
+    checkerror()
+    return
+
+def drawUse(name):
+    """FIXME"""
+    libc.pycpdf_drawUse(str.encode(name))
     checkerror()
     return
 
