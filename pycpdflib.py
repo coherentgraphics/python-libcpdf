@@ -247,12 +247,12 @@ def loadDLL(f):
     libc.pycpdf_drawXObjBBox.argtypes = [c_double, c_double, c_double, c_double]
     libc.pycpdf_drawFillOpacity.argtypes = [c_double]
     libc.pycpdf_drawStrokeOpacity.argtypes = [c_double]
-    libc.pycpdf_drawFontSize = [c_double]
-    libc.pycpdf_drawCharSpace = [c_double]
-    libc.pycpdf_drawWordSpace = [c_double]
-    libc.pycpdf_drawTextScale = [c_double]
-    libc.pycpdf_drawRise = [c_double]
-    libc.pycpdf_drawLeading = [c_double]
+    libc.pycpdf_drawFontSize.argtypes = [c_double]
+    libc.pycpdf_drawCharSpace.argtypes = [c_double]
+    libc.pycpdf_drawWordSpace.argtypes = [c_double]
+    libc.pycpdf_drawTextScale.argtypes = [c_double]
+    libc.pycpdf_drawRise.argtypes = [c_double]
+    libc.pycpdf_drawLeading.argtypes = [c_double]
     LP_c_char = POINTER(c_char)
     LP_LP_c_char = POINTER(LP_c_char)
     argc = len(sys.argv)
@@ -2780,9 +2780,9 @@ def drawFont(name):
     checkerror()
     return
 
-def drawFontSize(b):
+def drawFontSize(n):
     """FIXME"""
-    libc.pycpdf_drawFontSize(b)
+    libc.pycpdf_drawFontSize(n)
     checkerror()
     return
 
