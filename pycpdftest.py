@@ -925,6 +925,9 @@ def chapter9():
     mp = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     mp2 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     mp25 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    mp25a = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    mp25b = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
+    mp25c = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     mp26 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     mp3 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
     mp4 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
@@ -957,21 +960,20 @@ def chapter9():
         prerr()
     print('---cpdf_chop()')
     try:
-        pycpdflib.chop(mp25, pycpdflib.all(mp25), 2, 3, False, False, False)
+        pycpdflib.chop(mp25a, pycpdflib.all(mp25), 2, 3, False, False, False)
+        pycpdflib.toFile(mp25a, 'testoutputs/09mp25a.pdf', False, False)
     except:
         prerr()
     print('---cpdf_chopH()')
     try:
-        pycpdflib.chopH(mp25, pycpdflib.all(mp25), False, 200)
+        pycpdflib.chopH(mp25b, pycpdflib.all(mp25), False, 200)
+        pycpdflib.toFile(mp25b, 'testoutputs/09mp25b.pdf', False, False)
     except:
         prerr()
     print('---cpdf_chopV()')
     try:
-        pycpdflib.chopV(mp25, pycpdflib.all(mp25), True, 300)
-    except:
-        prerr()
-    try:
-        pycpdflib.toFile(mp25, 'testoutputs/09mp25.pdf', False, False)
+        pycpdflib.chopV(mp25c, pycpdflib.all(mp25), True, 300)
+        pycpdflib.toFile(mp25c, 'testoutputs/09mp25c.pdf', False, False)
     except:
         prerr()
     try:
@@ -1808,7 +1810,7 @@ def chapter17():
     except:
         fatal_prerr()
     try:
-        pycpdflib.toFile(pdf5, 'testoutputs/01blank.pdf', False, False)
+        pycpdflib.toFile(pdf5, 'testoutputs/17blank.pdf', False, False)
     except:
         prerr()
     print('---cpdf_blankDocumentPaper()')
@@ -1817,7 +1819,7 @@ def chapter17():
     except:
         fatal_prerr()
     try:
-        pycpdflib.toFile(pdf6, 'testoutputs/01blanka4.pdf', False, False)
+        pycpdflib.toFile(pdf6, 'testoutputs/17blanka4.pdf', False, False)
     except:
         prerr()
     print('---cpdf_textToPDF()')
@@ -1827,7 +1829,7 @@ def chapter17():
     except:
         fatal_prerr()
     try:
-        pycpdflib.toFile(ttpdf, 'testoutputs/01ttpdf.pdf', False, False)
+        pycpdflib.toFile(ttpdf, 'testoutputs/17ttpdf.pdf', False, False)
     except:
         prerr()
     print('---cpdf_textToPDFPaper()')
@@ -1838,17 +1840,19 @@ def chapter17():
         fatal_prerr()
     try:
         pycpdflib.toFile(
-            ttpdfpaper, 'testoutputs/01ttpdfpaper.pdf', False, False)
+            ttpdfpaper, 'testoutputs/17ttpdfpaper.pdf', False, False)
     except:
         prerr()
     print('---cpdf_fromPNG()')
     try:
         png = pycpdflib.fromPNG('testinputs/png.png')
+        pycpdflib.toFile(png, 'testoutputs/17png.pdf', False, False)
     except:
         prerr()
     print('---cpdf_fromJPEG()')
     try:
-        png = pycpdflib.fromJPEG('testinputs/jpg.jpg')
+        jpeg = pycpdflib.fromJPEG('testinputs/jpg.jpg')
+        pycpdflib.toFile(jpeg, 'testoutputs/17jpg.pdf', False, False)
     except:
         prerr()
 
@@ -2375,7 +2379,7 @@ def chapter19():
     except:
         prerr()
     try:
-        pycpdflib.toFile(misc, 'testoutputs/17draft.pdf', False, False)
+        pycpdflib.toFile(misc, 'testoutputs/99draft.pdf', False, False)
     except:
         prerr()
     print('---cpdf_removeAllText()')
@@ -2385,7 +2389,7 @@ def chapter19():
         prerr()
     try:
         pycpdflib.toFile(
-            misc2, 'testoutputs/17removealltext.pdf', False, False)
+            misc2, 'testoutputs/99removealltext.pdf', False, False)
     except:
         prerr()
     print('---cpdf_blackText()')
@@ -2394,7 +2398,7 @@ def chapter19():
     except:
         prerr()
     try:
-        pycpdflib.toFile(misc3, 'testoutputs/17blacktext.pdf', False, False)
+        pycpdflib.toFile(misc3, 'testoutputs/99blacktext.pdf', False, False)
     except:
         prerr()
     print('---cpdf_blackLines()')
@@ -2403,7 +2407,7 @@ def chapter19():
     except:
         prerr()
     try:
-        pycpdflib.toFile(misc4, 'testoutputs/17blacklines.pdf', False, False)
+        pycpdflib.toFile(misc4, 'testoutputs/99blacklines.pdf', False, False)
     except:
         prerr()
     print('---cpdf_blackFills()')
@@ -2412,7 +2416,7 @@ def chapter19():
     except:
         prerr()
     try:
-        pycpdflib.toFile(misc5, 'testoutputs/17blackfills.pdf', False, False)
+        pycpdflib.toFile(misc5, 'testoutputs/99blackfills.pdf', False, False)
     except:
         prerr()
     print('---cpdf_thinLines()')
@@ -2421,7 +2425,7 @@ def chapter19():
     except:
         prerr()
     try:
-        pycpdflib.toFile(misc6, 'testoutputs/17thinlines.pdf', False, False)
+        pycpdflib.toFile(misc6, 'testoutputs/99thinlines.pdf', False, False)
     except:
         prerr()
     print('---cpdf_copyId()')
@@ -2430,7 +2434,7 @@ def chapter19():
     except:
         prerr()
     try:
-        pycpdflib.toFile(misc7, 'testoutputs/17copyid.pdf', False, False)
+        pycpdflib.toFile(misc7, 'testoutputs/99copyid.pdf', False, False)
     except:
         prerr()
     print('---cpdf_removeId()')
@@ -2439,7 +2443,7 @@ def chapter19():
     except:
         prerr()
     try:
-        pycpdflib.toFile(misc8, 'testoutputs/17removeid.pdf', False, False)
+        pycpdflib.toFile(misc8, 'testoutputs/99removeid.pdf', False, False)
     except:
         prerr()
     print('---cpdf_setVersion()')
@@ -2448,7 +2452,7 @@ def chapter19():
     except:
         prerr()
     try:
-        pycpdflib.toFile(misc9, 'testoutputs/17setversion.pdf', False, False)
+        pycpdflib.toFile(misc9, 'testoutputs/99setversion.pdf', False, False)
     except:
         prerr()
     print('---cpdf_setFullVersion()')
@@ -2458,7 +2462,7 @@ def chapter19():
         prerr()
     try:
         pycpdflib.toFile(
-            misc10, 'testoutputs/17setfullversion.pdf', False, False)
+            misc10, 'testoutputs/99setfullversion.pdf', False, False)
     except:
         prerr()
     print('---cpdf_removeDictEntry()')
@@ -2468,7 +2472,7 @@ def chapter19():
         prerr()
     try:
         pycpdflib.toFile(
-            misc11, 'testoutputs/17removedictentry.pdf', False, False)
+            misc11, 'testoutputs/99removedictentry.pdf', False, False)
     except:
         prerr()
     print('---cpdf_removeDictEntrySearch()')
@@ -2478,7 +2482,7 @@ def chapter19():
         prerr()
     try:
         pycpdflib.toFile(
-            misc13, 'testoutputs/17removedictentrysearch.pdf', False, False)
+            misc13, 'testoutputs/99removedictentrysearch.pdf', False, False)
     except:
         prerr()
     print('---cpdf_replaceDictEntry()')
@@ -2488,7 +2492,7 @@ def chapter19():
         prerr()
     try:
         pycpdflib.toFile(
-            misc14, 'testoutputs/17replacedictentry.pdf', False, False)
+            misc14, 'testoutputs/99replacedictentry.pdf', False, False)
     except:
         prerr()
     print('---cpdf_replaceDictEntrySearch()')
@@ -2498,7 +2502,7 @@ def chapter19():
         prerr()
     try:
         pycpdflib.toFile(
-            misc15, 'testoutputs/17replacedictentrysearch.pdf', False, False)
+            misc15, 'testoutputs/99replacedictentrysearch.pdf', False, False)
     except:
         prerr()
     print('---cpdf_getDictEntries()')
@@ -2514,7 +2518,7 @@ def chapter19():
         prerr()
     try:
         pycpdflib.toFile(
-            misc12, 'testoutputs/17removeclipping.pdf', False, False)
+            misc12, 'testoutputs/99removeclipping.pdf', False, False)
     except:
         prerr()
 

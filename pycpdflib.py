@@ -150,6 +150,7 @@ def loadDLL(f):
     libc.pycpdf_scaleContents.argtypes =\
         [c_int, c_int, c_int, c_double, c_double, c_double]
     libc.pycpdf_shiftContents.argtypes = [c_int, c_int, c_double, c_double]
+    libc.pycpdf_shiftBoxes.argtypes = [c_int, c_int, c_double, c_double]
     libc.pycpdf_rotateContents.argtypes = [c_int, c_int, c_double]
     libc.pycpdf_crop.argtypes =\
         [c_int, c_int, c_double, c_double, c_double, c_double]
