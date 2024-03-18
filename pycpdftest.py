@@ -956,23 +956,24 @@ def chapter9():
     try:
         pycpdflib.impose(mp25, 5.0, 4.0, False, False, False,
                          False, False, 40.0, 20.0, 2.0)
+        pycpdflib.toFile(mp25, 'testoutputs/09mp25.pdf', False, False)
     except:
         prerr()
     print('---cpdf_chop()')
     try:
-        pycpdflib.chop(mp25a, pycpdflib.all(mp25), 2, 3, False, False, False)
+        pycpdflib.chop(mp25a, pycpdflib.all(mp25a), 2, 3, False, False, False)
         pycpdflib.toFile(mp25a, 'testoutputs/09mp25a.pdf', False, False)
     except:
         prerr()
     print('---cpdf_chopH()')
     try:
-        pycpdflib.chopH(mp25b, pycpdflib.all(mp25), False, 200)
+        pycpdflib.chopH(mp25b, pycpdflib.all(mp25a), False, 200)
         pycpdflib.toFile(mp25b, 'testoutputs/09mp25b.pdf', False, False)
     except:
         prerr()
     print('---cpdf_chopV()')
     try:
-        pycpdflib.chopV(mp25c, pycpdflib.all(mp25), True, 300)
+        pycpdflib.chopV(mp25c, pycpdflib.all(mp25a), True, 300)
         pycpdflib.toFile(mp25c, 'testoutputs/09mp25c.pdf', False, False)
     except:
         prerr()
@@ -2229,7 +2230,7 @@ def chapter18():
         prerr()
     print("---cpdf_drawSText()")
     try:
-        pycpdflib.drawSText("Page %Page on %filename with bates |%Bates|")
+        pycpdflib.drawSText("Page %Page with bates |%Bates|")
     except:
         prerr()
     print("---cpdf_drawET()")
