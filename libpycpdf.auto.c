@@ -101,6 +101,10 @@ void pycpdf_toMemoryFree(void) {
 /* __AUTO void decryptPdfOwner(int pdf, char *ownerpw) */
 /* __AUTO int hasPermission(int pdf, int perm) */
 /* __AUTO int encryptionKind(int pdf) */
+/* __AUTO void loadFont(char* name, char* filename) */ 
+
+/* CHAPTER 2. Merging and Splitting */
+
 /* __AUTO int mergeSimple(int *pdfs, int len) */
 /* __AUTO int merge(int *pdfs, int len, int retain_numbering, int remove_duplicate_fonts) */
 /* __AUTO int mergeSame(int *pdfs, int len, int retain_numbering, int remove_duplicate_fonts, int *ranges) */
@@ -577,12 +581,14 @@ void pycpdf_outputJSONMemoryFree(void) {
 /* __AUTO void drawXObj(char* name) */
 /* __AUTO void drawUse(char* name) */
 /* __AUTO void drawEndXObj() */
+/* __AUTO void drawJPEG(char* name, char* fontname) */
+/* __AUTO void drawPNG(char* name, char* fontname) */
 /* __AUTO void drawImage(char* name) */
 /* __AUTO void drawFillOpacity(double n) */
 /* __AUTO void drawStrokeOpacity(double n) */
 /* __AUTO void drawBT() */
 /* __AUTO void drawET() */
-/* __AUTO void drawFont(char* fontname) */
+/* __AUTO void drawFont(char* name) */
 /* __AUTO void drawFontSize(double n) */
 /* __AUTO void drawText(char* text) */
 /* __AUTO void drawSText(char* text) */

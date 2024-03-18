@@ -2167,88 +2167,127 @@ def chapter18():
         pycpdflib.drawMScale(0, 0, 100, 100)
     except:
         prerr()
-
-#  printf("---cpdf_drawJPEG\n");
-#  cpdf_drawJPEG("A", "testinputs/jpg.jpg");
-#  prerr();
-#  printf("---cpdf_drawPNG\n");
-#  cpdf_drawPNG("B", "testinputs/png.png");
-#  prerr();
-#  printf("---cpdf_drawImage\n");
-#  cpdf_drawImage("A");
-#  cpdf_drawMScale(0, 0, 0.7, 0.7);
-#  cpdf_drawImage("B");
-#  prerr();
-#  cpdf_drawPop();
-#  printf("---cpdf_drawFillOpacity\n");
-#  cpdf_drawFillOpacity(0.5);
-#  prerr();
-#  printf("---cpdf_drawStrokeOpacity\n");
-#  cpdf_drawStrokeOpacity(0.5);
-#  prerr();
-#  cpdf_drawCircle(0., 0., 300.);
-#  cpdf_drawStrokeFill();
-#  printf("---cpdf_drawBT\n");
-#  cpdf_drawBT();
-#  prerr();
-#  printf("---cpdf_loadFont\n");
-#  cpdf_loadFont("A", "testinputs/NotoSans-Black.ttf");
-#  prerr();
-#  printf("---cpdf_drawFont\n");
-#  cpdf_drawFont("Times-Roman");
-#  prerr();
-#  printf("---cpdf_drawFontSize\n");
-#  cpdf_drawFontSize(15.0);
-#  prerr();
-#  printf("---cpdf_drawText\n");
-#  cpdf_drawText("Hello!");
-#  prerr();
-#  cpdf_drawFont("A");
-#  printf("---cpdf_drawSText\n");
-#  cpdf_drawSText("Page %Page on %filename with bates |%Bates|");
-#  prerr();
-#  printf("---cpdf_drawET\n");
-#  cpdf_drawET();
-#  prerr();
-#  cpdf_drawMTrans(100, 100);
-#  cpdf_drawDash("0");
-#  cpdf_drawStrokeColGrey(1.0);
-#  cpdf_drawThick(0.5);
-#  printf("---cpdf_drawCharSpace\n");
-#  cpdf_drawCharSpace(10.0);
-#  prerr();
-#  printf("---cpdf_drawWordSpace\n");
-#  cpdf_drawWordSpace(20.0);
-#  prerr();
-#  printf("---cpdf_drawTextScale\n");
-#  cpdf_drawTextScale(70.0);
-#  prerr();
-#  printf("---cpdf_drawRenderMode\n");
-#  cpdf_drawRenderMode(1);
-#  prerr();
-#  printf("---cpdf_drawRise\n");
-#  cpdf_drawRise(10.0);
-#  prerr();
-#  cpdf_drawBT();
-#  cpdf_drawText("With parameters...");
-#  printf("---cpdf_drawLeading\n");
-#  cpdf_drawLeading(30.0);
-#  prerr();
-#  printf("---cpdf_drawNL\n");
-#  cpdf_drawNL();
-#  cpdf_drawText("another line...");
-#  prerr();
-#  cpdf_drawNL();
-#  cpdf_drawText("and yet more......");
-#  cpdf_drawET();
-#  printf("---cpdf_drawNewPage\n");
-#  cpdf_drawNewPage();
-#  prerr();
-#  cpdf_drawBT();
-#  cpdf_drawText("Another page");
-#  cpdf_drawET();
-#  /*printf("---cpdf_drawEnd\n");
-#  cpdf_drawEnd(draw, drawall);*/
+    print("---cpdf_drawJPEG()")
+    try:
+        pycpdflib.drawJPEG("A", "testinputs/jpg.jpg")
+    except:
+        prerr()
+    print("---cpdf_drawPNG()")
+    try:
+        pycpdflib.drawPNG("B", "testinputs/png.png")
+    except:
+        prerr()
+    print("---cpdf_drawImage()")
+    try:
+        pycpdflib.drawImage("A")
+        pycpdflib.drawMScale(0, 0, 0.7, 0.7)
+        pycpdflib.drawImage("B")
+        pycpdflib.drawPop()
+    except:
+        prerr()
+    print("---cpdf_drawFillOpacity()")
+    try:
+        pycpdflib.drawFillOpacity(0.5)
+    except:
+        prerr()
+    print("---cpdf_drawStrokeOpacity()")
+    try:
+        pycpdflib.drawStrokeOpacity(0.5)
+        pycpdflib.drawCircle(0., 0., 300.)
+        pycpdflib.drawStrokeFill()
+    except:
+        prerr()
+    print("---cpdf_drawBT()")
+    try:
+        pycpdflib.drawBT()
+    except:
+        prerr()
+    print("---cpdf_loadFont()")
+    try:
+        pycpdflib.loadFont("A", "testinputs/NotoSans-Black.ttf")
+    except:
+        prerr()
+    print("---cpdf_drawFont()")
+    try:
+        pycpdflib.drawFont("Times-Roman")
+    except:
+        prerr()
+    print("---cpdf_drawFontSize()")
+    try:
+        pycpdflib.drawFontSize(15.0)
+    except:
+        prerr()
+    print("---cpdf_drawText()")
+    try:
+        pycpdflib.drawText("Hello!")
+        pycpdflib.drawFont("A")
+    except:
+        prerr()
+    print("---cpdf_drawSText()")
+    try:
+        pycpdflib.drawSText("Page %Page on %filename with bates |%Bates|")
+    except:
+        prerr()
+    print("---cpdf_drawET()")
+    try:
+        pycpdflib.drawET()
+        pycpdflib.drawMTrans(100, 100)
+        pycpdflib.drawDash("0")
+        pycpdflib.drawStrokeColGrey(1.0)
+        pycpdflib.drawThick(0.5)
+    except:
+        prerr()
+    print("---cpdf_drawCharSpace()")
+    try:
+        pycpdflib.drawCharSpace(10.0)
+    except:
+        prerr()
+    print("---cpdf_drawWordSpace()")
+    try:
+        pycpdflib.drawWordSpace(20.0)
+    except:
+        prerr()
+    print("---cpdf_drawTextScale()")
+    try:
+        pycpdflib.drawTextScale(70.0)
+    except:
+        prerr()
+    print("---cpdf_drawRenderMode()")
+    try:
+        pycpdflib.drawRenderMode(1)
+    except:
+        prerr()
+    print("---cpdf_drawRise()")
+    try:
+        pycpdflib.drawRise(10.0)
+        pycpdflib.drawBT()
+        pycpdflib.drawText("With parameters...")
+    except:
+        prerr()
+    print("---cpdf_drawLeading()")
+    try:
+        pycpdflib.drawLeading(30.0)
+    except:
+        prerr()
+    print("---cpdf_drawNL()")
+    try:
+        pycpdflib.drawNL()
+        pycpdflib.drawText("another line...")
+        pycpdflib.drawNL()
+        pycpdflib.drawText("and yet more......")
+        pycpdflib.drawET()
+    except:
+        prerr()
+    print("---cpdf_drawNewPage()")
+    try:
+        pycpdflib.drawNewPage()
+        pycpdflib.drawBT()
+        pycpdflib.drawText("Another page")
+        pycpdflib.drawET()
+    except:
+        prerr()
+    #  print("---cpdf_drawEnd()")
+    #  pycpdflib.drawEnd(draw, drawall)
     print("---cpdf_drawEndExtended()")
     try:
         pycpdflib.drawEndExtended(draw, drawall, True, 10, "filename.txt")

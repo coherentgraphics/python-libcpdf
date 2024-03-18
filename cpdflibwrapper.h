@@ -1684,7 +1684,7 @@ void cpdf_drawBT(void);
 /* cpdf_drawET() ends a text section. */
 void cpdf_drawET(void);
 
-/* cpdf_drawFont(fontname) sets the font. */
+/* cpdf_drawFont(name) sets the font. */
 void cpdf_drawFont(char *);
 
 /* cpdf_drawFontSize(n) sets the font size. */

@@ -248,6 +248,13 @@ int pycpdf_encryptionKind(int pdf) {
   return cpdf_encryptionKind(pdf);
 }
 
+void pycpdf_loadFont(char* name, char* filename) {
+  return cpdf_loadFont(name, filename);
+}
+
+
+/* CHAPTER 2. Merging and Splitting */
+
 int pycpdf_mergeSimple(int *pdfs, int len) {
   return cpdf_mergeSimple(pdfs, len);
 }
@@ -1474,6 +1481,14 @@ void pycpdf_drawEndXObj() {
   return cpdf_drawEndXObj();
 }
 
+void pycpdf_drawJPEG(char* name, char* fontname) {
+  return cpdf_drawJPEG(name, fontname);
+}
+
+void pycpdf_drawPNG(char* name, char* fontname) {
+  return cpdf_drawPNG(name, fontname);
+}
+
 void pycpdf_drawImage(char* name) {
   return cpdf_drawImage(name);
 }
@@ -1494,8 +1509,8 @@ void pycpdf_drawET() {
   return cpdf_drawET();
 }
 
-void pycpdf_drawFont(char* fontname) {
-  return cpdf_drawFont(fontname);
+void pycpdf_drawFont(char* name) {
+  return cpdf_drawFont(name);
 }
 
 void pycpdf_drawFontSize(double n) {

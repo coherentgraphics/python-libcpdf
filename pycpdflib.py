@@ -245,6 +245,14 @@ def loadDLL(f):
     libc.pycpdf_drawMShearY.argtypes = [c_double, c_double, c_double]
     libc.pycpdf_drawMatrix.argtypes = [c_double, c_double, c_double, c_double, c_double, c_double]
     libc.pycpdf_drawXObjBBox.argtypes = [c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawFillOpacity.argtypes = [c_double]
+    libc.pycpdf_drawStrokeOpacity.argtypes = [c_double]
+    libc.pycpdf_drawFontSize = [c_double]
+    libc.pycpdf_drawCharSpace = [c_double]
+    libc.pycpdf_drawWordSpace = [c_double]
+    libc.pycpdf_drawTextScale = [c_double]
+    libc.pycpdf_drawRise = [c_double]
+    libc.pycpdf_drawLeading = [c_double]
     LP_c_char = POINTER(c_char)
     LP_LP_c_char = POINTER(LP_c_char)
     argc = len(sys.argv)
@@ -717,6 +725,12 @@ def encryptionKind(pdf):
     r = libc.pycpdf_encryptionKind(pdf.pdf)
     checkerror()
     return r
+
+def loadFont(name, filename):
+    """FIXME"""
+    libc.pycpdf_loadFont(str.encode(name), str.encode(filename))
+    checkerror()
+    return
 
 # CHAPTER 2. Merging and Splitting
 
@@ -2715,6 +2729,120 @@ def drawEndXObj():
 def drawUse(name):
     """FIXME"""
     libc.pycpdf_drawUse(str.encode(name))
+    checkerror()
+    return
+
+def drawJPEG(name, filename):
+    """FIXME"""
+    libc.pycpdf_drawJPEG(str.encode(name), str.encode(filename))
+    checkerror()
+    return
+
+def drawPNG(name, filename):
+    """FIXME"""
+    libc.pycpdf_drawPNG(str.encode(name), str.encode(filename))
+    checkerror()
+    return
+
+def drawImage(name):
+    """FIXME"""
+    libc.pycpdf_drawImage(str.encode(name))
+    checkerror()
+    return
+
+def drawFillOpacity(n):
+    """FIXME"""
+    libc.pycpdf_drawFillOpacity(n)
+    checkerror()
+    return
+
+def drawStrokeOpacity(n):
+    """FIXME"""
+    libc.pycpdf_drawStrokeOpacity(n)
+    checkerror()
+    return
+
+def drawBT():
+    """FIXME"""
+    libc.pycpdf_drawBT()
+    checkerror()
+    return
+
+def drawET():
+    """FIXME"""
+    libc.pycpdf_drawET()
+    checkerror()
+    return
+
+def drawFont(name):
+    """FIXME"""
+    libc.pycpdf_drawFont(str.encode(name))
+    checkerror()
+    return
+
+def drawFontSize(b):
+    """FIXME"""
+    libc.pycpdf_drawFontSize(b)
+    checkerror()
+    return
+
+def drawText(text):
+    """FIXME"""
+    libc.pycpdf_drawText(str.encode(text))
+    checkerror()
+    return
+
+def drawSText(text):
+    """FIXME"""
+    libc.pycpdf_drawSText(str.encode(text))
+    checkerror()
+    return
+
+def drawCharSpace(n):
+    """FIXME"""
+    libc.pycpdf_drawCharSpace(n)
+    checkerror()
+    return
+
+def drawWordSpace(n):
+    """FIXME"""
+    libc.pycpdf_drawWordSpace(n)
+    checkerror()
+    return
+
+def drawTextScale(n):
+    """FIXME"""
+    libc.pycpdf_drawTextScale(n)
+    checkerror()
+    return
+
+def drawRenderMode(n):
+    """FIXME"""
+    libc.pycpdf_drawRenderMode(n)
+    checkerror()
+    return
+
+def drawRise(n):
+    """FIXME"""
+    libc.pycpdf_drawRise(n)
+    checkerror()
+    return
+
+def drawLeading(n):
+    """FIXME"""
+    libc.pycpdf_drawLeading(n)
+    checkerror()
+    return
+
+def drawNL():
+    """FIXME"""
+    libc.pycpdf_drawNL()
+    checkerror()
+    return
+
+def drawNewPage():
+    """FIXME"""
+    libc.pycpdf_drawNewPage()
     checkerror()
     return
 
