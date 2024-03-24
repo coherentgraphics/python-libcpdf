@@ -90,6 +90,14 @@ useNone useOutlines useThumbs useOC useAttachments
 Page label styles:
 
 decimalArabic uppercaseRoman lowercaseRoman uppercaseLetters lowercaseLetters
+
+Line cap types:
+
+capButt capRound capSquare
+
+Line join types:
+
+joinMiter joinRound joinBevel
 """
 
 
