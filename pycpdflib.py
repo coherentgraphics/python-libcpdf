@@ -335,21 +335,19 @@ def setSlow():
 
 
 def embedStd14(embed):
-    """ FIXME """
+    """ Calling this function with a true argument sets embedding for the
+    Standard 14 fonts.  You must also set the directory to load them from with
+    the embedStd14Dir function. Default value: False. """
     libc.pycpdf_embedStd14(embed)
     checkerror()
 
 
 def embedStd14Dir(d):
-    """ FIXME """
+    """ Set the directory to load Standard 14 fonts for embedding. """
     libc.pycpdf_embedStd14Dir(str.encode(d))
     checkerror()
 
 
-def JSONUTF8(utf8):
-    """ FIXME """
-    libc.pycpdf_JSONUTF8(utf8)
-    checkerror()
 
 
 def clearError():
@@ -748,7 +746,9 @@ def encryptionKind(pdf):
 
 
 def loadFont(name, filename):
-    """FIXME"""
+    """ loads a TrueType font from the given file name, and names it. It may
+    then be used when adding text or drawing, using the name in place of a
+    standard font name. """
     libc.pycpdf_loadFont(str.encode(name), str.encode(filename))
     checkerror()
     return
@@ -1343,8 +1343,7 @@ def twoUpStack(pdf):
 
 
 def impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing, linewidth):
-    """impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing,
-    linewidth) imposes a PDF. There are two modes: imposing x * y, or imposing
+    """Impose a PDF. There are two modes: imposing x * y, or imposing
     to fit a page of size x * y. This is controlled by fit. Columns imposes by
     columns rather than rows. rtl is right-to-left, btt bottom-to-top. Center
     is unused for now. Margin is the margin around the output, spacing the
@@ -1355,7 +1354,9 @@ def impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing, linewidth
 
 
 def chop(pdf, r, x, y, columns, rtl, btt):
-    """ FIXME """
+    """ Chop each page in the range into x * y pieces. If columns is set, the
+    pieces go by columns instead of rows. If rtl is set, the pieces are taken
+    right-to-left. If btt is set, the pieces are taken from bottom to top. """
     r = range_of_list(r)
     libc.pycpdf_chop(pdf.pdf, r, x, y, columns, rtl, btt)
     deleteRange(r)
@@ -1363,7 +1364,8 @@ def chop(pdf, r, x, y, columns, rtl, btt):
 
 
 def chopH(pdf, r, columns, y):
-    """ FIXME """
+    """ Chop each page in the range horizontally at position y. If columns is
+    set, the pieces are arranged in reverse order. """
     r = range_of_list(r)
     libc.pycpdf_chopH(pdf.pdf, r, columns, y)
     deleteRange(r)
@@ -1371,7 +1373,8 @@ def chopH(pdf, r, columns, y):
 
 
 def chopV(pdf, r, columns, x):
-    """ FIXME """
+    """ Chop each page in the range vertically at position x. If columns is
+    set, the pieces are arranged in reverse order. """
     r = range_of_list(r)
     libc.pycpdf_chopV(pdf.pdf, r, columns, x)
     deleteRange(r)
@@ -1417,7 +1420,7 @@ def padMultipleBefore(pdf, n):
 
 
 def annotationsJSON(pdf):
-    """Get the annotations in JSON format."""
+    """ Gets the annotations in JSON format. """
     length = c_int32()
     data = libc.pycpdf_annotationsJSON(pdf.pdf, byref(length))
     out_data = create_string_buffer(length.value)
@@ -1428,7 +1431,7 @@ def annotationsJSON(pdf):
 
 
 def removeAnnotations(pdf, r):
-    """FIXME"""
+    """ Removes all annotations from pages in the given range. """
     rn = range_of_list(r)
     libc.pycpdf_removeAnnotations(pdf.pdf, rn)
     deleteRange(rn)
@@ -1437,7 +1440,8 @@ def removeAnnotations(pdf, r):
 
 
 def setAnnotationsJSON(pdf, data):
-    """FIXME"""
+    """ Adds the annotations given in JSON format to the PDF, on top of any
+    existing annotations. """
     libc.pycpdf_setAnnotationsJSON(pdf.pdf, data, len(data))
     checkerror()
     return
@@ -1454,48 +1458,48 @@ def isLinearized(filename):
 
 
 def hasAcroForm(pdf):
-    """ FIXME """
+    """ Returns True if the document has an AcroForm.  """
     r = libc.pycpdf_hasAcroForm(pdf.pdf)
     checkerror()
     return r
 
+""" FIXME THIS ALL NEEDS TO BE REPLACED WITH A FUNCTION WHICH JUST RETURNS THE LIST """
 
 def startGetSubformats(pdf):
-    """ FIXME """
     r = libc.pycpdf_startGetSubformats(pdf.pdf)
     checkerror()
     return r
 
 
 def getSubformat(serial):
-    """ FIXME """
     r = string_at(libc.pycpdf_getSubformat(serial)).decode()
     checkerror()
     return r
 
 
 def endGetSubformats():
-    """ FIXME """
     libc.pycpdf_endGetSubformats()
     checkerror()
 
 
 def hasObjectStreams(pdf):
-    """ FIXME """
+    """ Returns True if a document was written using object streams."""
     r = libc.pycpdf_hasObjectStreams(pdf.pdf)
     checkerror()
     return r
 
 
 def id1(pdf):
-    """ FIXME """
+    """ Return the first ID string of the PDF, if any, in hexadecimal string
+    format.  """
     r = string_at(libc.pycpdf_id1(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def id2(pdf):
-    """ FIXME """
+    """ Return the second ID string of the PDF, if any, in hexadecimal string
+    format.  """
     r = string_at(libc.pycpdf_id2(pdf.pdf)).decode()
     checkerror()
     return r
@@ -1794,7 +1798,7 @@ def hasBox(pdf, pagenumber, boxname):
 
 
 def numAnnots(pdf, pagenumber):
-    """FIXME"""
+    """ Return the number of annotations on the given page in the given PDF. """
     r = libc.pycpdf_numAnnots(pdf.pdf, pagenumber)
     checkerror()
     return r
@@ -1911,7 +1915,7 @@ def setArtBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def pageInfoJSON(pdf):
-    """FIXME"""
+    """Returns JSON data for the page information."""
     length = c_int32()
     data = libc.pycpdf_pageInfoJSON(pdf.pdf, byref(length))
     out_data = create_string_buffer(length.value)
@@ -1976,7 +1980,7 @@ def setPageLayout(pdf, layout):
 
 
 def getPageLayout(pdf):
-    """FIXME"""
+    """Get the page layout for a document."""
     r = libc.pycpdf_getPageLayout(pdf.pdf)
     checkerror()
     return r
@@ -1998,7 +2002,7 @@ def setPageMode(pdf, mode):
 
 
 def getPageMode(pdf):
-    """FIXME"""
+    """Get the page mode for a document"""
     r = libc.pycpdf_getPageMode(pdf.pdf)
     checkerror()
     return r
@@ -2012,7 +2016,7 @@ def hideToolbar(pdf, flag):
 
 
 def getHideToolbar(pdf):
-    """FIXME"""
+    """Get the hide toolbar flag."""
     r = libc.pycpdf_getHideToolbar(pdf.pdf)
     checkerror()
     return r
@@ -2026,7 +2030,7 @@ def hideMenubar(pdf, flag):
 
 
 def getHideMenubar(pdf):
-    """FIXME"""
+    """Get the hide menubar flag."""
     r = libc.pycpdf_getHideMenubar(pdf.pdf)
     checkerror()
     return r
@@ -2040,7 +2044,7 @@ def hideWindowUi(pdf, flag):
 
 
 def getHideWindowUi(pdf):
-    """FIXME"""
+    """Get the hide window UI flag."""
     r = libc.pycpdf_getHideWindowUi(pdf.pdf)
     checkerror()
     return r
@@ -2054,7 +2058,7 @@ def fitWindow(pdf, flag):
 
 
 def getFitWindow(pdf):
-    """FIXME"""
+    """Get the fit window flag."""
     r = libc.pycpdf_getFitWindow(pdf.pdf)
     checkerror()
     return r
@@ -2068,7 +2072,7 @@ def centerWindow(pdf, flag):
 
 
 def getCenterWindow(pdf):
-    """FIXME"""
+    """Get the center window flag."""
     r = libc.pycpdf_getCenterWindow(pdf.pdf)
     checkerror()
     return r
@@ -2082,21 +2086,21 @@ def displayDocTitle(pdf, flag):
 
 
 def getDisplayDocTitle(pdf):
-    """FIXME"""
+    """Get the display document title flag."""
     r = libc.pycpdf_getDisplayDocTitle(pdf.pdf)
     checkerror()
     return r
 
 
 def nonFullScreenPageMode(pdf, flag):
-    """FIXME"""
+    """set the non full screen page mode flag."""
     libc.pycpdf_nonFullScreenPageMode(pdf.pdf, flag)
     checkerror()
     return
 
 
 def getNonFullScreenPageMode(pdf):
-    """FIXME"""
+    """get the non full screen page mode flag."""
     r = libc.pycpdf_getNonFullScreenPageMode(pdf.pdf)
     checkerror()
     return r
@@ -2111,7 +2115,7 @@ def openAtPage(pdf, fitflag, pagenumber):
 
 
 def openAtPageCustom(pdf, custom):
-    """FIXME"""
+    """Set a custom openAtPage description."""
     libc.pycpdf_openAtPageCustom(pdf.pdf, str.encode(custom))
     checkerror()
     return
@@ -2412,6 +2416,11 @@ def copyFont(pdf, pdf2, r, pagenumber, fontname):
     checkerror()
 
 # CHAPTER 15. PDF and JSON
+
+def JSONUTF8(utf8):
+    """ FIXME """
+    libc.pycpdf_JSONUTF8(utf8)
+    checkerror()
 
 
 def outputJSON(filename, parse_content, no_stream_data, decompress_streams, pdf):
