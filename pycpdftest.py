@@ -300,7 +300,7 @@ def chapter1():
         print(f'n subformats: {subformats}')
     except:
         fatal_prerr()
-    #FIXME actually call this
+    # FIXME actually call this
     print(f'---cpdf_getSubformat()')
     print(f'---cpdf_endGetSubformats()')
     try:
@@ -747,9 +747,10 @@ def chapter6():
     except:
         fatal_prerr()
     print(f'There are {len(existing_marks)} bookmarks')
-    m = existing_marks[0];
+    m = existing_marks[0]
     a, b, c, d = m
-    print(f'Bookmark at level {a} points to page {b} and has text "{c}" and open {d}')
+    print(f'Bookmark at level {a} points to page {
+          b} and has text "{c}" and open {d}')
     marks = [(0, 20, "New bookmark!", True)]
     print('---cpdf: set bookmarks')
     try:
@@ -1857,6 +1858,7 @@ def chapter17():
     except:
         prerr()
 
+
 def chapter18():
     print('***** CHAPTER 18. Drawing on PDFs')
     draw = pycpdflib.fromFile("hello.pdf", "")
@@ -1909,7 +1911,7 @@ def chapter18():
     try:
         pycpdflib.drawFillColRGB(0.0, 1.0, 0.5)
         pycpdflib.drawCircle(500.0, 400.0, 50.0)
-        pycpdflib.drawFill();
+        pycpdflib.drawFill()
     except:
         prerr()
     print("---cpdf_drawStrokeColGrey()")
@@ -1976,7 +1978,7 @@ def chapter18():
         pycpdflib.drawLine(200, 200)
         pycpdflib.drawClose()
     except:
-       prerr()
+        prerr()
     print("---cpdf_drawFillEo()")
     try:
         pycpdflib.drawFillEo()
@@ -2018,7 +2020,7 @@ def chapter18():
     except:
         prerr()
     print("---cpdf_drawClip()")
-    try: 
+    try:
         pycpdflib.drawClip()
         pycpdflib.drawCircle(300, 350, 100)
         pycpdflib.drawFill()
@@ -2027,10 +2029,10 @@ def chapter18():
         prerr()
     print("---cpdf_drawClipEo()")
     try:
-       pycpdflib.drawClipEo();
-       pycpdflib.drawCircle(500, 550, 300)
-       pycpdflib.drawFill()
-       pycpdflib.drawPop()
+        pycpdflib.drawClipEo()
+        pycpdflib.drawCircle(500, 550, 300)
+        pycpdflib.drawFill()
+        pycpdflib.drawPop()
     except:
         prerr()
     print("---cpdf_drawThick()")
@@ -2303,6 +2305,7 @@ def chapter18():
     except:
         prerr()
 
+
 def chapter19():
     print('***** CHAPTER 19. Miscellaneous')
     try:
@@ -2498,7 +2501,8 @@ def chapter19():
         prerr()
     print('---cpdf_replaceDictEntrySearch()')
     try:
-        pycpdflib.replaceDictEntrySearch(misc15, '/Producer', '"NewProducer2"', '"pdfTeX-1.40.22"')
+        pycpdflib.replaceDictEntrySearch(
+            misc15, '/Producer', '"NewProducer2"', '"pdfTeX-1.40.22"')
     except:
         prerr()
     try:

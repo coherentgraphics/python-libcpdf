@@ -231,20 +231,24 @@ def loadDLL(f):
     libc.pycpdf_fontsJSON.restype = POINTER(c_char)
     libc.pycpdf_imagesJSON.restype = POINTER(c_char)
     libc.pycpdf_imageResolutionJSON.restype = POINTER(c_char)
-    libc.pycpdf_imageResolutionJSON.argtypes = [c_int, POINTER(c_int), c_double]
+    libc.pycpdf_imageResolutionJSON.argtypes = [
+        c_int, POINTER(c_int), c_double]
     libc.pycpdf_drawTo.argtypes = [c_double, c_double]
     libc.pycpdf_drawLine.argtypes = [c_double, c_double]
     libc.pycpdf_drawRect.argtypes = [c_double, c_double, c_double, c_double]
-    libc.pycpdf_drawBez.argtypes = [c_double, c_double, c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawBez.argtypes = [
+        c_double, c_double, c_double, c_double, c_double, c_double]
     libc.pycpdf_drawBez23.argtypes = [c_double, c_double, c_double, c_double]
     libc.pycpdf_drawBez13.argtypes = [c_double, c_double, c_double, c_double]
     libc.pycpdf_drawCircle.argtypes = [c_double, c_double, c_double]
     libc.pycpdf_drawStrokeColGrey.argtypes = [c_double]
     libc.pycpdf_drawStrokeColRGB.argtypes = [c_double, c_double, c_double]
-    libc.pycpdf_drawStrokeColCYMK.argtypes = [c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawStrokeColCYMK.argtypes = [
+        c_double, c_double, c_double, c_double]
     libc.pycpdf_drawFillColGrey.argtypes = [c_double]
     libc.pycpdf_drawFillColRGB.argtypes = [c_double, c_double, c_double]
-    libc.pycpdf_drawFillColCYMK.argtypes = [c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawFillColCYMK.argtypes = [
+        c_double, c_double, c_double, c_double]
     libc.pycpdf_drawThick.argtypes = [c_double]
     libc.pycpdf_drawMiter.argtypes = [c_double]
     libc.pycpdf_drawMTrans.argtypes = [c_double, c_double]
@@ -252,8 +256,10 @@ def loadDLL(f):
     libc.pycpdf_drawMScale.argtypes = [c_double, c_double, c_double, c_double]
     libc.pycpdf_drawMShearX.argtypes = [c_double, c_double, c_double]
     libc.pycpdf_drawMShearY.argtypes = [c_double, c_double, c_double]
-    libc.pycpdf_drawMatrix.argtypes = [c_double, c_double, c_double, c_double, c_double, c_double]
-    libc.pycpdf_drawXObjBBox.argtypes = [c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawMatrix.argtypes = [
+        c_double, c_double, c_double, c_double, c_double, c_double]
+    libc.pycpdf_drawXObjBBox.argtypes = [
+        c_double, c_double, c_double, c_double]
     libc.pycpdf_drawFillOpacity.argtypes = [c_double]
     libc.pycpdf_drawStrokeOpacity.argtypes = [c_double]
     libc.pycpdf_drawFontSize.argtypes = [c_double]
@@ -319,6 +325,7 @@ def setFast():
     libc.pycpdf_setFast()
     checkerror()
 
+
 def setSlow():
     """ Set slow mode. Some operations have a fast mode. The default is 'slow'
     mode, which works even on old-fashioned files. For more details, see
@@ -326,20 +333,24 @@ def setSlow():
     libc.pycpdf_setSlow()
     checkerror()
 
+
 def embedStd14(embed):
     """ FIXME """
     libc.pycpdf_embedStd14(embed)
     checkerror()
+
 
 def embedStd14Dir(d):
     """ FIXME """
     libc.pycpdf_embedStd14Dir(str.encode(d))
     checkerror()
 
+
 def JSONUTF8(utf8):
     """ FIXME """
     libc.pycpdf_JSONUTF8(utf8)
     checkerror()
+
 
 def clearError():
     """ Clear the current error state. """
@@ -735,6 +746,7 @@ def encryptionKind(pdf):
     checkerror()
     return r
 
+
 def loadFont(name, filename):
     """FIXME"""
     libc.pycpdf_loadFont(str.encode(name), str.encode(filename))
@@ -904,12 +916,14 @@ def shiftContents(pdf, r, dx, dy):
     deleteRange(r)
     checkerror()
 
+
 def shiftBoxes(pdf, r, dx, dy):
     """Shift the pages boxes in the range by (dx, dy)."""
     r = range_of_list(r)
     libc.pycpdf_shiftBoxes(pdf.pdf, r, dx, dy)
     deleteRange(r)
     checkerror()
+
 
 def rotate(pdf, r, rotation):
     """Change the viewing rotation of the pages in the range to an
@@ -1339,12 +1353,14 @@ def impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing, linewidth
                        btt, center, margin, spacing, linewidth)
     checkerror()
 
+
 def chop(pdf, r, x, y, columns, rtl, btt):
     """ FIXME """
     r = range_of_list(r)
     libc.pycpdf_chop(pdf.pdf, r, x, y, columns, rtl, btt)
     deleteRange(r)
     checkerror()
+
 
 def chopH(pdf, r, columns, y):
     """ FIXME """
@@ -1353,12 +1369,14 @@ def chopH(pdf, r, columns, y):
     deleteRange(r)
     checkerror()
 
+
 def chopV(pdf, r, columns, x):
     """ FIXME """
     r = range_of_list(r)
     libc.pycpdf_chopV(pdf.pdf, r, columns, x)
     deleteRange(r)
     checkerror()
+
 
 def padBefore(pdf, r):
     """Adds a blank page before each page in the given range."""
@@ -1417,6 +1435,7 @@ def removeAnnotations(pdf, r):
     checkerror()
     return
 
+
 def setAnnotationsJSON(pdf, data):
     """FIXME"""
     libc.pycpdf_setAnnotationsJSON(pdf.pdf, data, len(data))
@@ -1433,11 +1452,13 @@ def isLinearized(filename):
     checkerror()
     return r
 
+
 def hasAcroForm(pdf):
     """ FIXME """
     r = libc.pycpdf_hasAcroForm(pdf.pdf)
     checkerror()
     return r
+
 
 def startGetSubformats(pdf):
     """ FIXME """
@@ -1445,16 +1466,19 @@ def startGetSubformats(pdf):
     checkerror()
     return r
 
+
 def getSubformat(serial):
     """ FIXME """
     r = string_at(libc.pycpdf_getSubformat(serial)).decode()
     checkerror()
     return r
 
+
 def endGetSubformats():
     """ FIXME """
     libc.pycpdf_endGetSubformats()
     checkerror()
+
 
 def hasObjectStreams(pdf):
     """ FIXME """
@@ -1462,17 +1486,20 @@ def hasObjectStreams(pdf):
     checkerror()
     return r
 
+
 def id1(pdf):
     """ FIXME """
     r = string_at(libc.pycpdf_id1(pdf.pdf)).decode()
     checkerror()
     return r
 
+
 def id2(pdf):
     """ FIXME """
     r = string_at(libc.pycpdf_id2(pdf.pdf)).decode()
     checkerror()
     return r
+
 
 def getVersion(pdf):
     """Return the minor version number of a document."""
@@ -1765,11 +1792,13 @@ def hasBox(pdf, pagenumber, boxname):
     checkerror()
     return r
 
+
 def numAnnots(pdf, pagenumber):
     """FIXME"""
     r = libc.pycpdf_numAnnots(pdf.pdf, pagenumber)
     checkerror()
     return r
+
 
 def getMediaBox(pdf, pagenumber):
     """Get a mediabox box given the document, page range, min x, max x,
@@ -1880,6 +1909,7 @@ def setArtBox(pdf, r, minx, maxx, miny, maxy):
     checkerror()
     return
 
+
 def pageInfoJSON(pdf):
     """FIXME"""
     length = c_int32()
@@ -1889,6 +1919,7 @@ def pageInfoJSON(pdf):
     libc.pycpdf_pageInfoJSONFree()
     checkerror()
     return out_data.raw
+
 
 def setBleedBox(pdf, r, minx, maxx, miny, maxy):
     """Set the bleed box given the document, page range, min x, max x,
@@ -1943,11 +1974,13 @@ def setPageLayout(pdf, layout):
     checkerror()
     return
 
+
 def getPageLayout(pdf):
     """FIXME"""
     r = libc.pycpdf_getPageLayout(pdf.pdf)
     checkerror()
     return r
+
 
 """Page modes."""
 useNone = 0
@@ -1963,11 +1996,13 @@ def setPageMode(pdf, mode):
     checkerror()
     return
 
+
 def getPageMode(pdf):
     """FIXME"""
     r = libc.pycpdf_getPageMode(pdf.pdf)
     checkerror()
     return r
+
 
 def hideToolbar(pdf, flag):
     """Sets the hide toolbar flag."""
@@ -1975,11 +2010,13 @@ def hideToolbar(pdf, flag):
     checkerror()
     return
 
+
 def getHideToolbar(pdf):
     """FIXME"""
     r = libc.pycpdf_getHideToolbar(pdf.pdf)
     checkerror()
     return r
+
 
 def hideMenubar(pdf, flag):
     """Set the hide menu bar flag."""
@@ -1987,11 +2024,13 @@ def hideMenubar(pdf, flag):
     checkerror()
     return
 
+
 def getHideMenubar(pdf):
     """FIXME"""
     r = libc.pycpdf_getHideMenubar(pdf.pdf)
     checkerror()
     return r
+
 
 def hideWindowUi(pdf, flag):
     """Set the hide window UI flag."""
@@ -1999,11 +2038,13 @@ def hideWindowUi(pdf, flag):
     checkerror()
     return
 
+
 def getHideWindowUi(pdf):
     """FIXME"""
     r = libc.pycpdf_getHideWindowUi(pdf.pdf)
     checkerror()
     return r
+
 
 def fitWindow(pdf, flag):
     """Set the fit window flag."""
@@ -2011,11 +2052,13 @@ def fitWindow(pdf, flag):
     checkerror()
     return
 
+
 def getFitWindow(pdf):
     """FIXME"""
     r = libc.pycpdf_getFitWindow(pdf.pdf)
     checkerror()
     return r
+
 
 def centerWindow(pdf, flag):
     """Set the center window flag."""
@@ -2023,11 +2066,13 @@ def centerWindow(pdf, flag):
     checkerror()
     return
 
+
 def getCenterWindow(pdf):
     """FIXME"""
     r = libc.pycpdf_getCenterWindow(pdf.pdf)
     checkerror()
     return r
+
 
 def displayDocTitle(pdf, flag):
     """Set the display document title flag."""
@@ -2035,11 +2080,13 @@ def displayDocTitle(pdf, flag):
     checkerror()
     return
 
+
 def getDisplayDocTitle(pdf):
     """FIXME"""
     r = libc.pycpdf_getDisplayDocTitle(pdf.pdf)
     checkerror()
     return r
+
 
 def nonFullScreenPageMode(pdf, flag):
     """FIXME"""
@@ -2047,11 +2094,13 @@ def nonFullScreenPageMode(pdf, flag):
     checkerror()
     return
 
+
 def getNonFullScreenPageMode(pdf):
     """FIXME"""
     r = libc.pycpdf_getNonFullScreenPageMode(pdf.pdf)
     checkerror()
     return r
+
 
 def openAtPage(pdf, fitflag, pagenumber):
     """Set the PDF to open, possibly with zoom-to-fit, at the given page number.
@@ -2060,11 +2109,13 @@ def openAtPage(pdf, fitflag, pagenumber):
     checkerror()
     return
 
+
 def openAtPageCustom(pdf, custom):
     """FIXME"""
     libc.pycpdf_openAtPageCustom(pdf.pdf, str.encode(custom))
     checkerror()
     return
+
 
 def setMetadataFromFile(pdf, filename):
     """Set the XMP metadata of a document, given a file name."""
@@ -2181,6 +2232,7 @@ def getPageLabelStringForPage(pdf, pagenumber):
     checkerror()
     return r
 
+
 def compositionJSON(filesize, pdf):
     """Get the composition in JSON format."""
     length = c_int32()
@@ -2271,6 +2323,7 @@ def getImageResolution(pdf, min_required_resolution):
     checkerror()
     return l
 
+
 def getImages(pdf):
     """FIXME"""
     n = libc.pycpdf_startGetImages(pdf.pdf)
@@ -2290,6 +2343,7 @@ def getImages(pdf):
     checkerror()
     return l
 
+
 def imagesJSON(pdf):
     """FIXME"""
     length = c_int32()
@@ -2299,6 +2353,7 @@ def imagesJSON(pdf):
     libc.pycpdf_imagesJSONFree()
     checkerror()
     return out_data.raw
+
 
 def imageResolutionJSON(pdf, resolution):
     """FIXME"""
@@ -2329,6 +2384,7 @@ def getFontInfo(pdf):
     checkerror()
     return l
 
+
 def fontsJSON(pdf):
     """FIXME"""
     length = c_int32()
@@ -2338,6 +2394,7 @@ def fontsJSON(pdf):
     libc.pycpdf_fontsJSONFree()
     checkerror()
     return out_data.raw
+
 
 def removeFonts(pdf):
     """Remove all font data from a file."""
@@ -2468,11 +2525,13 @@ def textToPDFPaper(papersize, font, fontsize, filename):
     checkerror()
     return pdf
 
+
 def fromPNG(filename):
     """FIXME"""
     pdf = Pdf(libc.pycpdf_fromPNG(str.encode(filename)))
     checkerror()
     return pdf
+
 
 def fromJPEG(filename):
     """FIXME"""
@@ -2489,19 +2548,23 @@ def drawBegin():
     checkerror()
     return
 
+
 def drawEnd(pdf, r):
     """FIXME"""
     libc.pycpdf_drawEnd()
     checkerror()
     return
 
+
 def drawEndExtended(pdf, r, underneath, bates, filename):
     """FIXME"""
     rn = range_of_list(r)
-    libc.pycpdf_drawEndExtended(pdf.pdf, rn, underneath, bates, filename, str.encode(filename))
+    libc.pycpdf_drawEndExtended(
+        pdf.pdf, rn, underneath, bates, filename, str.encode(filename))
     deleteRange(rn)
     checkerror()
     return
+
 
 def drawRect(x, y, w, h):
     """FIXME"""
@@ -2509,11 +2572,13 @@ def drawRect(x, y, w, h):
     checkerror()
     return
 
+
 def drawTo(x, y):
     """FIXME"""
     libc.pycpdf_drawTo(x, y)
     checkerror()
     return
+
 
 def drawLine(x, y):
     """FIXME"""
@@ -2521,11 +2586,13 @@ def drawLine(x, y):
     checkerror()
     return
 
+
 def drawBez(x1, y1, x2, y2, x3, y3):
     """FIXME"""
     libc.pycpdf_drawBez(x1, y1, x2, y2, x3, y3)
     checkerror()
     return
+
 
 def drawBez23(x2, y2, x3, y3):
     """FIXME"""
@@ -2533,11 +2600,13 @@ def drawBez23(x2, y2, x3, y3):
     checkerror()
     return
 
+
 def drawBez13(x1, y1, x3, y3):
     """FIXME"""
     libc.pycpdf_drawBez13(x1, y1, x3, y3)
     checkerror()
     return
+
 
 def drawCircle(x, y, r):
     """FIXME"""
@@ -2545,11 +2614,13 @@ def drawCircle(x, y, r):
     checkerror()
     return
 
+
 def drawStroke():
     """FIXME"""
     libc.pycpdf_drawStroke()
     checkerror()
     return
+
 
 def drawFill():
     """FIXME"""
@@ -2557,11 +2628,13 @@ def drawFill():
     checkerror()
     return
 
+
 def drawFillEo():
     """FIXME"""
     libc.pycpdf_drawFillEo()
     checkerror()
     return
+
 
 def drawStrokeFill():
     """FIXME"""
@@ -2569,11 +2642,13 @@ def drawStrokeFill():
     checkerror()
     return
 
+
 def drawStrokeFillEo():
     """FIXME"""
     libc.pycpdf_drawStrokeFillEo()
     checkerror()
     return
+
 
 def drawClose():
     """FIXME"""
@@ -2581,11 +2656,13 @@ def drawClose():
     checkerror()
     return
 
+
 def drawClip():
     """FIXME"""
     libc.pycpdf_drawClip()
     checkerror()
     return
+
 
 def drawClipEo():
     """FIXME"""
@@ -2593,16 +2670,19 @@ def drawClipEo():
     checkerror()
     return
 
+
 def drawThick(thickness):
     """FIXME"""
     libc.pycpdf_drawThick(thickness)
     checkerror()
     return
 
+
 """Cap types."""
 capButt = 0
 capRound = 1
 capSquare = 2
+
 
 def drawCap(captype):
     """FIXME"""
@@ -2610,10 +2690,12 @@ def drawCap(captype):
     checkerror()
     return
 
+
 """Join types."""
 joinMiter = 0
 joinRound = 1
 joinBevel = 2
+
 
 def drawJoin(jointype):
     """FIXME"""
@@ -2621,11 +2703,13 @@ def drawJoin(jointype):
     checkerror()
     return
 
+
 def drawMiter(miter):
     """FIXME"""
     libc.pycpdf_drawMiter(miter)
     checkerror()
     return
+
 
 def drawDash(description):
     """FIXME"""
@@ -2633,11 +2717,13 @@ def drawDash(description):
     checkerror()
     return
 
+
 def drawStrokeColGrey(g):
     """FIXME"""
     libc.pycpdf_drawStrokeColGrey(g)
     checkerror()
     return
+
 
 def drawStrokeColRGB(r, g, b):
     """FIXME"""
@@ -2645,11 +2731,13 @@ def drawStrokeColRGB(r, g, b):
     checkerror()
     return
 
+
 def drawStrokeColCYMK(c, y, m, k):
     """FIXME"""
     libc.pycpdf_drawStrokeColCYMK(c, y, m, k)
     checkerror()
     return
+
 
 def drawFillColGrey(g):
     """FIXME"""
@@ -2657,11 +2745,13 @@ def drawFillColGrey(g):
     checkerror()
     return
 
+
 def drawFillColRGB(r, g, b):
     """FIXME"""
     libc.pycpdf_drawFillColRGB(r, g, b)
     checkerror()
     return
+
 
 def drawFillColCYMK(c, y, m, k):
     """FIXME"""
@@ -2669,11 +2759,13 @@ def drawFillColCYMK(c, y, m, k):
     checkerror()
     return
 
+
 def drawPush():
     """FIXME"""
     libc.pycpdf_drawPush()
     checkerror()
     return
+
 
 def drawPop():
     """FIXME"""
@@ -2681,11 +2773,13 @@ def drawPop():
     checkerror()
     return
 
+
 def drawMTrans(tx, ty):
     """FIXME"""
     libc.pycpdf_drawMTrans(tx, ty)
     checkerror()
     return
+
 
 def drawMRot(x, y, a):
     """FIXME"""
@@ -2693,11 +2787,13 @@ def drawMRot(x, y, a):
     checkerror()
     return
 
+
 def drawMScale(x, y, sx, sy):
     """FIXME"""
     libc.pycpdf_drawMScale(x, y, sx, sy)
     checkerror()
     return
+
 
 def drawMShearX(x, y, a):
     """FIXME"""
@@ -2705,11 +2801,13 @@ def drawMShearX(x, y, a):
     checkerror()
     return
 
+
 def drawMShearY(x, y, a):
     """FIXME"""
     libc.pycpdf_drawMShearY(x, y, a)
     checkerror()
     return
+
 
 def drawMatrix(a, b, c, d, e, f):
     """FIXME"""
@@ -2717,11 +2815,13 @@ def drawMatrix(a, b, c, d, e, f):
     checkerror()
     return
 
+
 def drawXObjBBox(x, y, w, h):
     """FIXME"""
     libc.pycpdf_drawXObjBBox(x, y, w, h)
     checkerror()
     return
+
 
 def drawXObj(name):
     """FIXME"""
@@ -2729,11 +2829,13 @@ def drawXObj(name):
     checkerror()
     return
 
+
 def drawEndXObj():
     """FIXME"""
     libc.pycpdf_drawEndXObj()
     checkerror()
     return
+
 
 def drawUse(name):
     """FIXME"""
@@ -2741,11 +2843,13 @@ def drawUse(name):
     checkerror()
     return
 
+
 def drawJPEG(name, filename):
     """FIXME"""
     libc.pycpdf_drawJPEG(str.encode(name), str.encode(filename))
     checkerror()
     return
+
 
 def drawPNG(name, filename):
     """FIXME"""
@@ -2753,11 +2857,13 @@ def drawPNG(name, filename):
     checkerror()
     return
 
+
 def drawImage(name):
     """FIXME"""
     libc.pycpdf_drawImage(str.encode(name))
     checkerror()
     return
+
 
 def drawFillOpacity(n):
     """FIXME"""
@@ -2765,11 +2871,13 @@ def drawFillOpacity(n):
     checkerror()
     return
 
+
 def drawStrokeOpacity(n):
     """FIXME"""
     libc.pycpdf_drawStrokeOpacity(n)
     checkerror()
     return
+
 
 def drawBT():
     """FIXME"""
@@ -2777,11 +2885,13 @@ def drawBT():
     checkerror()
     return
 
+
 def drawET():
     """FIXME"""
     libc.pycpdf_drawET()
     checkerror()
     return
+
 
 def drawFont(name):
     """FIXME"""
@@ -2789,11 +2899,13 @@ def drawFont(name):
     checkerror()
     return
 
+
 def drawFontSize(n):
     """FIXME"""
     libc.pycpdf_drawFontSize(n)
     checkerror()
     return
+
 
 def drawText(text):
     """FIXME"""
@@ -2801,11 +2913,13 @@ def drawText(text):
     checkerror()
     return
 
+
 def drawSText(text):
     """FIXME"""
     libc.pycpdf_drawSText(str.encode(text))
     checkerror()
     return
+
 
 def drawCharSpace(n):
     """FIXME"""
@@ -2813,11 +2927,13 @@ def drawCharSpace(n):
     checkerror()
     return
 
+
 def drawWordSpace(n):
     """FIXME"""
     libc.pycpdf_drawWordSpace(n)
     checkerror()
     return
+
 
 def drawTextScale(n):
     """FIXME"""
@@ -2825,11 +2941,13 @@ def drawTextScale(n):
     checkerror()
     return
 
+
 def drawRenderMode(n):
     """FIXME"""
     libc.pycpdf_drawRenderMode(n)
     checkerror()
     return
+
 
 def drawRise(n):
     """FIXME"""
@@ -2837,17 +2955,20 @@ def drawRise(n):
     checkerror()
     return
 
+
 def drawLeading(n):
     """FIXME"""
     libc.pycpdf_drawLeading(n)
     checkerror()
     return
 
+
 def drawNL():
     """FIXME"""
     libc.pycpdf_drawNL()
     checkerror()
     return
+
 
 def drawNewPage():
     """FIXME"""
