@@ -319,43 +319,43 @@ def version():
 
 
 def setFast():
-    """ Set fast mode. Some operations have a fast mode. The default is 'slow'
+    """Set fast mode. Some operations have a fast mode. The default is 'slow'
     mode, which works even on old-fashioned files. For more details, see
-    section 1.13 of the CPDF manual. This function sets the mode globally. """
+    section 1.13 of the CPDF manual. This function sets the mode globally."""
     libc.pycpdf_setFast()
     checkerror()
 
 
 def setSlow():
-    """ Set slow mode. Some operations have a fast mode. The default is 'slow'
+    """Set slow mode. Some operations have a fast mode. The default is 'slow'
     mode, which works even on old-fashioned files. For more details, see
-    section 1.13 of the CPDF manual. This function sets the mode globally. """
+    section 1.13 of the CPDF manual. This function sets the mode globally."""
     libc.pycpdf_setSlow()
     checkerror()
 
 
 def embedStd14(embed):
-    """ Calling this function with a true argument sets embedding for the
+    """Calling this function with a true argument sets embedding for the
     Standard 14 fonts.  You must also set the directory to load them from with
-    the embedStd14Dir function. Default value: False. """
+    the embedStd14Dir function. Default value: False."""
     libc.pycpdf_embedStd14(embed)
     checkerror()
 
 
 def embedStd14Dir(d):
-    """ Set the directory to load Standard 14 fonts for embedding. """
+    """Set the directory to load Standard 14 fonts for embedding."""
     libc.pycpdf_embedStd14Dir(str.encode(d))
     checkerror()
 
 
 def clearError():
-    """ Clear the current error state. """
+    """Clear the current error state."""
     libc.pycpdf_clearError()
     checkerror()
 
 
 def onExit():
-    """ A debug function which prints some information about
+    """A debug function which prints some information about
     resource usage. This can be used to detect if PDFs or ranges are being
     deallocated properly."""
     libc.pycpdf_onExit()
@@ -365,7 +365,7 @@ def onExit():
 
 
 def fromFile(filename, userpw):
-    """ Load a PDF file from a given file.
+    """Load a PDF file from a given file.
     Supply a user password (possibly blank) in case the file is encrypted. It
     won't be decrypted, but sometimes the password is needed just to load the
     file."""
@@ -375,7 +375,7 @@ def fromFile(filename, userpw):
 
 
 def fromFileLazy(filename, userpw):
-    """ Loads a PDF from a file, doing only
+    """Load a PDF from a file, doing only
     minimal parsing. The objects will be read and parsed when they are actually
     needed.  Use this when the whole file won't be required. Also supply a user
     password (possibly blank) in case the file is encrypted. It won't be
@@ -387,14 +387,14 @@ def fromFileLazy(filename, userpw):
 
 
 def fromMemory(data, userpw):
-    """ Load a file from a byte array and the user password (blank if none)."""
+    """Load a file from a byte array and the user password (blank if none)."""
     pdf = Pdf(libc.pycpdf_fromMemory(data, len(data), str.encode(userpw)))
     checkerror()
     return pdf
 
 
 def fromMemoryLazy(data, userpw):
-    """ Load a file from from a byte array and the user password (blank if
+    """Load a file from from a byte array and the user password (blank if
     none), but lazily like fromFileLazy."""
     pdf = Pdf(libc.pycpdf_fromMemoryLazy(data, len(data), str.encode(userpw)))
     checkerror()
@@ -463,9 +463,8 @@ def validatePagespec(pagespec):
 
 
 def stringOfPagespec(pdf, r):
-    """Build a page specification from a page
-    range. For example, the range containing 1,2,3,6,7,8 in a document of 8
-    pages might yield "1-3,6-end" """
+    """Build a page specification from a page range. For example, the range
+    containing 1,2,3,6,7,8 in a document of 8 pages might yield "1-3,6-end"."""
     rn = range_of_list(r)
     r = string_at(libc.pycpdf_stringOfPagespec(pdf.pdf, rn)).decode()
     deleteRange(rn)
@@ -483,8 +482,8 @@ def blankRange():
 
 
 def pageRange(f, t):
-    """ Nuild a range from one page to another inclusive.
-    For example, pageRange(3,7) gives the range 3,4,5,6,7. """
+    """Build a range from one page to another inclusive. For example,
+    pageRange(3,7) gives the range 3,4,5,6,7."""
     rn = libc.pycpdf_pageRange(f, t)
     r = list_of_range(rn)
     deleteRange(rn)
@@ -502,8 +501,7 @@ def all(pdf):
 
 
 def even(r):
-    """A range which contains just the even pages of another
-    range."""
+    """A range which contains just the even pages of another range."""
     rn = range_of_list(r)
     reven = libc.pycpdf_even(rn)
     rout = list_of_range(reven)
@@ -514,8 +512,7 @@ def even(r):
 
 
 def odd(r):
-    """A range which contains just the odd pages of another
-    range."""
+    """A range which contains just the odd pages of another range."""
     rn = range_of_list(r)
     rodd = libc.pycpdf_odd(rn)
     rout = list_of_range(rodd)
@@ -744,7 +741,7 @@ def encryptionKind(pdf):
 
 
 def loadFont(name, filename):
-    """ loads a TrueType font from the given file name, and names it. It may
+    """Loads a TrueType font from the given file name, and names it. It may
     then be used when adding text or drawing, using the name in place of a
     standard font name. """
     libc.pycpdf_loadFont(str.encode(name), str.encode(filename))
@@ -795,7 +792,7 @@ def mergeSame(pdfs, retain_numbering, remove_duplicate_fonts, ranges):
 
 
 def selectPages(pdf, r):
-    """ Returns a new document which just those pages in the page range."""
+    """Returns a new document which just those pages in the page range."""
     rn = range_of_list(r)
     r = Pdf(libc.pycpdf_selectPages(pdf.pdf, rn))
     deleteRange(rn)
@@ -846,7 +843,7 @@ uslegallandscape = 15
 
 def scaleToFitPaper(pdf, r, papersize, scale_to_fit_scale):
     """Scales the given pages to fit the given page size, possibly multiplied
-    by scale_to_fit_scale (typically 1.0)"""
+    by scale_to_fit_scale (typically 1.0)."""
     r = range_of_list(r)
     libc.pycpdf_scaleToFitPaper(pdf.pdf, r, papersize, scale_to_fit_scale)
     deleteRange(r)
@@ -1114,14 +1111,14 @@ def getBookmarksJSON(pdf):
 
 
 def setBookmarksJSON(pdf, data):
-    """setBookmarksJSON(pdf, data) sets the bookmarks from JSON bookmark data."""
+    """Sets the bookmarks from JSON bookmark data."""
     libc.pycpdf_setBookmarksJSON(pdf.pdf, data, len(data))
     checkerror()
     return
 
 
 def tableOfContents(pdf, font, fontsize, title, bookmark):
-    """tableOfContents(pdf, font, fontsize, title, bookmark) typesets a table
+    """Typesets a table
     of contents from existing bookmarks and prepends it to the document. If
     bookmark is set, the table of contents gets its own bookmark."""
     pdf = libc.pycpdf_tableOfContents(
@@ -1270,7 +1267,7 @@ def addText(metrics, pdf, r, text, p, line_spacing, bates, font, size, red,
 
 
 def addTextSimple(pdf, r, text, p, font, size):
-    """like addText, but with most parameters default
+    """Like addText, but with most parameters default
 
          * pdf = the document
          * r = the range
@@ -1352,7 +1349,7 @@ def impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing, linewidth
 
 
 def chop(pdf, r, x, y, columns, rtl, btt):
-    """ Chop each page in the range into x * y pieces. If columns is set, the
+    """Chop each page in the range into x * y pieces. If columns is set, the
     pieces go by columns instead of rows. If rtl is set, the pieces are taken
     right-to-left. If btt is set, the pieces are taken from bottom to top. """
     r = range_of_list(r)
@@ -1362,7 +1359,7 @@ def chop(pdf, r, x, y, columns, rtl, btt):
 
 
 def chopH(pdf, r, columns, y):
-    """ Chop each page in the range horizontally at position y. If columns is
+    """Chop each page in the range horizontally at position y. If columns is
     set, the pieces are arranged in reverse order. """
     r = range_of_list(r)
     libc.pycpdf_chopH(pdf.pdf, r, columns, y)
@@ -1371,7 +1368,7 @@ def chopH(pdf, r, columns, y):
 
 
 def chopV(pdf, r, columns, x):
-    """ Chop each page in the range vertically at position x. If columns is
+    """Chop each page in the range vertically at position x. If columns is
     set, the pieces are arranged in reverse order. """
     r = range_of_list(r)
     libc.pycpdf_chopV(pdf.pdf, r, columns, x)
@@ -1418,7 +1415,7 @@ def padMultipleBefore(pdf, n):
 
 
 def annotationsJSON(pdf):
-    """ Gets the annotations in JSON format. """
+    """Gets the annotations in JSON format."""
     length = c_int32()
     data = libc.pycpdf_annotationsJSON(pdf.pdf, byref(length))
     out_data = create_string_buffer(length.value)
@@ -1429,7 +1426,7 @@ def annotationsJSON(pdf):
 
 
 def removeAnnotations(pdf, r):
-    """ Removes all annotations from pages in the given range. """
+    """Removes all annotations from pages in the given range."""
     rn = range_of_list(r)
     libc.pycpdf_removeAnnotations(pdf.pdf, rn)
     deleteRange(rn)
@@ -1438,8 +1435,8 @@ def removeAnnotations(pdf, r):
 
 
 def setAnnotationsJSON(pdf, data):
-    """ Adds the annotations given in JSON format to the PDF, on top of any
-    existing annotations. """
+    """Adds the annotations given in JSON format to the PDF, on top of any
+    existing annotations."""
     libc.pycpdf_setAnnotationsJSON(pdf.pdf, data, len(data))
     checkerror()
     return
@@ -1456,13 +1453,14 @@ def isLinearized(filename):
 
 
 def hasAcroForm(pdf):
-    """ Returns True if the document has an AcroForm.  """
+    """Returns True if the document has an AcroForm."""
     r = libc.pycpdf_hasAcroForm(pdf.pdf)
     checkerror()
     return r
 
 
 def getSubformats(pdf):
+    """Returns a list of the subformats of the PDF, if any."""
     n = libc.pycpdf_startGetSubformats(pdf.pdf)
     l = []
     for x in range(n):
@@ -1473,23 +1471,23 @@ def getSubformats(pdf):
 
 
 def hasObjectStreams(pdf):
-    """ Returns True if a document was written using object streams."""
+    """Returns True if a document was written using object streams."""
     r = libc.pycpdf_hasObjectStreams(pdf.pdf)
     checkerror()
     return r
 
 
 def id1(pdf):
-    """ Return the first ID string of the PDF, if any, in hexadecimal string
-    format.  """
+    """Return the first ID string of the PDF, if any, in hexadecimal string
+    format."""
     r = string_at(libc.pycpdf_id1(pdf.pdf)).decode()
     checkerror()
     return r
 
 
 def id2(pdf):
-    """ Return the second ID string of the PDF, if any, in hexadecimal string
-    format.  """
+    """Return the second ID string of the PDF, if any, in hexadecimal string
+    format."""
     r = string_at(libc.pycpdf_id2(pdf.pdf)).decode()
     checkerror()
     return r
@@ -1781,14 +1779,14 @@ def getPageRotation(pdf, pagenumber):
 
 
 def hasBox(pdf, pagenumber, boxname):
-    """Returns True, if the page has the given box. E.g "/CropBox" """
+    """Returns True, if the page has the given box. E.g "/CropBox"."""
     r = libc.pycpdf_hasBox(pdf.pdf, pagenumber, str.encode(boxname))
     checkerror()
     return r
 
 
 def numAnnots(pdf, pagenumber):
-    """ Return the number of annotations on the given page in the given PDF. """
+    """Return the number of annotations on the given page in the given PDF."""
     r = libc.pycpdf_numAnnots(pdf.pdf, pagenumber)
     checkerror()
     return r
@@ -1797,7 +1795,7 @@ def numAnnots(pdf, pagenumber):
 def getMediaBox(pdf, pagenumber):
     """Get a mediabox box given the document, page range, min x, max x,
     min y, max y in points. Only suceeds if such a box exists, as checked by
-    hasBox"""
+    hasBox."""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1811,7 +1809,7 @@ def getMediaBox(pdf, pagenumber):
 def getCropBox(pdf, pagenumber):
     """Get a crop box given the document, page range, min x, max x,
     min y, max y in points. Only suceeds if such a box exists, as checked by
-    hasBox"""
+    hasBox."""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1825,7 +1823,7 @@ def getCropBox(pdf, pagenumber):
 def getTrimBox(pdf, pagenumber):
     """Get a trim box given the document, page range, min x, max x,
     min y, max y in points. Only suceeds if such a box exists, as checked by
-    hasBox"""
+    hasBox."""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1839,7 +1837,7 @@ def getTrimBox(pdf, pagenumber):
 def getArtBox(pdf, pagenumber):
     """Get an art box given the document, page range, min x, max x,
     min y, max y in points. Only suceeds if such a box exists, as checked by
-    hasBox"""
+    hasBox."""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1853,7 +1851,7 @@ def getArtBox(pdf, pagenumber):
 def getBleedBox(pdf, pagenumber):
     """Get a bleed box given the document, page range, min x, max x,
     min y, max y in points. Only suceeds if such a box exists, as checked by
-    hasBox"""
+    hasBox."""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -2137,7 +2135,7 @@ def getMetadata(pdf):
 
 
 def removeMetadata(pdf):
-    """Remove the XMP metadata from a document"""
+    """Remove the XMP metadata from a document."""
     libc.pycpdf_removeMetadata(pdf.pdf)
     checkerror()
     return
@@ -2184,7 +2182,7 @@ def getPageLabels(pdf):
     * labelstyle = DecimalArabic
     * labelprefix = ""
     * startpage = 6
-    * startvalue = 1 """
+    * startvalue = 1"""
     n = libc.pycpdf_startGetPageLabels(pdf.pdf)
     l = []
     for x in range(n):
@@ -2331,7 +2329,8 @@ def imageResolutionJSON(pdf, resolution):
 
 def getImages(pdf):
     """Return a list of images in the PDF as tuples of:
-    (object number, pages occurring, image name, width, height, size, bitspercomponent, color space, filter)
+    (object number, pages occurring, image name, width, height, size,
+     bitspercomponent, color space, filter)
     """
     n = libc.pycpdf_startGetImages(pdf.pdf)
     l = []
@@ -2412,7 +2411,8 @@ def copyFont(pdf, pdf2, r, pagenumber, fontname):
 
 
 def JSONUTF8(utf8):
-    """ Set the JSON output format. If true, the newer UTF8 format is used. Default: False. """
+    """Set the JSON output format. If true, the newer UTF8 format is used.
+    Default: False."""
     libc.pycpdf_JSONUTF8(utf8)
     checkerror()
 
@@ -2493,9 +2493,8 @@ def OCGCoalesce(pdf):
 
 
 def blankDocument(w, h, pages):
-    """ Create a blank document
-    with pages of the given width (in points), height (in points), and number
-    of pages."""
+    """Create a blank document with pages of the given width (in points),
+    height (in points), and number of pages."""
     pdf = Pdf(libc.pycpdf_blankDocument(w, h, pages))
     checkerror()
     return pdf
@@ -2503,7 +2502,7 @@ def blankDocument(w, h, pages):
 
 def blankDocumentPaper(papersize, pages):
     """Create a blank document with pages of the given paper size, and number
-    of pages. """
+    of pages."""
     r = Pdf(libc.pycpdf_blankDocumentPaper(papersize, pages))
     checkerror()
     return r
@@ -2530,14 +2529,14 @@ def textToPDFPaper(papersize, font, fontsize, filename):
 
 
 def fromPNG(filename):
-    """ Builds a PDF from a non-interlaced non-transparent PNG file. """
+    """Builds a PDF from a non-interlaced non-transparent PNG file."""
     pdf = Pdf(libc.pycpdf_fromPNG(str.encode(filename)))
     checkerror()
     return pdf
 
 
 def fromJPEG(filename):
-    """ Builds a PDF from a JPEG file. """
+    """Builds a PDF from a JPEG file."""
     pdf = Pdf(libc.pycpdf_fromJPEG(str.encode(filename)))
     checkerror()
     return pdf
@@ -2546,7 +2545,7 @@ def fromJPEG(filename):
 # CHAPTER 18. Drawing on PDFs
 
 def drawBegin():
-    """Sets up the drawing process. It must be called before any other draw* function. """
+    """Sets up the drawing process. It must be called before any other draw* function."""
     libc.pycpdf_drawBegin()
     checkerror()
     return
@@ -2560,9 +2559,8 @@ def drawEnd(pdf, r):
 
 
 def drawEndExtended(pdf, r, underneath, bates, filename):
-    """ drawExtended(pdf, range, underneath, bates, filename) is the same as
-    drawEnd, but provides the special parameters which may be required when
-    using drawSText."""
+    """The same as drawEnd, but provides the special parameters which may
+    be required when using drawSText."""
     rn = range_of_list(r)
     libc.pycpdf_drawEndExtended(
         pdf.pdf, rn, underneath, bates, filename, str.encode(filename))
