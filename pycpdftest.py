@@ -296,17 +296,12 @@ def chapter1():
     print(f'---cpdf_startGetSubformats()')
     try:
         pdf = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')
-        subformats = pycpdflib.startGetSubformats(pdf)
-        print(f'n subformats: {subformats}')
+        subformats = pycpdflib.getSubformats(pdf)
+        print(f'n subformats: {len(subformats)}')
     except:
         fatal_prerr()
-    # FIXME actually call this
     print(f'---cpdf_getSubformat()')
     print(f'---cpdf_endGetSubformats()')
-    try:
-        pycpdflib.endGetSubformats()
-    except:
-        fatal_prerr()
     print('---cpdf_toFileEncrypted()')
     try:
         pdf5 = pycpdflib.fromFile('testinputs/cpdflibmanual.pdf', '')

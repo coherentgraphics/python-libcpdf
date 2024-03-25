@@ -1463,24 +1463,14 @@ def hasAcroForm(pdf):
     checkerror()
     return r
 
-""" FIXME THIS ALL NEEDS TO BE REPLACED WITH A FUNCTION WHICH JUST RETURNS THE LIST """
-
-def startGetSubformats(pdf):
-    r = libc.pycpdf_startGetSubformats(pdf.pdf)
-    checkerror()
-    return r
-
-
-def getSubformat(serial):
-    r = string_at(libc.pycpdf_getSubformat(serial)).decode()
-    checkerror()
-    return r
-
-
-def endGetSubformats():
+def getSubformats(pdf):
+    n = libc.pycpdf_startGetSubformats(pdf.pdf)
+    l = []
+    for x in range(n):
+        l.append(string_at(libc.pycpdf_getSubformat(serial)).decode())
     libc.pycpdf_endGetSubformats()
     checkerror()
-
+    return l
 
 def hasObjectStreams(pdf):
     """ Returns True if a document was written using object streams."""
@@ -2307,11 +2297,11 @@ def getAttachments(pdf):
 # CHAPTER 13. Images
 
 
-def getImageResolution(pdf, min_required_resolution):
+def getImageResolution(pdf, resolution):
     """Return a list of all uses of images in the PDF which do not meet the
     minimum required resolution in dpi as tuples of:
     (pagenumber, name, x pixels, y pixels, x resolution, y resolution, objnum)."""
-    n = libc.pycpdf_startGetImageResolution(pdf.pdf, min_required_resolution)
+    n = libc.pycpdf_startGetImageResolution(pdf.pdf, resolution)
     l = []
     for x in range(n):
         pagenumber = libc.pycpdf_getImageResolutionPageNumber(x)
@@ -2327,9 +2317,20 @@ def getImageResolution(pdf, min_required_resolution):
     checkerror()
     return l
 
+def imageResolutionJSON(pdf, resolution):
+    """Return the image resolution data in JSON format."""
+    length = c_int32()
+    data = libc.pycpdf_imageResolutionJSON(pdf.pdf, byref(length), resolution)
+    out_data = create_string_buffer(length.value)
+    memmove(out_data, data, length.value)
+    libc.pycpdf_imageResolutionJSONFree()
+    checkerror()
+    return out_data.raw
 
 def getImages(pdf):
-    """FIXME"""
+    """Return a list of images in the PDF as tuples of:
+    (object number, pages occurring, image name, width, height, size, bitspercomponent, color space, filter)
+    """
     n = libc.pycpdf_startGetImages(pdf.pdf)
     l = []
     for x in range(n):
@@ -2349,7 +2350,7 @@ def getImages(pdf):
 
 
 def imagesJSON(pdf):
-    """FIXME"""
+    """Return the list of images in the PDF in JSON format."""
     length = c_int32()
     data = libc.pycpdf_imagesJSON(pdf.pdf, byref(length))
     out_data = create_string_buffer(length.value)
@@ -2358,16 +2359,6 @@ def imagesJSON(pdf):
     checkerror()
     return out_data.raw
 
-
-def imageResolutionJSON(pdf, resolution):
-    """FIXME"""
-    length = c_int32()
-    data = libc.pycpdf_imageResolutionJSON(pdf.pdf, byref(length), resolution)
-    out_data = create_string_buffer(length.value)
-    memmove(out_data, data, length.value)
-    libc.pycpdf_imageResolutionJSONFree()
-    checkerror()
-    return out_data.raw
 
 # CHAPTER 14. Fonts
 
@@ -2390,7 +2381,7 @@ def getFontInfo(pdf):
 
 
 def fontsJSON(pdf):
-    """FIXME"""
+    """Return font information in JSON format."""
     length = c_int32()
     data = libc.pycpdf_fontsJSON(pdf.pdf, byref(length))
     out_data = create_string_buffer(length.value)
@@ -2418,7 +2409,7 @@ def copyFont(pdf, pdf2, r, pagenumber, fontname):
 # CHAPTER 15. PDF and JSON
 
 def JSONUTF8(utf8):
-    """ FIXME """
+    """ Set the JSON output format. If true, the newer UTF8 format is used. Default: False. """
     libc.pycpdf_JSONUTF8(utf8)
     checkerror()
 
@@ -2536,14 +2527,14 @@ def textToPDFPaper(papersize, font, fontsize, filename):
 
 
 def fromPNG(filename):
-    """FIXME"""
+    """ Builds a PDF from a non-interlaced non-transparent PNG file. """
     pdf = Pdf(libc.pycpdf_fromPNG(str.encode(filename)))
     checkerror()
     return pdf
 
 
 def fromJPEG(filename):
-    """FIXME"""
+    """ Builds a PDF from a JPEG file. """
     pdf = Pdf(libc.pycpdf_fromJPEG(str.encode(filename)))
     checkerror()
     return pdf
