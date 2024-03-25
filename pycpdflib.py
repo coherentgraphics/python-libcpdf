@@ -348,8 +348,6 @@ def embedStd14Dir(d):
     checkerror()
 
 
-
-
 def clearError():
     """ Clear the current error state. """
     libc.pycpdf_clearError()
@@ -1463,6 +1461,7 @@ def hasAcroForm(pdf):
     checkerror()
     return r
 
+
 def getSubformats(pdf):
     n = libc.pycpdf_startGetSubformats(pdf.pdf)
     l = []
@@ -1471,6 +1470,7 @@ def getSubformats(pdf):
     libc.pycpdf_endGetSubformats()
     checkerror()
     return l
+
 
 def hasObjectStreams(pdf):
     """ Returns True if a document was written using object streams."""
@@ -2317,6 +2317,7 @@ def getImageResolution(pdf, resolution):
     checkerror()
     return l
 
+
 def imageResolutionJSON(pdf, resolution):
     """Return the image resolution data in JSON format."""
     length = c_int32()
@@ -2326,6 +2327,7 @@ def imageResolutionJSON(pdf, resolution):
     libc.pycpdf_imageResolutionJSONFree()
     checkerror()
     return out_data.raw
+
 
 def getImages(pdf):
     """Return a list of images in the PDF as tuples of:
@@ -2407,6 +2409,7 @@ def copyFont(pdf, pdf2, r, pagenumber, fontname):
     checkerror()
 
 # CHAPTER 15. PDF and JSON
+
 
 def JSONUTF8(utf8):
     """ Set the JSON output format. If true, the newer UTF8 format is used. Default: False. """
@@ -2543,21 +2546,23 @@ def fromJPEG(filename):
 # CHAPTER 18. Drawing on PDFs
 
 def drawBegin():
-    """FIXME"""
+    """Sets up the drawing process. It must be called before any other draw* function. """
     libc.pycpdf_drawBegin()
     checkerror()
     return
 
 
 def drawEnd(pdf, r):
-    """FIXME"""
+    """Commits the drawing to the given PDF on pages in the given range."""
     libc.pycpdf_drawEnd()
     checkerror()
     return
 
 
 def drawEndExtended(pdf, r, underneath, bates, filename):
-    """FIXME"""
+    """ drawExtended(pdf, range, underneath, bates, filename) is the same as
+    drawEnd, but provides the special parameters which may be required when
+    using drawSText."""
     rn = range_of_list(r)
     libc.pycpdf_drawEndExtended(
         pdf.pdf, rn, underneath, bates, filename, str.encode(filename))
@@ -2567,112 +2572,155 @@ def drawEndExtended(pdf, r, underneath, bates, filename):
 
 
 def drawRect(x, y, w, h):
-    """FIXME"""
+    """Add a rectangle to the current path."""
     libc.pycpdf_drawRect(x, y, w, h)
     checkerror()
     return
 
 
 def drawTo(x, y):
-    """FIXME"""
+    """Move the current point to (x, y)."""
     libc.pycpdf_drawTo(x, y)
     checkerror()
     return
 
 
 def drawLine(x, y):
-    """FIXME"""
+    """Adds a line from the current point to (x, y) to the current path."""
     libc.pycpdf_drawLine(x, y)
     checkerror()
     return
 
 
 def drawBez(x1, y1, x2, y2, x3, y3):
-    """FIXME"""
+    """Adds a Bezier curve to the current path."""
     libc.pycpdf_drawBez(x1, y1, x2, y2, x3, y3)
     checkerror()
     return
 
 
 def drawBez23(x2, y2, x3, y3):
-    """FIXME"""
+    """Adds a Bezier curve twith (x1, y1) = current point."""
     libc.pycpdf_drawBez23(x2, y2, x3, y3)
     checkerror()
     return
 
 
 def drawBez13(x1, y1, x3, y3):
-    """FIXME"""
+    """Adds a Bezier curve with (x3, y3) = new current point."""
     libc.pycpdf_drawBez13(x1, y1, x3, y3)
     checkerror()
     return
 
 
 def drawCircle(x, y, r):
-    """FIXME"""
+    """Adds a circle to the current path."""
     libc.pycpdf_drawCircle(x, y, r)
     checkerror()
     return
 
 
 def drawStroke():
-    """FIXME"""
+    """Stroke the current path and clear it."""
     libc.pycpdf_drawStroke()
     checkerror()
     return
 
 
 def drawFill():
-    """FIXME"""
+    """Fills the current path with a non-zero winding rule, and clears it. """
     libc.pycpdf_drawFill()
     checkerror()
     return
 
 
 def drawFillEo():
-    """FIXME"""
+    """Fills the current path with an even-odd winding rule, and clears it. """
     libc.pycpdf_drawFillEo()
     checkerror()
     return
 
 
 def drawStrokeFill():
-    """FIXME"""
+    """Fills and then strokes the current path with a non-zero winding rule, and clears it. """
     libc.pycpdf_drawStrokeFill()
     checkerror()
     return
 
 
 def drawStrokeFillEo():
-    """FIXME"""
+    """Fills and then strokes the current path with an even-odd winding rule, and clears it. """
     libc.pycpdf_drawStrokeFillEo()
     checkerror()
     return
 
 
 def drawClose():
-    """FIXME"""
+    """Closes the current path by appending a straight line segment from the
+    current point to the starting point of the subpath. """
     libc.pycpdf_drawClose()
     checkerror()
     return
 
 
 def drawClip():
-    """FIXME"""
+    """Uses the current path as a clipping region, using the non-zero winding rule. """
     libc.pycpdf_drawClip()
     checkerror()
     return
 
 
 def drawClipEo():
-    """FIXME"""
+    """Uses the current path as a clipping region, using the even-odd winding rule. """
     libc.pycpdf_drawClipEo()
     checkerror()
     return
 
 
+def drawStrokeColGrey(g):
+    """Changes to a greyscale stroke colourspace and sets the stroke colour. """
+    libc.pycpdf_drawStrokeColGrey(g)
+    checkerror()
+    return
+
+
+def drawStrokeColRGB(r, g, b):
+    """Changes to an RGB stroke colourspace and sets the stroke colour. """
+    libc.pycpdf_drawStrokeColRGB(r, g, b)
+    checkerror()
+    return
+
+
+def drawStrokeColCYMK(c, y, m, k):
+    """Changes to a CYMK stroke colourspace and sets the stroke colour. """
+    libc.pycpdf_drawStrokeColCYMK(c, y, m, k)
+    checkerror()
+    return
+
+
+def drawFillColGrey(g):
+    """Changes to a greyscale fill colourspace and sets the fill colour. """
+    libc.pycpdf_drawFillColGrey(g)
+    checkerror()
+    return
+
+
+def drawFillColRGB(r, g, b):
+    """Changes to an RGB fill colourspace and sets the fill colour. """
+    libc.pycpdf_drawFillColRGB(r, g, b)
+    checkerror()
+    return
+
+
+def drawFillColCYMK(c, y, m, k):
+    """Changes to a CYMK fill colourspace and sets the fill colour. """
+    libc.pycpdf_drawFillColCYMK(c, y, m, k)
+    checkerror()
+    return
+
+
 def drawThick(thickness):
-    """FIXME"""
+    """Sets the line thickness."""
     libc.pycpdf_drawThick(thickness)
     checkerror()
     return
@@ -2685,7 +2733,7 @@ capSquare = 2
 
 
 def drawCap(captype):
-    """FIXME"""
+    """Sets the line cap."""
     libc.pycpdf_drawCap(captype)
     checkerror()
     return
@@ -2698,280 +2746,243 @@ joinBevel = 2
 
 
 def drawJoin(jointype):
-    """FIXME"""
+    """Sets the line join type"""
     libc.pycpdf_drawJoin(jointype)
     checkerror()
     return
 
 
 def drawMiter(miter):
-    """FIXME"""
+    """Sets the miter limit."""
     libc.pycpdf_drawMiter(miter)
     checkerror()
     return
 
 
 def drawDash(description):
-    """FIXME"""
+    """Sets the line dash style"""
     libc.pycpdf_drawDash(str.encode(description))
     checkerror()
     return
 
 
-def drawStrokeColGrey(g):
-    """FIXME"""
-    libc.pycpdf_drawStrokeColGrey(g)
-    checkerror()
-    return
-
-
-def drawStrokeColRGB(r, g, b):
-    """FIXME"""
-    libc.pycpdf_drawStrokeColRGB(r, g, b)
-    checkerror()
-    return
-
-
-def drawStrokeColCYMK(c, y, m, k):
-    """FIXME"""
-    libc.pycpdf_drawStrokeColCYMK(c, y, m, k)
-    checkerror()
-    return
-
-
-def drawFillColGrey(g):
-    """FIXME"""
-    libc.pycpdf_drawFillColGrey(g)
-    checkerror()
-    return
-
-
-def drawFillColRGB(r, g, b):
-    """FIXME"""
-    libc.pycpdf_drawFillColRGB(r, g, b)
-    checkerror()
-    return
-
-
-def drawFillColCYMK(c, y, m, k):
-    """FIXME"""
-    libc.pycpdf_drawFillColCYMK(c, y, m, k)
-    checkerror()
-    return
-
-
 def drawPush():
-    """FIXME"""
+    """Saves the current graphics state on the stack. """
     libc.pycpdf_drawPush()
     checkerror()
     return
 
 
 def drawPop():
-    """FIXME"""
+    """Restores the graphics state from the stack. """
     libc.pycpdf_drawPop()
     checkerror()
     return
 
 
+def drawMatrix(a, b, c, d, e, f):
+    """Appends the given matrix to the Current Transformation Matrix. """
+    libc.pycpdf_drawMatrix(a, b, c, d, e, f)
+    checkerror()
+    return
+
+
 def drawMTrans(tx, ty):
-    """FIXME"""
+    """Appends a translation by (tx, ty) to the Current Transformation Matrix. """
     libc.pycpdf_drawMTrans(tx, ty)
     checkerror()
     return
 
 
 def drawMRot(x, y, a):
-    """FIXME"""
+    """Appends a rotation by a around (a, y) to the Current Transformation Matrix. """
     libc.pycpdf_drawMRot(x, y, a)
     checkerror()
     return
 
 
 def drawMScale(x, y, sx, sy):
-    """FIXME"""
+    """Appends a scaling by (sx, sy) around (x, y) to the Current Transformation Matrix. """
     libc.pycpdf_drawMScale(x, y, sx, sy)
     checkerror()
     return
 
 
 def drawMShearX(x, y, a):
-    """FIXME"""
+    """Appends an X shearing of angle a around (x, y) to the Current Transformation Matrix. """
     libc.pycpdf_drawMShearX(x, y, a)
     checkerror()
     return
 
 
 def drawMShearY(x, y, a):
-    """FIXME"""
+    """Appends an X shearing of angle a around (x, y) to the Current Transformation Matrix. """
     libc.pycpdf_drawMShearY(x, y, a)
     checkerror()
     return
 
 
-def drawMatrix(a, b, c, d, e, f):
-    """FIXME"""
-    libc.pycpdf_drawMatrix(a, b, c, d, e, f)
-    checkerror()
-    return
-
-
 def drawXObjBBox(x, y, w, h):
-    """FIXME"""
+    """Sets the XObject bounding box. """
     libc.pycpdf_drawXObjBBox(x, y, w, h)
     checkerror()
     return
 
 
 def drawXObj(name):
-    """FIXME"""
+    """Begins the storing of an XObject. """
     libc.pycpdf_drawXObj(str.encode(name))
     checkerror()
     return
 
 
 def drawEndXObj():
-    """FIXME"""
+    """Ends the storing of an XObject."""
     libc.pycpdf_drawEndXObj()
     checkerror()
     return
 
 
 def drawUse(name):
-    """FIXME"""
+    """Uses the named XObject. """
     libc.pycpdf_drawUse(str.encode(name))
     checkerror()
     return
 
 
 def drawJPEG(name, filename):
-    """FIXME"""
+    """Loads a JPEG from the given file, storing it under the given name. """
     libc.pycpdf_drawJPEG(str.encode(name), str.encode(filename))
     checkerror()
     return
 
 
 def drawPNG(name, filename):
-    """FIXME"""
+    """Loads a non-interlaced non-transparent PNG from the given file, storing it under the given name. """
     libc.pycpdf_drawPNG(str.encode(name), str.encode(filename))
     checkerror()
     return
 
 
 def drawImage(name):
-    """FIXME"""
+    """Draws a stored image. To draw at the expected size, it is required to
+    scale the Current Transformation Matrix by the width and height of the
+    image. """
     libc.pycpdf_drawImage(str.encode(name))
     checkerror()
     return
 
 
 def drawFillOpacity(n):
-    """FIXME"""
+    """Sets the fill opacity."""
     libc.pycpdf_drawFillOpacity(n)
     checkerror()
     return
 
 
 def drawStrokeOpacity(n):
-    """FIXME"""
+    """Sets the stroke opacity."""
     libc.pycpdf_drawStrokeOpacity(n)
     checkerror()
     return
 
 
 def drawBT():
-    """FIXME"""
+    """Begins a text section."""
     libc.pycpdf_drawBT()
     checkerror()
     return
 
 
 def drawET():
-    """FIXME"""
+    """Ends a text section."""
     libc.pycpdf_drawET()
     checkerror()
     return
 
 
 def drawFont(name):
-    """FIXME"""
+    """Sets the font."""
     libc.pycpdf_drawFont(str.encode(name))
     checkerror()
     return
 
 
 def drawFontSize(n):
-    """FIXME"""
+    """Sets the font size."""
     libc.pycpdf_drawFontSize(n)
     checkerror()
     return
 
 
 def drawText(text):
-    """FIXME"""
+    """Draws text."""
     libc.pycpdf_drawText(str.encode(text))
     checkerror()
     return
 
 
 def drawSText(text):
-    """FIXME"""
+    """draws text with %Specials. You may need to use cpdf_drawEndExtended
+    instead of cpdf_drawEnd later, to provide the extra information required.
+    """
     libc.pycpdf_drawSText(str.encode(text))
     checkerror()
     return
 
 
+def drawLeading(n):
+    """Sets the leading."""
+    libc.pycpdf_drawLeading(n)
+    checkerror()
+    return
+
+
 def drawCharSpace(n):
-    """FIXME"""
+    """Sets the character spacing."""
     libc.pycpdf_drawCharSpace(n)
     checkerror()
     return
 
 
 def drawWordSpace(n):
-    """FIXME"""
+    """Sets the word spacing."""
     libc.pycpdf_drawWordSpace(n)
     checkerror()
     return
 
 
 def drawTextScale(n):
-    """FIXME"""
+    """Sets the text scaling."""
     libc.pycpdf_drawTextScale(n)
     checkerror()
     return
 
 
 def drawRenderMode(n):
-    """FIXME"""
+    """Sets the text rendering mode."""
     libc.pycpdf_drawRenderMode(n)
     checkerror()
     return
 
 
 def drawRise(n):
-    """FIXME"""
+    """Sets the text rise."""
     libc.pycpdf_drawRise(n)
     checkerror()
     return
 
 
-def drawLeading(n):
-    """FIXME"""
-    libc.pycpdf_drawLeading(n)
-    checkerror()
-    return
-
-
 def drawNL():
-    """FIXME"""
+    """Moves to the next line. """
     libc.pycpdf_drawNL()
     checkerror()
     return
 
 
 def drawNewPage():
-    """FIXME"""
+    """Moves to the next page, creating it if necessary, and setting the range
+    to just that new page. """
     libc.pycpdf_drawNewPage()
     checkerror()
     return
