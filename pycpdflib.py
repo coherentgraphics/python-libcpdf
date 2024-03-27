@@ -2891,7 +2891,7 @@ def drawJPEG(name, filename):
 
 def drawJPEGMemory(name, data):
     """Loads a JPEG from the given bytearray, storing it under the given name. """
-    libc.pycpdf_drawJPEGMemory(data, len(data))
+    libc.pycpdf_drawJPEGMemory(str.encode(name), data, len(data))
     checkerror()
     return
 
@@ -2905,7 +2905,7 @@ def drawPNG(name, filename):
 
 def drawPNGMemory(name, data):
     """Loads a non-interlaced non-transparent PNG from the given bytearray, storing it under the given name. """
-    libc.pycpdf_drawPNGMemory(data, len(data))
+    libc.pycpdf_drawPNGMemory(str.encode(name), data, len(data))
     checkerror()
     return
 
