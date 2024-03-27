@@ -131,8 +131,12 @@ def loadDLL(f):
     libc.pycpdf_blankDocument.argtypes = [c_double, c_double, c_int]
     libc.pycpdf_textToPDF.argtypes = [
         c_double, c_double, c_int, c_double, POINTER(c_char)]
+    libc.pycpdf_textToPDFMemory.argtypes = [
+        c_double, c_double, c_int, c_double, POINTER(c_uint8), c_int]
     libc.pycpdf_textToPDFPaper.argtypes = [
         c_int, c_int, c_double, POINTER(c_char)]
+    libc.pycpdf_textToPDFPaperMemory.argtypes = [
+        c_int, c_int, c_double, POINTER(c_uint8), c_int]
     libc.pycpdf_ptOfCm.argtypes = [c_double]
     libc.pycpdf_ptOfCm.restype = c_double
     libc.pycpdf_ptOfMm.argtypes = [c_double]
@@ -2509,24 +2513,36 @@ def blankDocumentPaper(papersize, pages):
 
 
 def textToPDF(w, h, font, fontsize, filename):
-    """textToPDF(w, h, font, fontsize, filename) typesets a UTF8 text file
-    ragged right on a page of size w * h in points in the given font and font
-    size."""
+    """Typesets a UTF8 text file ragged right on a page of size w * h in points
+    in the given font and font size."""
     pdf = Pdf(libc.pycpdf_textToPDF(
         w, h, font, fontsize, str.encode(filename)))
     checkerror()
     return pdf
 
+def textToPDFMemory(w, h, font, fontsize, data):
+    """Typesets a UTF8 text file ragged right on a page of size w * h in points
+    in the given font and font size."""
+    pdf = Pdf(libc.pycpdf_textToPDF(
+        w, h, font, fontsize, data, len(data)))
+    checkerror()
+    return pdf
 
 def textToPDFPaper(papersize, font, fontsize, filename):
-    """textToPDF(papersize font, fontsize, filename) typesets a UTF8 text file
-    ragged right on a page of the given size in the given font and font
-    size."""
+    """Typesets a UTF8 text file ragged right on a page of the given size in
+    the given font and font size."""
     pdf = Pdf(libc.pycpdf_textToPDFPaper(
         papersize, font, fontsize, str.encode(filename)))
     checkerror()
     return pdf
 
+def textToPDFPaperMemory(papersize, font, fontsize, data):
+    """Typesets a UTF8 text file ragged right on a page of the given size in
+    the given font and font size."""
+    pdf = Pdf(libc.pycpdf_textToPDFPaper(
+        papersize, font, fontsize, data, len(data)))
+    checkerror()
+    return pdf
 
 def fromPNG(filename):
     """Builds a PDF from a non-interlaced non-transparent PNG file."""

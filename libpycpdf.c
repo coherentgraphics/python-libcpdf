@@ -1302,16 +1302,32 @@ int pycpdf_textToPDF(double w, double h, int font, double fontsize, char *filena
   return cpdf_textToPDF(w, h, font, fontsize, filename);
 }
 
+int pycpdf_textToPDFMemory(double w, double h, int font, double fontsize, void* data, int len) {
+  return cpdf_textToPDFMemory(w, h, font, fontsize, data, len);
+}
+
 int pycpdf_textToPDFPaper(int papersize, int font, double fontsize, char *filename) {
   return cpdf_textToPDFPaper(papersize, font, fontsize, filename);
+}
+
+int pycpdf_textToPDFPaperMemory(int papersize, int font, double fontsize, void* data, int len) {
+  return cpdf_textToPDFPaperMemory(papersize, font, fontsize, data, len);
 }
 
 int pycpdf_fromPNG(char* filename) {
   return cpdf_fromPNG(filename);
 }
 
+int pycpdf_fromPNGMemory(void* data, int len) {
+  return cpdf_fromPNGMemory(data, len);
+}
+
 int pycpdf_fromJPEG(char* filename) {
   return cpdf_fromJPEG(filename);
+}
+
+int pycpdf_fromJPEGMemory(void* data, int len) {
+  return cpdf_fromJPEGMemory(data, len);
 }
 
 
@@ -1485,8 +1501,16 @@ void pycpdf_drawJPEG(char* name, char* fontname) {
   return cpdf_drawJPEG(name, fontname);
 }
 
+void pycpdf_drawJPEGMemory(char* name, void* data, int len) {
+  return cpdf_drawJPEGMemory(name, data, len);
+}
+
 void pycpdf_drawPNG(char* name, char* fontname) {
   return cpdf_drawPNG(name, fontname);
+}
+
+void pycpdf_drawPNGMemory(char* name, void* data, int len) {
+  return cpdf_drawPNGMemory(name, data, len);
 }
 
 void pycpdf_drawImage(char* name) {

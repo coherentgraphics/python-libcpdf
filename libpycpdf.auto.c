@@ -534,9 +534,13 @@ void pycpdf_outputJSONMemoryFree(void) {
 /* __AUTO int blankDocument(double w, double h, int pages) */
 /* __AUTO int blankDocumentPaper(int papersize, int pages) */
 /* __AUTO int textToPDF(double w, double h, int font, double fontsize, char *filename) */
+/* __AUTO int textToPDFMemory(double w, double h, int font, double fontsize, void* data, int len) */
 /* __AUTO int textToPDFPaper(int papersize, int font, double fontsize, char *filename) */
+/* __AUTO int textToPDFPaperMemory(int papersize, int font, double fontsize, void* data, int len) */
 /* __AUTO int fromPNG(char* filename) */
+/* __AUTO int fromPNGMemory(void* data, int len) */
 /* __AUTO int fromJPEG(char* filename) */
+/* __AUTO int fromJPEGMemory(void* data, int len) */
 
 /* CHAPTER 18. Drawing on PDFs */
 
@@ -582,7 +586,9 @@ void pycpdf_outputJSONMemoryFree(void) {
 /* __AUTO void drawUse(char* name) */
 /* __AUTO void drawEndXObj() */
 /* __AUTO void drawJPEG(char* name, char* fontname) */
+/* __AUTO void drawJPEGMemory(char* name, void* data, int len) */
 /* __AUTO void drawPNG(char* name, char* fontname) */
+/* __AUTO void drawPNGMemory(char* name, void* data, int len) */
 /* __AUTO void drawImage(char* name) */
 /* __AUTO void drawFillOpacity(double n) */
 /* __AUTO void drawStrokeOpacity(double n) */
