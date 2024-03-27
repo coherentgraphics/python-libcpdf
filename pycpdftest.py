@@ -2203,16 +2203,32 @@ def chapter18():
         pycpdflib.drawJPEG("A", "testinputs/jpg.jpg")
     except:
         prerr()
+    print("---cpdf_drawJPEGMemory()")
+    try:
+        data = open('testinputs/jpg.jpg', 'rb').read()
+        pycpdflib.drawJPEGMemory("A2", data)
+    except:
+        prerr()
     print("---cpdf_drawPNG()")
     try:
         pycpdflib.drawPNG("B", "testinputs/png.png")
     except:
         prerr()
+    print("---cpdf_drawPNGMemory()")
+    try:
+        data = open('testinputs/png.png', 'rb').read()
+        pycpdflib.drawPNGMemory("B2", data)
+    except:
+        prerr()
     print("---cpdf_drawImage()")
     try:
         pycpdflib.drawImage("A")
-        pycpdflib.drawMScale(0, 0, 0.7, 0.7)
+        pycpdflib.drawMScale(0, 0, 0.95, 0.95)
         pycpdflib.drawImage("B")
+        pycpdflib.drawMScale(0, 0, 0.95, 0.95)
+        pycpdflib.drawImage("A2")
+        pycpdflib.drawMScale(0, 0, 0.95, 0.95)
+        pycpdflib.drawImage("B2")
         pycpdflib.drawPop()
     except:
         prerr()
