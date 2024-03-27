@@ -1829,6 +1829,13 @@ def chapter17():
         pycpdflib.toFile(ttpdf, 'testoutputs/17ttpdf.pdf', False, False)
     except:
         prerr()
+    print('---cpdf_textToPDFMemory()')
+    try:
+        ttpdf2 = pycpdflib.textToPDFMemory(
+            500.0, 600.0, pycpdflib.timesItalic, 8.0, b'Hello, World!')
+        pycpdflib.toFile(ttpdf2, 'testoutputs/17ttpdf2.pdf', False, False)
+    except:
+        fatal_prerr()
     print('---cpdf_textToPDFPaper()')
     try:
         ttpdfpaper = pycpdflib.textToPDFPaper(
@@ -1840,10 +1847,25 @@ def chapter17():
             ttpdfpaper, 'testoutputs/17ttpdfpaper.pdf', False, False)
     except:
         prerr()
+    print('---cpdf_textToPDFPaperMemory()')
+    try:
+        ttpdfpaper2 = pycpdflib.textToPDFPaperMemory(
+            pycpdflib.a4portrait, pycpdflib.timesBoldItalic, 10.0, b'Hello, World!')
+        pycpdflib.toFile(
+            ttpdfpaper2, 'testoutputs/17ttpdfpaper2.pdf', False, False)
+    except:
+        prerr()
     print('---cpdf_fromPNG()')
     try:
         png = pycpdflib.fromPNG('testinputs/png.png')
         pycpdflib.toFile(png, 'testoutputs/17png.pdf', False, False)
+    except:
+        prerr()
+    print('---cpdf_fromPNGMemory()')
+    try:
+        data = open('testinputs/png.png', 'rb').read()
+        png2 = pycpdflib.fromPNGMemory(data)
+        pycpdflib.toFile(png2, 'testoutputs/17png2.pdf', False, False)
     except:
         prerr()
     print('---cpdf_fromJPEG()')
@@ -1852,6 +1874,13 @@ def chapter17():
         pycpdflib.toFile(jpeg, 'testoutputs/17jpg.pdf', False, False)
     except:
         prerr()
+    print('---cpdf_fromJPEGMemory()')
+    try:
+        data = open('testinputs/jpg.jpg', 'rb').read()
+        jpeg = pycpdflib.fromJPEGMemory(data)
+        pycpdflib.toFile(jpeg, 'testoutputs/17jpg2.pdf', False, False)
+    except:
+        prerr_fatal()
 
 
 def chapter18():

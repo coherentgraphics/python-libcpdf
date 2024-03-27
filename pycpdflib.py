@@ -132,11 +132,11 @@ def loadDLL(f):
     libc.pycpdf_textToPDF.argtypes = [
         c_double, c_double, c_int, c_double, POINTER(c_char)]
     libc.pycpdf_textToPDFMemory.argtypes = [
-        c_double, c_double, c_int, c_double, POINTER(c_uint8), c_int]
+        c_double, c_double, c_int, c_double, POINTER(c_char), c_int]
     libc.pycpdf_textToPDFPaper.argtypes = [
         c_int, c_int, c_double, POINTER(c_char)]
     libc.pycpdf_textToPDFPaperMemory.argtypes = [
-        c_int, c_int, c_double, POINTER(c_uint8), c_int]
+        c_int, c_int, c_double, POINTER(c_char), c_int]
     libc.pycpdf_ptOfCm.argtypes = [c_double]
     libc.pycpdf_ptOfCm.restype = c_double
     libc.pycpdf_ptOfMm.argtypes = [c_double]
@@ -2520,13 +2520,15 @@ def textToPDF(w, h, font, fontsize, filename):
     checkerror()
     return pdf
 
+
 def textToPDFMemory(w, h, font, fontsize, data):
     """Typesets a UTF8 text file ragged right on a page of size w * h in points
     in the given font and font size."""
-    pdf = Pdf(libc.pycpdf_textToPDF(
+    pdf = Pdf(libc.pycpdf_textToPDFMemory(
         w, h, font, fontsize, data, len(data)))
     checkerror()
     return pdf
+
 
 def textToPDFPaper(papersize, font, fontsize, filename):
     """Typesets a UTF8 text file ragged right on a page of the given size in
@@ -2536,17 +2538,26 @@ def textToPDFPaper(papersize, font, fontsize, filename):
     checkerror()
     return pdf
 
+
 def textToPDFPaperMemory(papersize, font, fontsize, data):
     """Typesets a UTF8 text file ragged right on a page of the given size in
     the given font and font size."""
-    pdf = Pdf(libc.pycpdf_textToPDFPaper(
+    pdf = Pdf(libc.pycpdf_textToPDFPaperMemory(
         papersize, font, fontsize, data, len(data)))
     checkerror()
     return pdf
 
+
 def fromPNG(filename):
     """Builds a PDF from a non-interlaced non-transparent PNG file."""
     pdf = Pdf(libc.pycpdf_fromPNG(str.encode(filename)))
+    checkerror()
+    return pdf
+
+
+def fromPNGMemory(data):
+    """Builds a PDF from a non-interlaced non-transparent PNG file bytearray."""
+    pdf = Pdf(libc.pycpdf_fromPNGMemory(data, len(data)))
     checkerror()
     return pdf
 
@@ -2557,6 +2568,12 @@ def fromJPEG(filename):
     checkerror()
     return pdf
 
+
+def fromJPEGMemory(data):
+    """Builds a PDF from a JPEG file bytearray."""
+    pdf = Pdf(libc.pycpdf_fromJPEGMemory(data, len(data)))
+    checkerror()
+    return pdf
 
 # CHAPTER 18. Drawing on PDFs
 
@@ -2577,7 +2594,7 @@ def drawEnd(pdf, r):
 def drawEndExtended(pdf, r, underneath, bates, filename):
     """The same as drawEnd, but provides the special parameters which may
     be required when using drawSText."""
-    rn = range_of_list(r)
+    rn=range_of_list(r)
     libc.pycpdf_drawEndExtended(
         pdf.pdf, rn, underneath, bates, filename, str.encode(filename))
     deleteRange(rn)
@@ -2741,9 +2758,9 @@ def drawThick(thickness):
 
 
 """Cap types."""
-capButt = 0
-capRound = 1
-capSquare = 2
+capButt=0
+capRound=1
+capSquare=2
 
 
 def drawCap(captype):
@@ -2754,9 +2771,9 @@ def drawCap(captype):
 
 
 """Join types."""
-joinMiter = 0
-joinRound = 1
-joinBevel = 2
+joinMiter=0
+joinRound=1
+joinBevel=2
 
 
 def drawJoin(jointype):
@@ -3007,7 +3024,7 @@ def drawNewPage():
 def draft(pdf, r, boxes):
     """Remove images on the given pages, replacing
     them with crossed boxes if 'boxes' is True."""
-    r = range_of_list(r)
+    r=range_of_list(r)
     libc.pycpdf_draft(pdf.pdf, r, boxes)
     deleteRange(r)
     checkerror()
@@ -3015,7 +3032,7 @@ def draft(pdf, r, boxes):
 
 def removeAllText(pdf, r):
     """Remove all text from the given pages in a document."""
-    r = range_of_list(r)
+    r=range_of_list(r)
     libc.pycpdf_removeAllText(pdf.pdf, r)
     deleteRange(r)
     checkerror()
@@ -3023,7 +3040,7 @@ def removeAllText(pdf, r):
 
 def blackText(pdf, r):
     """Blacken all text on the given pages."""
-    r = range_of_list(r)
+    r=range_of_list(r)
     libc.pycpdf_blackText(pdf.pdf, r)
     deleteRange(r)
     checkerror()
@@ -3031,7 +3048,7 @@ def blackText(pdf, r):
 
 def blackLines(pdf, r):
     """Blacken all lines on the given pages."""
-    r = range_of_list(r)
+    r=range_of_list(r)
     libc.pycpdf_blackLines(pdf.pdf, r)
     deleteRange(r)
     checkerror()
@@ -3039,7 +3056,7 @@ def blackLines(pdf, r):
 
 def blackFills(pdf, r):
     """Blacken all fills on the given pages."""
-    r = range_of_list(r)
+    r=range_of_list(r)
     libc.pycpdf_blackFills(pdf.pdf, r)
     deleteRange(r)
     checkerror()
@@ -3048,7 +3065,7 @@ def blackFills(pdf, r):
 def thinLines(pdf, r, linewidth):
     """Thicken every line less than
     linewidth to linewidth. Thickness given in points."""
-    r = range_of_list(r)
+    r=range_of_list(r)
     libc.pycpdf_thinLines(pdf.pdf, r, linewidth)
     deleteRange(r)
     checkerror()
@@ -3113,9 +3130,9 @@ def replaceDictEntrySearch(pdf, key, newvalue, searchterm):
 
 def getDictEntries(pdf, key):
     """Return JSON of any dict entries with the given key."""
-    length = c_int32()
-    data = libc.pycpdf_getDictEntries(pdf.pdf, str.encode(key), byref(length))
-    out_data = create_string_buffer(length.value)
+    length=c_int32()
+    data=libc.pycpdf_getDictEntries(pdf.pdf, str.encode(key), byref(length))
+    out_data=create_string_buffer(length.value)
     memmove(out_data, data, length.value)
     libc.pycpdf_getDictEntriesFree()
     checkerror()
@@ -3124,7 +3141,7 @@ def getDictEntries(pdf, key):
 
 def removeClipping(pdf, r):
     """Remove all clipping from pages in the given range"""
-    r = range_of_list(r)
+    r=range_of_list(r)
     libc.pycpdf_removeClipping(pdf.pdf, r)
     deleteRange(r)
     checkerror()
@@ -3134,7 +3151,7 @@ def removeClipping(pdf, r):
 
 def list_of_range(r):
     """Internal."""
-    l = []
+    l=[]
     for x in range(libc.pycpdf_rangeLength(r)):
         l.append(libc.pycpdf_rangeGet(r, x))
     checkerror()
@@ -3143,17 +3160,17 @@ def list_of_range(r):
 
 def range_of_list(l):
     """Internal."""
-    r = libc.pycpdf_blankRange()
+    r=libc.pycpdf_blankRange()
     for x in l:
-        rn = libc.pycpdf_rangeAdd(r, x)
+        rn=libc.pycpdf_rangeAdd(r, x)
         deleteRange(r)
-        r = rn
+        r=rn
     checkerror()
     return r
 
 
 def deleteRange(r):
     """Internal."""
-    r = libc.pycpdf_deleteRange(r)
+    r=libc.pycpdf_deleteRange(r)
     checkerror()
     return r
