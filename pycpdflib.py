@@ -624,7 +624,9 @@ def pagesFast(userpw, filename):
 def toFile(pdf, filename, linearize, make_id):
     """Write the file to a given filename. If linearize is True, it will be
     linearized, if supported by libcpdf. If make_id is True, it will be given a
-    new ID."""
+    new ID. NB: Unlike with the command line tool, cpdf, streams decompressed
+    during processing will not automatically be compressed when writing. Call
+    compress() first."""
     libc.pycpdf_toFile(pdf.pdf, str.encode(filename), False, False)
     checkerror()
 
@@ -645,7 +647,9 @@ def toFileExt(pdf, filename, linearize, make_id, preserve_objstm,
 
 def toMemory(pdf, linearize, make_id):
     """Write a file to memory, returning the buffer as a byte array of type
-    bytes."""
+    bytes. NB: Unlike with the command line tool, cpdf, streams decompressed
+    during processing will not automatically be compressed when writing. Call
+    compress() first."""
     length = c_int32()
     data = libc.pycpdf_toMemory(pdf.pdf, linearize, make_id, byref(length))
     out_data = create_string_buffer(length.value)
@@ -1278,7 +1282,9 @@ def addTextSimple(pdf, r, text, p, font, size):
          * text = the text
          * p = the position
          * font = the font
-         * size = the font size"""
+         * size = the font size
+    NB: %filename cannot be used here. """
+
     a, b, c = tripleOfPosition(p)
     r = range_of_list(r)
     libc.pycpdf_addTextSimple(
