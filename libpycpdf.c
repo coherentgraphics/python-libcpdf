@@ -448,7 +448,7 @@ void pycpdf_setBookmarksJSON(int pdf, void* data, int length) {
   return cpdf_setBookmarksJSON(pdf, data, length);
 }
 
-void pycpdf_tableOfContents(int pdf, int font, double fontsize, char* title, int bookmark) {
+void pycpdf_tableOfContents(int pdf, char* font, double fontsize, char* title, int bookmark) {
   return cpdf_tableOfContents(pdf, font, fontsize, title, bookmark);
 }
 
@@ -484,7 +484,7 @@ void pycpdf_combinePages(int pdf, int pdf2) {
 
 
 void pycpdf_addText(int metrics, int pdf, int r, char *text, int pos, double p1,
-                    double p2, double line_spacing, int bates, int font,
+                    double p2, double line_spacing, int bates, char* font,
                     double size, double red, double green, double blue,
                     int underneath, int relative_to_cropbox, int outline,
                     double opacity, int justification, int midline, int topline,
@@ -499,7 +499,7 @@ void pycpdf_addText(int metrics, int pdf, int r, char *text, int pos, double p1,
 }
 
 void pycpdf_addTextSimple(int pdf, int r, char *text, int pos, double p1,
-                          double p2, int font, double size) {
+                          double p2, char* font, double size) {
   struct cpdf_position position = {
       .cpdf_anchor = pos, .cpdf_coord1 = p1, .cpdf_coord2 = p2};
   cpdf_addTextSimple(pdf, r, text, position, font, size);
@@ -510,7 +510,7 @@ void pycpdf_removeText(int pdf, int r) {
   return cpdf_removeText(pdf, r);
 }
 
-int pycpdf_textWidth(int font, char* string) {
+int pycpdf_textWidth(char* font, char* string) {
   return cpdf_textWidth(font, string);
 }
 
@@ -1298,19 +1298,19 @@ int pycpdf_blankDocumentPaper(int papersize, int pages) {
   return cpdf_blankDocumentPaper(papersize, pages);
 }
 
-int pycpdf_textToPDF(double w, double h, int font, double fontsize, char *filename) {
+int pycpdf_textToPDF(double w, double h, char* font, double fontsize, char *filename) {
   return cpdf_textToPDF(w, h, font, fontsize, filename);
 }
 
-int pycpdf_textToPDFMemory(double w, double h, int font, double fontsize, void* data, int len) {
+int pycpdf_textToPDFMemory(double w, double h, char* font, double fontsize, void* data, int len) {
   return cpdf_textToPDFMemory(w, h, font, fontsize, data, len);
 }
 
-int pycpdf_textToPDFPaper(int papersize, int font, double fontsize, char *filename) {
+int pycpdf_textToPDFPaper(int papersize, char* font, double fontsize, char *filename) {
   return cpdf_textToPDFPaper(papersize, font, fontsize, filename);
 }
 
-int pycpdf_textToPDFPaperMemory(int papersize, int font, double fontsize, void* data, int len) {
+int pycpdf_textToPDFPaperMemory(int papersize, char* font, double fontsize, void* data, int len) {
   return cpdf_textToPDFPaperMemory(papersize, font, fontsize, data, len);
 }
 
