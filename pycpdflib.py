@@ -125,18 +125,18 @@ def loadDLL(f):
     global libc
     libc = CDLL(f)
     libc.pycpdf_tableOfContents.argtypes = [
-        c_int, c_int, c_double, POINTER(c_char), c_int]
+        c_int, POINTER(c_char), c_double, POINTER(c_char), c_int]
     libc.pycpdf_version.restype = POINTER(c_char)
     libc.pycpdf_lastErrorString.restype = POINTER(c_char)
     libc.pycpdf_blankDocument.argtypes = [c_double, c_double, c_int]
     libc.pycpdf_textToPDF.argtypes = [
-        c_double, c_double, c_int, c_double, POINTER(c_char)]
+        c_double, c_double, POINTER(c_char), c_double, POINTER(c_char)]
     libc.pycpdf_textToPDFMemory.argtypes = [
-        c_double, c_double, c_int, c_double, POINTER(c_char), c_int]
+        c_double, c_double, POINTER(c_char), c_double, POINTER(c_char), c_int]
     libc.pycpdf_textToPDFPaper.argtypes = [
-        c_int, c_int, c_double, POINTER(c_char)]
+        c_int, POINTER(c_char), c_double, POINTER(c_char)]
     libc.pycpdf_textToPDFPaperMemory.argtypes = [
-        c_int, c_int, c_double, POINTER(c_char), c_int]
+        c_int, POINTER(c_char), c_double, POINTER(c_char), c_int]
     libc.pycpdf_ptOfCm.argtypes = [c_double]
     libc.pycpdf_ptOfCm.restype = c_double
     libc.pycpdf_ptOfMm.argtypes = [c_double]
@@ -197,12 +197,12 @@ def loadDLL(f):
     libc.pycpdf_getBookmarkText.restype = POINTER(c_char)
     libc.pycpdf_addText.argtypes =\
         [c_int, c_int, c_int, POINTER(c_char), c_int, c_double, c_double,
-         c_double, c_int, c_int, c_double, c_double, c_double, c_double, c_int,
+         c_double, c_int, POINTER(c_char), c_double, c_double, c_double, c_double, c_int,
          c_int, c_int, c_double, c_int, c_int, c_int, POINTER(c_char),
          c_double, c_int]
     libc.pycpdf_addTextSimple.argtypes =\
         [c_int, c_int, POINTER(c_char), c_int, c_double,
-         c_double, c_int, c_double]
+         c_double, POINTER(c_char), c_double]
     libc.pycpdf_getMetadata.restype = POINTER(c_uint8)
     libc.pycpdf_getDictEntries.restype = POINTER(c_uint8)
     libc.pycpdf_getAttachmentData.restype = POINTER(c_uint8)
@@ -1135,7 +1135,7 @@ def tableOfContents(pdf, font, fontsize, title, bookmark):
     of contents from existing bookmarks and prepends it to the document. If
     bookmark is set, the table of contents gets its own bookmark."""
     pdf = libc.pycpdf_tableOfContents(
-        pdf.pdf, font, fontsize, str.encode(title), bookmark)
+        pdf.pdf, str.encode(font), fontsize, str.encode(title), bookmark)
     checkerror()
     return pdf
 
@@ -1189,18 +1189,18 @@ def combinePages(pdf, pdf2):
 
 
 """Fonts."""
-timesRoman = 0
-timesBold = 1
-timesItalic = 2
-timesBoldItalic = 3
-helvetica = 4
-helveticaBold = 5
-helveticaOblique = 6
-helveticaBoldOblique = 7
-courier = 8
-courierBold = 9
-courierOblique = 10
-courierBoldOblique = 11
+timesRoman = "Times-Roman"
+timesBold = "Times-Bold"
+timesItalic = "Times-Italic"
+timesBoldItalic = "Times-BoldItalic"
+helvetica = "Helvetica"
+helveticaBold = "Helvetica-Bold"
+helveticaOblique = "Helvetica-Oblique"
+helveticaBoldOblique = "Helvetica-BoldOblique"
+courier = "Courier"
+courierBold = "Courier-Bold"
+courierOblique = "Courier-Oblique"
+courierBoldOblique = "Courier-BoldOblique"
 
 
 """Justifications."""
@@ -1271,7 +1271,7 @@ def addText(metrics, pdf, r, text, p, line_spacing, bates, font, size, red,
     a, b, c = tripleOfPosition(p)
     r = range_of_list(r)
     libc.pycpdf_addText(metrics, pdf.pdf, r, str.encode(text), a, b, c,
-                        line_spacing, bates, font, size, red, green, blue,
+                        line_spacing, bates, str.encode(font), size, red, green, blue,
                         underneath, relative_to_cropbox, outline, opacity,
                         justification, midline, topline, str.encode(filename),
                         line_width, embed_fonts)
@@ -1293,7 +1293,7 @@ def addTextSimple(pdf, r, text, p, font, size):
     a, b, c = tripleOfPosition(p)
     r = range_of_list(r)
     libc.pycpdf_addTextSimple(
-        pdf.pdf, r, str.encode(text), a, b, c, font, size)
+        pdf.pdf, r, str.encode(text), a, b, c, str.encode(font), size)
     deleteRange(r)
     checkerror()
 
@@ -1309,7 +1309,7 @@ def removeText(pdf, r):
 def textWidth(font, string):
     """Return the width of a given string in the given font in thousandths of a
     point."""
-    r = libc.pycpdf_textWidth(font, str.encode(string))
+    r = libc.pycpdf_textWidth(str.encode(font), str.encode(string))
     checkerror()
     return r
 
@@ -2527,7 +2527,7 @@ def textToPDF(w, h, font, fontsize, filename):
     """Typesets a UTF8 text file ragged right on a page of size w * h in points
     in the given font and font size."""
     pdf = Pdf(libc.pycpdf_textToPDF(
-        w, h, font, fontsize, str.encode(filename)))
+        w, h, str.encode(font), fontsize, str.encode(filename)))
     checkerror()
     return pdf
 
@@ -2536,7 +2536,7 @@ def textToPDFMemory(w, h, font, fontsize, data):
     """Typesets a UTF8 text file ragged right on a page of size w * h in points
     in the given font and font size."""
     pdf = Pdf(libc.pycpdf_textToPDFMemory(
-        w, h, font, fontsize, data, len(data)))
+        w, h, str.encode(font), fontsize, data, len(data)))
     checkerror()
     return pdf
 
@@ -2545,7 +2545,7 @@ def textToPDFPaper(papersize, font, fontsize, filename):
     """Typesets a UTF8 text file ragged right on a page of the given size in
     the given font and font size."""
     pdf = Pdf(libc.pycpdf_textToPDFPaper(
-        papersize, font, fontsize, str.encode(filename)))
+        papersize, str.encode(font), fontsize, str.encode(filename)))
     checkerror()
     return pdf
 
@@ -2554,7 +2554,7 @@ def textToPDFPaperMemory(papersize, font, fontsize, data):
     """Typesets a UTF8 text file ragged right on a page of the given size in
     the given font and font size."""
     pdf = Pdf(libc.pycpdf_textToPDFPaperMemory(
-        papersize, font, fontsize, data, len(data)))
+        papersize, str.encode(font), fontsize, data, len(data)))
     checkerror()
     return pdf
 
