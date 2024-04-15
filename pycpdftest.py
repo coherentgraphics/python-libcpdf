@@ -781,8 +781,9 @@ def chapter6():
     except:
         fatal_prerr()
     try:
+        pycpdflib.loadFont("A", "testinputs/NotoSans-Black.ttf")
         pycpdflib.tableOfContents(
-            tocfile, pycpdflib.timesRoman, 12.0, 'Table of Contents', False)
+            tocfile, "A", 12.0, 'Table of Contents', False)
     except:
         fatal_prerr()
     try:
@@ -807,13 +808,15 @@ def chapter8():
     except:
         prerr()
     try:
+        pycpdflib.loadFont("A", "testinputs/NotoSans-Black.ttf")
         pycpdflib.addText(False, pdf, pycpdflib.all(pdf), 'Some Text~~~~~~~~~~!', (pycpdflib.topLeft, 20.0, 20.0), 1.0, 1,
-                          pycpdflib.timesRoman, 20, 0.5, 0.5, 0.5, False, False, True, 0.5, pycpdflib.leftJustify, False, False, '', 1.0, False)
+                          "A", 20, 0.5, 0.5, 0.5, False, False, True, 0.5, pycpdflib.leftJustify, False, False, '', 1.0, False)
     except:
         prerr()
     print('---cpdf_addTextSimple()')
     r = pycpdflib.all(pdf)
     try:
+        pycpdflib.loadFont("A", "testinputs/NotoSans-Black.ttf")
         pycpdflib.addTextSimple(
             pdf, r, 'The text!', (pycpdflib.topLeft, 20.0, 20.0), pycpdflib.timesRoman, 50.0)
     except:
@@ -833,7 +836,8 @@ def chapter8():
         prerr()
     print('---cpdf_textWidth()')
     try:
-        pycpdflib.textWidth(pycpdflib.timesRoman, 'Some text')
+         w = pycpdflib.textWidth(pycpdflib.timesRoman, 'What is the width of this?')
+         print(f'width is {w} thousandths of a point')
     except:
         prerr()
     try:
@@ -1822,7 +1826,7 @@ def chapter17():
     print('---cpdf_textToPDF()')
     try:
         ttpdf = pycpdflib.textToPDF(
-            500.0, 600.0, pycpdflib.timesItalic, 8.0, '../cpdflib-source/cpdflibtest.c')
+            500.0, 600.0, "A", 8.0, '../cpdflib-source/cpdflibtest.c')
     except:
         fatal_prerr()
     try:
@@ -1832,14 +1836,14 @@ def chapter17():
     print('---cpdf_textToPDFMemory()')
     try:
         ttpdf2 = pycpdflib.textToPDFMemory(
-            500.0, 600.0, pycpdflib.timesItalic, 8.0, b'Hello, World!')
+            500.0, 600.0, "A", 8.0, b'Hello, World!')
         pycpdflib.toFile(ttpdf2, 'testoutputs/17ttpdf2.pdf', False, False)
     except:
         fatal_prerr()
     print('---cpdf_textToPDFPaper()')
     try:
         ttpdfpaper = pycpdflib.textToPDFPaper(
-            pycpdflib.a4portrait, pycpdflib.timesBoldItalic, 10.0, '../cpdflib-source/cpdflibtest.c')
+            pycpdflib.a4portrait, "A", 10.0, '../cpdflib-source/cpdflibtest.c')
     except:
         fatal_prerr()
     try:
@@ -1850,7 +1854,7 @@ def chapter17():
     print('---cpdf_textToPDFPaperMemory()')
     try:
         ttpdfpaper2 = pycpdflib.textToPDFPaperMemory(
-            pycpdflib.a4portrait, pycpdflib.timesBoldItalic, 10.0, b'Hello, World!')
+            pycpdflib.a4portrait, "A", 10.0, b'Hello, World!')
         pycpdflib.toFile(
             ttpdfpaper2, 'testoutputs/17ttpdfpaper2.pdf', False, False)
     except:
