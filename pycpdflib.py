@@ -751,12 +751,7 @@ def encryptionKind(pdf):
 def loadFont(name, filename):
     """Loads a TrueType font from the given file name, and names it. It may
     then be used when adding text or drawing, using the name in place of a
-    standard font name. NB: The font keeps a record of which glyphs are used,
-    and outputs the appropriate subset to the PDF when it is written to disk or
-    memory. Therefore, if you are using a font for multiple documents, you
-    should re-load the font (under the same name is fine) to clear the list of
-    used glyphs. Failure to to do so is not incorrect, but will result in
-    larger subsets so is inefficient. """
+    standard font name. """
     libc.pycpdf_loadFont(str.encode(name), str.encode(filename))
     checkerror()
     return
