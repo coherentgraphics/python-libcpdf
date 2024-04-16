@@ -5,8 +5,7 @@ achieved with the pycpdflib.loadDLL function, given the filename or full path
 of the libpycpdf DLL.  On Windows, you may have to call os.add_dll_directory
 first. On MacOS, you may need to give the full path, and you may need to
 install libcpdf.so in a standard location /usr/local/lib/, or use the
-install_name_tool command to tell libpycpdf.so where to find libcpdf.so.
-"""
+install_name_tool command to tell libpycpdf.so where to find libcpdf.so.  """
 
 """
 Loading the libpypcdf and libcpdf DLLs
@@ -24,8 +23,8 @@ to tell ``libpycpdf.so`` where to find ``libcpdf.so``.
 Conventions
 -----------
 
-Any function may raise the exception ``CPDFError``, carrying a string describing
-the error.
+Any function may raise the exception ``CPDFError``, carrying a string
+describing the error.
 
 A 'range' is a list of integers specifying page numbers. Page numbers start at
 1. Range arguments are called `r`.
@@ -370,21 +369,20 @@ def onExit():
 
 
 def fromFile(filename, userpw):
-    """Load a PDF file from a given file.
-    Supply a user password (possibly blank) in case the file is encrypted. It
-    won't be decrypted, but sometimes the password is needed just to load the
-    file."""
+    """Load a PDF file from a given file.  Supply a user password (possibly
+    blank) in case the file is encrypted. It won't be decrypted, but sometimes
+    the password is needed just to load the file."""
     pdf = Pdf(libc.pycpdf_fromFile(str.encode(filename), str.encode(userpw)))
     checkerror()
     return pdf
 
 
 def fromFileLazy(filename, userpw):
-    """Load a PDF from a file, doing only
-    minimal parsing. The objects will be read and parsed when they are actually
-    needed.  Use this when the whole file won't be required. Also supply a user
-    password (possibly blank) in case the file is encrypted. It won't be
-    decrypted, but sometimes the password is needed just to load the file."""
+    """Load a PDF from a file, doing only minimal parsing. The objects will be
+    read and parsed when they are actually needed.  Use this when the whole
+    file won't be required. Also supply a user password (possibly blank) in
+    case the file is encrypted. It won't be decrypted, but sometimes the
+    password is needed just to load the file."""
     pdf = Pdf(libc.pycpdf_fromFileLazy(
         str.encode(filename), str.encode(userpw)))
     checkerror()
@@ -614,9 +612,8 @@ def pages(pdf):
 
 
 def pagesFast(userpw, filename):
-    """Return the number of pages in a given
-    PDF, with given user password. It tries to do this as fast as
-    possible, without loading the whole file."""
+    """Return the number of pages in a given PDF, with given user password. It
+    tries to do this as fast as possible, without loading the whole file."""
     r = libc.pycpdf_pagesFast(str.encode(userpw), str.encode(filename))
     checkerror()
     return r
@@ -784,10 +781,10 @@ def merge(pdfs, retain_numbering, remove_duplicate_fonts):
 
 
 def mergeSame(pdfs, retain_numbering, remove_duplicate_fonts, ranges):
-    """The same as merge, except that it has an additional argument
-    - a list of page ranges. This is used to select the pages to pick from
-    each PDF. This avoids duplication of information when multiple discrete
-    parts of a single source PDF are included."""
+    """The same as merge, except that it has an additional argument (a list of
+    page ranges). This is used to select the pages to pick from each PDF. This
+    avoids duplication of information when multiple discrete parts of a single
+    source PDF are included."""
     ranges = list(map(range_of_list, ranges))
     raw_pdfs = map(lambda p: p.pdf, pdfs)
     c_pdfs = (c_int * len(pdfs))(*raw_pdfs)
@@ -930,8 +927,8 @@ def shiftBoxes(pdf, r, dx, dy):
 
 
 def rotate(pdf, r, rotation):
-    """Change the viewing rotation of the pages in the range to an
-    absolute value. Appropriate rotations are 0, 90, 180, 270."""
+    """Change the viewing rotation of the pages in the range to an absolute
+    value. Appropriate rotations are 0, 90, 180, 270."""
     r = range_of_list(r)
     libc.pycpdf_rotate(pdf.pdf, r, rotation)
     deleteRange(r)
@@ -939,8 +936,8 @@ def rotate(pdf, r, rotation):
 
 
 def rotateBy(pdf, r, rotation):
-    """Change the viewing rotation of the pages in the range by a
-    given number of degrees. Appropriate values are 90, 180, 270."""
+    """Change the viewing rotation of the pages in the range by a given number
+    of degrees. Appropriate values are 90, 180, 270."""
     r = range_of_list(r)
     libc.pycpdf_rotateBy(pdf.pdf, r, rotation)
     deleteRange(r)
@@ -948,8 +945,8 @@ def rotateBy(pdf, r, rotation):
 
 
 def rotateContents(pdf, r, rotation):
-    """Rotate the content about the centre
-    of the page by the given number of degrees, in a clockwise direction."""
+    """Rotate the content about the centre of the page by the given number of
+    degrees, in a clockwise direction."""
     r = range_of_list(r)
     libc.pycpdf_rotateContents(pdf.pdf, r, rotation)
     deleteRange(r)
@@ -1069,7 +1066,7 @@ def decompress(pdf):
 
 def squeezeInMemory(pdf):
     """squeezeToMemory(pdf) squeezes a pdf in memory. Squeezing is a lossless
-    compression method which works be rearrangement of a PDFs internal
+    compression method which works by rearrangement of a PDFs internal
     structure."""
     libc.pycpdf_squeezeInMemory(pdf.pdf)
     checkerror()
@@ -1127,9 +1124,9 @@ def setBookmarksJSON(pdf, data):
 
 
 def tableOfContents(pdf, font, fontsize, title, bookmark):
-    """Typesets a table
-    of contents from existing bookmarks and prepends it to the document. If
-    bookmark is set, the table of contents gets its own bookmark."""
+    """Typesets a table of contents from existing bookmarks and prepends it to
+    the document. If bookmark is set, the table of contents gets its own
+    bookmark."""
     pdf = libc.pycpdf_tableOfContents(
         pdf.pdf, str.encode(font), fontsize, str.encode(title), bookmark)
     checkerror()
@@ -1336,25 +1333,25 @@ def stampAsXObject(pdf, r, stamp_pdf):
 # CHAPTER 9. Multipage facilities
 
 def twoUp(pdf):
-    """Impose a document two up by retaining the existing page
-    size, scaling pages down."""
+    """Impose a document two up by retaining the existing page size, scaling
+    pages down."""
     libc.pycpdf_twoUp(pdf.pdf)
     checkerror()
 
 
 def twoUpStack(pdf):
-    """Impose a document two up by doubling the page size,
-    to fit two pages on one."""
+    """Impose a document two up by doubling the page size, to fit two pages on
+    one."""
     libc.pycpdf_twoUpStack(pdf.pdf)
     checkerror()
 
 
 def impose(pdf, x, y, fit, columns, rtl, btt, center, margin, spacing, linewidth):
-    """Impose a PDF. There are two modes: imposing x * y, or imposing
-    to fit a page of size x * y. This is controlled by fit. Columns imposes by
-    columns rather than rows. rtl is right-to-left, btt bottom-to-top. Center
-    is unused for now. Margin is the margin around the output, spacing the
-    spacing between imposed inputs."""
+    """Impose a PDF. There are two modes: imposing x * y, or imposing to fit a
+    page of size x * y. This is controlled by fit. Columns imposes by columns
+    rather than rows. rtl is right-to-left, btt bottom-to-top. Center is unused
+    for now. Margin is the margin around the output, spacing the spacing
+    between imposed inputs."""
     libc.pycpdf_impose(pdf.pdf, x, y, fit, columns, rtl,
                        btt, center, margin, spacing, linewidth)
     checkerror()
@@ -1418,8 +1415,8 @@ def padMultiple(pdf, n):
 
 
 def padMultipleBefore(pdf, n):
-    """Adds pages at the beginning to pad the file to a
-    multiple of n pages in length."""
+    """Adds pages at the beginning to pad the file to a multiple of n pages in
+    length."""
     libc.pycpdf_padMultipleBefore(pdf.pdf, n)
     checkerror()
 
@@ -1457,8 +1454,8 @@ def setAnnotationsJSON(pdf, data):
 
 
 def isLinearized(filename):
-    """Finds out if a document is linearized as quickly
-    as possible without loading it."""
+    """Finds out if a document is linearized as quickly as possible without
+    loading it."""
     r = libc.pycpdf_isLinearized(str.encode(filename))
     checkerror()
     return r
@@ -1744,12 +1741,14 @@ def setModificationDateXMP(pdf, s):
 
 
 def getDateComponents(string):
+
     """Return the components (year, month, day, hour, minute, second,
     hour_offset, minute_offset) from a PDF date string.
 
-    Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds
-    (0-59), hour_offset is the offset from UT in hours (-23 to 23);
-    minute_offset is the offset from UT in minutes (-59 to 59)."""
+    Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds (0-59),
+    hour_offset is the offset from UT in hours (-23 to 23); minute_offset is
+    the offset from UT in minutes (-59 to 59)."""
+
     year = c_int(0)
     month = c_int(0)
     day = c_int(0)
@@ -1771,9 +1770,9 @@ def dateStringOfComponents(cs):
     """Build a PDF date string a (year, month, day, hour, minute, second,
     hour_offset, minute_offset) tuple.
 
-    Dates: Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds
-    (0-59), hour_offset is the offset from UT in hours (-23 to 23);
-    minute_offset is the offset from UT in minutes (-59 to 59)."""
+    Dates: Month 1-31, day 1-31, hours (0-23), minutes (0-59), seconds (0-59),
+    hour_offset is the offset from UT in hours (-23 to 23); minute_offset is
+    the offset from UT in minutes (-59 to 59)."""
     year, month, day, hour, minute, second, hour_offset, minute_offset = cs
     r = string_at(libc.pycpdf_dateStringOfComponents(year, month, day, hour,
                                                      minute, second,
@@ -1805,8 +1804,8 @@ def numAnnots(pdf, pagenumber):
 
 
 def getMediaBox(pdf, pagenumber):
-    """Get a mediabox box given the document, page range, min x, max x,
-    min y, max y in points. Only suceeds if such a box exists, as checked by
+    """Get a mediabox box given the document, page range, min x, max x, min y,
+    max y in points. Only suceeds if such a box exists, as checked by
     hasBox."""
     minx = c_double(0.0)
     maxx = c_double(0.0)
@@ -1819,9 +1818,8 @@ def getMediaBox(pdf, pagenumber):
 
 
 def getCropBox(pdf, pagenumber):
-    """Get a crop box given the document, page range, min x, max x,
-    min y, max y in points. Only suceeds if such a box exists, as checked by
-    hasBox."""
+    """Get a crop box given the document, page range, min x, max x, min y, max
+    y in points. Only suceeds if such a box exists, as checked by hasBox."""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1833,9 +1831,8 @@ def getCropBox(pdf, pagenumber):
 
 
 def getTrimBox(pdf, pagenumber):
-    """Get a trim box given the document, page range, min x, max x,
-    min y, max y in points. Only suceeds if such a box exists, as checked by
-    hasBox."""
+    """Get a trim box given the document, page range, min x, max x, min y, max
+    y in points. Only suceeds if such a box exists, as checked by hasBox."""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1847,9 +1844,8 @@ def getTrimBox(pdf, pagenumber):
 
 
 def getArtBox(pdf, pagenumber):
-    """Get an art box given the document, page range, min x, max x,
-    min y, max y in points. Only suceeds if such a box exists, as checked by
-    hasBox."""
+    """Get an art box given the document, page range, min x, max x, min y, max
+    y in points. Only suceeds if such a box exists, as checked by hasBox."""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1861,9 +1857,8 @@ def getArtBox(pdf, pagenumber):
 
 
 def getBleedBox(pdf, pagenumber):
-    """Get a bleed box given the document, page range, min x, max x,
-    min y, max y in points. Only suceeds if such a box exists, as checked by
-    hasBox."""
+    """Get a bleed box given the document, page range, min x, max x, min y, max
+    y in points. Only suceeds if such a box exists, as checked by hasBox."""
     minx = c_double(0.0)
     maxx = c_double(0.0)
     miny = c_double(0.0)
@@ -1875,8 +1870,8 @@ def getBleedBox(pdf, pagenumber):
 
 
 def setMediaBox(pdf, r, minx, maxx, miny, maxy):
-    """Set the media box given the document, page range, min x, max x,
-    min y, max y in points."""
+    """Set the media box given the document, page range, min x, max x, min y,
+    max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setMediaBox(pdf.pdf, rn, minx, maxx, miny, maxy)
     deleteRange(rn)
@@ -1885,8 +1880,8 @@ def setMediaBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def setCropBox(pdf, r, minx, maxx, miny, maxy):
-    """Set the crop box given the document, page range, min x, max x,
-    min y, max y in points."""
+    """Set the crop box given the document, page range, min x, max x, min y,
+    max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setCropBox(pdf.pdf, rn, minx, maxx, miny, maxy)
     deleteRange(rn)
@@ -1895,8 +1890,8 @@ def setCropBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def setTrimBox(pdf, r, minx, maxx, miny, maxy):
-    """Set the trim box given the document, page range, min x, max x,
-    min y, max y in points."""
+    """Set the trim box given the document, page range, min x, max x, min y,
+    max y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setTrimBox(pdf.pdf, rn, minx, maxx, miny, maxy)
     deleteRange(rn)
@@ -1905,8 +1900,8 @@ def setTrimBox(pdf, r, minx, maxx, miny, maxy):
 
 
 def setArtBox(pdf, r, minx, maxx, miny, maxy):
-    """Set the art box given the document, page range, min x, max x,
-    min y, max y in points."""
+    """Set the art box given the document, page range, min x, max x, min y, max
+    y in points."""
     rn = range_of_list(r)
     libc.pycpdf_setArtBox(pdf.pdf, rn, minx, maxx, miny, maxy)
     deleteRange(rn)
@@ -2285,9 +2280,8 @@ def removeAttachedFiles(pdf):
 
 
 def getAttachments(pdf):
-    """List information about attachements. Returns a list of tuples
-    (name, page number, byte array of data). Page 0 = document-level
-    attachment."""
+    """List information about attachements. Returns a list of tuples (name,
+    page number, byte array of data). Page 0 = document-level attachment."""
     libc.pycpdf_startGetAttachments(pdf.pdf)
     n = libc.pycpdf_numberGetAttachments()
     l = []
@@ -2601,8 +2595,8 @@ def drawEnd(pdf, r):
 
 
 def drawEndExtended(pdf, r, underneath, bates, filename):
-    """The same as drawEnd, but provides the special parameters which may
-    be required when using drawSText."""
+    """The same as drawEnd, but provides the special parameters which may be
+    required when using drawSText."""
     rn = range_of_list(r)
     libc.pycpdf_drawEndExtended(
         pdf.pdf, rn, underneath, bates, filename, str.encode(filename))
@@ -2682,14 +2676,16 @@ def drawFillEo():
 
 
 def drawStrokeFill():
-    """Fills and then strokes the current path with a non-zero winding rule, and clears it. """
+    """Fills and then strokes the current path with a non-zero winding rule,
+    and clears it. """
     libc.pycpdf_drawStrokeFill()
     checkerror()
     return
 
 
 def drawStrokeFillEo():
-    """Fills and then strokes the current path with an even-odd winding rule, and clears it. """
+    """Fills and then strokes the current path with an even-odd winding rule,
+    and clears it. """
     libc.pycpdf_drawStrokeFillEo()
     checkerror()
     return
@@ -2704,21 +2700,24 @@ def drawClose():
 
 
 def drawClip():
-    """Uses the current path as a clipping region, using the non-zero winding rule. """
+    """Uses the current path as a clipping region, using the non-zero winding
+    rule. """
     libc.pycpdf_drawClip()
     checkerror()
     return
 
 
 def drawClipEo():
-    """Uses the current path as a clipping region, using the even-odd winding rule. """
+    """Uses the current path as a clipping region, using the even-odd winding
+    rule. """
     libc.pycpdf_drawClipEo()
     checkerror()
     return
 
 
 def drawStrokeColGrey(g):
-    """Changes to a greyscale stroke colourspace and sets the stroke colour. """
+    """Changes to a greyscale stroke colourspace and sets the stroke colour.
+    """
     libc.pycpdf_drawStrokeColGrey(g)
     checkerror()
     return
@@ -2828,35 +2827,40 @@ def drawMatrix(a, b, c, d, e, f):
 
 
 def drawMTrans(tx, ty):
-    """Appends a translation by (tx, ty) to the Current Transformation Matrix. """
+    """Appends a translation by (tx, ty) to the Current Transformation Matrix.
+    """
     libc.pycpdf_drawMTrans(tx, ty)
     checkerror()
     return
 
 
 def drawMRot(x, y, a):
-    """Appends a rotation by a around (a, y) to the Current Transformation Matrix. """
+    """Appends a rotation by a around (a, y) to the Current Transformation
+    Matrix. """
     libc.pycpdf_drawMRot(x, y, a)
     checkerror()
     return
 
 
 def drawMScale(x, y, sx, sy):
-    """Appends a scaling by (sx, sy) around (x, y) to the Current Transformation Matrix. """
+    """Appends a scaling by (sx, sy) around (x, y) to the Current
+    Transformation Matrix. """
     libc.pycpdf_drawMScale(x, y, sx, sy)
     checkerror()
     return
 
 
 def drawMShearX(x, y, a):
-    """Appends an X shearing of angle a around (x, y) to the Current Transformation Matrix. """
+    """Appends an X shearing of angle a around (x, y) to the Current
+    Transformation Matrix. """
     libc.pycpdf_drawMShearX(x, y, a)
     checkerror()
     return
 
 
 def drawMShearY(x, y, a):
-    """Appends an X shearing of angle a around (x, y) to the Current Transformation Matrix. """
+    """Appends an X shearing of angle a around (x, y) to the Current
+    Transformation Matrix. """
     libc.pycpdf_drawMShearY(x, y, a)
     checkerror()
     return
@@ -2898,21 +2902,24 @@ def drawJPEG(name, filename):
 
 
 def drawJPEGMemory(name, data):
-    """Loads a JPEG from the given bytearray, storing it under the given name. """
+    """Loads a JPEG from the given bytearray, storing it under the given name.
+    """
     libc.pycpdf_drawJPEGMemory(str.encode(name), data, len(data))
     checkerror()
     return
 
 
 def drawPNG(name, filename):
-    """Loads a non-interlaced non-transparent PNG from the given file, storing it under the given name. """
+    """Loads a non-interlaced non-transparent PNG from the given file, storing
+    it under the given name. """
     libc.pycpdf_drawPNG(str.encode(name), str.encode(filename))
     checkerror()
     return
 
 
 def drawPNGMemory(name, data):
-    """Loads a non-interlaced non-transparent PNG from the given bytearray, storing it under the given name. """
+    """Loads a non-interlaced non-transparent PNG from the given bytearray,
+    storing it under the given name. """
     libc.pycpdf_drawPNGMemory(str.encode(name), data, len(data))
     checkerror()
     return
@@ -3045,8 +3052,8 @@ def drawNewPage():
 
 
 def draft(pdf, r, boxes):
-    """Remove images on the given pages, replacing
-    them with crossed boxes if 'boxes' is True."""
+    """Remove images on the given pages, replacing them with crossed boxes if
+    'boxes' is True."""
     r = range_of_list(r)
     libc.pycpdf_draft(pdf.pdf, r, boxes)
     deleteRange(r)
@@ -3086,8 +3093,8 @@ def blackFills(pdf, r):
 
 
 def thinLines(pdf, r, linewidth):
-    """Thicken every line less than
-    linewidth to linewidth. Thickness given in points."""
+    """Thicken every line less than linewidth to linewidth. Thickness given in
+    points."""
     r = range_of_list(r)
     libc.pycpdf_thinLines(pdf.pdf, r, linewidth)
     deleteRange(r)
@@ -3127,16 +3134,16 @@ def removeDictEntry(pdf, key):
 
 
 def removeDictEntrySearch(pdf, key, searchterm):
-    """Remove any dictionary entry with the given
-    key anywhere in the document, if its value matches the given search term."""
+    """Remove any dictionary entry with the given key anywhere in the document,
+    if its value matches the given search term."""
     libc.pycpdf_removeDictEntrySearch(
         pdf.pdf, str.encode(key), str.encode(searchterm))
     checkerror()
 
 
 def replaceDictEntry(pdf, key, newvalue):
-    """Replace any dictionary entry with the given
-    key anywhere in the document using the new value given."""
+    """Replace any dictionary entry with the given key anywhere in the document
+    using the new value given."""
     libc.pycpdf_replaceDictEntry(
         pdf.pdf, str.encode(key), str.encode(newvalue))
     checkerror()
