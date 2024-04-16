@@ -1741,7 +1741,6 @@ def setModificationDateXMP(pdf, s):
 
 
 def getDateComponents(string):
-
     """Return the components (year, month, day, hour, minute, second,
     hour_offset, minute_offset) from a PDF date string.
 
