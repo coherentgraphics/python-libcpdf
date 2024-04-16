@@ -225,7 +225,8 @@ def loadDLL(f):
     libc.pycpdf_getImageResolutionXRes.restype = c_double
     libc.pycpdf_getImageResolutionYRes.restype = c_double
     libc.pycpdf_impose.argtypes = [c_int, c_double, c_double, c_int,
-                                   c_int, c_int, c_int, c_int, c_double, c_double, c_double]
+                                   c_int, c_int, c_int, c_int, c_double,
+                                   c_double, c_double]
     libc.pycpdf_chopH.argtypes = [c_int, c_int, c_int, c_double]
     libc.pycpdf_chopV.argtypes = [c_int, c_int, c_int, c_double]
     libc.pycpdf_id1.restype = POINTER(c_char)
@@ -1164,7 +1165,8 @@ def stampExtended(pdf, pdf2, r, isover, scale_stamp_to_fit, pos,
      - isover True, pdf goes over pdf2, isover False, pdf goes under pdf2
      - scale_stamp_to_fit scales the stamp to fit the page
      - pos gives the position to put the stamp
-     - relative_to_cropbox: if True, pos is relative to crop box not media box"""
+     - relative_to_cropbox: if True, pos is relative to crop box not media box
+    """
     r = range_of_list(r)
     a, b, c = tripleOfPosition(pos)
     libc.pycpdf_stampExtended(pdf.pdf, pdf2.pdf, r, isover, scale_stamp_to_fit,
@@ -2303,7 +2305,8 @@ def getAttachments(pdf):
 def getImageResolution(pdf, resolution):
     """Return a list of all uses of images in the PDF which do not meet the
     minimum required resolution in dpi as tuples of:
-    (pagenumber, name, x pixels, y pixels, x resolution, y resolution, objnum)."""
+    (pagenumber, name, x pixels, y pixels, x resolution, y resolution, objnum).
+    """
     n = libc.pycpdf_startGetImageResolution(pdf.pdf, resolution)
     l = []
     for x in range(n):
@@ -2580,7 +2583,8 @@ def fromJPEGMemory(data):
 
 
 def drawBegin():
-    """Sets up the drawing process. It must be called before any other draw* function."""
+    """Sets up the drawing process. It must be called before any other draw*
+    function."""
     libc.pycpdf_drawBegin()
     checkerror()
     return
@@ -3119,15 +3123,14 @@ def setVersion(pdf, version):
 
 
 def setFullVersion(pdf, major, minor):
-    """Set the major and minor version number of
-    a document."""
+    """Set the major and minor version number of a document."""
     libc.pycpdf_setFullVersion(pdf.pdf, major, minor)
     checkerror()
 
 
 def removeDictEntry(pdf, key):
-    """Remove any dictionary entry with the given
-    key anywhere in the document."""
+    """Remove any dictionary entry with the given key anywhere in the
+    document."""
     libc.pycpdf_removeDictEntry(pdf.pdf, str.encode(key))
     checkerror()
 
