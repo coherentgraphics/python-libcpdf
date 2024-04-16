@@ -197,7 +197,8 @@ def loadDLL(f):
     libc.pycpdf_getBookmarkText.restype = POINTER(c_char)
     libc.pycpdf_addText.argtypes =\
         [c_int, c_int, c_int, POINTER(c_char), c_int, c_double, c_double,
-         c_double, c_int, POINTER(c_char), c_double, c_double, c_double, c_double, c_int,
+         c_double, c_int, POINTER(
+             c_char), c_double, c_double, c_double, c_double, c_int,
          c_int, c_int, c_double, c_int, c_int, c_int, POINTER(c_char),
          c_double, c_int]
     libc.pycpdf_addTextSimple.argtypes =\
@@ -1266,7 +1267,8 @@ def addText(metrics, pdf, r, text, p, line_spacing, bates, font, size, red,
     a, b, c = tripleOfPosition(p)
     r = range_of_list(r)
     libc.pycpdf_addText(metrics, pdf.pdf, r, str.encode(text), a, b, c,
-                        line_spacing, bates, str.encode(font), size, red, green, blue,
+                        line_spacing, bates, str.encode(
+                            font), size, red, green, blue,
                         underneath, relative_to_cropbox, outline, opacity,
                         justification, midline, topline, str.encode(filename),
                         line_width, embed_fonts)

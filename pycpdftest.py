@@ -836,8 +836,9 @@ def chapter8():
         prerr()
     print('---cpdf_textWidth()')
     try:
-         w = pycpdflib.textWidth(pycpdflib.timesRoman, 'What is the width of this?')
-         print(f'width is {w} thousandths of a point')
+        w = pycpdflib.textWidth(pycpdflib.timesRoman,
+                                'What is the width of this?')
+        print(f'width is {w} thousandths of a point')
     except:
         prerr()
     try:
