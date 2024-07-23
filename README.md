@@ -1,9 +1,13 @@
 # pycpdflib
 
-pycpdflib is a Python interface to the cpdf pdf tools. More information,
-including commercial licenses can be found at <https://www.coherentpdf.com/>
+pycpdflib is a Python interface to the cpdf pdf tools.
 
-The non-commercial home of pycpdflib is <http://community.coherentpdf.com/>
+pycpdflib is distributed under the AGPL - see LICENSE.md. If you are unable to
+abide by the terms of the AGPL, you will need a commercial license.
+
+For commercial licenses, email
+[contact@coherentgraphics.co.uk](mailto:contact@coherentgraphics.co.uk) or
+visit [https://www.coherentpdf.com/](https://www.coherentpdf.com/)
 
 The python package may be installed with
 
@@ -35,9 +39,7 @@ Functionality
 Obtaining the DLLs
 ------------------
 
-The DLLs `pycpdflib` and `cpdflib` are required. They are free for
-non-commercial use. Commercial use requires a license. The DLLs can be obtained
-here:
+The DLLs `pycpdflib` and `cpdflib` are required. They may be obtained here:
 
 <https://github.com/coherentgraphics/cpdflib-binary>
 
@@ -56,6 +58,6 @@ Quick reference API docs: <https://python-libcpdf.readthedocs.io/en/latest/>
 Contact
 -------
 
-<mailto:contact@coherentgraphics.co.uk>
+For commercial licenses, or queries: <mailto:contact@coherentgraphics.co.uk>
 
 Bug report: <https://github.com/coherentgraphics/python-libcpdf>
